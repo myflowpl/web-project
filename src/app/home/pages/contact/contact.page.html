@@ -1,0 +1,9 @@
+<h2>Contact us:</h2>
+
+<p *ngFor="let contact of contacts">
+  contact: <b>{{contact.name}}</b> {{contact.email}}
+</p>
+
+<pre>
+  {{ contacts | json }}
+</pre>
