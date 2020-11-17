@@ -1,29 +1,26 @@
-import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Contact } from 'src/app/api/api.model';
+import { API_BASE_URL } from '../../api/api.tokens';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactService {
 
-  contacts: Contact[] = [
-    
-  ];
+  contacts: Contact[] = [];
 
-  constructor() { }
+  constructor(
+    private http: HttpClient,
+    @Inject(API_BASE_URL) private base: string,
+  ) { }
 
   getContacts(): Observable<Contact[]> {
-    return of(this.contacts);
+    return this.http.get<Contact[]>(this.base + '/contacts');
   }
 
   getById(id: number): Observable<Contact> {
-    const contact = this.contacts.find(c => c.id === id);
-    console.log('contact', contact)
-    if(contact) {
-      return of(contact);
-    } else {
-      return throwError(new Error('Not Found'));
-    }
+    return this.http.get<Contact>(this.base + '/contacts/'+id);
   }
 }

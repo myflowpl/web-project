@@ -11,6 +11,7 @@ import { ContactDetailsPage } from './pages/contact-details/contact-details.page
 
 @NgModule({
   declarations: [HomePage, ContactPage, ContactComponent, ContactPhotoUrlPipe, ContactDetailsPage],
+  providers: [],
   imports: [
     CommonModule,
     HomeRoutingModule

@@ -8,7 +8,8 @@ import { filter, map, switchMap, tap } from 'rxjs/operators';
 @Component({
   selector: 'app-contact-details',
   templateUrl: './contact-details.page.html',
-  styleUrls: ['./contact-details.page.scss']
+  styleUrls: ['./contact-details.page.scss'],
+  providers: [],
 })
 export class ContactDetailsPage implements OnInit {
 
