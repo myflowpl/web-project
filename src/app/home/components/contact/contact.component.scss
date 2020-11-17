@@ -1,0 +1,21 @@
+:host {
+  overflow: auto;
+  display: block;
+  margin-bottom: 10px;
+}
+
+img {
+  float: left;
+  margin-right: 10px;
+  height: 70px;
+}
+b {
+  color: red;
+}
+
+.btns {
+  margin-top: 5px;
+  button {
+    margin-right: 5px;
+  }
+}

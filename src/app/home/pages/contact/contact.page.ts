@@ -13,10 +13,7 @@ export class ContactPage implements OnInit {
     {id: 3, name: 'Iwona', email: 'iwona@myflow.pl'},
   ];
 
-
-  labelString = "Person";
-
-  selectedId: number | null = null;
+  contact: Contact | null = null;
 
   constructor() { }
 
@@ -24,7 +21,7 @@ export class ContactPage implements OnInit {
   }
 
   onContactClick(contact: Contact) {
-    this.selectedId = contact.id;
+    this.contact = contact;
   }
 
   handleContactDelete(contact: Contact) {

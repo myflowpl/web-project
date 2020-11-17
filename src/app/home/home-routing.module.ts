@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ContactDetailsPage } from './pages/contact-details/contact-details.page';
 import { ContactPage } from './pages/contact/contact.page';
 import { HomePage } from './pages/home/home.page';
 
@@ -15,7 +16,14 @@ const routes: Routes = [
   {
     path: 'contact',
     component: ContactPage,
-  }
+    children: [
+      {
+        path: ':id',
+        component: ContactDetailsPage,
+      }
+    ]
+  },
+
 ];
 
 @NgModule({

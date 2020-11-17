@@ -1,15 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { Contact } from 'src/app/api/api.model';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+  styleUrls: ['./contact.component.scss'],
+  // encapsulation: ViewEncapsulation.ShadowDom
 })
 export class ContactComponent implements OnInit {
-
-  @Input()
-  label = 'Contact';
 
   @Input()
   contact: Contact | null = null;
@@ -20,12 +18,9 @@ export class ContactComponent implements OnInit {
   @Output()
   duplicate = new EventEmitter<Contact>();
 
-  currentDate = new Date();
-  dateFormat = 'y'
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   emitDelete() {
     if(this.contact) {
