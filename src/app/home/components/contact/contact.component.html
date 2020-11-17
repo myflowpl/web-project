@@ -1,1 +1,6 @@
-<p>contact item!</p>
+<div *ngIf="contact">
+  {{label}}: <b>{{contact.name}}</b> {{contact.email}}
+
+  <button (click)="emitDelete()">Delete</button>
+  <button (click)="emitDuplicate()">Duplicate</button>
+</div>

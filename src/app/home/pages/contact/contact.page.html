@@ -1,9 +1,14 @@
 <h2>Contact us:</h2>
 
-<p *ngFor="let contact of contacts">
-  contact: <b>{{contact.name}}</b> {{contact.email}}
-</p>
+Selected ID: {{selectedId}}
 
-<pre>
-  {{ contacts | json }}
-</pre>
+<app-contact
+  (mouseover)="onContactClick(contact)"
+  (delete)="handleContactDelete($event)"
+  (duplicate)="handleContactDuplicate($event)"
+  [label]="labelString"
+  [contact]="contact"
+  *ngFor="let contact of contacts"
+></app-contact>
+
+<button (click)="selectedId = 0" >CLICK ME</button>

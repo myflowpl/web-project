@@ -1,3 +1,9 @@
+export interface Contact {
+  id: number;
+  name: string;
+  email: string;
+}
+
 export interface Coords {
   lat: number;
   lng: number;
