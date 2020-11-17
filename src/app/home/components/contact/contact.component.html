@@ -7,8 +7,11 @@
   <i>{{contact.email}}</i>
 
   <div class="btns">
-    <button (click)="emitDelete()">Delete</button>
-    <button (click)="emitDuplicate()">Duplicate</button>
+    <ng-content></ng-content>
+  </div>
+
+  <div class="btns-top">
+    <ng-content select="[top]"></ng-content>
   </div>
 
 </ng-container>

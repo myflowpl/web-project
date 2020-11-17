@@ -1,3 +1,10 @@
 <h2>Contact Details</h2>
 
-<app-contact [contact]="contact$ | async" (delete)="handleContactDelete($event)"></app-contact>
+<app-contact [contact]="contact$ | async" (delete)="handleContactDelete($event)">
+  <button top >Delete</button>
+  <button >Edit</button>
+</app-contact>
+
+<app-contact [contact]="contact$ | async" (delete)="handleContactDelete($event)">
+  <button >Duplicate</button>
+</app-contact>

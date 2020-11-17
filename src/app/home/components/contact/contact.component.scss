@@ -2,6 +2,7 @@
   overflow: auto;
   display: block;
   margin-bottom: 10px;
+  position: relative;
 }
 
 img {
@@ -19,3 +20,15 @@ b {
     margin-right: 5px;
   }
 }
+.btns-top {
+  position: absolute;
+  top: 0;
+  right: 0;
+  ::ng-deep button {
+    display: none;
+  }
+}
+:host:hover ::ng-deep .btns-top button {
+    display: inline-block;
+  }
+
