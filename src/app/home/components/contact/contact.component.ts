@@ -20,6 +20,8 @@ export class ContactComponent implements OnInit {
   @Output()
   duplicate = new EventEmitter<Contact>();
 
+  currentDate = new Date();
+  dateFormat = 'y'
   constructor() { }
 
   ngOnInit(): void {

@@ -13,6 +13,7 @@ export class ContactPage implements OnInit {
     {id: 3, name: 'Iwona', email: 'iwona@myflow.pl'},
   ];
 
+
   labelString = "Person";
 
   selectedId: number | null = null;

@@ -1,6 +1,14 @@
-<div *ngIf="contact">
-  {{label}}: <b>{{contact.name}}</b> {{contact.email}}
+<ng-container *ngIf="contact">
 
-  <button (click)="emitDelete()">Delete</button>
-  <button (click)="emitDuplicate()">Duplicate</button>
-</div>
+  <img src="{{ contact | contactPhotoUrl }}">
+
+  <b>{{contact.name}}</b>
+  <br>
+  <i>{{contact.email}}</i>
+
+  <div class="btns">
+    <button (click)="emitDelete()">Delete</button>
+    <button (click)="emitDuplicate()">Duplicate</button>
+  </div>
+
+</ng-container>
