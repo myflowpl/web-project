@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Contact } from 'src/app/api/api.model';
+import { ContactService } from '../../services/contact.service';
+import { Observable } from 'rxjs';
+import { filter, map, switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-contact-details',
@@ -8,14 +12,22 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ContactDetailsPage implements OnInit {
 
-  params: any;
+  contact$: Observable<Contact>;
 
   constructor(
     public route: ActivatedRoute,
-  ) { }
-
-  ngOnInit(): void {
-    this.route.params.subscribe(params => this.params = params)
+    public contactService: ContactService,
+  ) {
+    this.contact$ = this.route.params.pipe(
+      map(params => parseInt(params.id, 10)),
+      filter(id => !!id),
+      switchMap(id => this.contactService.getById(id)),
+    );
   }
 
+  ngOnInit(): void {}
+
+  handleContactDelete(contact: Contact) {
+
+  }
 }

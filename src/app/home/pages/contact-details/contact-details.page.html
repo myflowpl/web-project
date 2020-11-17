@@ -1,9 +1,3 @@
-<p>contact-details works!</p>
-<pre>{{params | json }} </pre>
-<!-- <app-contact
-    (mouseover)="onContactClick(contact)"
-    (delete)="handleContactDelete($event)"
-    (duplicate)="handleContactDuplicate($event)"
-    [contact]="contact"
+<h2>Contact Details</h2>
 
-  ></app-contact> -->
+<app-contact [contact]="contact$ | async" (delete)="handleContactDelete($event)"></app-contact>

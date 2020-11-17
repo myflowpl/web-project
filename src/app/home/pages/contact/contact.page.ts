@@ -1,34 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import { Contact } from 'src/app/api/api.model';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Contact } from '../../../api/api.model';
+import { ContactService } from '../../services/contact.service';
 
 @Component({
   templateUrl: './contact.page.html',
   styleUrls: ['./contact.page.scss']
 })
-export class ContactPage implements OnInit {
+export class ContactPage implements OnInit, OnDestroy {
 
-  contacts: Contact[] = [
-    {id: 1, name: 'Piotr', email: 'piotr@myflow.pl'},
-    {id: 2, name: 'Paweł', email: 'pawel@myflow.pl'},
-    {id: 3, name: 'Iwona', email: 'iwona@myflow.pl'},
-  ];
-
-  contact: Contact | null = null;
-
-  constructor() { }
+  contacts: Contact[] = [];
+  sub = new Subscription();
+  constructor(
+    private contactService: ContactService,
+  ) { }
 
   ngOnInit(): void {
+    console.log('INIT Contact Page')
+    const s = this.contactService.getContacts().subscribe(contacts => this.contacts = contacts);
+
+    this.sub.add(s);
+
   }
 
-  onContactClick(contact: Contact) {
-    this.contact = contact;
-  }
+  ngOnDestroy() {
+    console.log('DESTROY Contact Page')
 
-  handleContactDelete(contact: Contact) {
-    this.contacts = this.contacts.filter(c => c !== contact)
-  }
-
-  handleContactDuplicate(contact: Contact) {
-    this.contacts.push({...contact})
+    this.sub.unsubscribe()
   }
 }

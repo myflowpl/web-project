@@ -1,5 +1,9 @@
 {
-  "contacts": [],
+  "contacts": [
+    {"id":1,"name":"Piotr","email":"piotr@myflow.pl"},
+    {"id":2,"name":"Paweł","email":"pawel@myflow.pl"},
+    {"id":3,"name":"Iwona","email":"iwona@myflow.pl"}
+  ],
   "videos": [],
   "users": [
     {
