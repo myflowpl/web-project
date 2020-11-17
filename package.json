@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "api": "json-server db.json"
+    "api": "node db.js && json-server db.json"
   },
   "private": true,
   "dependencies": {
@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "~11.0.0",
     "@angular/router": "~11.0.0",
     "rxjs": "~6.6.0",
+    "shelljs": "^0.8.4",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },
