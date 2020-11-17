@@ -29,6 +29,10 @@ export class ContactDetailsPage implements OnInit {
   ngOnInit(): void {}
 
   handleContactDelete(contact: Contact) {
+    console.log(contact)
+  }
 
+  handleContactEdit(contact: Contact) {
+    console.log(contact)
   }
 }
