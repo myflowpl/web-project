@@ -17,6 +17,7 @@ export interface Artist {
 export interface Playlist {
   id: number;
   name: string;
+  userId: number;
 }
 
 export interface PlaylistSongs {
@@ -25,6 +26,7 @@ export interface PlaylistSongs {
   songId: number;
   song?: Song;
   playlist?: Playlist;
+  userId: number;
 }
 
 export interface Song {
@@ -32,6 +34,7 @@ export interface Song {
   title: string;
   year: string;
   artistId: number;
+  artist?: Artist;
   webUrl: string;
   genders?: string[];
   favorite?: boolean;
@@ -40,6 +43,7 @@ export interface Song {
 export interface User {
   id: number;
   name: string;
+  email: string;
   password: string;
   role?: Role;
 }

@@ -8,47 +8,55 @@
   "users": [
     {
       "id": 1,
-      "name": "Admin",
-      "password": "admin",
+      "name": "Piotr",
+      "email": "piotr@myflow.pl",
+      "password": "123",
       "role": "admin"
     },
     {
-      "id": 1,
-      "name": "User",
-      "password": "user",
+      "id": 2,
+      "name": "Paweł",
+      "email": "pawel@myflow.pl",
+      "password": "456",
       "role": "user"
     }
   ],
   "playlists": [
     {
       "id": 1,
-      "name": "Ulubione"
+      "name": "Ulubione",
+      "userId": 1
     },
     {
       "id": 2,
-      "name": "Do programowania"
+      "name": "Do programowania",
+      "userId": 1
     }
   ],
   "playlistSongs": [
     {
       "id": 1,
       "songId": 5,
-      "playlistId": 1
+      "playlistId": 1,
+      "userId": 1
     },
     {
       "id": 2,
       "songId": 30,
-      "playlistId": 1
+      "playlistId": 1,
+      "userId": 1
     },
     {
       "id": 2,
       "songId": 60,
-      "playlistId": 2
+      "playlistId": 2,
+      "userId": 1
     },
     {
       "id": 2,
       "songId": 80,
-      "playlistId": 2
+      "playlistId": 2,
+      "userId": 1
     }
   ],
   "artists": [
