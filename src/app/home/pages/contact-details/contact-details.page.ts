@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Contact } from 'src/app/api/api.model';
 import { ContactService } from '../../services/contact.service';
 import { Observable } from 'rxjs';
@@ -18,6 +18,7 @@ export class ContactDetailsPage implements OnInit {
   constructor(
     public route: ActivatedRoute,
     public contactService: ContactService,
+    public router: Router,
   ) {
     this.contact$ = this.route.params.pipe(
       map(params => parseInt(params.id, 10)),
@@ -30,6 +31,9 @@ export class ContactDetailsPage implements OnInit {
 
   handleContactDelete(contact: Contact) {
     console.log(contact)
+    this.contactService.delete(contact.id).subscribe(() => {
+      this.router.navigate(['..'], {relativeTo: this.route})
+    });
   }
 
   handleContactEdit(contact: Contact) {

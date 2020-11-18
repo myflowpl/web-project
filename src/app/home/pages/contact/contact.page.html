@@ -1,7 +1,8 @@
 <h2>Contact us:</h2>
 
 <div class="menu">
-  <p *ngFor="let contact of contacts">
+  <a routerLink="create">New Contact</a>
+  <p *ngFor="let contact of contacts$ | async">
     <a [routerLink]="[contact.id]">{{contact.name}}</a>
   </p>
 </div>
@@ -10,4 +11,3 @@
   <router-outlet></router-outlet>
 </div>
 
-<h3>Zapadało</h3>

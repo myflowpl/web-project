@@ -1,10 +1,12 @@
 <h2>Contact Details</h2>
 
 <ng-container *ngIf="contact$ | async as contact; else loadingTpl">
-  <app-contact [contact]="contact">
+  <app-contact [contact]="contact" #contactComponent>
     <button top (click)="handleContactDelete(contact)">Delete</button>
     <button (click)="handleContactEdit(contact)">Edit</button>
   </app-contact>
+
+  <button (click)="contactComponent.emitDuplicate()">Update</button>
 </ng-container>
 
 <ng-template #loadingTpl>

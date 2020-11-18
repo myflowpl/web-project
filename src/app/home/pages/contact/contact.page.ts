@@ -7,25 +7,12 @@ import { ContactService } from '../../services/contact.service';
   templateUrl: './contact.page.html',
   styleUrls: ['./contact.page.scss']
 })
-export class ContactPage implements OnInit, OnDestroy {
+export class ContactPage {
 
-  contacts: Contact[] = [];
-  sub = new Subscription();
+  contacts$ = this.contactService.getContacts();
+
   constructor(
     private contactService: ContactService,
   ) { }
 
-  ngOnInit(): void {
-    console.log('INIT Contact Page')
-    const s = this.contactService.getContacts().subscribe(contacts => this.contacts = contacts);
-
-    this.sub.add(s);
-
-  }
-
-  ngOnDestroy() {
-    console.log('DESTROY Contact Page')
-
-    this.sub.unsubscribe()
-  }
 }

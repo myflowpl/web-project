@@ -7,10 +7,12 @@ import { ContactPage } from './pages/contact/contact.page';
 import { ContactComponent } from './components/contact/contact.component';
 import { ContactPhotoUrlPipe } from './pipes/contact-photo-url.pipe';
 import { ContactDetailsPage } from './pages/contact-details/contact-details.page';
+import { ContactCreatePage } from './pages/contact-create/contact-create.page';
+import { ContactFormComponent } from './components/contact-form/contact-form.component';
 
 
 @NgModule({
-  declarations: [HomePage, ContactPage, ContactComponent, ContactPhotoUrlPipe, ContactDetailsPage],
+  declarations: [HomePage, ContactPage, ContactComponent, ContactPhotoUrlPipe, ContactDetailsPage, ContactCreatePage, ContactFormComponent],
   providers: [],
   imports: [
     CommonModule,
