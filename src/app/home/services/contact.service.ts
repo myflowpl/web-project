@@ -1,16 +1,27 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, from, BehaviorSubject } from 'rxjs';
 import { startWith, switchMap, tap } from 'rxjs/operators';
 import { Contact } from 'src/app/api/api.model';
 import { API_BASE_URL } from '../../api/api.tokens';
+
+function cache<R = any, T = any>(cache$: BehaviorSubject<R>, requestFn: (val: T, i: number) => Observable<R>) {
+  return (in$: Observable<T>) => {
+    return in$.pipe(
+      startWith(1 as any),
+      switchMap(requestFn),
+      tap(data => cache$.next(data)),
+      startWith(cache$.getValue()),
+    );
+  }
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactService {
 
-  contacts: Contact[] = [];
+  contacts$ = new BehaviorSubject<Contact[]>([]);
 
   reload$ = new Subject();
 
@@ -21,10 +32,7 @@ export class ContactService {
 
   getContacts(): Observable<Contact[]> {
     return this.reload$.pipe(
-      startWith(1),
-      switchMap(() => this.http.get<Contact[]>(this.base + '/contacts')),
-      tap(contacts => this.contacts = contacts),
-      startWith(this.contacts.length ? this.contacts : undefined as any),
+      cache(this.contacts$, () => this.http.get<Contact[]>(this.base + '/contacts')),
     );
   }
 
