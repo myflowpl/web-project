@@ -5,6 +5,7 @@ import { map, switchMap, tap } from 'rxjs/operators';
 import { User } from '../../api/api.model';
 import { API_BASE_URL } from '../../api/api.tokens';
 import jwtDecode from "jwt-decode";
+import { UserStorageService } from './user-storage.service';
 
 export interface Payload {
   sub: string;
@@ -21,10 +22,17 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
+    private storage: UserStorageService,
 
     @Inject(API_BASE_URL)
     private base: string,
-  ) { }
+  ) {
+    this.user$$.next(storage.getUser())
+    this.user$$.subscribe(user => storage.setUser(user));
+
+    this.token$$.next(storage.getToken())
+    this.token$$.subscribe(token => storage.setToken(token));
+   }
 
   getToken() {
     return this.token$$.getValue();
@@ -45,5 +53,6 @@ export class UserService {
 
   logout() {
     this.user$$.next(null)
+    this.token$$.next('')
   }
 }

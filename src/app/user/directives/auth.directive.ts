@@ -1,4 +1,5 @@
 import { Directive, HostListener } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 
 @Directive({
@@ -7,14 +8,11 @@ import { UserService } from '../services/user.service';
 export class AuthDirective {
 
   constructor(
-    private userService: UserService,
+    private authService: AuthService,
   ) {}
 
   @HostListener('click')
   onHostClick() {
-    this.userService.login({
-      email: 'piotr@myflow.pl',
-      password: '12345'
-    }).subscribe();
+    this.authService.loginDialog$.subscribe();
   }
 }
