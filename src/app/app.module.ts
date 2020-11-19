@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { HomeModule } from './home/home.module';
 import { API_BASE_URL } from './api/api.tokens';
 import { environment } from '../environments/environment';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     HomeModule,
     HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     {
