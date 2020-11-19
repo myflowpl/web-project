@@ -54,4 +54,10 @@ export class ContactService {
       tap(() => this.reload$.next(true))
     );
   }
+
+  update(contact: Partial<Contact>): Observable<Contact> {
+    return this.http.patch<Contact>(this.base + '/contacts/'+contact.id, contact).pipe(
+      tap(() => this.reload$.next(true))
+    );
+  }
 }

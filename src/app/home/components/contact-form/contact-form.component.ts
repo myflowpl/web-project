@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Contact } from '../../../api/api.model';
 
 @Component({
@@ -6,10 +6,13 @@ import { Contact } from '../../../api/api.model';
   templateUrl: './contact-form.component.html',
   styleUrls: ['./contact-form.component.scss']
 })
-export class ContactFormComponent implements OnInit {
+export class ContactFormComponent implements OnInit, OnChanges {
 
   @Output()
-  create = new EventEmitter<Partial<Contact>>()
+  create = new EventEmitter<Partial<Contact>>();
+
+  @Input()
+  contact: Partial<Contact> | undefined;
 
   model: Partial<Contact> = {
     email: '',
@@ -25,11 +28,12 @@ export class ContactFormComponent implements OnInit {
     this.create.emit(this.model);
   }
 
-  onPaste(e: ClipboardEvent) {
-    console.log(e)
-    // console.log(e.key === 'v' && e.ctrlKey === true)
-    // if(e.key === 'v' && e.ctrlKey === true) {
-      e.preventDefault()
-    // }
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes.contact && changes.contact.currentValue) {
+      this.model = {...changes.contact.currentValue}
+    }
+  }
+  onReset() {
+    this.model = {...this.contact};
   }
 }

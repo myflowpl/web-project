@@ -1,12 +1,22 @@
 <h2>Contact Details</h2>
 
 <ng-container *ngIf="contact$ | async as contact; else loadingTpl">
-  <app-contact [contact]="contact" #contactComponent>
-    <button top (click)="handleContactDelete(contact)">Delete</button>
-    <button (click)="handleContactEdit(contact)">Edit</button>
-  </app-contact>
 
-  <button (click)="contactComponent.emitDuplicate()">Update</button>
+  <ng-container *ngIf="!isEdit; else elseTemplate">
+    <app-contact [contact]="contact">
+      <button top (click)="handleContactDelete(contact)">Delete</button>
+      <button (click)="isEdit = true">Edit</button>
+    </app-contact>
+
+  </ng-container>
+  <ng-template #elseTemplate>
+
+    <app-contact-form [contact]="contact" (create)="handleContactEdit($event)">
+      <button (click)="isEdit = false">Cancel</button>
+    </app-contact-form>
+
+  </ng-template>
+
 </ng-container>
 
 <ng-template #loadingTpl>

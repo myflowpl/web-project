@@ -3,10 +3,11 @@
     email: <input [(ngModel)]="model.email" name="email" required #email type="email" />
   </p>
   <p>
-    name: <input (paste)="$event.preventDefault()"  [(ngModel)]="model.name" name="name" [required]="email.value.length > 3" />
+    name: <input (paste)="$event.preventDefault()" [(ngModel)]="model.name" name="name" required />
   </p>
   <button type="submit" [disabled]="contactForm.invalid">Save</button>
+  <button type="button" *ngIf="contact" (click)="onReset()">Reset</button>
+  <ng-content></ng-content>
 </form>
 
-<pre>{{contactForm.invalid | json }}</pre>
-<pre>{{model | json }}</pre>
+<!-- <pre>{{model | json }}</pre> -->
