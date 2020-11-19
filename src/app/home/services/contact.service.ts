@@ -1,18 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Observable, Subject, from, BehaviorSubject } from 'rxjs';
-import { startWith, switchMap, tap } from 'rxjs/operators';
+import { Observable, Subject, from, BehaviorSubject, merge } from 'rxjs';
+import { startWith, switchMap, tap, take } from 'rxjs/operators';
 import { Contact } from 'src/app/api/api.model';
 import { API_BASE_URL } from '../../api/api.tokens';
 
 function cache<R = any, T = any>(cache$: BehaviorSubject<R>, requestFn: (val: T, i: number) => Observable<R>) {
   return (in$: Observable<T>) => {
-    return in$.pipe(
-      startWith(1 as any),
-      switchMap(requestFn),
-      tap(data => cache$.next(data)),
-      startWith(cache$.getValue()),
-    );
+    return merge(
+      cache$.pipe(take(1)),
+      in$.pipe(
+        startWith(1 as any),
+        switchMap(requestFn),
+        tap(data => cache$.next(data)),
+      )
+    )
   }
 }
 
