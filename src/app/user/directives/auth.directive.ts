@@ -5,6 +5,8 @@ import { Directive } from '@angular/core';
 })
 export class AuthDirective {
 
-  constructor() { }
+  constructor() {
+    console.log('AUTH DIRECTIVE')
+  }
 
 }

@@ -11,6 +11,9 @@ import { AuthDirective } from './directives/auth.directive';
   imports: [
     CommonModule,
     UserRoutingModule
+  ],
+  exports: [
+    AuthDirective,
   ]
 })
 export class UserModule { }
