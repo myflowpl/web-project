@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { UserService } from '../../../user/services/user.service';
 
 @Component({
   selector: 'app-layout',
@@ -16,6 +17,9 @@ export class LayoutComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    public userService: UserService,
+  ) {}
 
 }
