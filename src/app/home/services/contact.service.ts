@@ -35,7 +35,7 @@ export class ContactService {
 
   getContacts(): Observable<Contact[]> {
     return this.reload$.pipe(
-      cache(this.contacts$, (v) => this.http.get<Contact[]>(this.base + '/contacts')),
+      cache(this.contacts$, () => this.http.get<Contact[]>(this.base + '/contacts')),
     );
   }
 

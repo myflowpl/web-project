@@ -1,1 +1,12 @@
-<p>contact-form works!</p>
+<form #contactForm="ngForm" (ngSubmit)="emitCreate()">
+  <p>
+    email: <input [(ngModel)]="model.email" name="email" required #email type="email" />
+  </p>
+  <p>
+    name: <input (paste)="$event.preventDefault()"  [(ngModel)]="model.name" name="name" [required]="email.value.length > 3" />
+  </p>
+  <button type="submit" [disabled]="contactForm.invalid">Save</button>
+</form>
+
+<pre>{{contactForm.invalid | json }}</pre>
+<pre>{{model | json }}</pre>

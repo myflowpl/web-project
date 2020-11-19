@@ -9,6 +9,7 @@ import { ContactPhotoUrlPipe } from './pipes/contact-photo-url.pipe';
 import { ContactDetailsPage } from './pages/contact-details/contact-details.page';
 import { ContactCreatePage } from './pages/contact-create/contact-create.page';
 import { ContactFormComponent } from './components/contact-form/contact-form.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ContactFormComponent } from './components/contact-form/contact-form.com
   providers: [],
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    FormsModule,
   ]
 })
 export class HomeModule { }

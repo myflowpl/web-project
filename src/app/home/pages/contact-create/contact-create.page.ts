@@ -18,11 +18,7 @@ export class ContactCreatePage implements OnInit {
   ngOnInit(): void {
   }
 
-  onCreate() {
-    const contact: Partial<Contact> = {
-      email: 'test@myflow.pl',
-      name: 'Test'
-    }
+  onCreate(contact: Partial<Contact>) {
     this.contactService.create(contact).subscribe((contact: Contact) => {
       this.router.navigate(['contact', contact.id])
     })
