@@ -10,14 +10,14 @@
       "id": 1,
       "name": "Piotr",
       "email": "piotr@myflow.pl",
-      "password": "123",
+      "password": "$2a$10$wTyyu33bxsrJAB9jlYmQN.yWbepFFfd1pZI.xDqnTOqbM03RmoUIq",
       "role": "admin"
     },
     {
       "id": 2,
       "name": "Paweł",
       "email": "pawel@myflow.pl",
-      "password": "456",
+      "password": "$2a$10$wTyyu33bxsrJAB9jlYmQN.yWbepFFfd1pZI.xDqnTOqbM03RmoUIq",
       "role": "user"
     }
   ],

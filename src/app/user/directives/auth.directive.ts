@@ -1,12 +1,20 @@
-import { Directive } from '@angular/core';
+import { Directive, HostListener } from '@angular/core';
+import { UserService } from '../services/user.service';
 
 @Directive({
   selector: '[appAuth]'
 })
 export class AuthDirective {
 
-  constructor() {
-    console.log('AUTH DIRECTIVE')
-  }
+  constructor(
+    private userService: UserService,
+  ) {}
 
+  @HostListener('click')
+  onHostClick() {
+    this.userService.login({
+      email: 'piotr@myflow.pl',
+      password: '12345'
+    }).subscribe();
+  }
 }
