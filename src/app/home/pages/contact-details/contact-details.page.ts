@@ -4,6 +4,9 @@ import { Contact } from 'src/app/api/api.model';
 import { ContactService } from '../../services/contact.service';
 import { Observable, Subject } from 'rxjs';
 import { filter, map, repeatWhen, switchMap, tap } from 'rxjs/operators';
+import { AppState } from '../../../reducers';
+import { Store } from '@ngrx/store';
+import { getContactByRouteParam } from '../../+contacts/contacts.selectors';
 
 @Component({
   selector: 'app-contact-details',
@@ -13,7 +16,7 @@ import { filter, map, repeatWhen, switchMap, tap } from 'rxjs/operators';
 })
 export class ContactDetailsPage implements OnInit {
 
-  contact$: Observable<Contact>;
+  contact$ = this.store.select(getContactByRouteParam);
 
   isEdit = false;
 
@@ -23,14 +26,16 @@ export class ContactDetailsPage implements OnInit {
     public route: ActivatedRoute,
     public contactService: ContactService,
     public router: Router,
+    public store: Store<AppState>
   ) {
-    this.contact$ = this.route.params.pipe(
-      map(params => parseInt(params.id, 10)),
-      filter(id => !!id),
-      switchMap(id => this.contactService.getById(id).pipe(
-        repeatWhen(() => this.reloadId$)
-      )),
-    );
+
+    // this.contact$ = this.route.params.pipe(
+    //   map(params => parseInt(params.id, 10)),
+    //   filter(id => !!id),
+    //   switchMap(id => this.contactService.getById(id).pipe(
+    //     repeatWhen(() => this.reloadId$)
+    //   )),
+    // );
   }
 
   ngOnInit(): void {}
