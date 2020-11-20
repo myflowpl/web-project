@@ -17,6 +17,7 @@ export interface Payload {
 export class UserService {
 
   private user$$ = new BehaviorSubject<User | null>(null);
+  public user$ = this.user$$.asObservable();
 
   private token$$ = new BehaviorSubject('');
 
@@ -37,9 +38,6 @@ export class UserService {
   getToken() {
     return this.token$$.getValue();
   }
-  get user$() {
-    return this.user$$.asObservable();
-  }
 
   login(credentials: {email: string, password: string}) {
 
@@ -47,6 +45,8 @@ export class UserService {
       tap(res => this.token$$.next(res.accessToken)),
       map(res => jwtDecode<Payload>(res.accessToken)),
       switchMap((payload) => this.http.get<User>(this.base + '/users/'+payload.sub, {headers: {}})),
+      tap(user => this.user$$.next(user)),
+      tap(user => this.user$$.next(user)),
       tap(user => this.user$$.next(user)),
     )
   }

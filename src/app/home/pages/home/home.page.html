@@ -1,2 +1,5 @@
 <h2>Witaj na stronie głównej</h2>
-<p>home works!</p>
+
+<button mat-button (click)="flag = !flag">Toggle</button> {{flag}}
+
+<img *appUnless="flag" src="https://randomuser.me/api/portraits/men/sdfd.jpg" />

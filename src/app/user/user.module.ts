@@ -10,10 +10,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UserDirective } from './directives/user.directive';
 
 
 @NgModule({
-  declarations: [AuthDialog, AuthDirective],
+  declarations: [AuthDialog, AuthDirective, UserDirective],
   imports: [
     CommonModule,
     UserRoutingModule,
@@ -31,6 +32,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   exports: [
     AuthDirective,
+    UserDirective,
   ]
 })
 export class UserModule { }

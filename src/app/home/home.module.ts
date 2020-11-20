@@ -18,6 +18,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { UserModule } from '../user/user.module';
+import { LightDirective } from './directives/light.directive';
+import { ImgErrorDirective } from './directives/img-error.directive';
+import { UnlessDirective } from './directives/unless.directive';
 
 
 @NgModule({
@@ -30,6 +33,9 @@ import { UserModule } from '../user/user.module';
     ContactCreatePage,
     ContactFormComponent,
     LayoutComponent,
+    LightDirective,
+    ImgErrorDirective,
+    UnlessDirective,
   ],
   providers: [],
   imports: [
