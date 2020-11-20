@@ -21,6 +21,8 @@ import { UserModule } from '../user/user.module';
 import { LightDirective } from './directives/light.directive';
 import { ImgErrorDirective } from './directives/img-error.directive';
 import { UnlessDirective } from './directives/unless.directive';
+import { EffectsModule } from '@ngrx/effects';
+import { ContactsEffects } from './+contacts/contacts.effects';
 
 
 @NgModule({
@@ -49,6 +51,7 @@ import { UnlessDirective } from './directives/unless.directive';
     MatIconModule,
     MatListModule,
     UserModule,
+    EffectsModule.forFeature([ContactsEffects]),
   ],
   exports: [
     LayoutComponent,

@@ -15,8 +15,17 @@ export const loadContactssFailure = createAction(
   props<{ error: any }>()
 );
 
-
 export const create = createAction(
   '[Contacts] Create',
   props<{ contact: Partial<Contact> }>()
+);
+
+export const createSuccess = createAction(
+  '[Contacts] Create Success',
+  props<{ contact: Contact }>()
+);
+
+export const createFailure = createAction(
+  '[Contacts] Create Failure',
+  props<{ error: any }>()
 );

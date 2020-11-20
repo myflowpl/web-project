@@ -15,7 +15,7 @@ export const initialState: ContactsState = {
 export const reducer = createReducer(
   initialState,
 
-  on(contactActions.create, (state, action) => {
+  on(contactActions.createSuccess, (state, action) => {
     // NIE
     // state.contacts.push(action.contact);
     // return state
@@ -24,7 +24,7 @@ export const reducer = createReducer(
     return {
       ...state,
       contacts: [
-        action.contact as any,
+        action.contact,
         ...state.contacts
       ]
     }
