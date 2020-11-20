@@ -5,9 +5,13 @@ export const loadContactss = createAction(
   '[Contacts] Load Contactss'
 );
 
+export const loading = createAction(
+  '[Contacts] Loading'
+);
+
 export const loadContactssSuccess = createAction(
   '[Contacts] Load Contactss Success',
-  props<{ data: any }>()
+  props<{ contacts: Contact[] }>()
 );
 
 export const loadContactssFailure = createAction(
@@ -18,6 +22,10 @@ export const loadContactssFailure = createAction(
 export const create = createAction(
   '[Contacts] Create',
   props<{ contact: Partial<Contact> }>()
+);
+
+export const createSaving = createAction(
+  '[Contacts] Load Saving'
 );
 
 export const createSuccess = createAction(

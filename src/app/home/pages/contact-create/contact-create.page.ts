@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { create } from '../../+contacts/contacts.actions';
+import { getSaving } from '../../+contacts/contacts.selectors';
 import { Contact } from '../../../api/api.model';
 import { AppState } from '../../../reducers';
 import { ContactService } from '../../services/contact.service';
@@ -12,6 +13,8 @@ import { ContactService } from '../../services/contact.service';
   styleUrls: ['./contact-create.page.scss']
 })
 export class ContactCreatePage implements OnInit {
+
+  saving$ = this.store.select(getSaving);
 
   constructor(
     private contactService: ContactService,

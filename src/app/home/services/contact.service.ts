@@ -34,6 +34,10 @@ export class ContactService {
   ) { }
 
   getContacts(): Observable<Contact[]> {
+    return this.http.get<Contact[]>(this.base + '/contacts');
+  }
+
+  getContactsOnSubjects(): Observable<Contact[]> {
     return this.reload$.pipe(
       cache(this.contacts$, () => this.http.get<Contact[]>(this.base + '/contacts')),
     );

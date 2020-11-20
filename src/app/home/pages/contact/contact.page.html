@@ -2,6 +2,7 @@
 
 <div class="menu">
   <a routerLink="create">New Contact</a>
+  <p *ngIf="loading$ | async">Loading...</p>
   <p *ngFor="let contact of contacts$ | async">
     <a [routerLink]="[contact.id]">{{contact.name}}</a>
   </p>
