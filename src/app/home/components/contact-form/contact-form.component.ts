@@ -25,7 +25,7 @@ export class ContactFormComponent implements OnInit, OnChanges {
   }
 
   emitCreate() {
-    this.create.emit(this.model);
+    this.create.emit({...this.model});
   }
 
   ngOnChanges(changes: SimpleChanges): void {
