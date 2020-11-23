@@ -1,5 +1,12 @@
 # Zapis chatu
 
+## MATERIAŁY
+
+> Link do materiałów, jeszcze zostanie uaktualnioy o materiały z RxJS i NgRx
+
+https://get.myflow.pl/files/201116-ng
+
+
 ## dzień 1
 
 09:32:56	 From  Sages Trener14 : http://latentflip.com/loupe/
