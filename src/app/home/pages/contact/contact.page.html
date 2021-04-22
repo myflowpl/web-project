@@ -6,7 +6,11 @@
 
 <ng-container *ngIf="contacts.length; else elseTemplate">
 
-  <app-contact-details *ngFor="let contact of contacts" [contact]="contact" (edit)="handleEdit($event)"></app-contact-details>
+  <app-contact-details *ngFor="let contact of contacts" [contact]="contact" (edit)="handleEdit($event)">
+    <button>delete</button>
+    <a topleft (click)="handleEdit()">share</a>
+    <a bottomleft>share2</a>
+  </app-contact-details>
 
 </ng-container>
 <ng-template #elseTemplate>

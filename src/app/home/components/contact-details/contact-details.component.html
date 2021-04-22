@@ -1,7 +1,8 @@
 <ng-container *ngIf="contact">
   <img src="https://randomuser.me/api/portraits/men/{{contact.id}}.jpg" />
-  <h3>{{contact.name}}</h3>
-  <i>{{contact.email}}</i>
+  <h3>{{contact.name}} <ng-content select="[topleft]"></ng-content></h3>
+  <i>{{contact.email}}</i><ng-content select="[bottomleft]"></ng-content>
   <button (click)="onEdit()">edit</button>
+  <ng-content></ng-content>
 </ng-container>
 
