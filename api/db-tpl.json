@@ -5,22 +5,7 @@
     {"id":3,"name":"Iwona","email":"iwona@myflow.pl"}
   ],
   "videos": [],
-  "users": [
-    {
-      "id": 1,
-      "name": "Piotr",
-      "email": "piotr@myflow.pl",
-      "password": "$2a$10$wTyyu33bxsrJAB9jlYmQN.yWbepFFfd1pZI.xDqnTOqbM03RmoUIq",
-      "role": "admin"
-    },
-    {
-      "id": 2,
-      "name": "Paweł",
-      "email": "pawel@myflow.pl",
-      "password": "$2a$10$wTyyu33bxsrJAB9jlYmQN.yWbepFFfd1pZI.xDqnTOqbM03RmoUIq",
-      "role": "user"
-    }
-  ],
+  "users": [],
   "playlists": [
     {
       "id": 1,

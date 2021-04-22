@@ -8,7 +8,7 @@
 
   <app-contact-details *ngFor="let contact of contacts" [contact]="contact" (edit)="handleEdit($event)">
     <button>delete</button>
-    <a topleft (click)="handleEdit()">share</a>
+    <a topleft>share</a>
     <a bottomleft>share2</a>
   </app-contact-details>
 
