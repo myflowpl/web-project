@@ -1,2 +1,20 @@
-<p>contact works!</p>
-<!-- <app-contact-details name="Piotr" (edit)="onContactEdit($event)"></app-contact-details> -->
+<p [style.color]="color">{{ title | uppercase }} - {{color}}</p>
+
+<button (click)="changeColor()">make red</button>
+
+<button (click)="loadContacts()">load contacts</button>
+
+<ng-container *ngIf="contacts.length; else elseTemplate">
+
+  <app-contact-details *ngFor="let contact of contacts" [contact]="contact" (edit)="handleEdit($event)"></app-contact-details>
+
+</ng-container>
+<ng-template #elseTemplate>
+  Hit load contacts...
+</ng-template>
+
+
+<pre>{{ contacts | json }}</pre>
+
+<!-- <input #nameInput> {{nameInput.value}}
+<button (click)="nameInput.value = 'mytext'">SET TEXT</button> -->

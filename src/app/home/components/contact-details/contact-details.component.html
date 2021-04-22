@@ -1,1 +1,7 @@
-<p>contact-details works!</p>
+<ng-container *ngIf="contact">
+  <img src="https://randomuser.me/api/portraits/men/{{contact.id}}.jpg" />
+  <h3>{{contact.name}}</h3>
+  <i>{{contact.email}}</i>
+  <button (click)="onEdit()">edit</button>
+</ng-container>
+

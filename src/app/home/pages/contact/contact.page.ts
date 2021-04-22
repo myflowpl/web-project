@@ -8,11 +8,29 @@ import { Contact } from '../../../api/api.models';
 })
 export class ContactPage implements OnInit {
 
-  public contacts: Contact[] = [];
+  color = 'green';
+
+  title = 'Skontaktuj się z nami';
+
+  contacts: Contact[] = [];
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  changeColor() {
+    this.color = 'red';
+  }
+
+  loadContacts() {
+    this.contacts = [
+      {id: 1, name: 'Piotr', email: 'piotr@myflow.pl'},
+      {id: 2, name: 'Pawel', email: 'pawel@myflow.pl'},
+    ]
+  }
+
+  handleEdit(event: Contact) {
+    console.log('EDIT', event)
+  }
 }
