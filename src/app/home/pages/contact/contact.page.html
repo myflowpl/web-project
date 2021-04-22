@@ -2,23 +2,29 @@
 
 <button (click)="changeColor()">make red</button>
 
-<button (click)="loadContacts()">load contacts</button>
+<!-- <button (click)="loadContacts()">load contacts</button> -->
 
-<ng-container *ngIf="contacts.length; else elseTemplate">
+<ng-container *ngIf="color === 'red'">
 
-  <app-contact-details *ngFor="let contact of contacts" [contact]="contact" (edit)="handleEdit($event)">
-    <button>delete</button>
-    <a topleft>share</a>
-    <a bottomleft>share2</a>
-  </app-contact-details>
+  <ng-container *ngIf="contacts$ | async as contacts; else elseTemplate">
+
+    <app-contact-details *ngFor="let contact of contacts" [contact]="contact" (edit)="handleEdit($event)">
+      <button>delete</button>
+      <a topleft>share</a>
+      <a bottomleft>share2</a>
+    </app-contact-details>
+
+  </ng-container>
+  <ng-template #elseTemplate>
+    Hit load contacts...
+  </ng-template>
 
 </ng-container>
-<ng-template #elseTemplate>
-  Hit load contacts...
-</ng-template>
 
 
-<pre>{{ contacts | json }}</pre>
+
+
+<!-- <pre>{{ contacts | json }}</pre> -->
 
 <!-- <input #nameInput> {{nameInput.value}}
 <button (click)="nameInput.value = 'mytext'">SET TEXT</button> -->
