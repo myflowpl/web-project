@@ -1,1 +1,20 @@
-<p>sign-up works!</p>
+<form [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
+  <h2>Sign Up</h2>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput type="email" formControlName="email" />
+  </mat-form-field>
+  <mat-error *ngIf="signUpForm.controls.email.errors?.email">
+    This should be email
+  </mat-error>
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input matInput type="password" formControlName="password" />
+  </mat-form-field>
+
+  <button [disabled]="signUpForm.invalid" mat-button type="submit">Sign Up</button>
+</form>

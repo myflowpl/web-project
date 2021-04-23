@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +9,16 @@ import { Component, OnInit } from '@angular/core';
       <a mat-button  routerLink="/" [routerLinkActive]="activeClass" [routerLinkActiveOptions]="{exact: true}">Home</a>
       <a mat-button  routerLink="/contact" routerLinkActive="active">Contact</a>
       <span class="spacer"></span>
-      <a mat-button >Sign In</a>
+
+      <ng-container *ngIf="authService.profile$ | async as profile; else elseTemplate">
+        <span>{{profile.user.name}}</span>
+        <a mat-button (click)="authService.signOut()">Sign Out</a>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <a mat-button >Sign In</a>
+        <a mat-button routerLink="/sign-up">Sign Up</a>
+      </ng-template>
+
     </mat-toolbar>
   `,
   styles: [`
@@ -23,7 +33,9 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   activeClass = 'active';
-  constructor() { }
+  constructor(
+    public authService: AuthService
+  ) { }
 
   ngOnInit(): void {
   }
