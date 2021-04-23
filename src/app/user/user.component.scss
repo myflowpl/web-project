@@ -1,0 +1,14 @@
+:host {
+  overflow: auto;
+  display: block;
+}
+nav {
+  float: left;
+  width: 200px;
+  a {
+    display: block;
+  }
+}
+main {
+  float: left;
+}
