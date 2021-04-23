@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -18,6 +19,7 @@ export class SignUpPage implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
+    private router: Router,
   ) { }
 
   ngOnInit() /*: void*/ {
@@ -27,6 +29,7 @@ export class SignUpPage implements OnInit {
     this.authService.signUp(this.signUpForm.value).subscribe(
       (profile) => {
         console.log(profile);
+        this.router.navigate(['/'])
       },
       err => {
         console.error(err.error);

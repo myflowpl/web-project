@@ -16,7 +16,11 @@ export class LoginService {
         return of(profile);
       }
 
-      const dialogRef = this.dialog.open(SignInDialog, {width: '300px', height: '400px'})
+      const dialogRef = this.dialog.open(SignInDialog, {
+        width: '600px',
+        height: '400px',
+        disableClose: true,
+      })
       return dialogRef.afterClosed()
     }),
     share(),
