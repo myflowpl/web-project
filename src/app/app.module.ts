@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BASE_URL } from './api/api.config';
 import { environment } from '../environments/environment';
 import { LayoutModule } from './layout/layout.module';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { LayoutModule } from './layout/layout.module';
     HomeModule,
     HttpClientModule,
     LayoutModule,
+    AuthModule,
   ],
   providers: [
     {
