@@ -6,6 +6,7 @@ import { AuthDirective } from './directives/auth.directive';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [SignUpPage, SignInDialog, AuthDirective],
@@ -14,6 +15,7 @@ import { MatButtonModule } from "@angular/material/button";
     ReactiveFormsModule,
     MatInputModule,
     MatButtonModule,
+    MatDialogModule,
   ],
   exports: [AuthDirective]
 })

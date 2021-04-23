@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import jwtDecode from 'jwt-decode';
 import { BASE_URL } from '../../api/api.config';
-import { SignUpDto, SignUpResponseDto, User } from '../../api/api.models';
+import { SignInDto, SignInResponseDto, SignUpDto, SignUpResponseDto, User } from '../../api/api.models';
 import { Profile } from '../models';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, switchMap, tap } from "rxjs/operators";
@@ -42,6 +42,13 @@ export class AuthService {
 
   signUp(data: SignUpDto): Observable<Profile> {
     return this.http.post<SignUpResponseDto>(this.baseUrl + '/signup', data).pipe(
+      switchMap(res => this.getProfile(res.accessToken)),
+      tap(profile => this.profile$$.next(profile)),
+    )
+  }
+
+  signIn(data: SignInDto): Observable<Profile> {
+    return this.http.post<SignInResponseDto>(this.baseUrl + '/signin', data).pipe(
       switchMap(res => this.getProfile(res.accessToken)),
       tap(profile => this.profile$$.next(profile)),
     )

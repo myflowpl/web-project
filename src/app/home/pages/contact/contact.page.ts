@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { share } from 'rxjs/operators';
 import { Contact } from '../../../api/api.models';
 import { ContactService } from '../../services/contact.service';
 
@@ -14,7 +15,7 @@ export class ContactPage implements OnInit, OnDestroy {
   // contacts: Contact[] = [];
 
   contacts$ = this.contactService.getContacts().pipe(
-
+    // share()
   );
 
   // sub: Subscription | null = null;

@@ -15,7 +15,7 @@ import { AuthService } from '../../auth/services/auth.service';
         <a mat-button (click)="authService.signOut()">Sign Out</a>
       </ng-container>
       <ng-template #elseTemplate>
-        <a mat-button >Sign In</a>
+        <a mat-button appAuth>Sign In</a>
         <a mat-button routerLink="/sign-up">Sign Up</a>
       </ng-template>
 

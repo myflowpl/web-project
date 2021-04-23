@@ -6,6 +6,7 @@ import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from "@angular/material/button";
+import { AuthModule } from '../auth/auth.module';
 
 
 
@@ -15,7 +16,8 @@ import { MatButtonModule } from "@angular/material/button";
     CommonModule,
     RouterModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    AuthModule,
   ],
   exports: [MainLayoutComponent]
 })
