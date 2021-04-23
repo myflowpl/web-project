@@ -7,11 +7,17 @@ const routes: Routes = [
   {
     path: '',
     component: HomePage,
+    data: {
+      layout: 'no-footer'
+    }
   },
   {
     path: 'contact',
     component: ContactPage,
-  }
+    data: {
+      layout: 'main'
+    }
+  },
 ];
 
 @NgModule({

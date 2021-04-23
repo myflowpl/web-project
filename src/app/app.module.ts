@@ -8,6 +8,7 @@ import { HomeModule } from './home/home.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BASE_URL } from './api/api.config';
 import { environment } from '../environments/environment';
+import { LayoutModule } from './layout/layout.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { environment } from '../environments/environment';
     BrowserAnimationsModule,
     HomeModule,
     HttpClientModule,
+    LayoutModule,
   ],
   providers: [
     {
