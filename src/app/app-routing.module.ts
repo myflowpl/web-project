@@ -18,9 +18,10 @@ const routes: Routes = [
     component: SignUpPage,
   },
   {
-    path: 'user',
-    loadChildren: () => import('./user/user.module').then(m => m.UserModule)
-  }
+    path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserModule)
+  },
+  { path: 'music', loadChildren: () => import('./music/music.module').then(m => m.MusicModule) },
+  { path: 'photo', loadChildren: () => import('./photo/photo.module').then(m => m.PhotoModule) }
 ];
 
 @NgModule({

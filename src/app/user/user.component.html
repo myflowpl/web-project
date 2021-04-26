@@ -2,5 +2,7 @@
   <a [routerLink]="[user.id]" *ngFor="let user of users$ | async">{{user.name}}</a>
 </nav>
 <main>
+  <app-a></app-a>
+  <app-b></app-b>
   <router-outlet></router-outlet>
 </main>

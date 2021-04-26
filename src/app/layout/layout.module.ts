@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from "@angular/material/button";
 import { AuthModule } from '../auth/auth.module';
+import { CModule } from '../shared/c/c.module';
 
 
 
@@ -18,6 +19,7 @@ import { AuthModule } from '../auth/auth.module';
     MatToolbarModule,
     MatButtonModule,
     AuthModule,
+    CModule,
   ],
   exports: [MainLayoutComponent]
 })

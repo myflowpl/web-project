@@ -9,6 +9,8 @@ import { AuthService } from '../../auth/services/auth.service';
       <a mat-button  routerLink="/" [routerLinkActive]="activeClass" [routerLinkActiveOptions]="{exact: true}">Home</a>
       <a mat-button  routerLink="/contact" routerLinkActive="active">Contact</a>
       <a mat-button  routerLink="/user" routerLinkActive="active">User</a>
+      <a mat-button  routerLink="/music" routerLinkActive="active">Music</a>
+      <a mat-button  routerLink="/photo" routerLinkActive="active">Photo</a>
       <span class="spacer"></span>
 
       <ng-container *ngIf="authService.profile$ | async as profile; else elseTemplate">

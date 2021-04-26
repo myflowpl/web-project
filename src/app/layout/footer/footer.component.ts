@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
   template: `
     <p>
       My Company 2021 &copy;
+      <app-c></app-c>
     </p>
   `,
   styles: [`
