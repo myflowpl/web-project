@@ -9,7 +9,7 @@ import { marker } from '@biesbjerg/ngx-translate-extract-marker';
     <mat-toolbar>
       <span translate>MY_APP</span>
       <a mat-button  routerLink="/" [routerLinkActive]="activeClass" [routerLinkActiveOptions]="{exact: true}">{{ 'HOME' | translate}}</a>
-      <a mat-button  routerLink="/contact" routerLinkActive="active" translate>CONTACT2</a>
+      <a mat-button  routerLink="/contact" routerLinkActive="active"><span translate>CONTACT2</span></a>
       <a mat-button  routerLink="/user" routerLinkActive="active">{{ 'USER' | translate}}</a>
       <a mat-button  routerLink="/music" routerLinkActive="active" [innerHTML]="'MUSIC' | translate"></a>
       <a mat-button  routerLink="/photo" routerLinkActive="active">{{ photo }} </a>
