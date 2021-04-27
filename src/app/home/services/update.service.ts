@@ -19,7 +19,7 @@ export class UpdateService {
       console.log('SW INIT');
       swUpdate.available.subscribe((event) => {
         console.log('update available', event);
-        this.openDialog(event);
+        this.openDialog(event as any);
       });
       swUpdate.activated.subscribe(event => {
         console.log('update activated', event);

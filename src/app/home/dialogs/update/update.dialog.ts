@@ -8,7 +8,7 @@ export interface AppData {
 }
 export interface Version {
   hash: string;
-  appData?: AppData | any;
+  appData?: AppData;
 }
 export interface UpdateAvailableEvent extends UAE {
   type: 'UPDATE_AVAILABLE';
