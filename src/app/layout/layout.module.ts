@@ -8,6 +8,7 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from "@angular/material/button";
 import { AuthModule } from '../auth/auth.module';
 import { CModule } from '../shared/c/c.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -20,6 +21,7 @@ import { CModule } from '../shared/c/c.module';
     MatButtonModule,
     AuthModule,
     CModule,
+    TranslateModule,
   ],
   exports: [MainLayoutComponent]
 })
