@@ -7,6 +7,8 @@ import { UpdateDialog } from './dialogs/update/update.dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { UpdateService } from './services/update.service';
+import { HighlightDirective } from './directives/highlight.directive';
+import { AuthModule } from '../auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -14,11 +16,13 @@ import { UpdateService } from './services/update.service';
     ContactPage,
     ContactDetailsComponent,
     UpdateDialog,
+    HighlightDirective,
   ],
   imports: [
     CommonModule,
     MatDialogModule,
     MatButtonModule,
+    AuthModule,
   ]
 })
 export class HomeModule {

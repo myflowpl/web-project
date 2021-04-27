@@ -10,9 +10,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { WatchdogComponent } from './components/watchdog/watchdog.component';
+import { RolesDirective } from './directive/roles.directive';
 
 @NgModule({
-  declarations: [SignUpPage, SignInDialog, AuthDirective, WatchdogComponent],
+  declarations: [SignUpPage, SignInDialog, AuthDirective, WatchdogComponent, RolesDirective],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -27,6 +28,6 @@ import { WatchdogComponent } from './components/watchdog/watchdog.component';
       multi: true,
     }
   ],
-  exports: [AuthDirective, WatchdogComponent]
+  exports: [AuthDirective, WatchdogComponent, RolesDirective]
 })
 export class AuthModule { }
