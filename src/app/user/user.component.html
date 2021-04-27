@@ -1,8 +1,10 @@
+<app-watchdog redirectTo="/"></app-watchdog>
+
 <nav>
   <a [routerLink]="[user.id]" *ngFor="let user of users$ | async">{{user.name}}</a>
 </nav>
 <main>
-  <app-a></app-a>
+  <app-a ></app-a>
   <app-b></app-b>
   update user: 1
   <router-outlet></router-outlet>

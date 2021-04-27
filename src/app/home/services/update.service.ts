@@ -3,6 +3,7 @@ import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SwUpdate } from '@angular/service-worker';
 import { interval } from 'rxjs';
+import { environment } from '../../../environments/environment';
 import { UpdateAvailableEvent, UpdateDialog } from '../dialogs/update/update.dialog';
 
 @Injectable({
@@ -14,6 +15,9 @@ export class UpdateService {
     private swUpdate: SwUpdate,
     @Inject(PLATFORM_ID) platformId: Object,
   ) {
+    if(!environment.production) {
+      return;
+    }
     console.log('SW CONSTRUCTOR');
     if (isPlatformBrowser(platformId)) {
       console.log('SW INIT');
