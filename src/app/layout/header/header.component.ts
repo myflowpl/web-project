@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../auth/services/auth.service';
 import { marker } from '@biesbjerg/ngx-translate-extract-marker';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,7 @@ import { marker } from '@biesbjerg/ngx-translate-extract-marker';
       <a mat-button  routerLink="/contact" routerLinkActive="active"><span translate>CONTACT2</span></a>
       <a mat-button  routerLink="/user" routerLinkActive="active">{{ 'USER' | translate}}</a>
       <a mat-button  routerLink="/music" routerLinkActive="active" [innerHTML]="'MUSIC' | translate"></a>
-      <a mat-button  routerLink="/photo" routerLinkActive="active">{{ photo }} </a>
+      <a mat-button  routerLink="/photo" routerLinkActive="active">{{ photo | translate }} </a>
       <span class="spacer"></span>
       <span (click)="setLang('en')">[en]</span>
       <span (click)="setLang('pl')">[pl]</span>
@@ -51,6 +52,12 @@ export class HeaderComponent implements OnInit {
     this.translateService.use(lang);
   }
   ngOnInit(): void {
+    // this.pobierz(true).subscribe(res => {
+    //   res?.toLocaleLowerCase()
+    // }, err => {})
   }
+  // pobierz(flag: boolean): Observable<string | null> {
+  //   return flag ? of('string') : of(null)
+  // }
 
 }
