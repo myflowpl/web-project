@@ -1,10 +1,13 @@
-:host ::ng-deep {
+:host {
   display: block;
-  border: 1px dotted blue;
-  
-  a {
-    color: yellowgreen !important;
-    border: none !important;
-    display: inline-block !important;
-  }
+  overflow: auto;
+}
+
+nav {
+  width: 30%;
+  float: left;
+}
+main {
+  width: 70%;
+  float: left;
 }

@@ -1,16 +1,21 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ContactDetailsPage } from './home/pages/contact-details/contact-details.page';
 import { ContactPage } from './home/pages/contact/contact.page';
 import { HomePage } from './home/pages/home/home.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomePage
+    component: HomePage,
   },
   {
     path: 'contact',
-    component: ContactPage
+    component: ContactPage,
+    children: [{
+      path: ':id',
+      component: ContactDetailsPage
+    }]
   }
 ];
 

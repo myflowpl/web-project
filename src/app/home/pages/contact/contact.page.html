@@ -1,3 +1,11 @@
-<p>contact works!</p>
-<app-footer></app-footer>
-<a href="/">Back to home</a>
+<h2>Contacts</h2>
+
+<nav>
+  <ul *ngFor="let contact of contacts">
+    <a [routerLink]="[contact.id]" routerLinkActive="active-{{contact.id}}">{{contact.name}}</a>
+  </ul>
+</nav>
+
+<main>
+  <router-outlet></router-outlet>
+</main>
