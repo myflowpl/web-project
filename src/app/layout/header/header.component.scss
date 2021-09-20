@@ -1,8 +1,11 @@
 a {
   padding: 5px 10px;
-
+  color: blue;
   &.active {
     color: #ff0000;
   }
 }
 
+:host {
+
+}

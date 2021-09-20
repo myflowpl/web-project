@@ -1,0 +1,10 @@
+:host ::ng-deep {
+  display: block;
+  border: 1px dotted blue;
+  
+  a {
+    color: yellowgreen !important;
+    border: none !important;
+    display: inline-block !important;
+  }
+}
