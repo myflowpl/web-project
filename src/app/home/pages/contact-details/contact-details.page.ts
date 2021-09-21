@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EMPTY, Observable, of, Subject, Subscription } from 'rxjs';
-import { map, filter, share, switchMap, distinctUntilChanged, takeUntil, startWith, catchError } from 'rxjs/operators';
+import { map, filter, share, switchMap, distinctUntilChanged, takeUntil, startWith, catchError, tap } from 'rxjs/operators';
 import { Contact } from '../../../api/api.models';
 import { ContactService } from '../../services/contact.service';
 
@@ -29,6 +29,7 @@ export class ContactDetailsPage implements OnInit {
       map(params => params.id),
       filter(id => !!id),
       distinctUntilChanged(),
+      tap(id => this.error = null),
       switchMap(id => this.contactService.getById(id).pipe(
         catchError(err => {
           this.error = err;
