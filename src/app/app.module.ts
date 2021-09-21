@@ -11,6 +11,7 @@ import { ContactDetailsComponent } from './home/components/contact-details/conta
 import { ContactDetailsPage } from './home/pages/contact-details/contact-details.page';
 import { HttpClientModule } from '@angular/common/http';
 import { ContactFormComponent } from './home/components/contact-form/contact-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ContactFormComponent } from './home/components/contact-form/contact-for
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

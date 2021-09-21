@@ -63,6 +63,17 @@ export class ContactDetailsPage implements OnInit {
     })
   }
 
+  handleEditSubmit(contact: Contact) {
+    console.log('handle contact submit', contact)
+    this.contactService.update(contact).subscribe(c => {
+      console.log('SUBMIT SUCCESS', c);
+
+      this.router.navigate([], {
+        relativeTo: this.route
+      })
+    })
+  }
+
 }
 
 /**

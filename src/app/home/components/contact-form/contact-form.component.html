@@ -1,1 +1,23 @@
-<p>contact-form works!</p>
+<form [formGroup]="form" #ngForm="ngForm" (ngSubmit)="handleSubmit()" >
+  <input formControlName="name" />
+  <br>
+  <input formControlName="email" />
+
+  <p *ngIf="form.get('email')?.hasError('email')">
+    Format maila jest niepoprawny
+  </p>
+
+  <br>
+  <button type="submit" [disabled]="form.invalid">Save</button>
+</form>
+
+<pre>
+
+valid: {{form.valid}}
+touched: {{form.touched}}
+dirty: {{form.dirty}}
+submitted: {{ngForm.submitted}}
+
+{{form.value | json}}
+
+</pre>

@@ -19,4 +19,8 @@ export class ContactService {
   getContacts(): Observable<Contact[]> {
     return this.http.get<Contact[]>(`http://localhost:3000/contacts`);
   }
+
+  update(contact: Contact): Observable<Contact> {
+    return this.http.patch<Contact>(`http://localhost:3000/contacts/${contact.id}`, contact);
+  }
 }
