@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "api": "node api/db.js && json-server-auth api/db.json -r api/db-routes.json --delay 1000"
+    "api": "node api/db.js && json-server-auth api/db.json -r api/db-routes.json --delay 2500"
   },
   "private": true,
   "dependencies": {

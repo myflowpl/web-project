@@ -14,7 +14,11 @@ const routes: Routes = [
     component: ContactPage,
     children: [{
       path: ':id',
-      component: ContactDetailsPage
+      component: ContactDetailsPage,
+      data: {
+        title: 'Contact {{id}} Details',
+        breadcrumbs: ['']
+      }
     }]
   }
 ];

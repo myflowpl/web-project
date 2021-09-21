@@ -9,6 +9,7 @@ import { HomePage } from './home/pages/home/home.page';
 import { ContactPage } from './home/pages/contact/contact.page';
 import { ContactDetailsComponent } from './home/components/contact-details/contact-details.component';
 import { ContactDetailsPage } from './home/pages/contact-details/contact-details.page';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ContactDetailsPage } from './home/pages/contact-details/contact-details
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -55,5 +57,10 @@ export class AppModule { }
 // console.log('instance of', user instanceof User); // ???
 
 // user = new User(2, 'Paweł')
+// const user2 = new User(2, 'Paweł')
 
 // console.log('instance of user2', user instanceof User); // ???
+
+// class Admin extends User {
+
+// }

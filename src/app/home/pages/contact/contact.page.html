@@ -2,7 +2,10 @@
 
 <nav>
   <ul *ngFor="let contact of contacts">
-    <a [routerLink]="[contact.id]" routerLinkActive="active-{{contact.id}}">{{contact.name}}</a>
+    <a [routerLink]="[contact.id]" routerLinkActive="active">{{contact.name}}</a>
+  </ul>
+  <ul>
+    <a [routerLink]="[555]" routerLinkActive="active">Contact 404</a>
   </ul>
 </nav>
 

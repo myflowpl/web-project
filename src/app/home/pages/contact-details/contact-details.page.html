@@ -1,1 +1,13 @@
-<p>contact-details <B>{{id}}</B> works!</p>
+<h2>Contact Details</h2>
+
+<div *ngIf="contact$ | async as contact; else loadingContact">
+  <p>id: <b>{{contact.id}}</b></p>
+  <p>name: <b>{{contact.name}}</b></p>
+  <p>email: <b>{{contact.email}}</b></p>
+</div>
+
+<ng-template #loadingContact>
+  Loading...
+</ng-template>
+
+<pre *ngIf="error">{{error | json }}</pre>
