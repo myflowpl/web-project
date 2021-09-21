@@ -1,9 +1,22 @@
-<h2>Contact Details</h2>
 
 <div *ngIf="contact$ | async as contact; else loadingContact">
-  <p>id: <b>{{contact.id}}</b></p>
-  <p>name: <b>{{contact.name}}</b></p>
-  <p>email: <b>{{contact.email}}</b></p>
+
+  <ng-container *ngIf="isEdit$ | async; else elseTemplate">
+
+    <h2>Edit Contact</h2>
+
+    <app-contact-form [contact]="contact"></app-contact-form>
+
+    <button (click)="handleEditCancel()">Cancel</button>
+
+  </ng-container>
+  <ng-template #elseTemplate>
+
+    <h2>Contact Details</h2>
+    <app-contact-details [contact]="contact" (edit)="handleEdit($event)"></app-contact-details>
+
+  </ng-template>
+
 </div>
 
 <ng-template #loadingContact>

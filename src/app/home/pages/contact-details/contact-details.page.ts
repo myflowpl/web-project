@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EMPTY, Observable, of, Subject, Subscription } from 'rxjs';
 import { map, filter, share, switchMap, distinctUntilChanged, takeUntil, startWith, catchError, tap } from 'rxjs/operators';
 import { Contact } from '../../../api/api.models';
@@ -17,11 +17,13 @@ export class ContactDetailsPage implements OnInit {
 
   error: any;
   contact$: Observable<Contact | null> | undefined;
+  isEdit$: Observable<boolean> | undefined;
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private contactService: ContactService,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
 
@@ -39,6 +41,26 @@ export class ContactDetailsPage implements OnInit {
       )),
     )
 
+    this.isEdit$ = this.route.queryParams.pipe(
+      map(params => !!params.edit)
+    );
+
+  }
+
+  handleEdit(contact: Contact) {
+
+    this.router.navigate([], {
+      queryParams: {edit: 1},
+      // queryParamsHandling: 'merge',
+      relativeTo: this.route
+    })
+  }
+
+  handleEditCancel() {
+
+    this.router.navigate([], {
+      relativeTo: this.route
+    })
   }
 
 }

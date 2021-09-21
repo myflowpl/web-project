@@ -1,1 +1,8 @@
-<p>contact-details works!</p>
+<ng-container *ngIf=contact>
+  <p>id: <b>{{contact.id}}</b></p>
+  <p>name: <b>{{contact.name}}</b></p>
+  <p>email: <b>{{contact.email}}</b></p>
+
+  <button (click)="onEditClick()">Edit</button>
+
+</ng-container>

@@ -1,12 +1,23 @@
 <h2>Contacts</h2>
 
 <nav>
-  <ul *ngFor="let contact of contacts">
-    <a [routerLink]="[contact.id]" routerLinkActive="active">{{contact.name}}</a>
-  </ul>
-  <ul>
-    <a [routerLink]="[555]" routerLinkActive="active">Contact 404</a>
-  </ul>
+  <ng-container *ngIf="contacts$ | async as contacts; else elseTemplate">
+
+    <ul>
+      <li *ngFor="let contact of contacts">
+        <a [routerLink]="[contact.id]" routerLinkActive="active">{{contact.name}}</a>
+      </li>
+      <li>
+        <a [routerLink]="[555]" routerLinkActive="active">Contact 404</a>
+      </li>
+    </ul>
+
+  </ng-container>
+
+  <ng-template #elseTemplate>
+    Loading...
+  </ng-template>
+
 </nav>
 
 <main>

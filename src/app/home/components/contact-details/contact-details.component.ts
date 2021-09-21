@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Contact } from '../../../api/api.models';
 
 @Component({
   selector: 'app-contact-details',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactDetailsComponent implements OnInit {
 
+  @Input()
+  contact: Contact | undefined;
+
+  @Output()
+  edit = new EventEmitter<Contact>()
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onEditClick() {
+    if(this.contact) {
+      this.edit.emit(this.contact);
+    }
   }
 
 }

@@ -10,6 +10,7 @@ import { ContactPage } from './home/pages/contact/contact.page';
 import { ContactDetailsComponent } from './home/components/contact-details/contact-details.component';
 import { ContactDetailsPage } from './home/pages/contact-details/contact-details.page';
 import { HttpClientModule } from '@angular/common/http';
+import { ContactFormComponent } from './home/components/contact-form/contact-form.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
     HomePage,
     ContactPage,
     ContactDetailsComponent,
-    ContactDetailsPage
+    ContactDetailsPage,
+    ContactFormComponent
   ],
   imports: [
     BrowserModule,

@@ -15,4 +15,8 @@ export class ContactService {
   getById(id: number): Observable<Contact> {
     return this.http.get<Contact>(`http://localhost:3000/contacts/${id}`);
   }
+
+  getContacts(): Observable<Contact[]> {
+    return this.http.get<Contact[]>(`http://localhost:3000/contacts`);
+  }
 }

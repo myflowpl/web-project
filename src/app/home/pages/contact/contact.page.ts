@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Contact } from '../../../api/api.models';
+import { ContactService } from '../../services/contact.service';
 
 @Component({
   selector: 'app-contact',
@@ -8,14 +10,14 @@ import { Contact } from '../../../api/api.models';
 })
 export class ContactPage implements OnInit {
 
-  contacts: Contact[] = [
-    {id: 1, name: 'Piotr', email: 'piotr@myflow.pl'},
-    {id: 2, name: 'Paweł', email: 'pawel@myflow.pl'},
-  ]
+  contacts$: Observable<Contact[]> | undefined;
 
-  constructor() { }
+  constructor(
+    private contactService: ContactService
+  ) { }
 
   ngOnInit(): void {
+    this.contacts$ = this.contactService.getContacts();
   }
 
 }
