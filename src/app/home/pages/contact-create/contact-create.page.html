@@ -1,8 +1,10 @@
 <h2>Create Contact</h2>
 
-<app-contact-form label="Create" (edited)="handleCreateSubmit($event)">
+<app-loader #loaderRef>
+  <app-contact-form label="Create" (edited)="handleCreateSubmit($event)">
 
-  <button routerLink=".." type="button">Cancel</button>
+    <button routerLink=".." type="button" [disabled]="loaderRef.loading">Cancel</button>
 
-</app-contact-form>
+  </app-contact-form>
+</app-loader>
 
