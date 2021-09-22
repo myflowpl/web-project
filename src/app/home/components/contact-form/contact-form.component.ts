@@ -21,7 +21,13 @@ export class ContactFormComponent implements OnInit, OnChanges {
   form = this.fb.group({
     id: [],
     name: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]]
+    email: ['', [Validators.required, Validators.email]],
+
+    address: this.fb.group({
+      id: [],
+      street: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+    }),
   })
 
   constructor(

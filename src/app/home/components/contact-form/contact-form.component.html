@@ -3,9 +3,18 @@
   <ng-content select="[top]"></ng-content>
   <br>
 
-  <input formControlName="name" />
+  Name: <input formControlName="name" />
   <br>
-  <input formControlName="email" />
+  Email: <input formControlName="email" />
+
+  <div formGroupName="address">
+    Address: <br>
+
+    Street: <input formControlName="street" />
+    <br>
+    City: <input formControlName="city" />
+
+  </div>
 
   <p *ngIf="form.get('email')?.hasError('email')">
     Format maila jest niepoprawny

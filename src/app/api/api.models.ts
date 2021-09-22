@@ -40,10 +40,24 @@ export interface SignInResponseDto {
   accessToken: string;
 }
 
+export interface Medium {
+  id: number;
+  name: string;
+  url: string;
+}
+
+export interface Address {
+  id: number;
+  street: string;
+  city: string;
+}
+
 export interface Contact {
   id: number;
   name: string;
   email: string;
+  address?: Address;
+  media?: Medium[];
 }
 
 export interface Coords {

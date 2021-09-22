@@ -2,6 +2,7 @@
   <p>id: <b>{{contact.id}}</b></p>
   <p>name: <b>{{contact.name}}</b></p>
   <p>email: <b>{{contact.email}}</b></p>
+  <p>address: <b>{{contact.address?.street}}, {{contact.address?.city}}</b></p>
 
   <button (click)="onEditClick()">Edit</button>
 
