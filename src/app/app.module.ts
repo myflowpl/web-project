@@ -14,6 +14,11 @@ import { ContactFormComponent } from './home/components/contact-form/contact-for
 import { ReactiveFormsModule } from '@angular/forms';
 import { ContactCreatePage } from './home/pages/contact-create/contact-create.page';
 import { LoaderComponent } from './shared/loader/loader.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from "@angular/material/dialog";
+import { MatInputModule } from "@angular/material/input";
+import { MatButtonModule } from "@angular/material/button";
+import { MatToolbarModule } from "@angular/material/toolbar";
 
 @NgModule({
   declarations: [
@@ -33,6 +38,11 @@ import { LoaderComponent } from './shared/loader/loader.component';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatInputModule,
+    MatButtonModule,
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
