@@ -1,1 +1,22 @@
-<p>sign-up works!</p>
+<form [formGroup]="form" (ngSubmit)="onSignUp()" >
+  <h2>Sign Up</h2>
+
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input matInput formControlName="password" type="password" />
+  </mat-form-field>
+
+  <button mat-button type="button" routerLink="/" >cancel</button>
+  <button mat-button type="submit" color="primary" [disabled]="form.invalid" >Sign Up</button>
+</form>
+<pre>{{authService.profile$ | async | json}}</pre>

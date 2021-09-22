@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import jwtDecode from 'jwt-decode';
 import { BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { SignUpDto } from '../../api/api.models';
+import { map, switchMap, tap } from 'rxjs/operators';
+import { SignUpDto, SignUpResponseDto, User } from '../../api/api.models';
 import { API_BASE_URL } from '../../app.config';
 import { Profile } from '../models/auth.model';
 
@@ -30,8 +31,22 @@ export class AuthService {
   ) { }
 
   signUp(data: SignUpDto) {
-    return this.http.post(`${this.baseUrl}/signup`, data).pipe(
-      tap((profile: any) => this.profile$$.next(profile))
+
+    return this.http.post<SignUpResponseDto>(`${this.baseUrl}/signup`, data).pipe(
+      switchMap((res) => this.getProfile(res.accessToken)),
+      tap((profile) => this.profile$$.next(profile))
+    );
+  }
+
+  getProfile(accessToken: string) {
+
+    const payload: {sub: string} = jwtDecode(accessToken);
+
+    return this.http.get<User>(
+      `${this.baseUrl}/users/${payload.sub}`,
+      {headers: {Authorization: `Bearer ${accessToken}`}}
+    ).pipe(
+      map(user => ({accessToken, user}))
     );
   }
 
