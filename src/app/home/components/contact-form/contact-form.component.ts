@@ -59,7 +59,6 @@ export class ContactFormComponent implements OnInit, OnChanges {
         data.media.forEach(() => this.addMedium())
       }
       this.form.patchValue(data);
-      // this.form.setValue({email: 'piotr@myfl.pl'});
     }
   }
 
@@ -67,7 +66,6 @@ export class ContactFormComponent implements OnInit, OnChanges {
   }
 
   handleSubmit() {
-    console.log('SUBMIT', this.form.value);
     this.edited.emit(this.form.value);
   }
 }
