@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Contact } from '../../../api/api.models';
 
 @Component({
@@ -28,15 +28,37 @@ export class ContactFormComponent implements OnInit, OnChanges {
       street: ['', [Validators.required]],
       city: ['', [Validators.required]],
     }),
+
+    media: this.fb.array([])
   })
 
   constructor(
     private fb: FormBuilder,
   ) { }
 
+  get media() {
+    return this.form.get('media') as FormArray;
+  }
+
+  addMedium() {
+    this.media.push(this.fb.group({
+      id: [],
+      name: ['', [Validators.required]],
+      url: ['', [Validators.required]],
+    }))
+  }
+
+  removeMedium(index: number) {
+    this.media.removeAt(index);
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes.contact?.currentValue) {
-      this.form.patchValue(changes.contact.currentValue);
+    const data: Contact = changes.contact?.currentValue;
+    if(data) {
+      if(data.media) {
+        data.media.forEach(() => this.addMedium())
+      }
+      this.form.patchValue(data);
       // this.form.setValue({email: 'piotr@myfl.pl'});
     }
   }
