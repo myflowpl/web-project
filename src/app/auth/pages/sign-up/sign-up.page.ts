@@ -26,8 +26,9 @@ export class SignUpPage implements OnInit {
   }
 
   onSignUp() {
-    this.authService.signUp(this.form.value).subscribe(profile => {
 
+    this.authService.signUp(this.form.value).subscribe(profile => {
+      this.router.navigate(['/'])
     });
   }
 }
