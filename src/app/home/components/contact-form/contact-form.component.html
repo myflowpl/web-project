@@ -1,4 +1,8 @@
 <form [formGroup]="form" #ngForm="ngForm" (ngSubmit)="handleSubmit()" >
+
+  <ng-content select="[top]"></ng-content>
+  <br>
+
   <input formControlName="name" />
   <br>
   <input formControlName="email" />
@@ -8,7 +12,12 @@
   </p>
 
   <br>
-  <button type="submit" [disabled]="form.invalid">Save</button>
+  <ng-content></ng-content>
+  <button type="submit" [disabled]="form.invalid">{{label}}</button>
+
+
+  <ng-content select="[bottom]"></ng-content>
+
 </form>
 
 <pre>

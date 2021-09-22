@@ -5,9 +5,20 @@
 
     <h2>Edit Contact</h2>
 
-    <app-contact-form label="Edit" [contact]="contact" (edited)="handleEditSubmit($event)"></app-contact-form>
+    <app-contact-form label="Update" [contact]="contact" (edited)="handleEditSubmit($event)">
 
-    <button (click)="handleEditCancel()">Cancel</button>
+      <button (click)="handleEditCancel()" type="button">Cancel</button>
+
+      <ng-container top>
+
+        <button>Delete</button>
+        <button>Unpublish</button>
+        <button>Share</button>
+
+      </ng-container>
+
+    </app-contact-form>
+
 
   </ng-container>
   <ng-template #elseTemplate>

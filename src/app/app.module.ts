@@ -12,6 +12,8 @@ import { ContactDetailsPage } from './home/pages/contact-details/contact-details
 import { HttpClientModule } from '@angular/common/http';
 import { ContactFormComponent } from './home/components/contact-form/contact-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ContactCreatePage } from './home/pages/contact-create/contact-create.page';
+import { LoaderComponent } from './shared/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     ContactPage,
     ContactDetailsComponent,
     ContactDetailsPage,
-    ContactFormComponent
+    ContactFormComponent,
+    ContactCreatePage,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

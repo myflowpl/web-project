@@ -3,6 +3,8 @@
 <nav>
   <ng-container *ngIf="contacts$ | async as contacts; else elseTemplate">
 
+    <button routerLink="create">Create +</button>
+
     <ul>
       <li *ngFor="let contact of contacts">
         <a [routerLink]="[contact.id]" routerLinkActive="active">{{contact.name}}</a>

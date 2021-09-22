@@ -34,4 +34,10 @@ export class ContactService {
       tap((contact) => this.reload$.next(contact))
     );
   }
+
+  create(contact: Contact): Observable<Contact> {
+    return this.http.post<Contact>(`http://localhost:3000/contacts`, contact).pipe(
+      tap((contact) => this.reload$.next(contact))
+    );
+  }
 }

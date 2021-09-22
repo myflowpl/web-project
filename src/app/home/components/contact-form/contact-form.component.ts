@@ -10,7 +10,7 @@ import { Contact } from '../../../api/api.models';
 export class ContactFormComponent implements OnInit, OnChanges {
 
   @Input()
-  label: string = '';
+  label: string = 'Save';
 
   @Input()
   contact: Contact | undefined;
@@ -29,9 +29,10 @@ export class ContactFormComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('changes', changes)
-    this.form.patchValue(changes.contact.currentValue);
-    // this.form.setValue({email: 'piotr@myfl.pl'});
+    if(changes.contact?.currentValue) {
+      this.form.patchValue(changes.contact.currentValue);
+      // this.form.setValue({email: 'piotr@myfl.pl'});
+    }
   }
 
   ngOnInit(): void {
