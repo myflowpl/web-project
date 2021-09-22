@@ -19,6 +19,8 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
 import { MatToolbarModule } from "@angular/material/toolbar";
+import { AuthModule } from './auth/auth.module';
+import { API_BASE_URL } from './app.config';
 
 @NgModule({
   declarations: [
@@ -43,8 +45,12 @@ import { MatToolbarModule } from "@angular/material/toolbar";
     MatInputModule,
     MatButtonModule,
     MatToolbarModule,
+    AuthModule,
   ],
-  providers: [],
+  providers: [{
+    provide: API_BASE_URL,
+    useValue: 'http://localhost:3000'
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
