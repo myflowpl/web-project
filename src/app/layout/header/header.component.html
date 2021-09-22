@@ -1,5 +1,5 @@
 <mat-toolbar>
-  <span>My Web App</span>
+  <span appAuth>My Web App</span>
 
   <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
 
@@ -7,6 +7,15 @@
 
   <span class="spacer"></span>
 
-  <a mat-button routerLink="/signup" >Sign Up</a>
+
+  <ng-container *ngIf="user$ | async as user; else elseTemplate">
+
+  </ng-container>
+
+  <ng-template #elseTemplate>
+    <a mat-button routerLink="/signup" >Sign Up</a>
+    <button mat-button appAuth label="Hello Login" >Sign In</button>
+  </ng-template>
+
 
 </mat-toolbar>

@@ -10,8 +10,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AppRoutingModule } from '../app-routing.module';
 
-
-
 @NgModule({
   declarations: [
     SignUpPage,
@@ -27,6 +25,9 @@ import { AppRoutingModule } from '../app-routing.module';
     MatToolbarModule,
     AppRoutingModule,
   ],
-  providers: []
+  providers: [],
+  exports: [
+    AuthDirective,
+  ],
 })
 export class AuthModule { }

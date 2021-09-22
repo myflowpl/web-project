@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { map } from 'rxjs/operators';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  user$ = this.authService.profile$.pipe(
+    map(profile => profile?.user)
+  );
+
+  constructor(
+    private authService: AuthService,
+  ) { }
 
   ngOnInit(): void {
   }
