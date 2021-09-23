@@ -1,3 +1,38 @@
 <h1>Admin</h1>
 
-<pre>{{users$ | async | json}}</pre>
+<ng-container *ngIf="users$ | async as users; else loading">
+
+  <table mat-table [dataSource]="users" >
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>Id</th>
+      <td mat-cell *matCellDef="let element"> {{ element.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="photo">
+      <th mat-header-cell *matHeaderCellDef>Photo</th>
+      <td mat-cell *matCellDef="let user">
+        <img [src]="user | photoUrl:'men'" />
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element"> {{ element.name | uppercase }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let e"> {{ e.email | titlecase }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+
+</ng-container>
+
+<ng-template #loading>
+  Loading user data...
+</ng-template>

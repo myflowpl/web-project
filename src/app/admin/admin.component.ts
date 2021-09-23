@@ -8,6 +8,8 @@ import { AdminService } from './admin.service';
 })
 export class AdminComponent implements OnInit {
 
+  displayedColumns: string[] = ['id', 'photo', 'name', 'email'];
+
   users$ = this.adminService.getUsers()
 
   constructor(

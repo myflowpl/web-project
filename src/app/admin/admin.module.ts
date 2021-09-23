@@ -3,15 +3,18 @@ import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
-
+import { MatTableModule } from "@angular/material/table";
+import { PhotoUrlPipe } from './photo-url.pipe';
 
 @NgModule({
   declarations: [
-    AdminComponent
+    AdminComponent,
+    PhotoUrlPipe
   ],
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    MatTableModule,
   ]
 })
 export class AdminModule { }
