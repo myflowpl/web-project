@@ -1,16 +1,18 @@
 <mat-toolbar>
-  <span appAuth>My Web App</span>
+  <span>My Web App</span>
 
   <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
 
   <a mat-button [routerLink]="['/contact']" routerLinkActive="active">Contact</a>
+
+  <a mat-button [routerLink]="['/admin']" routerLinkActive="active" *appHasRole="'admin'">Admin</a>
 
   <span class="spacer"></span>
 
 
   <ng-container *ngIf="user$ | async as user; else elseTemplate">
     <span>{{user.name}}</span>
-    <a mat-button (click)="signOut()" >Sign Out</a>
+    <a mat-button (click)="signOut()">Sign Out</a>
   </ng-container>
 
   <ng-template #elseTemplate>

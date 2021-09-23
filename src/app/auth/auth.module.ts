@@ -9,12 +9,14 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AppRoutingModule } from '../app-routing.module';
+import { HasRoleDirective } from './directives/has-role.directive';
 
 @NgModule({
   declarations: [
     SignUpPage,
     SignInDialog,
     AuthDirective,
+    HasRoleDirective,
   ],
   imports: [
     CommonModule,
@@ -28,6 +30,7 @@ import { AppRoutingModule } from '../app-routing.module';
   providers: [],
   exports: [
     AuthDirective,
+    HasRoleDirective,
   ],
 })
 export class AuthModule { }
