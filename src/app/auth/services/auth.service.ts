@@ -71,4 +71,12 @@ export class AuthService {
       map(user => ({accessToken, user} as Profile))
     );
   }
+
+  isValidEmail(email: string): Observable<boolean> {
+
+    return this.http.get<User[]>(`${this.baseUrl}/emails/${email}`).pipe(
+      map(users => users.length === 0)
+    );
+
+  }
 }
