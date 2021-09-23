@@ -9,7 +9,8 @@
 
 
   <ng-container *ngIf="user$ | async as user; else elseTemplate">
-
+    <span>{{user.name}}</span>
+    <a mat-button >Sign Out</a>
   </ng-container>
 
   <ng-template #elseTemplate>

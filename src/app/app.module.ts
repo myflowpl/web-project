@@ -21,6 +21,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { AuthModule } from './auth/auth.module';
 import { API_BASE_URL } from './app.config';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,7 @@ import { API_BASE_URL } from './app.config';
   ],
   providers: [{
     provide: API_BASE_URL,
-    useValue: 'http://localhost:3000'
+    useValue: environment.production ? '/api/' : 'http://localhost:3000'
   }],
   bootstrap: [AppComponent]
 })
