@@ -1,9 +1,10 @@
 {
-  "users": 600,
+  "users": 640,
   "artists": 444,
   "songs": 444,
   "playlists": 644,
   "playlistSongs": 644,
   "/playlistSongs/:id": "/playlistSongs?_expand=song&_expand=playlist&playlistId=:id",
-  "/songs": "/songs?_expand=artist"
+  "/songs": "/songs?_expand=artist",
+  "/emails/:email": "/users?email=:email"
 }

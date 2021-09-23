@@ -26,6 +26,10 @@ const routes: Routes = [
       component: ContactDetailsPage,
       data: {}
     }]
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
   }
 ];
 

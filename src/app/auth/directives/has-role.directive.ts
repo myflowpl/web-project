@@ -39,7 +39,7 @@ export class HasRoleDirective implements OnInit, OnDestroy {
           return true;
         }
 
-        return user?.role !== role;
+        return user?.role === role;
 
         // return !role || user?.role === role;
       }),
