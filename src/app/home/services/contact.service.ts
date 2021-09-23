@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { Contact } from '../../api/api.models';
-import { switchMap, tap } from 'rxjs/operators';
+import { catchError, switchMap, tap } from 'rxjs/operators';
 import { API_BASE_URL } from '../../app.config';
 
 @Injectable({
@@ -32,9 +32,9 @@ export class ContactService {
 
   }
 
-  update(contact: Contact): Observable<Contact> {
+  update(contact: Contact): Observable<any> {
     return this.http.patch<Contact>(`${this.baseUrl}/contacts/${contact.id}`, contact).pipe(
-      tap((contact) => this.reload$.next(contact))
+      tap((contact) => this.reload$.next(contact)),
     );
   }
 

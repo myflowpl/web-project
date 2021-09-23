@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import jwtDecode from 'jwt-decode';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
-import { SignUpDto, SignUpResponseDto, User } from '../../api/api.models';
+import { SignInDto, SignInResponseDto, SignUpDto, SignUpResponseDto, User } from '../../api/api.models';
 import { API_BASE_URL } from '../../app.config';
 import { Profile } from '../models/auth.model';
 
@@ -38,6 +38,18 @@ export class AuthService {
     );
   }
 
+  signIn(data: SignInDto) {
+
+    return this.http.post<SignInResponseDto>(`${this.baseUrl}/signin`, data).pipe(
+      switchMap(res => this.getProfile(res.accessToken)),
+      tap(profile => this.profile$$.next(profile))
+    );
+  }
+
+  signOut() {
+    this.profile$$.next(null);
+  }
+
   getProfile(accessToken: string) {
 
     const payload: {sub: string} = jwtDecode(accessToken);
@@ -46,15 +58,7 @@ export class AuthService {
       `${this.baseUrl}/users/${payload.sub}`,
       {headers: {Authorization: `Bearer ${accessToken}`}}
     ).pipe(
-      map(user => ({accessToken, user}))
+      map(user => ({accessToken, user} as Profile))
     );
-  }
-
-  signIn() {
-
-  }
-
-  signOut() {
-    this.profile$$.next(null);
   }
 }

@@ -19,6 +19,7 @@ export class AuthDirective {
   @HostListener('click')
   onClick() {
     this.decoration = 'underline';
+
     this.loginService.loginDialog$.subscribe();
   }
 
