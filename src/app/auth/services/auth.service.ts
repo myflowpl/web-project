@@ -6,6 +6,7 @@ import { map, switchMap, tap } from 'rxjs/operators';
 import { SignInDto, SignInResponseDto, SignUpDto, SignUpResponseDto, User } from '../../api/api.models';
 import { API_BASE_URL } from '../../app.config';
 import { Profile } from '../models/auth.model';
+import { ProfileStorageService } from './profile-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,14 @@ export class AuthService {
     @Inject(API_BASE_URL)
     private baseUrl: string,
     private http: HttpClient,
-  ) { }
+    profileStorage: ProfileStorageService,
+  ) {
+    // get profile from storage
+    this.profile$$.next(profileStorage.getProfile());
+
+    // update storage on profile changes
+    this.profile$.subscribe(profile => profileStorage.setProfile(profile));
+  }
 
   signUp(data: SignUpDto) {
 
@@ -47,7 +55,9 @@ export class AuthService {
   }
 
   signOut() {
-    this.profile$$.next(null);
+    return new Observable(() => {
+      this.profile$$.next(null);
+    });
   }
 
   getProfile(accessToken: string) {
