@@ -11,7 +11,7 @@ import { AuthService } from '../../services/auth.service';
 export class SignInDialog implements OnInit {
 
   form = this.fb.group({
-    email: ['piotr@myflow.pl', [Validators.required]],
+    email: ['jarek@myflow.pl', [Validators.required]],
     password: ['1234', [Validators.required, Validators.minLength(4)]]
   });
 

@@ -13,7 +13,7 @@ export class SignUpPage implements OnInit {
   form = this.fb.group({
     name: ['Jarek', [Validators.required], []],
     email: ['jarek@myflow.pl', [Validators.required, Validators.email], []],
-    password: ['1234', [Validators.required, Validators.minLength(3)], []],
+    password: ['1234', [Validators.required, Validators.minLength(4)], []],
   })
 
   constructor(
