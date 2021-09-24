@@ -33,7 +33,8 @@
 
   <br>
   <ng-content></ng-content>
-  <button type="submit" [disabled]="form.invalid">{{label}}</button>
+
+  <button type="submit" [disabled]="form.invalid || (createLoading$ | async)">{{label}}</button>
 
 
   <ng-content select="[bottom]"></ng-content>

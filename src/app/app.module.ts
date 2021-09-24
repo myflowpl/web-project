@@ -28,6 +28,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { reducers, metaReducers } from './reducers';
+import { ContactEffects } from './home/+contact/contact.effects';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,7 @@ import { reducers, metaReducers } from './reducers';
     MatToolbarModule,
     AuthModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([ContactEffects]),
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     // StoreRouterConnectingModule.forRoot(),

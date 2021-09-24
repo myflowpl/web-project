@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { ContactFacade } from '../../+contact';
 import { Contact } from '../../../api/api.models';
 
 @Component({
@@ -20,20 +21,23 @@ export class ContactFormComponent implements OnInit, OnChanges {
 
   form = this.fb.group({
     id: [],
-    name: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
+    name: ['Test', [Validators.required]],
+    email: ['test@cos.pl', [Validators.required, Validators.email]],
 
     address: this.fb.group({
       id: [],
-      street: ['', [Validators.required]],
-      city: ['', [Validators.required]],
+      street: ['Heliego', [Validators.required]],
+      city: ['Wawa', [Validators.required]],
     }),
 
     media: this.fb.array([])
   })
 
+  createLoading$ = this.contactFacade.createLoading$;
+
   constructor(
     private fb: FormBuilder,
+    private contactFacade: ContactFacade,
   ) { }
 
   get media() {

@@ -3,7 +3,7 @@
 <app-loader #loaderRef>
   <app-contact-form label="Create" (edited)="handleCreateSubmit($event)">
 
-    <button routerLink=".." type="button" [disabled]="loaderRef.loading">Cancel</button>
+    <button routerLink=".." type="button" [disabled]="createLoading$ | async">Cancel</button>
 
   </app-contact-form>
 </app-loader>

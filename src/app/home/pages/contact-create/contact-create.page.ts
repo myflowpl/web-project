@@ -16,6 +16,8 @@ export class ContactCreatePage implements OnInit {
   @ViewChild('loaderRef')
   loader!: LoaderComponent;
 
+  createLoading$ = this.contactFacade.createLoading$
+
   constructor(
     private contactService: ContactService,
     private router: Router,
@@ -38,18 +40,5 @@ export class ContactCreatePage implements OnInit {
     //     );
     //   })
     // )
-  }
-
-  handleCreateSubmitWithCancel(contact: Contact) {
-
-    this.contactService.create(contact).pipe(
-      this.loader.takeUntil(),
-      tap((newContact: any) => {
-        this.router.navigate(
-          ['..', newContact.id],
-          {relativeTo: this.route}
-        );
-      })
-    )
   }
 }

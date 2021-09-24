@@ -21,3 +21,13 @@ export const createContact = createAction(
   '[Contact Create Page] Create Contact',
   props<{ contact: Contact }>()
 );
+
+export const createContactSuccess = createAction(
+  '[Contact Effect] Create Contact Success',
+  props<{ contact: Contact }>()
+);
+
+export const createContactFailure = createAction(
+  '[Contact Effect] Create Contact Failure',
+  props<{error: any}>()
+);
