@@ -1,0 +1,16 @@
+:host {
+  display: block;
+  overflow: auto;
+}
+
+nav {
+  width: 30%;
+  float: left;
+}
+main {
+  width: 70%;
+  float: left;
+}
+.active {
+  color: red;
+}

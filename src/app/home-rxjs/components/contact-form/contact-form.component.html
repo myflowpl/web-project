@@ -1,0 +1,52 @@
+<form [formGroup]="form" #ngForm="ngForm" (ngSubmit)="handleSubmit()" >
+
+  <ng-content select="[top]"></ng-content>
+  <br>
+
+  Name: <input formControlName="name" />
+  <br>
+  Email: <input formControlName="email" />
+
+  <div formGroupName="address">
+    Address: <br>
+
+    Street: <input formControlName="street" />
+    <br>
+    City: <input formControlName="city" />
+
+  </div>
+
+  <div formArrayName="media">
+    <h3>Social Media <button (click)="addMedium()" type="button">+</button></h3>
+
+    <div *ngFor="let medium of media.controls; let i=index" [formGroupName]="i">
+      Medium Name: <input formControlName="name" />
+      <br>
+      Url: <input formControlName="url" />
+      <button type="button" (click)="removeMedium(i)">X</button>
+    </div>
+  </div>
+
+  <p *ngIf="form.get('email')?.hasError('email')">
+    Format maila jest niepoprawny
+  </p>
+
+  <br>
+  <ng-content></ng-content>
+  <button type="submit" [disabled]="form.invalid">{{label}}</button>
+
+
+  <ng-content select="[bottom]"></ng-content>
+
+</form>
+
+<pre>
+
+valid: {{form.valid}}
+touched: {{form.touched}}
+dirty: {{form.dirty}}
+submitted: {{ngForm.submitted}}
+
+{{form.value | json}}
+
+</pre>

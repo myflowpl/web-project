@@ -1,0 +1,37 @@
+
+<div *ngIf="contact$ | async as contact; else loadingContact">
+
+  <ng-container *ngIf="isEdit$ | async; else elseTemplate">
+
+    <h2>Edit Contact</h2>
+
+    <app-contact-form label="Update" [contact]="contact" (edited)="handleEditSubmit($event)">
+
+      <button (click)="handleEditCancel()" type="button">Cancel</button>
+
+      <ng-container top>
+
+        <button>Delete</button>
+        <button>Unpublish</button>
+        <button>Share</button>
+
+      </ng-container>
+
+    </app-contact-form>
+
+
+  </ng-container>
+  <ng-template #elseTemplate>
+
+    <h2>Contact Details</h2>
+    <app-contact-details [contact]="contact" (edit)="handleEdit($event)"></app-contact-details>
+
+  </ng-template>
+
+</div>
+
+<ng-template #loadingContact>
+  Loading...
+</ng-template>
+
+<pre *ngIf="error">{{error | json }}</pre>

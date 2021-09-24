@@ -1,0 +1,14 @@
+<ng-container *ngIf=contact>
+  <p>id: <b>{{contact.id}}</b></p>
+  <p>name: <b>{{contact.name}}</b></p>
+  <p>email: <b>{{contact.email}}</b></p>
+  <p>address: <b>{{contact.address?.street}}, {{contact.address?.city}}</b></p>
+  <div>social media:
+    <p *ngFor="let medium of contact?.media">
+      <b>{{medium.name}}: {{medium.url}}</b>
+    </p>
+  </div>
+
+  <button (click)="onEditClick()">Edit</button>
+
+</ng-container>
