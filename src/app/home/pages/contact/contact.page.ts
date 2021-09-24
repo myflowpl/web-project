@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Contact } from '../../../api/api.models';
-import { ContactService } from '../../services/contact.service';
+import { ContactFacade } from '../../+contact/contact.facade';
 
 @Component({
   selector: 'app-contact',
@@ -10,14 +8,13 @@ import { ContactService } from '../../services/contact.service';
 })
 export class ContactPage implements OnInit {
 
-  contacts$: Observable<Contact[]> | undefined;
+  contacts$ = this.contactFacade.contacts$;
 
   constructor(
-    private contactService: ContactService
+    private contactFacade: ContactFacade,
   ) { }
 
   ngOnInit(): void {
-    this.contacts$ = this.contactService.getContacts();
   }
 
 }

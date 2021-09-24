@@ -27,6 +27,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { reducers, metaReducers } from './reducers';
 
 @NgModule({
   declarations: [
@@ -52,10 +53,11 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
     MatButtonModule,
     MatToolbarModule,
     AuthModule,
-    StoreModule.forRoot({}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([]),
-    StoreRouterConnectingModule.forRoot(),
+    StoreModule.forRoot(reducers, { metaReducers }),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    // StoreRouterConnectingModule.forRoot(),
   ],
   providers: [{
     provide: API_BASE_URL,
