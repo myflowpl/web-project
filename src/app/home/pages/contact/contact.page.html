@@ -1,7 +1,7 @@
 <h2>Contacts</h2>
 
 <nav>
-  <ng-container *ngIf="contacts$ | async as contacts; else elseTemplate">
+  <ng-container *ngIf="contacts$ | async as contacts">
 
     <button routerLink="create">Create +</button>
 
@@ -16,9 +16,9 @@
 
   </ng-container>
 
-  <ng-template #elseTemplate>
+  <div *ngIf="contactsLoading$ | async">
     Loading...
-  </ng-template>
+  </div>
 
 </nav>
 

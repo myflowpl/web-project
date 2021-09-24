@@ -7,14 +7,14 @@ export const contactFeatureKey = 'contact';
 
 export interface ContactState {
   contacts: Contact[];
+  contactsLoading: boolean;
   createLoading: boolean;
   error: any;
 }
 
 export const initialState: ContactState = {
-  contacts: [
-    {id: 1, name: 'Piotr z Ngrx', email: 'pio@co.pl'}
-  ],
+  contacts: [],
+  contactsLoading: false,
   createLoading: false,
   error: null,
 };
@@ -22,6 +22,25 @@ export const initialState: ContactState = {
 
 export const reducer = createReducer(
   initialState,
+
+  on(ContactActions.loadContacts, (state) => ({
+    ...state,
+    contactsLoading: true,
+    error: null,
+  })),
+
+  on(ContactActions.loadContactsSuccess, (state, {contacts}) => ({
+    ...state,
+    contacts,
+    contactsLoading: false,
+    error: null,
+  })),
+
+  on(ContactActions.loadContactsFailure, (state, {error}) => ({
+    ...state,
+    contactsLoading: false,
+    error,
+  })),
 
   on(ContactActions.createContact, (state) => ({
     ...state,

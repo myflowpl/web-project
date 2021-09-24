@@ -17,3 +17,8 @@ export const getError = createSelector(
   getContactState,
   (contactState) => contactState.error
 );
+
+export const getContactsLoading = createSelector(
+  getContactState,
+  (contactState) => contactState.contactsLoading
+);

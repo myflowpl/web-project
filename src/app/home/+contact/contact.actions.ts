@@ -2,16 +2,16 @@ import { createAction, props } from '@ngrx/store';
 import { Contact } from '../../api/api.models';
 
 export const loadContacts = createAction(
-  '[Contact] Load Contacts'
+  '[Contact Page] Load Contacts'
 );
 
 export const loadContactsSuccess = createAction(
-  '[Contact] Load Contacts Success',
-  props<{ data: any }>()
+  '[Contact Effect] Load Contacts Success',
+  props<{ contacts: Contact[] }>()
 );
 
 export const loadContactsFailure = createAction(
-  '[Contact] Load Contacts Failure',
+  '[Contact Effect] Load Contacts Failure',
   props<{ error: any }>()
 );
 

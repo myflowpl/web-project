@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Action, Store } from "@ngrx/store";
 import { State } from "../../reducers";
-import { getContacts, getCreateLoading, getError } from "./contact.selectors";
+import { getContacts, getContactsLoading, getCreateLoading, getError } from "./contact.selectors";
 
 @Injectable({providedIn: 'root'})
 export class ContactFacade {
@@ -11,6 +11,8 @@ export class ContactFacade {
   createLoading$ = this.store.select(getCreateLoading);
 
   error$ = this.store.select(getError);
+
+  contactsLoading$ = this.store.select(getContactsLoading);
 
   constructor(
     private store: Store<State>

@@ -18,6 +18,16 @@ export class ContactEffects {
     }),
   ))
 
+  loadContacts$ = createEffect(() => this.actions$.pipe(
+    ofType(ContactActions.loadContacts),
+    mergeMap((action) => {
+      return this.contactService.getContacts().pipe(
+        map(contacts => ContactActions.loadContactsSuccess({contacts})),
+        catchError(error => of(ContactActions.loadContactsFailure({error}))),
+      )
+    }),
+  ))
+
   constructor(
     private actions$: Actions,
     private contactService: ContactService,
