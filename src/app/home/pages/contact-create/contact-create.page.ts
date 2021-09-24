@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
+import { ContactActions, ContactFacade } from '../../+contact';
 import { Contact } from '../../../api/api.models';
 import { LoaderComponent } from '../../../shared/loader/loader.component';
 import { ContactService } from '../../services/contact.service';
@@ -19,6 +20,7 @@ export class ContactCreatePage implements OnInit {
     private contactService: ContactService,
     private router: Router,
     private route: ActivatedRoute,
+    private contactFacade: ContactFacade,
   ) { }
 
   ngOnInit(): void {
@@ -26,14 +28,16 @@ export class ContactCreatePage implements OnInit {
 
   handleCreateSubmit(contact: Contact) {
 
-    this.loader.add = this.contactService.create(contact).pipe(
-      tap(newContact => {
-        this.router.navigate(
-          ['..', newContact.id],
-          {relativeTo: this.route}
-        );
-      })
-    )
+    this.contactFacade.dispatch(ContactActions.createContact({contact}))
+
+    // this.loader.add = this.contactService.create(contact).pipe(
+    //   tap(newContact => {
+    //     this.router.navigate(
+    //       ['..', newContact.id],
+    //       {relativeTo: this.route}
+    //     );
+    //   })
+    // )
   }
 
   handleCreateSubmitWithCancel(contact: Contact) {
