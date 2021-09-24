@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Action, Store } from "@ngrx/store";
-import { State } from "../../reducers";
-import { getContacts, getContactsLoading, getCreateLoading, getError } from "./contact.selectors";
+import { selectQueryParam, State } from "../../reducers";
+import { getContactById, getContacts, getContactsLoading, getCreateLoading, getError } from "./contact.selectors";
 
 @Injectable({providedIn: 'root'})
 export class ContactFacade {
@@ -13,6 +13,10 @@ export class ContactFacade {
   error$ = this.store.select(getError);
 
   contactsLoading$ = this.store.select(getContactsLoading);
+
+  contactById$ = this.store.select(getContactById);
+
+  isEdit$ = this.store.select(selectQueryParam('edit'));
 
   constructor(
     private store: Store<State>

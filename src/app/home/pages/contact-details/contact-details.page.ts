@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EMPTY, Observable, of, Subject, Subscription } from 'rxjs';
 import { map, filter, share, switchMap, distinctUntilChanged, takeUntil, startWith, catchError, tap } from 'rxjs/operators';
+import { ContactFacade } from '../../+contact';
 import { Contact } from '../../../api/api.models';
 import { ContactService } from '../../services/contact.service';
 
@@ -16,34 +17,37 @@ import { ContactService } from '../../services/contact.service';
 export class ContactDetailsPage implements OnInit {
 
   error: any;
-  contact$: Observable<Contact | null> | undefined;
-  isEdit$: Observable<boolean> | undefined;
+
+  contact$ = this.contactFacade.contactById$;
+
+  isEdit$ = this.contactFacade.isEdit$;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private contactService: ContactService,
+    private contactFacade: ContactFacade,
   ) {}
 
   ngOnInit(): void {
 
-    this.contact$ = this.route.params.pipe(
-      map(params => params.id),
-      filter(id => !!id),
-      distinctUntilChanged(),
-      tap(id => this.error = null),
-      switchMap(id => this.contactService.getById(id).pipe(
-        catchError(err => {
-          this.error = err;
-          return EMPTY;
-        }),
-        startWith(null)
-      )),
-    )
+    // this.contact$ = this.route.params.pipe(
+    //   map(params => params.id),
+    //   filter(id => !!id),
+    //   distinctUntilChanged(),
+    //   tap(id => this.error = null),
+    //   switchMap(id => this.contactService.getById(id).pipe(
+    //     catchError(err => {
+    //       this.error = err;
+    //       return EMPTY;
+    //     }),
+    //     startWith(null)
+    //   )),
+    // )
 
-    this.isEdit$ = this.route.queryParams.pipe(
-      map(params => !!params.edit)
-    );
+    // this.isEdit$ = this.route.queryParams.pipe(
+    //   map(params => !!params.edit)
+    // );
 
   }
 

@@ -58,7 +58,7 @@ import { ContactEffects } from './home/+contact/contact.effects';
     EffectsModule.forRoot([ContactEffects]),
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    // StoreRouterConnectingModule.forRoot(),
+    StoreRouterConnectingModule.forRoot(),
   ],
   providers: [{
     provide: API_BASE_URL,

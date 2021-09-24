@@ -1,4 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { selectQueryParam, selectRouteParam } from '../../reducers';
 import { contactFeatureKey, ContactState } from './contact.reducer';
 
 export const getContactState = createFeatureSelector<ContactState>(contactFeatureKey);
@@ -21,4 +22,10 @@ export const getError = createSelector(
 export const getContactsLoading = createSelector(
   getContactState,
   (contactState) => contactState.contactsLoading
+);
+
+export const getContactById = createSelector(
+  getContacts,
+  selectRouteParam('id'),
+  (contacts, id ) => contacts.find(contact => id && contact.id === +id)
 );

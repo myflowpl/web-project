@@ -2,10 +2,10 @@ import { Action, createReducer, on } from '@ngrx/store';
 import * as ContactActions from './contact.actions';
 import { Contact } from '../../api/api.models';
 
-
 export const contactFeatureKey = 'contact';
 
 export interface ContactState {
+  contact: Contact | null;
   contacts: Contact[];
   contactsLoading: boolean;
   createLoading: boolean;
@@ -13,6 +13,7 @@ export interface ContactState {
 }
 
 export const initialState: ContactState = {
+  contact: null,
   contacts: [],
   contactsLoading: false,
   createLoading: false,
