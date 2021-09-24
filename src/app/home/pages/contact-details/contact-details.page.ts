@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EMPTY, Observable, of, Subject, Subscription } from 'rxjs';
 import { map, filter, share, switchMap, distinctUntilChanged, takeUntil, startWith, catchError, tap } from 'rxjs/operators';
-import { ContactFacade } from '../../+contact';
+import { ContactActions, ContactFacade } from '../../+contact';
 import { Contact } from '../../../api/api.models';
 import { ContactService } from '../../services/contact.service';
 
@@ -31,24 +31,6 @@ export class ContactDetailsPage implements OnInit {
 
   ngOnInit(): void {
 
-    // this.contact$ = this.route.params.pipe(
-    //   map(params => params.id),
-    //   filter(id => !!id),
-    //   distinctUntilChanged(),
-    //   tap(id => this.error = null),
-    //   switchMap(id => this.contactService.getById(id).pipe(
-    //     catchError(err => {
-    //       this.error = err;
-    //       return EMPTY;
-    //     }),
-    //     startWith(null)
-    //   )),
-    // )
-
-    // this.isEdit$ = this.route.queryParams.pipe(
-    //   map(params => !!params.edit)
-    // );
-
   }
 
   handleEdit(contact: Contact) {
@@ -68,14 +50,9 @@ export class ContactDetailsPage implements OnInit {
   }
 
   handleEditSubmit(contact: Contact) {
-    console.log('handle contact submit', contact)
-    this.contactService.update(contact).subscribe(c => {
-      console.log('SUBMIT SUCCESS', c);
 
-      this.router.navigate([], {
-        relativeTo: this.route
-      })
-    })
+    this.contactFacade.dispatch(ContactActions.updateContact({contact}))
+
   }
 
 }

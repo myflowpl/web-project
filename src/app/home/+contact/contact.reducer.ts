@@ -24,6 +24,7 @@ export const initialState: ContactState = {
 export const reducer = createReducer(
   initialState,
 
+  // load contact
   on(ContactActions.loadContacts, (state) => ({
     ...state,
     contactsLoading: true,
@@ -43,6 +44,7 @@ export const reducer = createReducer(
     error,
   })),
 
+  // create
   on(ContactActions.createContact, (state) => ({
     ...state,
     createLoading: true,
@@ -64,6 +66,35 @@ export const reducer = createReducer(
     ...state,
     createLoading: false,
     error: action.error
+  })),
+
+  // update
+  on(ContactActions.updateContact, (state) => ({
+    ...state,
+    contactsLoading: true,
+    error: null,
+  })),
+
+  on(ContactActions.updateContactSuccess, (state, {contact}) => {
+
+    const index = state.contacts.findIndex(c => contact.id === c.id);
+
+    const contacts = [...state.contacts];
+
+    contacts[index] = contact;
+
+    return {
+      ...state,
+      contacts,
+      contactsLoading: false,
+      error: null,
+    }
+  }),
+
+  on(ContactActions.updateContactFailure, (state, {error}) => ({
+    ...state,
+    contactsLoading: false,
+    error,
   })),
 
 );

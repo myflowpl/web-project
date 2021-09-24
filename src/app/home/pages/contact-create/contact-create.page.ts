@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { tap } from 'rxjs/operators';
+import { ofType } from '@ngrx/effects';
+import { take, takeUntil, tap } from 'rxjs/operators';
 import { ContactActions, ContactFacade } from '../../+contact';
 import { Contact } from '../../../api/api.models';
 import { LoaderComponent } from '../../../shared/loader/loader.component';
@@ -32,13 +33,16 @@ export class ContactCreatePage implements OnInit {
 
     this.contactFacade.dispatch(ContactActions.createContact({contact}))
 
-    // this.loader.add = this.contactService.create(contact).pipe(
-    //   tap(newContact => {
-    //     this.router.navigate(
-    //       ['..', newContact.id],
-    //       {relativeTo: this.route}
-    //     );
-    //   })
-    // )
+    this.contactFacade.actions$.pipe(
+      ofType(ContactActions.createContactSuccess),
+      take(1),
+      takeUntil(this.contactFacade.actions$.pipe(ofType(ContactActions.createContactFailure)))
+    ).subscribe(({contact}) => {
+      this.router.navigate(
+        ['..', contact.id],
+        {relativeTo: this.route}
+      );
+    })
+
   }
 }

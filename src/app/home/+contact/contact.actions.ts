@@ -31,3 +31,20 @@ export const createContactFailure = createAction(
   '[Contact Effect] Create Contact Failure',
   props<{error: any}>()
 );
+
+// UPDATE CONTACT
+
+export const updateContact = createAction(
+  '[Contact Details Page] Update Contact',
+  props<{ contact: Contact }>()
+);
+
+export const updateContactSuccess = createAction(
+  '[Contact Effect] Update Contact Success',
+  props<{ contact: Contact }>()
+);
+
+export const updateContactFailure = createAction(
+  '[Contact Effect] Update Contact Failure',
+  props<{error: any}>()
+);

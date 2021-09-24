@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { Actions, ofType } from "@ngrx/effects";
 import { Action, Store } from "@ngrx/store";
 import { selectQueryParam, State } from "../../reducers";
 import { getContactById, getContacts, getContactsLoading, getCreateLoading, getError } from "./contact.selectors";
@@ -19,7 +20,8 @@ export class ContactFacade {
   isEdit$ = this.store.select(selectQueryParam('edit'));
 
   constructor(
-    private store: Store<State>
+    private store: Store<State>,
+    public actions$: Actions
   ) {}
 
   dispatch(action: Action) {
