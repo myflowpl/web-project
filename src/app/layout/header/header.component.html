@@ -1,1 +1,9 @@
-<p>header works!</p>
+<mat-toolbar>
+  <div class="container">
+    <span>Web Project</span>
+    <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+    <a mat-button routerLink="/contact" routerLinkActive="active">Contact</a>
+    <a mat-button routerLink="/users" routerLinkActive="active">Users</a>
+
+  </div>
+</mat-toolbar>

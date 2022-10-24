@@ -14,6 +14,10 @@ const routes: Routes = [
     component: ContactPage,
   },
   {
+    path: 'users',
+    loadChildren: () => import('./users/users.module').then(module => module.UsersModule)
+  },
+  {
     path: '**',
     component: Error404Page,
   }
