@@ -1,7 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ContactPage } from './home/pages/contact/contact.page';
+import { Error404Page } from './home/pages/error404/error404.page';
+import { HomePage } from './home/pages/home/home.page';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: '',
+    component: HomePage,
+  },
+  {
+    path: 'contact',
+    component: ContactPage,
+  },
+  {
+    path: '**',
+    component: Error404Page,
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
