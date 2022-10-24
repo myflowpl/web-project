@@ -1,1 +1,13 @@
-<p>user-list works!</p>
+<h2>{{ title | uppercase }}</h2>
+<h3>{{ today | date:'longDate' }}</h3>
+
+<nav>
+  <mat-nav-list>
+    <a mat-list-item *ngFor="let user of users" [routerLink]="[user.id]">{{ user.name }}</a>
+  </mat-nav-list>
+
+</nav>
+
+<main>
+  <router-outlet></router-outlet>
+</main>

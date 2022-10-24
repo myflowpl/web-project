@@ -1,0 +1,17 @@
+
+:host {
+  overflow: auto;
+  display: block;
+}
+
+nav {
+  width: 200px;
+  float: left;
+  a {
+    display: block;
+  }
+}
+
+main {
+  float: left;
+}
