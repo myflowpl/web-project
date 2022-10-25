@@ -16,6 +16,13 @@
   </mat-form-field>
 
   <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input matInput formControlName="password"  />
+    <mat-error *ngIf="form.get('password')?.hasError('required')">Password is required</mat-error>
+    <mat-error *ngIf="form.get('password')?.hasError('minLength')">Min 4 chars required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
     <mat-label>Role</mat-label>
     <mat-select  formControlName="role">
       <mat-option>-- select role --</mat-option>
@@ -25,6 +32,8 @@
     </mat-select>
     <mat-error *ngIf="form.get('email')?.hasError('required')">Role is required</mat-error>
   </mat-form-field>
+
+  <mat-error *ngIf="error">{{error}}</mat-error>
 
   <button mat-raised-button [disabled]="form.invalid" type="submit">Save</button>
 

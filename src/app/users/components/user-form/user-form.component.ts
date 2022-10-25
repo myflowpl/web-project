@@ -10,9 +10,12 @@ import { UsersService } from '../../services/users.service';
 })
 export class UserFormComponent implements OnInit {
 
+  error = '';
+
   form = this.fb.group({
     name: ['piotr', [Validators.required], []],
     email: ['piotr@myflow.pl', [Validators.required, Validators.email], []],
+    password: ['!@#$', [Validators.required, Validators.minLength(4)], []],
     role: [Role.USER, [Validators.required], []]
   });
 
@@ -32,6 +35,14 @@ export class UserFormComponent implements OnInit {
 
   onSubmit() {
     console.log('ON SUBMIT', this.form.value)
+    this.error = '';
+    this.usersService.create(this.form.value as any).subscribe({
+      next: user => console.log('SUCCESS', user),
+      error: error => {
+        console.log('ERROR', error)
+        this.error = error.error;
+      }
+    })
   }
 
 }

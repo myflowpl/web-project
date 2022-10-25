@@ -27,4 +27,9 @@ export class UsersService {
 
     return this.http.get<User>(this.baseUrl+'/users/'+id);
   }
+
+  create(user: Omit<User, 'id'>): Observable<User> {
+
+    return this.http.post<User>(this.baseUrl+'/users', user);
+  }
 }
