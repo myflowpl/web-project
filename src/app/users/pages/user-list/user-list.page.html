@@ -1,10 +1,18 @@
 <h2>{{ title | uppercase }}</h2>
-<h3>{{ today | date:'longDate' }}</h3>
+<!-- <h3>{{ today | date:'longDate' }}</h3> -->
 
 <nav>
-  <mat-nav-list>
-    <a mat-list-item *ngFor="let user of users" [routerLink]="[user.id]">{{ user.name }}</a>
-  </mat-nav-list>
+  <button mat-button color="primary">Dodaj</button>
+
+  <ng-container *ngIf="users$ | async as users; else loadingTpl">
+    <mat-nav-list>
+      <a mat-list-item *ngFor="let user of users" [routerLink]="[user.id]">{{ user.name }}</a>
+    </mat-nav-list>
+  </ng-container>
+
+  <ng-template #loadingTpl>
+    <mat-spinner></mat-spinner>
+  </ng-template>
 
 </nav>
 

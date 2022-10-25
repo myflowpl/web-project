@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, share } from 'rxjs';
 import { User } from '../../../api/api.model';
 import { UsersService } from '../../services/users.service';
 
@@ -14,15 +15,15 @@ export class UserListPage implements OnInit {
 
   today = new Date();
 
-  users: User[] | undefined;
+  users$: Observable<User[]> | undefined;
 
   constructor(
     private usersService: UsersService,
   ) { }
 
   ngOnInit(): void {
-    this.usersService.getUsers().subscribe(
-      users => this.users = users
+    this.users$ = this.usersService.getUsers().pipe(
+      share(),
     )
   }
 

@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { User } from '../../api/api.model';
@@ -7,23 +8,19 @@ import { User } from '../../api/api.model';
 })
 export class UsersService {
 
-  users: User[] = [
-    {id: 1, name: 'Piotr', email: 'piotr@myflow.pl'},
-    {id: 2, name: 'Pawel', email: 'pawel@myflow.pl'},
-    {id: 3, name: 'Justyna', email: 'justyna@myflow.pl'},
-  ]
-
-  constructor() {
+  constructor(
+    private http: HttpClient,
+  ) {
     console.log('INIT USERS SERVICE')
    }
 
   getUsers(): Observable<User[]> {
 
-    return of(this.users);
+    return this.http.get<User[]>('http://localhost:3000/users');
   }
 
-  getUserById(id: number): Observable<User | undefined> {
+  getUserById(id: number): Observable<User> {
 
-    return of(this.users.find(user => user.id === id));
+    return this.http.get<User>('http://localhost:3000/users/'+id);
   }
 }

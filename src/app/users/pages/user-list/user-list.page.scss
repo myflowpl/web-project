@@ -5,7 +5,7 @@
 }
 
 nav {
-  width: 200px;
+  width: 30%;
   float: left;
   a {
     display: block;
@@ -13,5 +13,7 @@ nav {
 }
 
 main {
+  width: 70%;
   float: left;
+  overflow: auto;
 }

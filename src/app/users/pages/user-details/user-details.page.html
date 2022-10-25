@@ -1,5 +1,11 @@
-<h2>User {{id}} </h2>
+<h2>User {{id$ | async}} </h2>
 
-<p>user-details works!</p>
 
-<pre>{{ user | json }}</pre>
+<ng-container *ngIf="user$ | async as user; else elseTemplate">
+
+  <pre>{{ user | json }}</pre>
+
+</ng-container>
+<ng-template #elseTemplate>
+  <mat-spinner></mat-spinner>
+</ng-template>

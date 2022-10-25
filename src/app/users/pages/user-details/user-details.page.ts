@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map, Subscription, switchMap } from 'rxjs';
+import { finalize, map, Observable, startWith, Subject, Subscription, switchMap, takeUntil, tap } from 'rxjs';
 import { User } from '../../../api/api.model';
 import { UsersService } from '../../services/users.service';
 
@@ -11,11 +11,14 @@ import { UsersService } from '../../services/users.service';
 })
 export class UserDetailsPage implements OnInit, OnDestroy, AfterViewInit {
 
-  id: number | undefined;
+  id$: Observable<number> | undefined;
 
-  user: User | undefined;
+  user$: Observable<User | undefined> | undefined;
 
-  sub: Subscription | undefined;
+  // sub: Subscription | undefined;
+  subs = new Subscription();
+
+  destroy$ = new Subject();
 
   constructor(
     private route: ActivatedRoute,
@@ -33,12 +36,29 @@ export class UserDetailsPage implements OnInit, OnDestroy, AfterViewInit {
     )
 
     const user$ = id$.pipe(
-      switchMap(id => this.usersService.getUserById(id))
+
+      switchMap(
+        id => this.usersService.getUserById(id).pipe(
+          startWith(undefined),
+          // tap({
+          //   subscribe: () => console.log(),
+          //   finalize: () => console.log(),
+          // }),
+        )
+      ),
+
+      // takeUntil(this.destroy$)
     )
 
-    id$.subscribe(id => this.id = id);
+    this.id$ = id$;
+    this.user$ = user$;
 
-    this.sub = user$.subscribe(user => this.user = user);
+    // const sub = id$.subscribe(id => console.log('ID', id));
+    // this.subs.add(sub);
+    // const sub2 = id$.subscribe(id => console.log('ID', id));
+    // this.subs.add(sub2);
+
+    // user$.subscribe(user => this.user = user);
 
   }
 
@@ -49,7 +69,10 @@ export class UserDetailsPage implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnDestroy(): void {
     console.log('DETAILS DESTROY')
-    this.sub?.unsubscribe();
+    // this.sub?.unsubscribe();
+    this.subs.unsubscribe();
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 
 }
