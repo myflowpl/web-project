@@ -7,11 +7,15 @@ import { UserListPage } from './pages/user-list/user-list.page';
 import {MatListModule} from '@angular/material/list';
 import {MatButtonModule} from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { UserComponent } from './components/user/user.component';
+import { UserFormComponent } from './components/user-form/user-form.component';
 
 @NgModule({
   declarations: [
     UserDetailsPage,
-    UserListPage
+    UserListPage,
+    UserComponent,
+    UserFormComponent
   ],
   imports: [
     CommonModule,

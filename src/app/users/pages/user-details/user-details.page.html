@@ -3,7 +3,7 @@
 
 <ng-container *ngIf="user$ | async as user; else elseTemplate">
 
-  <pre>{{ user | json }}</pre>
+  <app-user [user]="user"></app-user>
 
 </ng-container>
 <ng-template #elseTemplate>
