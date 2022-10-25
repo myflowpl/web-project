@@ -15,6 +15,7 @@ import {MatListModule} from '@angular/material/list';
     CommonModule,
     UsersRoutingModule,
     MatListModule,
-  ]
+  ],
+  providers: [],
 })
 export class UsersModule { }

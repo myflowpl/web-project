@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../../api/api.model';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.page.html',
-  styleUrls: ['./user-list.page.scss']
+  styleUrls: ['./user-list.page.scss'],
+  // providers: [UsersService],
 })
 export class UserListPage implements OnInit {
 
@@ -12,15 +14,16 @@ export class UserListPage implements OnInit {
 
   today = new Date();
 
-  users: User[] = [
-    {id: 1, name: 'Piotr', email: 'piotr@myflow.pl'},
-    {id: 2, name: 'Pawel', email: 'pawel@myflow.pl'},
-    {id: 3, name: 'Justyna', email: 'justyna@myflow.pl'},
-  ];
+  users: User[] | undefined;
 
-  constructor() { }
+  constructor(
+    private usersService: UsersService,
+  ) { }
 
   ngOnInit(): void {
+    this.usersService.getUsers().subscribe(
+      users => this.users = users
+    )
   }
 
 }
