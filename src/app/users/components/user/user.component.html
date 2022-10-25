@@ -13,4 +13,12 @@
     <li> role: {{user.role || 'guest'}}  </li>
   </ul>
 
+  <div class="buttons">
+    <ng-content></ng-content>
+  </div>
+
+  <div class="toolbar">
+    <ng-content select="[toolbar]"></ng-content>
+  </div>
+
 </ng-container>

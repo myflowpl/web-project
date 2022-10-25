@@ -3,11 +3,21 @@
   display: block;
   position: relative;
   max-width: 200px;
+  background-color: lightgrey;
+  border-radius: 5px;
+  box-shadow: inset;
+  padding: 15px;
 }
 
 mat-icon {
   position: absolute;
-  top: 0;
-  right:0;
+  top: 15px;
+  right: 15px;
   cursor: pointer;
+}
+
+.toolbar {
+  position: absolute;
+  top: 6px;
+  right: 35px;
 }

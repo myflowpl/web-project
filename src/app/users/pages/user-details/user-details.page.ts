@@ -68,6 +68,14 @@ export class UserDetailsPage implements OnInit, OnDestroy, AfterViewInit {
     this.router.navigate(['..'], {relativeTo: this.route});
   }
 
+  handleDelete(user: User) {
+
+  }
+
+  handleEdit(user: User) {
+
+  }
+
   ngAfterViewInit(): void {
     console.log('DETAILS VIEW INIT')
 
