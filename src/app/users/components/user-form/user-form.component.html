@@ -1,1 +1,35 @@
-<p>user-form works!</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name"  />
+    <mat-error *ngIf="form.get('email')?.hasError('required')">Name is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email"  />
+
+    <mat-error *ngIf="form.get('email')?.hasError('email')">Email is incorrect</mat-error>
+    <mat-error *ngIf="form.get('email')?.hasError('required')">Email is required</mat-error>
+
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Role</mat-label>
+    <mat-select  formControlName="role">
+      <mat-option>-- select role --</mat-option>
+      <mat-option *ngFor="let role of roles" [value]="role.value">
+        {{role.label}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="form.get('email')?.hasError('required')">Role is required</mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button [disabled]="form.invalid" type="submit">Save</button>
+
+</form>
+
+<pre>{{ form.value | json }}</pre>
+
+<pre>{{ form.valid | json }}</pre>

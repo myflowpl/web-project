@@ -2,7 +2,7 @@
 <!-- <h3>{{ today | date:'longDate' }}</h3> -->
 
 <nav>
-  <button mat-button color="primary">Dodaj</button>
+  <button mat-stroked-button color="primary" routerLink="create">Dodaj</button>
 
   <ng-container *ngIf="users$ | async as users; else loadingTpl">
     <mat-nav-list>

@@ -11,6 +11,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { UserComponent } from './components/user/user.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { UserPhotoPipe } from './pipes/user-photo.pipe';
+import { UserCreatePage } from './pages/user-create/user-create.page';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatSelectModule, MatSelectTrigger} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -18,7 +23,8 @@ import { UserPhotoPipe } from './pipes/user-photo.pipe';
     UserListPage,
     UserComponent,
     UserFormComponent,
-    UserPhotoPipe
+    UserPhotoPipe,
+    UserCreatePage
   ],
   imports: [
     CommonModule,
@@ -27,6 +33,10 @@ import { UserPhotoPipe } from './pipes/user-photo.pipe';
     MatButtonModule,
     MatProgressSpinnerModule,
     MatIconModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSelectModule,
   ],
   exports: [UserPhotoPipe],
   providers: [],
