@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { User } from '../../../api/api.model';
 
 @Component({
@@ -11,6 +11,9 @@ export class UserComponent implements OnInit, OnChanges {
   @Input()
   user: User | undefined;
 
+  @Output()
+  close = new EventEmitter<{user: User, event: PointerEvent}>();
+
   constructor() { }
 
   ngOnInit(): void {
@@ -18,5 +21,9 @@ export class UserComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log('USER INPUT CHANGE', changes);
+  }
+
+  handleClose(event: any, user: User) {
+    this.close.emit({user, event});
   }
 }

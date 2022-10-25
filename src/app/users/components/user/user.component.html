@@ -1,2 +1,16 @@
-<p>user works!</p>
-<pre>{{user | json}}</pre>
+<ng-container *ngIf="user">
+
+  <mat-icon (click)="handleClose($event, user)">close</mat-icon>
+
+  <h3>{{user.name}}</h3>
+
+  <!-- <img [src]="user | userPhoto" /> -->
+  <img [src]="user | userPhoto:'thumb'" />
+
+  <ul>
+    <li> id: {{user.id}}  </li>
+    <li> email: {{user.email}}  </li>
+    <li> role: {{user.role || 'guest'}}  </li>
+  </ul>
+
+</ng-container>

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, map, Observable, startWith, Subject, Subscription, switchMap, takeUntil, tap } from 'rxjs';
 import { User } from '../../../api/api.model';
 import { UsersService } from '../../services/users.service';
@@ -23,6 +23,7 @@ export class UserDetailsPage implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private route: ActivatedRoute,
     private usersService: UsersService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -60,6 +61,11 @@ export class UserDetailsPage implements OnInit, OnDestroy, AfterViewInit {
 
     // user$.subscribe(user => this.user = user);
 
+  }
+
+  handleUserClose(event: any) {
+    console.log('HANDLE handleUserClose()', event)
+    this.router.navigate(['..'], {relativeTo: this.route});
   }
 
   ngAfterViewInit(): void {
