@@ -8,16 +8,18 @@
 
   <mat-form-field>
     <mat-label>Email</mat-label>
-    <input matInput formControlName="email"  />
+    <input matInput formControlName="email" type="email"  />
 
     <mat-error *ngIf="form.get('email')?.hasError('email')">Email is incorrect</mat-error>
     <mat-error *ngIf="form.get('email')?.hasError('required')">Email is required</mat-error>
 
   </mat-form-field>
 
+  <pre>{{ form.get('email')?.errors | json }}</pre>
+
   <mat-form-field>
     <mat-label>Password</mat-label>
-    <input matInput formControlName="password"  />
+    <input matInput formControlName="password" type="password"  />
     <mat-error *ngIf="form.get('password')?.hasError('required')">Password is required</mat-error>
     <mat-error *ngIf="form.get('password')?.hasError('minLength')">Min 4 chars required</mat-error>
   </mat-form-field>
@@ -35,10 +37,12 @@
 
   <mat-error *ngIf="error">{{error}}</mat-error>
 
+  <button mat-stroked-button  type="button" (click)="cancel.emit()">cancel</button>
+
   <button mat-raised-button [disabled]="form.invalid" type="submit">Save</button>
 
 </form>
 
-<pre>{{ form.value | json }}</pre>
+<!-- <pre>{{ form.value | json }}</pre>
 
-<pre>{{ form.valid | json }}</pre>
+<pre>{{ form.valid | json }}</pre> -->

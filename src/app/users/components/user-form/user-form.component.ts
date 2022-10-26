@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Role } from '../../../api/api.model';
+import { Role, User } from '../../../api/api.model';
 import { UsersService } from '../../services/users.service';
 
 @Component({
@@ -9,6 +9,12 @@ import { UsersService } from '../../services/users.service';
   styleUrls: ['./user-form.component.scss']
 })
 export class UserFormComponent implements OnInit {
+
+  @Output()
+  success = new EventEmitter<User>()
+
+  @Output()
+  cancel = new EventEmitter<void>()
 
   error = '';
 
@@ -37,12 +43,17 @@ export class UserFormComponent implements OnInit {
     console.log('ON SUBMIT', this.form.value)
     this.error = '';
     this.usersService.create(this.form.value as any).subscribe({
-      next: user => console.log('SUCCESS', user),
+      next: res => {
+        console.log('SUCCESS', res);
+        this.success.emit(res.user);
+      },
       error: error => {
         console.log('ERROR', error)
         this.error = error.error;
       }
     })
   }
+
+  validateEmail() {}
 
 }

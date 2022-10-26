@@ -12,3 +12,8 @@ export enum Role {
     ADMIN = 'admin',
     ROOT = 'root',
 }
+
+export interface UserCreateResponse {
+  accessToken: string;
+  user: User;
+}

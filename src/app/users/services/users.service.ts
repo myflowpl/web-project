@@ -1,13 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { filter, merge, Observable, of, startWith, Subject, switchMap, tap } from 'rxjs';
 import { BASE_URL } from '../../api/api.config';
-import { User } from '../../api/api.model';
+import { User, UserCreateResponse } from '../../api/api.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
+
+  private reload$ = new Subject<User>();
 
   constructor(
     private http: HttpClient,
@@ -20,16 +22,32 @@ export class UsersService {
 
   getUsers(): Observable<User[]> {
 
-    return this.http.get<User[]>(this.baseUrl+'/users');
+    const users$ = this.http.get<User[]>(this.baseUrl+'/users');
+
+    const usersWithReload$ = merge(this.reload$, of(null)).pipe(
+      switchMap((user) => users$ )
+    );
+
+    return usersWithReload$;
   }
 
   getUserById(id: number): Observable<User> {
 
-    return this.http.get<User>(this.baseUrl+'/users/'+id);
+    const user$ = this.http.get<User>(this.baseUrl+'/users/'+id);
+
+    return this.reload$.pipe(
+      filter(user => id === user.id),
+      startWith(true),
+      switchMap(() => user$),
+    );
   }
 
-  create(user: Omit<User, 'id'>): Observable<User> {
+  create(user: Omit<User, 'id'>): Observable<UserCreateResponse> {
 
-    return this.http.post<User>(this.baseUrl+'/users', user);
+    return this.http.post<UserCreateResponse>(this.baseUrl+'/users', user).pipe(
+      tap({
+        next: (res) => this.reload$.next(res.user)
+      })
+    );
   }
 }
