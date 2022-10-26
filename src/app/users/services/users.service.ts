@@ -50,4 +50,13 @@ export class UsersService {
       })
     );
   }
+
+  update(user: User): Observable<User> {
+
+    return this.http.patch<User>(this.baseUrl+'/users/'+user.id, user).pipe(
+      tap({
+        next: (user) => this.reload$.next(user)
+      })
+    );
+  }
 }

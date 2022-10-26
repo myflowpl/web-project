@@ -11,6 +11,8 @@ import { UsersService } from '../../services/users.service';
 })
 export class UserDetailsPage implements OnInit, OnDestroy, AfterViewInit {
 
+  isEdit = false;
+
   id$: Observable<number> | undefined;
 
   user$: Observable<User | undefined> | undefined;
@@ -73,7 +75,7 @@ export class UserDetailsPage implements OnInit, OnDestroy, AfterViewInit {
   }
 
   handleEdit(user: User) {
-
+    this.isEdit = true;
   }
 
   ngAfterViewInit(): void {

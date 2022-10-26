@@ -3,14 +3,25 @@
 
 <ng-container *ngIf="user$ | async as user; else elseTemplate">
 
-  <app-user [user]="user" (close)="handleUserClose($event)">
+  <!-- EDIT -->
+  <ng-container *ngIf="isEdit; else elseDetails">
+    <app-user-form [user]="user" (success)="isEdit=false" (cancel)="isEdit = false"></app-user-form>
+  </ng-container>
 
-    <button mat-stroked-button color="primary" (click)="handleEdit(user)">Edit</button>
+  <!-- DETAILS -->
+  <ng-template #elseDetails>
 
-    <button mat-icon-button toolbar color="primary" (click)="handleDelete(user)"><mat-icon>delete</mat-icon></button>
-    <button mat-icon-button toolbar color="primary"><mat-icon>share</mat-icon></button>
+    <app-user [user]="user" (close)="handleUserClose($event)">
 
-  </app-user>
+      <button mat-stroked-button color="primary" (click)="handleEdit(user)">Edit</button>
+
+      <button mat-icon-button toolbar color="primary" (click)="handleDelete(user)"><mat-icon>delete</mat-icon></button>
+      <button mat-icon-button toolbar color="primary"><mat-icon>share</mat-icon></button>
+
+    </app-user>
+  </ng-template>
+
+
 
 </ng-container>
 <ng-template #elseTemplate>

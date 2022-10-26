@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Role, User } from '../../../api/api.model';
 import { UsersService } from '../../services/users.service';
@@ -16,13 +16,21 @@ export class UserFormComponent implements OnInit {
   @Output()
   cancel = new EventEmitter<void>()
 
+  @Input()
+  set user(user: User | undefined) {
+    if(user) {
+      this.form.patchValue(user as any);
+    }
+  }
+
   error = '';
 
   form = this.fb.group({
-    name: ['piotr', [Validators.required], []],
-    email: ['piotr@myflow.pl', [Validators.required, Validators.email], []],
-    password: ['!@#$', [Validators.required, Validators.minLength(4)], []],
-    role: [Role.USER, [Validators.required], []]
+    id: [],
+    name: ['', [Validators.required], []],
+    email: ['', [Validators.required, Validators.email], []],
+    password: ['', [Validators.required, Validators.minLength(4)], []],
+    role: ['', [Validators.required], []]
   });
 
   roles = Object.values(Role).map((role) => ({
@@ -41,17 +49,36 @@ export class UserFormComponent implements OnInit {
 
   onSubmit() {
     console.log('ON SUBMIT', this.form.value)
+
+    const user = this.form.value;
+
     this.error = '';
-    this.usersService.create(this.form.value as any).subscribe({
-      next: res => {
-        console.log('SUCCESS', res);
-        this.success.emit(res.user);
-      },
-      error: error => {
-        console.log('ERROR', error)
-        this.error = error.error;
-      }
-    })
+
+    if(user.id) {
+
+      this.usersService.update(user as any).subscribe({
+        next: (user) => {
+          console.log('SUCCESS', user);
+          this.success.emit(user);
+        },
+        error: (error) => {
+          console.log('ERROR', error)
+          this.error = error.error;
+        }
+      })
+
+    } else {
+      this.usersService.create(user as any).subscribe({
+        next: (res) => {
+          console.log('SUCCESS', res);
+          this.success.emit(res.user);
+        },
+        error: (error) => {
+          console.log('ERROR', error)
+          this.error = error.error;
+        }
+      })
+    }
   }
 
   validateEmail() {}
