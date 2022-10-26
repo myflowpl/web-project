@@ -5,5 +5,19 @@
     <a mat-button routerLink="/contact" routerLinkActive="active">Contact</a>
     <a mat-button routerLink="/users" routerLinkActive="active">Users</a>
 
+    <div class="spacer"></div>
+
+    <ng-container *ngIf="authService.profile$ | async as profile; else elseTemplate">
+
+      <a mat-button>{{profile.user.name}}</a>
+      <a mat-stroked-button appAuth (click)="authService.logout()">Logout</a>
+
+    </ng-container>
+    <ng-template #elseTemplate>
+
+      <a mat-stroked-button appAuth (click)="authService.login()">Login</a>
+    </ng-template>
+
+
   </div>
 </mat-toolbar>

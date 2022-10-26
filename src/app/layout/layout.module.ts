@@ -5,6 +5,7 @@ import { FooterComponent } from './footer/footer.component';
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatButtonModule } from '@angular/material/button'
 import { RouterModule } from '@angular/router';
+import { AuthModule } from '../auth/auth.module';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { RouterModule } from '@angular/router';
     MatToolbarModule,
     MatButtonModule,
     RouterModule,
+    AuthModule,
   ],
   exports: [
     HeaderComponent,

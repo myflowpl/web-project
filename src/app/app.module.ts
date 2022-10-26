@@ -7,6 +7,7 @@ import { LayoutModule } from './layout/layout.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BASE_URL } from './api/api.config';
 import { environment } from '../environments/environment';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { environment } from '../environments/environment';
     LayoutModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    AuthModule,
   ],
   providers: [
     {
