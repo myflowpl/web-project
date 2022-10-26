@@ -12,10 +12,12 @@
 
     <mat-error *ngIf="form.get('email')?.hasError('email')">Email is incorrect</mat-error>
     <mat-error *ngIf="form.get('email')?.hasError('required')">Email is required</mat-error>
-
   </mat-form-field>
 
-  <pre>{{ form.get('email')?.errors | json }}</pre>
+  <mat-error *ngIf="form.get('email')?.hasError('taken')">Email is already taken</mat-error>
+  <mat-error *ngIf="form.get('email')?.pending">checking availability...</mat-error>
+
+  <!-- <pre>{{ form.get('email')?.pending | json }}</pre> -->
 
   <mat-form-field>
     <mat-label>Password</mat-label>
@@ -43,6 +45,9 @@
 
 </form>
 
-<!-- <pre>{{ form.value | json }}</pre>
+<pre>valid {{ form.valid | json }}</pre>
 
-<pre>{{ form.valid | json }}</pre> -->
+<pre>pending {{ form.pending | json }}</pre>
+
+<pre>{{ form.value | json }}</pre>
+

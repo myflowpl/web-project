@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { map, take } from 'rxjs';
 import { Role, User } from '../../../api/api.model';
 import { UsersService } from '../../services/users.service';
 
@@ -28,7 +29,11 @@ export class UserFormComponent implements OnInit {
   form = this.fb.group({
     id: [],
     name: ['', [Validators.required], []],
-    email: ['', [Validators.required, Validators.email], []],
+    email: ['', {
+      validators: [Validators.required, Validators.email],
+      asyncValidators: [this.checkIfValidEmail()],
+      updateOn: 'change'
+    }],
     password: ['', [Validators.required, Validators.minLength(4)], []],
     role: ['', [Validators.required], []]
   });
@@ -42,6 +47,32 @@ export class UserFormComponent implements OnInit {
     private fb: FormBuilder,
     private usersService: UsersService,
   ) { }
+
+  checkIfValidEmail() {
+
+    return (input: FormControl) => {
+
+      return this.usersService.getUsers().pipe(
+        take(1),
+        map(users => users.find(user => user.email === input.value)),
+        map((user) => {
+
+          if(!user) {
+            return null;
+          }
+
+          if(user && this.form.value.id && user.id === this.form.value.id) {
+            return null;
+          }
+
+          return {
+            taken: true,
+          }
+        }),
+      )
+
+    }
+  }
 
   ngOnInit(): void {
     // console.log('ENUM', Role)
