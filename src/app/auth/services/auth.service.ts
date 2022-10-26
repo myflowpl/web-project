@@ -1,6 +1,8 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, of } from 'rxjs';
-import { Profile } from '../auth.model';
+import { HttpClient } from '@angular/common/http';
+import { Inject, Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, of, tap } from 'rxjs';
+import { BASE_URL } from '../../api/api.config';
+import { LoginDto, Profile } from '../auth.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,19 +22,15 @@ export class AuthService {
   }
 
   constructor(
-
+    private http: HttpClient,
+    @Inject(BASE_URL)
+    private baseUrl: string,
   ) { }
 
-  login() {
-    this.profile$$.next({
-      accessToken: 'sdfsdf',
-      user: {
-        id: 1,
-        name: 'Piotr',
-        email: 'Piotr@mcos.pl'
-      }
-    });
-    return this.profile$;
+  login(data: LoginDto): Observable<Profile> {
+    return this.http.post<Profile>(this.baseUrl+'/login', data).pipe(
+      tap(profile => this.profile$$.next(profile)),
+    )
   }
 
   logout() {
