@@ -3,7 +3,7 @@
     <span>Web Project</span>
     <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
     <a mat-button routerLink="/contact" routerLinkActive="active">Contact</a>
-    <a mat-button routerLink="/users" routerLinkActive="active">Users</a>
+    <a mat-button routerLink="/users" routerLinkActive="active" *appHasRole>Users</a>
 
     <div class="spacer"></div>
 

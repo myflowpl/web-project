@@ -11,13 +11,15 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { RegisterPage } from './pages/register/register.page';
 import { RouterModule } from '@angular/router';
+import { HasRoleDirective } from './directives/has-role.directive';
 
 
 @NgModule({
   declarations: [
     LoginDialog,
     AuthDirective,
-    RegisterPage
+    RegisterPage,
+    HasRoleDirective
   ],
   imports: [
     CommonModule,
@@ -30,6 +32,7 @@ import { RouterModule } from '@angular/router';
   ],
   exports: [
     AuthDirective,
+    HasRoleDirective,
   ],
   providers: [
     {
