@@ -51,6 +51,15 @@ export class UsersService {
     );
   }
 
+  register(user: Omit<User, 'id'>): Observable<UserCreateResponse> {
+
+    return this.http.post<UserCreateResponse>(this.baseUrl+'/register', user).pipe(
+      tap({
+        next: (res) => this.reload$.next(res.user)
+      })
+    );
+  }
+
   update(user: User): Observable<User> {
 
     return this.http.patch<User>(this.baseUrl+'/users/'+user.id, user).pipe(

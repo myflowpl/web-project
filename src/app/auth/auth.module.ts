@@ -9,12 +9,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { RegisterPage } from './pages/register/register.page';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
   declarations: [
     LoginDialog,
-    AuthDirective
+    AuthDirective,
+    RegisterPage
   ],
   imports: [
     CommonModule,
@@ -23,6 +26,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    RouterModule,
   ],
   exports: [
     AuthDirective,
