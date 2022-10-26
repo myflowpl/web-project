@@ -1,13 +1,14 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { map, take } from 'rxjs';
 import { Role, User } from '../../../api/api.model';
+import { LoaderComponent } from '../../../shared/loader/loader.component';
 import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
-  styleUrls: ['./user-form.component.scss']
+  styleUrls: ['./user-form.component.scss'],
 })
 export class UserFormComponent implements OnInit {
 
@@ -23,6 +24,9 @@ export class UserFormComponent implements OnInit {
       this.form.patchValue(user as any);
     }
   }
+
+  @ViewChild('loaderCompRef')
+  loader!: LoaderComponent;
 
   error = '';
 
@@ -87,7 +91,9 @@ export class UserFormComponent implements OnInit {
 
     if(user.id) {
 
-      this.usersService.update(user as any).subscribe({
+      this.usersService.update(user as any).pipe(
+        this.loader.tap(),
+      ).subscribe({
         next: (user) => {
           console.log('SUCCESS', user);
           this.success.emit(user);
@@ -99,7 +105,9 @@ export class UserFormComponent implements OnInit {
       })
 
     } else {
-      this.usersService.create(user as any).subscribe({
+      this.usersService.create(user as any).pipe(
+        this.loader.tap(),
+      ).subscribe({
         next: (res) => {
           console.log('SUCCESS', res);
           this.success.emit(res.user);

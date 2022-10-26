@@ -1,53 +1,56 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<app-loader #loaderCompRef>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-  <mat-form-field>
-    <mat-label>Name</mat-label>
-    <input matInput formControlName="name"  />
-    <mat-error *ngIf="form.get('email')?.hasError('required')">Name is required</mat-error>
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name"  />
+      <mat-error *ngIf="form.get('email')?.hasError('required')">Name is required</mat-error>
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Email</mat-label>
-    <input matInput formControlName="email" type="email"  />
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" type="email"  />
 
-    <mat-error *ngIf="form.get('email')?.hasError('email')">Email is incorrect</mat-error>
-    <mat-error *ngIf="form.get('email')?.hasError('required')">Email is required</mat-error>
-  </mat-form-field>
+      <mat-error *ngIf="form.get('email')?.hasError('email')">Email is incorrect</mat-error>
+      <mat-error *ngIf="form.get('email')?.hasError('required')">Email is required</mat-error>
+    </mat-form-field>
 
-  <mat-error *ngIf="form.get('email')?.hasError('taken')">Email is already taken</mat-error>
-  <mat-error *ngIf="form.get('email')?.pending">checking availability...</mat-error>
+    <mat-error *ngIf="form.get('email')?.hasError('taken')">Email is already taken</mat-error>
+    <mat-error *ngIf="form.get('email')?.pending">checking availability...</mat-error>
 
-  <!-- <pre>{{ form.get('email')?.pending | json }}</pre> -->
+    <!-- <pre>{{ form.get('email')?.pending | json }}</pre> -->
 
-  <mat-form-field>
-    <mat-label>Password</mat-label>
-    <input matInput formControlName="password" type="password"  />
-    <mat-error *ngIf="form.get('password')?.hasError('required')">Password is required</mat-error>
-    <mat-error *ngIf="form.get('password')?.hasError('minLength')">Min 4 chars required</mat-error>
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput formControlName="password" type="password"  />
+      <mat-error *ngIf="form.get('password')?.hasError('required')">Password is required</mat-error>
+      <mat-error *ngIf="form.get('password')?.hasError('minLength')">Min 4 chars required</mat-error>
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Role</mat-label>
-    <mat-select  formControlName="role">
-      <mat-option>-- select role --</mat-option>
-      <mat-option *ngFor="let role of roles" [value]="role.value">
-        {{role.label}}
-      </mat-option>
-    </mat-select>
-    <mat-error *ngIf="form.get('email')?.hasError('required')">Role is required</mat-error>
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label>Role</mat-label>
+      <mat-select  formControlName="role">
+        <mat-option>-- select role --</mat-option>
+        <mat-option *ngFor="let role of roles" [value]="role.value">
+          {{role.label}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('email')?.hasError('required')">Role is required</mat-error>
+    </mat-form-field>
 
-  <mat-error *ngIf="error">{{error}}</mat-error>
+    <mat-error *ngIf="error">{{error}}</mat-error>
 
-  <button mat-stroked-button  type="button" (click)="cancel.emit()">cancel</button>
+    <button mat-stroked-button  type="button" (click)="cancel.emit()">cancel</button>
 
-  <button mat-raised-button [disabled]="form.invalid" type="submit">Save</button>
+    <button mat-raised-button [disabled]="form.invalid || loaderCompRef.loading" type="submit">Save</button>
 
-</form>
-
+  </form>
+</app-loader>
+<div *ngIf="loaderCompRef.loading">Saving...</div>
+<!--
 <pre>valid {{ form.valid | json }}</pre>
 
 <pre>pending {{ form.pending | json }}</pre>
 
-<pre>{{ form.value | json }}</pre>
+<pre>{{ form.value | json }}</pre> -->
 

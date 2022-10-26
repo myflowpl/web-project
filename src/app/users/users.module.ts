@@ -16,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatSelectModule, MatSelectTrigger} from '@angular/material/select';
+import { LoaderComponent } from '../shared/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import {MatSelectModule, MatSelectTrigger} from '@angular/material/select';
     MatInputModule,
     MatFormFieldModule,
     MatSelectModule,
+    LoaderComponent,
   ],
   exports: [UserPhotoPipe],
   providers: [],
