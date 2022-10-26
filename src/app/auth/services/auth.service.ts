@@ -3,6 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { BASE_URL } from '../../api/api.config';
 import { LoginDto, Profile } from '../auth.model';
+import { ProfileStorageService } from './profile-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,14 @@ export class AuthService {
     private http: HttpClient,
     @Inject(BASE_URL)
     private baseUrl: string,
-  ) { }
+    private storage: ProfileStorageService,
+  ) {
+    // read storage session
+    this.profile$$.next(this.storage.getProfile());
+
+    // write profile session on changes
+    this.profile$$.subscribe(profile => this.storage.setProfile(profile));
+   }
 
   login(data: LoginDto): Observable<Profile> {
     return this.http.post<Profile>(this.baseUrl+'/login', data).pipe(
