@@ -21,6 +21,6 @@
   <div mat-dialog-actions>
     <button mat-button mat-dialog-close type="button">cancel</button>
     <div class="spacer"></div>
-    <button mat-raised-button type="submit" [disabled]="form.invalid" >Login</button>
+    <button mat-raised-button type="submit" [disabled]="form.invalid || loading$.active" >Login</button>
   </div>
 </form>
