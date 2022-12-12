@@ -2,16 +2,40 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
-
-
+import { ConfirmDialog } from '../ui/confirm/confirm.dialog';
+import { AppService } from '../app.service';
+import { UserInfoComponent } from './user-info/user-info.component';
 
 @NgModule({
   declarations: [
+    // components
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    UserInfoComponent,
+
+    // directives
+
+    // pipes
+
+  ],
+  // kiedys -> serwisy
+  providers: [
+    AppService,
   ],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+    ConfirmDialog,
+  ],
+  exports: [
+    FooterComponent,
+    HeaderComponent,
+  ],
 })
-export class LayoutModule { }
+export class LayoutModule {
+  constructor(
+    private appService: AppService,
+  ) {
+
+    console.log('layotu module id', this.appService.id)
+  }
+}

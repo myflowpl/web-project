@@ -1,4 +1,19 @@
-<h1 class="text-3xl font-bold underline
+<app-header></app-header>
+<div>
+  CONTENT {{ title | uppercase | json}}
+  users
+  {{ getUsers() | json }}
+  <app-confirm></app-confirm>
+</div>
+<app-footer></app-footer>
+
+
+
+
+
+
+
+<!-- <h1 class="text-3xl font-bold underline
   px-2 py-5 pt-8
   bg-gray-400
   text-center
@@ -6,4 +21,4 @@
   md:text-right
  ">
   <a class="btn">Hello world!</a>
-</h1>
+</h1> -->

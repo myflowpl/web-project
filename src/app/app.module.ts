@@ -3,6 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AppService } from './app.service';
+import { LayoutModule } from './layout/layout.module';
+import { ConfirmDialog } from './ui/confirm/confirm.dialog';
 
 @NgModule({
   declarations: [
@@ -10,9 +13,20 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    LayoutModule,
+    ConfirmDialog,
   ],
-  providers: [],
+  providers: [
+    AppService,
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(
+    private appService: AppService
+  ) {
+
+    console.log('app module id', this.appService.id)
+  }
+ }
