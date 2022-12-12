@@ -13,6 +13,10 @@ const routes: Routes = [
     path: 'contact',
     component: ContactPage,
   },
+  {
+    path: 'artists',
+    loadChildren: () => import('./artists/artists.module').then(m => m.ArtistsModule)
+  }
 ];
 
 @NgModule({
