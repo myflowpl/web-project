@@ -5,6 +5,7 @@ import { HeaderComponent } from './header/header.component';
 import { ConfirmDialog } from '../ui/confirm/confirm.dialog';
 import { AppService } from '../app.service';
 import { UserInfoComponent } from './user-info/user-info.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { UserInfoComponent } from './user-info/user-info.component';
   imports: [
     CommonModule,
     ConfirmDialog,
+    RouterModule,
   ],
   exports: [
     FooterComponent,
@@ -36,6 +38,6 @@ export class LayoutModule {
     private appService: AppService,
   ) {
 
-    console.log('layotu module id', this.appService.id)
+    // console.log('layotu module id', this.appService.id)
   }
 }

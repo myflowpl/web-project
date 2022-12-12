@@ -12,7 +12,7 @@ export class FooterComponent implements OnInit {
   appService = inject(AppService)
 
   constructor() {
-    console.log('footer id', this.appService.id)
+    // console.log('footer id', this.appService.id)
   }
 
   ngOnInit(): void {

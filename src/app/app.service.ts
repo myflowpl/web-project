@@ -8,6 +8,6 @@ export class AppService {
   id = count++;
 
   constructor() {
-    console.log('AppService CONSTRUCTOR')
+    // console.log('AppService CONSTRUCTOR')
    }
 }

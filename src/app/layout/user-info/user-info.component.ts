@@ -12,8 +12,8 @@ export class UserInfoComponent implements OnInit {
     private header: HeaderComponent,
     private elementRef: ElementRef,
   ) {
-    console.log('user info ma header', this.header)
-    console.log('user info el', this.elementRef)
+    // console.log('user info ma header', this.header)
+    // console.log('user info el', this.elementRef)
 
    }
 

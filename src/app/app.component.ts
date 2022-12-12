@@ -14,7 +14,7 @@ export class AppComponent {
     private appService: AppService
   ) {
 
-    console.log('app id', this.appService.id)
+    // console.log('app id', this.appService.id)
   }
 
   getUsers() {

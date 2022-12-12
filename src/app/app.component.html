@@ -1,9 +1,6 @@
 <app-header></app-header>
-<div>
-  CONTENT {{ title | uppercase | json}}
-  users
-  {{ getUsers() | json }}
-  <app-confirm></app-confirm>
+<div class="container mx-auto p-4">
+  <router-outlet></router-outlet>
 </div>
 <app-footer></app-footer>
 

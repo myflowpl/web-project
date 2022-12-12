@@ -27,6 +27,6 @@ export class AppModule {
     private appService: AppService
   ) {
 
-    console.log('app module id', this.appService.id)
+    // console.log('app module id', this.appService.id)
   }
  }

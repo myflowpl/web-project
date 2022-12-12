@@ -19,7 +19,7 @@ export class ConfirmDialog implements OnInit {
     // private appService: AppService,
   ) {
 
-    console.log('confirm id', this.appService.id)
+    // console.log('confirm id', this.appService.id)
   }
 
   ngOnInit(): void {
