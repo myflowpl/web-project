@@ -1,0 +1,18 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 w-96 mx-auto">
+
+  <label>Name</label>
+  <input formControlName="name" type="text" />
+
+  <label>Email</label>
+  <input formControlName="email" type="email" />
+
+  <label>Password</label>
+  <input formControlName="password" type="password" />
+
+  <div class="flex">
+    <button class="btn-outline" type="button">cancel</button>
+    <div class="flex-auto"></div>
+    <button class="btn-primary" type="submit" [disabled]="form.invalid">Register</button>
+  </div>
+  <pre>{{ form.valid | json }}</pre>
+</form>
