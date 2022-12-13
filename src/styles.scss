@@ -37,8 +37,16 @@
     disabled:border-slate-400
      ;
   }
+
+
 }
 
 @layer utilities {
 
+}
+
+// styles
+
+.ng-invalid.ng-touched {
+  @apply border-red-500;
 }
