@@ -7,6 +7,11 @@ export interface User {
   role?: Role
 }
 
+export interface LoginDto {
+  email: string;
+  password: string;
+}
+
 export enum Role {
     USER = 'user',
     ADMIN = 'admin',

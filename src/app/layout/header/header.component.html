@@ -8,8 +8,18 @@
     </div>
     <div class="flex gap-4">
 
-      <a>Login</a>
-      <a routerLink="/register">Register</a>
+      <ng-container *ngIf="user$ | async as user; else elseTemplate">
+
+        <a >Hello {{user.name}}</a>
+        <a (click)="authService.logout()">Logout</a>
+
+      </ng-container>
+      <ng-template #elseTemplate>
+
+        <a routerLink="/login">Login</a>
+        <a routerLink="/register">Register</a>
+      </ng-template>
+
     </div>
   </div>
 </div>

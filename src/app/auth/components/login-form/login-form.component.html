@@ -1,0 +1,17 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 w-96 mx-auto">
+
+  <label>Email</label>
+  <input formControlName="email" type="email" />
+
+  <label>Password</label>
+  <input formControlName="password" type="password" />
+  <div class="text-red-500">
+    {{saving.error?.error}}
+  </div>
+
+  <div class="flex gap-4">
+    <button class="btn-outline" type="button">cancel</button>
+    <div class="flex-auto">{{ saving.active ? 'Working...' : ''}}</div>
+    <button class="btn-primary" type="submit" [disabled]="form.invalid || saving.active">Login</button>
+  </div>
+</form>

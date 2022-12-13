@@ -12,11 +12,11 @@ export class LoadingHandler implements OnDestroy {
 
   private destroy$$ = new Subject();
 
-  // public destroy$ = this.destroy$$.asObservable()
+  public destroy$ = this.destroy$$.asObservable()
 
-  tap() {
+  tap<T>() {
     return pipe(
-      tap({
+      tap<T>({
         subscribe: () => {
           this.active = true;
           this.error = null;
@@ -30,7 +30,6 @@ export class LoadingHandler implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log('DESTROY')
     this.destroy$$.next(undefined);
     this.destroy$$.complete();
   }
