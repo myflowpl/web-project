@@ -4,6 +4,7 @@ import { BehaviorSubject, delay, map, Observable, tap } from 'rxjs';
 import { BASE_URL } from '../../api/api.config';
 import { LoginDto, User, UserCreateResponse } from '../../api/api.model';
 import { Profile } from '../auth.model';
+import { ProfileStorageService } from './profile-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,15 @@ export class AuthService {
   private baseUrl = inject(BASE_URL);
 
   private http = inject(HttpClient);
+  private profileStorage = inject(ProfileStorageService);
+
+  constructor() {
+    // read storage session
+    this.profile$$.next(this.profileStorage.getProfile());
+
+    // write profile to session on changes
+    this.profile$$.subscribe(profile => this.profileStorage.setProfile(profile))
+  }
 
   register(data: Omit<User, 'id'>): Observable<UserCreateResponse> {
     return this.http.post<UserCreateResponse>(this.baseUrl+'/register', data)
