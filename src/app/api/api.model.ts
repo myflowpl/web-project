@@ -1,4 +1,17 @@
 
+export interface Quote {
+  id: number;
+  text: string;
+  author: string;
+}
+
+export interface QuotesDto {
+  page: number;
+  pageSize: number;
+  total: number;
+  data: Quote[];
+}
+
 export interface User {
   id: number;
   name: string;

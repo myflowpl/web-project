@@ -9,6 +9,8 @@ import { ConfirmDialog } from './ui/confirm/confirm.dialog';
 import { AuthModule } from './auth/auth.module';
 import { BASE_URL } from './api/api.config';
 import { environment } from '../environments/environment';
+import { CommonModule } from '@angular/common';
+import { HomeModule } from './home/home.module';
 
 export class AppMockService {}
 
@@ -23,6 +25,8 @@ export class AppMockService {}
     ConfirmDialog,
     AuthModule,
     HttpClientModule,
+    CommonModule,
+    HomeModule,
   ],
   providers: [
     AppService,
