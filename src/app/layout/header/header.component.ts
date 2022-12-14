@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Role } from '../../api/api.model';
 import { AppService } from '../../app.service';
 import { AuthService } from '../../auth/services/auth.service';
 
@@ -12,7 +13,14 @@ import { AuthService } from '../../auth/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
+  requiredRole: Role | string = Role.ADMIN;
+
   user$ = this.authService.user$;
+
+  toggleRole() {
+
+    this.requiredRole = (this.requiredRole) ? "" : Role.ADMIN;
+  }
 
   constructor(
     private appService: AppService,

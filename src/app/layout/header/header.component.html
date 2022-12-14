@@ -1,10 +1,10 @@
 <div  class=" bg-slate-200">
   <div  class="container mx-auto p-4 flex gap-4">
-    <div>MyApp</div>
+    <div (click)="toggleRole()">MyApp</div>
     <div class="flex-auto flex gap-4">
       <a routerLink="/">Home</a>
-      <a routerLink="/contact">Contact</a>
-      <a routerLink="/artists" *appHasRole>Artists</a>
+      <a routerLink="/contact" *appHasRole>Contact</a>
+      <a routerLink="/artists" *appHasRole="requiredRole">Artists</a>
     </div>
     <div class="flex gap-4">
 
