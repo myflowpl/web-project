@@ -1,7 +1,8 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
-import { catchError, debounceTime, EMPTY, Observable, of, Subject, switchMap, tap } from "rxjs";
+import { catchError, debounceTime, EMPTY, map, Observable, of, Subject, switchMap, tap } from "rxjs";
 import { Quote, QuotesDto } from "../../../api/api.model";
 
 export interface QuoteState {
@@ -17,12 +18,17 @@ export interface QuoteState {
 export class HomePageStore extends ComponentStore<QuoteState> {
 
   http = inject(HttpClient);
+  route = inject(ActivatedRoute);
+  router = inject(Router);
 
   loading$ = this.select(state => state.loading);
   error$ = this.select(state => state.error);
   quotes$ = this.select(state => state.quotes);
   favorite$ = this.select(state => state.favorite);
-  search$ = this.select(state => state.search);
+  // search$ = this.select(state => state.search);
+  search$ = this.route.queryParams.pipe(
+    map(params => params['q'] || '')
+  );
 
   hasQuotes$ = this.select(state => state.quotes.length > 0);
 
@@ -58,8 +64,16 @@ export class HomePageStore extends ComponentStore<QuoteState> {
     }
   });
 
-  readonly search = this.effect((searchStr$: Observable<string>) => {
-    return searchStr$.pipe(
+  search(searchStr: string) {
+    this.router.navigate([], {
+      queryParams: {q: searchStr || null},
+      queryParamsHandling: 'merge',
+      relativeTo: this.route
+    });
+  }
+
+  private readonly searchLoading = this.effect((searchStr$: Observable<string>) => {
+    return this.search$.pipe(
       debounceTime(250),
       tap(search => this.patchState({
         search,
