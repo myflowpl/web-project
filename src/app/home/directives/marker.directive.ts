@@ -1,9 +1,9 @@
-import { Directive, ElementRef, HostBinding, HostListener, inject, Input, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, HostBinding, HostListener, inject, Input, OnChanges, OnDestroy, OnInit, Renderer2, SimpleChanges } from '@angular/core';
 
 @Directive({
   selector: '[appMarker]'
 })
-export class MarkerDirective {
+export class MarkerDirective implements OnInit, OnDestroy, OnChanges {
 
   el = inject(ElementRef);
   renderer = inject(Renderer2);
@@ -11,6 +11,15 @@ export class MarkerDirective {
   constructor() {
     console.log('DIR CONSTRUCTOR', this.el)
     // this.el.nativeElement.addEventListener('click', () => console.log('CLICk'))
+  }
+  ngOnInit(): void {
+
+  }
+  ngOnDestroy(): void {
+
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('changes', changes)
   }
 
   @Input()

@@ -9,6 +9,8 @@ export class ContactPage implements OnInit {
 
   constructor() { }
 
+  color = 'purple';
+
   ngOnInit(): void {
   }
 

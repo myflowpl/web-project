@@ -1,4 +1,7 @@
-<p appMarker="red">contact works!</p>
-<p appMarker="yellow" fontWeight="800">contact works!</p>
-<p [appMarker]="'green'" fontWeight="300">contact works!</p>
-<p appMarker fontWeight="bold">contact works!</p>
+<p appMarker="red" (click)="color = 'blue'">contact works!</p>
+
+<p appMarker="yellow" fontWeight="800" (click)="color = 'red'">contact works!</p>
+
+<p [appMarker]="'green'" fontWeight="300" (click)="emptyMarker.style.color = 'red'">contact works!</p>
+
+<p [appMarker]="color" fontWeight="bold" #emptyMarker>contact works!</p>
