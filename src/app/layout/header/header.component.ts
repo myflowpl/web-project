@@ -13,7 +13,7 @@ import { AuthService } from '../../auth/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  requiredRole: Role | string = Role.ADMIN;
+  requiredRole: Role | string = '';
 
   user$ = this.authService.user$;
 
