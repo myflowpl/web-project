@@ -9,7 +9,7 @@ export class MarkerDirective implements OnInit, OnDestroy, OnChanges {
   renderer = inject(Renderer2);
 
   constructor() {
-    console.log('DIR CONSTRUCTOR', this.el)
+    // console.log('DIR CONSTRUCTOR', this.el)
     // this.el.nativeElement.addEventListener('click', () => console.log('CLICk'))
   }
   ngOnInit(): void {
@@ -19,7 +19,7 @@ export class MarkerDirective implements OnInit, OnDestroy, OnChanges {
 
   }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('changes', changes)
+    // console.log('changes', changes)
   }
 
   @Input()

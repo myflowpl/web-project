@@ -6,6 +6,7 @@ import { ConfirmDialog } from '../ui/confirm/confirm.dialog';
 import { AppService } from '../app.service';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { RouterModule } from '@angular/router';
+import { AuthModule } from '../auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     ConfirmDialog,
     RouterModule,
+    AuthModule,
   ],
   exports: [
     FooterComponent,
