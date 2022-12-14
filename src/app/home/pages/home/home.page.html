@@ -20,7 +20,7 @@
     <div *ngIf="store.error$ | async as error" class="text-red-500">{{error.error?.message}}</div>
     <div *ngIf="store.noQuotesFound$ | async" >No quotes found :(</div>
 
-    <div *ngFor="let quote of quotes$ | async">
+    <div *ngFor="let quote of store.quotes$ | async">
       <b>{{ quote.author }}</b> {{ quote.text }}
       <div class="text-right">
         <button type="button" (click)="store.addFavorite(quote)">Add to favorite</button>

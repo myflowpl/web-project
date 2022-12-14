@@ -11,9 +11,6 @@ export class HomePage implements OnInit {
 
   store = inject(HomePageStore);
 
-  quotes$ = this.store.quotes$
-
-
   ngOnInit(): void {
   }
 
