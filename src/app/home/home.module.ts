@@ -4,13 +4,15 @@ import { HomePage } from './pages/home/home.page';
 import { ContactPage } from './pages/contact/contact.page';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { MarkerDirective } from './directives/marker.directive';
 
 
 
 @NgModule({
   declarations: [
     HomePage,
-    ContactPage
+    ContactPage,
+    MarkerDirective
   ],
   imports: [
     CommonModule,

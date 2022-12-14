@@ -4,7 +4,7 @@
   <div class="w-40">
     <h2 class="font-bold my-2">Favorite</h2>
     <div class="whitespace-nowrap overflow-hidden" *ngFor="let quote of store.favorite$ | async">
-      <button (click)="store.removeFavorite(quote)" class="p-1">X</button> <b>{{ quote.author }}</b> {{ quote.text }}
+      <button (click)="store.removeFavorite(quote)" class="p-1 cursor-pointer">X</button> <b>{{ quote.author }}</b> {{ quote.text }}
     </div>
     <h2 class="font-bold my-2">Favorite Search</h2>
     <a routerLink="." [queryParams]="{q: 'strong'}" >strong</a><br>
