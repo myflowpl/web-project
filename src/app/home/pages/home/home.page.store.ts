@@ -1,9 +1,12 @@
-import { Injectable } from "@angular/core";
-import { ComponentStore } from '@ngrx/component-store';
-import { Observable, of, Subject, switchMap, tap } from "rxjs";
-import { Quote } from "../../../api/api.model";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { inject, Injectable } from "@angular/core";
+import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { catchError, debounceTime, EMPTY, Observable, of, Subject, switchMap, tap } from "rxjs";
+import { Quote, QuotesDto } from "../../../api/api.model";
 
 export interface QuoteState {
+  loading: boolean;
+  error: HttpErrorResponse | null;
   search: string;
   quotes: Quote[];
   favorite: Quote[];
@@ -13,9 +16,26 @@ export interface QuoteState {
 @Injectable()
 export class HomePageStore extends ComponentStore<QuoteState> {
 
+  http = inject(HttpClient);
+
+  loading$ = this.select(state => state.loading);
+  error$ = this.select(state => state.error);
   quotes$ = this.select(state => state.quotes);
   favorite$ = this.select(state => state.favorite);
   search$ = this.select(state => state.search);
+
+  hasQuotes$ = this.select(state => state.quotes.length > 0);
+
+  noQuotesFound1$ = this.select(
+    state => (!state.loading && !state.quotes.length && state.search)
+  );
+
+  noQuotesFound$ = this.select(
+    this.loading$,
+    this.hasQuotes$,
+    this.search$,
+    (loading, quotes, search) => (!loading && !quotes && search)
+  );
 
   readonly addFavorite = this.updater((state, quote: Quote) => {
     const exists = state.favorite.find(q => q.id === quote.id)
@@ -39,19 +59,33 @@ export class HomePageStore extends ComponentStore<QuoteState> {
   });
 
   readonly search = this.effect((searchStr$: Observable<string>) => {
-    console.log('SEARCH factory')
     return searchStr$.pipe(
-      tap(search => this.patchState({search}))
+      debounceTime(250),
+      tap(search => this.patchState({
+        search,
+        error: null,
+        loading: true,
+        quotes: [],
+      })),
+      switchMap(str => this.fetchQuotes(str).pipe(
+        tapResponse(
+          (res) => this.patchState({quotes: res.data, loading: false}),
+          (error: HttpErrorResponse) => this.patchState({error, loading: false}),
+        ),
+      )),
     );
   });
 
+  private fetchQuotes(searchStr: string) {
+    return this.http.get<QuotesDto>(`http://localhost:3333/api/quotes?q=`+searchStr)
+  }
+
   constructor() {
     super({
+      loading: false,
+      error: null,
       search: '',
-      quotes: [
-        {id: 1, author: 'Piotr', text: 'działaj i osiągaj'},
-        {id: 2, author: 'Paweł', text: 'działaj i odpoczywaj'},
-      ],
+      quotes: [],
       favorite: [],
       selectedId: 2,
     });

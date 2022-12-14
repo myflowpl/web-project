@@ -10,6 +10,11 @@
   <div class="flex-auto">
     <h2>Search for: {{store.search$ | async}}</h2>
     <input type="text" ngModel (ngModelChange)="store.search($event)" />
+
+    <div *ngIf="store.loading$ | async" >Loading...</div>
+    <div *ngIf="store.error$ | async as error" class="text-red-500">{{error.error?.message}}</div>
+    <div *ngIf="store.noQuotesFound$ | async" >No quotes found :(</div>
+
     <div *ngFor="let quote of quotes$ | async">
       <b>{{ quote.author }}</b> {{ quote.text }}
       <div class="text-right">
