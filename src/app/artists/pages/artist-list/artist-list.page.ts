@@ -1,4 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { ArtistsFacade } from '../../+artists/artists.facade';
 import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({
@@ -9,6 +10,8 @@ import { AuthService } from '../../../auth/services/auth.service';
 export class ArtistListPage implements OnInit {
 
   authService = inject(AuthService);
+
+  artistsFacade = inject(ArtistsFacade);
 
   profile$ = this.authService.loadProfile();
 
