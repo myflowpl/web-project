@@ -10,7 +10,7 @@
   </div>
 
   <div class="flex gap-4">
-    <button class="btn-outline" type="button">cancel</button>
+    <button class="btn-outline" type="button" (click)="loginCancel.next()">cancel</button>
     <div class="flex-auto">{{ saving.active ? 'Working...' : ''}}</div>
     <button class="btn-primary" type="submit" [disabled]="form.invalid || saving.active">Login</button>
   </div>

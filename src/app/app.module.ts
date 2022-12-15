@@ -12,6 +12,7 @@ import { environment } from '../environments/environment';
 import { CommonModule } from '@angular/common';
 import { HomeModule } from './home/home.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
 
 export class AppMockService {}
 
@@ -29,6 +30,7 @@ export class AppMockService {}
     CommonModule,
     HomeModule,
     BrowserAnimationsModule,
+    MatDialogModule,
   ],
   providers: [
     AppService,

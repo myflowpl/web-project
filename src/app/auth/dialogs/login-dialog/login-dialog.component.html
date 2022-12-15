@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>
+  Login
+</h1>
+
+<div mat-dialog-content>
+  <p *ngIf="data?.message" class="text-red-500">
+    {{data?.message}}
+  </p>
+  <app-login-form
+    (loginCancel)="handleCancel()"
+    (loginSuccess)="handleSuccess($event)"
+  ></app-login-form>
+</div>
+
+<!-- <div mat-dialog-actions>
+<button class="btn-outline" mat-dialog-close="">CLOSE</button>
+</div> -->
+

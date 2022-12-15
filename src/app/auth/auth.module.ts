@@ -30,6 +30,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
   ],
   exports: [
     HasRoleDirective,
+    LoginFormComponent,
   ],
 })
 export class AuthModule { }

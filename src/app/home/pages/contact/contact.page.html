@@ -8,6 +8,8 @@
 
 <p [appMarker]="color" fontWeight="bold" #emptyMarker>contact works!</p>
 
+<button (click)="login()">Login Dialog</button>
+
 <p *ngIf="profile$ | async as profile">
   Hello {{profile.name}}
 </p>

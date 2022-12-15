@@ -25,6 +25,9 @@ export class LoginFormComponent implements OnInit {
   @Output()
   loginSuccess = new EventEmitter<User>();
 
+  @Output()
+  loginCancel = new EventEmitter<void>();
+
   constructor() { }
 
   ngOnInit(): void {
