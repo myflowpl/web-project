@@ -11,6 +11,7 @@ import { BASE_URL } from './api/api.config';
 import { environment } from '../environments/environment';
 import { CommonModule } from '@angular/common';
 import { HomeModule } from './home/home.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export class AppMockService {}
 
@@ -27,6 +28,7 @@ export class AppMockService {}
     HttpClientModule,
     CommonModule,
     HomeModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     AppService,
