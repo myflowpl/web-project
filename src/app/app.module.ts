@@ -17,6 +17,7 @@ import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 export class AppMockService {}
 
@@ -39,6 +40,7 @@ export class AppMockService {}
     StoreModule.forRoot(reducers, { metaReducers }),
     // isDevMode() ? StoreDevtoolsModule.instrument() : [],
     (!environment.production) ? StoreDevtoolsModule.instrument() : [],
+    StoreRouterConnectingModule.forRoot(),
   ],
   providers: [
     AppService,

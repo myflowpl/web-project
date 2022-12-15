@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ArtistsFacade } from '../../+artists/artists.facade';
 
 @Component({
   selector: 'app-songs',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class SongsPage {
 
+  artistsFacade = inject(ArtistsFacade);
 }
