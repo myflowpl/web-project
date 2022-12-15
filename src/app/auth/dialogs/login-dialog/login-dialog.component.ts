@@ -2,8 +2,9 @@ import { Component, inject, Injectable } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { User } from '../../../api/api.model';
-import { EMPTY, Observable, of, switchMap, throwError } from 'rxjs';
+import { EMPTY, Observable, of, share, switchMap, take, throwError } from 'rxjs';
 import { AuthModule } from '../../auth.module';
+import { AuthService } from '../../services/auth.service';
 
 export interface LoginDialogData {
   message: string;
@@ -16,7 +17,20 @@ export interface LoginDialogResponse {
 @Injectable({providedIn: 'root'})
 export class LoginDialog {
 
-  private dialog = inject(MatDialog)
+  private dialog = inject(MatDialog);
+  private authService = inject(AuthService);
+
+  /**
+   * returns user
+   * if exists returns immediate
+   * if not exists, displays login dialog and after success returns user
+   * if no user ??? throw error OR complete with empty
+   */
+  user$ = this.authService.user$.pipe(
+    switchMap(user =>  user ? of(user) : this.open() ),
+    share(),
+    take(1),
+  )
 
   open(data?:LoginDialogData): Observable<User> {
 

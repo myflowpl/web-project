@@ -57,6 +57,8 @@ export class AuthService {
   }
 
   loadProfile() {
-    return this.http.get<User>(this.baseUrl+'/users/'+this.user?.id)
+    return this.http.get<User[]>(this.baseUrl+'/users').pipe(
+      map(users => users[0])
+    )
   }
 }
