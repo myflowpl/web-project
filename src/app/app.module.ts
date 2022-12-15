@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClient, HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +13,9 @@ import { CommonModule } from '@angular/common';
 import { HomeModule } from './home/home.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 export class AppMockService {}
 
@@ -31,6 +34,9 @@ export class AppMockService {}
     HomeModule,
     BrowserAnimationsModule,
     MatDialogModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
+    // isDevMode() ? StoreDevtoolsModule.instrument() : [],
+    (!environment.production) ? StoreDevtoolsModule.instrument() : [],
   ],
   providers: [
     AppService,
