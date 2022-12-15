@@ -55,4 +55,8 @@ export class AuthService {
     // TODO create server request to destroy session
     this.profile$$.next(null);
   }
+
+  loadProfile() {
+    return this.http.get<User>(this.baseUrl+'/users/'+this.user?.id)
+  }
 }

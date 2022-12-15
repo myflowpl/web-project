@@ -1,3 +1,7 @@
-<p>artist-list works!</p>
+<h1>Artists</h1>
+
+<p *ngIf="profile$ | async as profile">
+  Hello {{profile.name}}
+</p>
 
 {{ 'my-photo.jpg' | imageUrl }}

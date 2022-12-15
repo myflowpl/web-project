@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({
   selector: 'app-artist-list',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArtistListPage implements OnInit {
 
-  constructor() { }
+  authService = inject(AuthService);
+
+  profile$ = this.authService.loadProfile();
 
   ngOnInit(): void {
   }

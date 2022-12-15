@@ -5,6 +5,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginPage } from './pages/login/login.page';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { HasRoleDirective } from './directives/has-role.directive';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 
 
@@ -18,6 +20,13 @@ import { HasRoleDirective } from './directives/has-role.directive';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    }
   ],
   exports: [
     HasRoleDirective,
