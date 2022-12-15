@@ -8,12 +8,14 @@ import { StoreModule } from '@ngrx/store';
 import * as fromArtists from './+artists/artists.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { ArtistsEffects } from './+artists/artists.effects';
+import { SongsPage } from './pages/songs/songs.page';
 
 
 @NgModule({
   declarations: [
     ArtistListPage,
-    ImageUrlPipe
+    ImageUrlPipe,
+    SongsPage
   ],
   imports: [
     CommonModule,

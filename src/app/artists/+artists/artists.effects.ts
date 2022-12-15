@@ -1,19 +1,20 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of, switchMap } from 'rxjs';
-import { loadArtists, loadArtistsSuccess } from './artists.actions';
-
-
+import { catchError, map, of, switchMap } from 'rxjs';
+import { ArtistsService } from '../services/artists.service';
+import { loadArtists, loadArtistsFailure, loadArtistsSuccess } from './artists.actions';
 
 @Injectable()
 export class ArtistsEffects {
+  artistsService = inject(ArtistsService);
 
   loadArtists$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(loadArtists),
-      switchMap(action => of(loadArtistsSuccess({
-        data: [{id: 1, img: '', name: ''}]
-      }))),
+      switchMap(action => this.artistsService.getArtists().pipe(
+        map(artists => loadArtistsSuccess({data: artists})),
+        catchError(error => of(loadArtistsFailure({error})))
+      )),
     );
   });
 

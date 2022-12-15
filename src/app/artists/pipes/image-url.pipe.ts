@@ -6,8 +6,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ImageUrlPipe implements PipeTransform {
 
-  transform(value: string, ...args: unknown[]): unknown {
-    return 'http://localhost/photos/' + value;
+  transform(value: string, id?: number): unknown {
+    return `https://randomuser.me/api/portraits/men/${id}.jpg`;
   }
 
 }

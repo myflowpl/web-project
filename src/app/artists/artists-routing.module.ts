@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ArtistListPage } from './pages/artist-list/artist-list.page';
+import { SongsPage } from './pages/songs/songs.page';
 
 const routes: Routes = [
   {
@@ -10,8 +11,14 @@ const routes: Routes = [
   },
   {
     path: 'list',
-    component: ArtistListPage
-  }
+    component: ArtistListPage,
+    children: [
+      {
+        path: ':artistId',
+        component: SongsPage,
+      },
+    ],
+  },
 ];
 
 @NgModule({
