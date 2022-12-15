@@ -1,4 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { loadArtists } from '../../+artists/artists.actions';
 import { ArtistsFacade } from '../../+artists/artists.facade';
 import { AuthService } from '../../../auth/services/auth.service';
 
@@ -16,6 +17,7 @@ export class ArtistListPage implements OnInit {
   profile$ = this.authService.loadProfile();
 
   ngOnInit(): void {
+    this.artistsFacade.dispatch(loadArtists())
   }
 
 }

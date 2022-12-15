@@ -6,4 +6,5 @@
 
 {{ 'my-photo.jpg' | imageUrl }}
 
+<div *ngIf="artistsFacade.loading$ | async">Loading...</div>
 <pre>{{artistsFacade.artists$ | async | json}}</pre>

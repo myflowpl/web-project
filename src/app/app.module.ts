@@ -16,6 +16,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
 
 export class AppMockService {}
 
@@ -34,6 +35,7 @@ export class AppMockService {}
     HomeModule,
     BrowserAnimationsModule,
     MatDialogModule,
+    EffectsModule.forRoot(),
     StoreModule.forRoot(reducers, { metaReducers }),
     // isDevMode() ? StoreDevtoolsModule.instrument() : [],
     (!environment.production) ? StoreDevtoolsModule.instrument() : [],
