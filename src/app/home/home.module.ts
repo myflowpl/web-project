@@ -5,6 +5,7 @@ import { ContactPage } from './pages/contact/contact.page';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MarkerDirective } from './directives/marker.directive';
+import { HomeUserPage } from './pages/home-user/home-user.page';
 
 
 
@@ -12,7 +13,8 @@ import { MarkerDirective } from './directives/marker.directive';
   declarations: [
     HomePage,
     ContactPage,
-    MarkerDirective
+    MarkerDirective,
+    HomeUserPage
   ],
   imports: [
     CommonModule,

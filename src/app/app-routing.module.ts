@@ -5,9 +5,16 @@ import { AuthGuard } from './auth/guards/auth.guard';
 import { LoginPage } from './auth/pages/login/login.page';
 import { RegisterPage } from './auth/pages/register/register.page';
 import { ContactPage } from './home/pages/contact/contact.page';
+import { HomeUserPage } from './home/pages/home-user/home-user.page';
 import { HomePage } from './home/pages/home/home.page';
 
 const routes: Routes = [
+  {
+    path: '',
+    pathMatch: 'full',
+    component: HomeUserPage,
+    canMatch: [AuthGuard],
+  },
   {
     path: '',
     pathMatch: 'full',
