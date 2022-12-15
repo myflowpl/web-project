@@ -19,7 +19,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     // intercept REQUEST
-    console.log('REQUEST', request)
+    // console.log('REQUEST', request)
 
     if(this.authService.token) {
       request = request.clone({
@@ -32,8 +32,8 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       // INTERCEPT response
       tap({
-        next: (res) => console.log('RESPONSE', res),
-        error: (res) => console.log('RESPONSE ERROR', res)
+        // next: (res) => console.log('RESPONSE', res),
+        // error: (res) => console.log('RESPONSE ERROR', res)
       }),
       catchError((error: HttpErrorResponse) => {
         if(error.status === 401 || error.status === 403) {
