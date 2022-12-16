@@ -18,6 +18,7 @@ import { reducers, metaReducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { Configuration } from 'api-client';
 
 export class AppMockService {}
 
@@ -46,6 +47,15 @@ export class AppMockService {}
       provide: AppService,
       useClass: environment.production ? AppService : AppMockService,
     },
+    // {
+    //   provide: Configuration,
+    //   useFactory: (basePath: string) => {
+    //     return new Configuration({
+    //       basePath
+    //     });
+    //   },
+    //   deps: [BASE_URL]
+    // },
     {
       provide: BASE_URL,
       useValue:
