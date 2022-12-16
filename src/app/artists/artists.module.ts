@@ -9,9 +9,10 @@ import * as fromArtists from './+artists/artists.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { ArtistsEffects } from './+artists/artists.effects';
 import { SongsPage } from './pages/songs/songs.page';
+import { ArtistComponent } from './ui/artist/artist.component';
 
 @NgModule({
-  declarations: [ArtistListPage, ImageUrlPipe, SongsPage],
+  declarations: [ArtistListPage, ImageUrlPipe, SongsPage, ArtistComponent],
   imports: [
     CommonModule,
     ArtistsRoutingModule,

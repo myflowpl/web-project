@@ -1,17 +1,26 @@
 <h1>Artists</h1>
 
+<p>
+  Hello to artists list
+</p>
+
 <p *ngIf="profile$ | async as profile">Hello {{profile.name}}</p>
 
 <div class="flex">
-  <nav>
+  <nav class="overflow-auto h-96">
     <div *ngIf="artistsFacade.loading$ | async">Loading...</div>
 
-    <div *ngFor="let artist of artistsFacade.artists$ | async">
-      <a [routerLink]="[artist.id]">
-        <img [src]="artist.img | imageUrl:artist.id" />
-        <h3>{{artist.name}}</h3>
-      </a>
-    </div>
+    <app-artist
+    (artistDelete)="handleDelete($event)"
+    [artist]="artist"
+    *ngFor="let artist of artistsFacade.artists$ | async">
+
+    <button top class="btn-outline" (click)="handleDelete(artist)">X</button>
+
+    <button class="btn-outline" (click)="handleSubscribe(artist)">Subscribe</button>
+
+    </app-artist>
+
   </nav>
   <div>
     <router-outlet></router-outlet>

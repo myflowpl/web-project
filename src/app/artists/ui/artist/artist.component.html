@@ -1,0 +1,12 @@
+<div *ngIf="artist" class="relative border rounded p-2 mb-2">
+  <div class="absolute top-1 right-1">
+    <ng-content select="[top]"></ng-content>
+  </div>
+  <a [routerLink]="[artist.id]">
+    <img [src]="artist.img | imageUrl:artist.id" />
+    <h3>{{artist.name}}</h3>
+  </a>
+  <p>
+    <ng-content></ng-content>
+  </p>
+</div>

@@ -1,0 +1,16 @@
+:host {
+  display: block;
+
+}
+:host {
+  p {
+    background-color: red;
+  }
+
+}
+:host ::ng-deep {
+  p {
+    background-color: rebeccapurple;
+  }
+
+}
