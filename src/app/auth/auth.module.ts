@@ -8,29 +8,16 @@ import { HasRoleDirective } from './directives/has-role.directive';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 
-
-
 @NgModule({
-  declarations: [
-    RegisterPage,
-    LoginPage,
-    LoginFormComponent,
-    HasRoleDirective,
-  ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-  ],
+  declarations: [RegisterPage, LoginPage, LoginFormComponent, HasRoleDirective],
+  imports: [CommonModule, ReactiveFormsModule],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true,
-    }
+    },
   ],
-  exports: [
-    HasRoleDirective,
-    LoginFormComponent,
-  ],
+  exports: [HasRoleDirective, LoginFormComponent],
 })
-export class AuthModule { }
+export class AuthModule {}

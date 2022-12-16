@@ -3,30 +3,42 @@
 <div class="flex gap-4">
   <div class="w-40">
     <h2 class="font-bold my-2">Favorite</h2>
-    <div class="whitespace-nowrap overflow-hidden" *ngFor="let quote of store.favorite$ | async">
-      <button (click)="store.removeFavorite(quote)" class="p-1 cursor-pointer">X</button> <b>{{ quote.author }}</b> {{ quote.text }}
+    <div
+      class="whitespace-nowrap overflow-hidden"
+      *ngFor="let quote of store.favorite$ | async"
+    >
+      <button (click)="store.removeFavorite(quote)" class="p-1 cursor-pointer">
+        X
+      </button>
+      <b>{{ quote.author }}</b> {{ quote.text }}
     </div>
     <h2 class="font-bold my-2">Favorite Search</h2>
-    <a routerLink="." [queryParams]="{q: 'strong'}" >strong</a><br>
-    <a routerLink="." [queryParams]="{q: 'the'}" >the</a><br>
-    <a routerLink="." [queryParams]="{q: 'heart'}" >heart</a><br>
-
+    <a routerLink="." [queryParams]="{q: 'strong'}">strong</a><br />
+    <a routerLink="." [queryParams]="{q: 'the'}">the</a><br />
+    <a routerLink="." [queryParams]="{q: 'heart'}">heart</a><br />
   </div>
   <div class="flex-auto">
     <h2 class="font-bold my-2">Search for: {{store.search$ | async}}</h2>
-    <input #searchInput type="text" [ngModel]="store.search$ | async" (ngModelChange)="store.search($event)" />
+    <input
+      #searchInput
+      type="text"
+      [ngModel]="store.search$ | async"
+      (ngModelChange)="store.search($event)"
+    />
 
-    <div *ngIf="store.loading$ | async" >Loading...</div>
-    <div *ngIf="store.error$ | async as error" class="text-red-500">{{error.error?.message}}</div>
-    <div *ngIf="store.noQuotesFound$ | async" >No quotes found :(</div>
+    <div *ngIf="store.loading$ | async">Loading...</div>
+    <div *ngIf="store.error$ | async as error" class="text-red-500">
+      {{error.error?.message}}
+    </div>
+    <div *ngIf="store.noQuotesFound$ | async">No quotes found :(</div>
 
     <div *ngFor="let quote of store.quotes$ | async">
       <b>{{ quote.author }}</b> {{ quote.text }}
       <div class="text-right">
-        <button type="button" (click)="store.addFavorite(quote)">Add to favorite</button>
+        <button type="button" (click)="store.addFavorite(quote)">
+          Add to favorite
+        </button>
       </div>
     </div>
-
   </div>
 </div>
-

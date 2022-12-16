@@ -18,28 +18,14 @@ import { AuthModule } from '../auth/auth.module';
     // directives
 
     // pipes
-
   ],
   // kiedys -> serwisy
-  providers: [
-    AppService,
-  ],
-  imports: [
-    CommonModule,
-    ConfirmDialog,
-    RouterModule,
-    AuthModule,
-  ],
-  exports: [
-    FooterComponent,
-    HeaderComponent,
-  ],
+  providers: [AppService],
+  imports: [CommonModule, ConfirmDialog, RouterModule, AuthModule],
+  exports: [FooterComponent, HeaderComponent],
 })
 export class LayoutModule {
-  constructor(
-    private appService: AppService,
-  ) {
-
+  constructor(private appService: AppService) {
     // console.log('layotu module id', this.appService.id)
   }
 }

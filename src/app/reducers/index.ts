@@ -1,11 +1,15 @@
 import { isDevMode } from '@angular/core';
-import { getSelectors, routerReducer, RouterReducerState } from '@ngrx/router-store';
+import {
+  getSelectors,
+  routerReducer,
+  RouterReducerState,
+} from '@ngrx/router-store';
 import {
   ActionReducer,
   ActionReducerMap,
   createFeatureSelector,
   createSelector,
-  MetaReducer
+  MetaReducer,
 } from '@ngrx/store';
 import * as fromHome from '../home/+home/home.reducer';
 
@@ -17,11 +21,9 @@ export interface AppState {
 }
 
 export const reducers: ActionReducerMap<AppState> = {
-
   [routerFeatureKey]: routerReducer,
   [fromHome.homeFeatureKey]: fromHome.reducer,
 };
-
 
 export const {
   selectCurrentRoute, // select the current route

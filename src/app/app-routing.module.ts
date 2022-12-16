@@ -19,16 +19,16 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     component: HomePage,
-    canDeactivate: [AuthGuard]
+    canDeactivate: [AuthGuard],
   },
   {
     path: 'contact',
     component: ContactPage,
     canActivate: [AuthGuard],
     data: {
-      unauthorizedUrl: '/'
+      unauthorizedUrl: '/',
     },
-    children: []
+    children: [],
   },
   {
     path: 'register',
@@ -42,15 +42,13 @@ const routes: Routes = [
     path: 'artists',
     canActivate: [AuthGuard],
     canLoad: [AuthGuard],
-    loadChildren: () => import('./artists/artists.module').then(m => m.ArtistsModule)
-  }
+    loadChildren: () =>
+      import('./artists/artists.module').then((m) => m.ArtistsModule),
+  },
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes),
-    CommonModule,
-  ],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes), CommonModule],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

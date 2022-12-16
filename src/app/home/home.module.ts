@@ -7,19 +7,8 @@ import { RouterModule } from '@angular/router';
 import { MarkerDirective } from './directives/marker.directive';
 import { HomeUserPage } from './pages/home-user/home-user.page';
 
-
-
 @NgModule({
-  declarations: [
-    HomePage,
-    ContactPage,
-    MarkerDirective,
-    HomeUserPage
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    RouterModule,
-  ]
+  declarations: [HomePage, ContactPage, MarkerDirective, HomeUserPage],
+  imports: [CommonModule, FormsModule, RouterModule],
 })
-export class HomeModule { }
+export class HomeModule {}

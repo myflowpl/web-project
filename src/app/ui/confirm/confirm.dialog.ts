@@ -7,22 +7,17 @@ import { AppService } from '../../app.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './confirm.dialog.html',
-  styleUrls: ['./confirm.dialog.scss']
+  styleUrls: ['./confirm.dialog.scss'],
 })
 export class ConfirmDialog implements OnInit {
-
   appService = inject(AppService);
   appService2 = inject(AppService);
   appService3 = inject(AppService);
 
-  constructor(
-    // private appService: AppService,
-  ) {
-
+  constructor() // private appService: AppService,
+  {
     // console.log('confirm id', this.appService.id)
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

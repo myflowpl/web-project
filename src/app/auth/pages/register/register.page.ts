@@ -12,7 +12,6 @@ import { AuthService } from '../../services/auth.service';
   providers: [LoadingHandler],
 })
 export class RegisterPage implements OnInit {
-
   sub = new Subscription();
   router = inject(Router);
   fb = inject(UntypedFormBuilder);
@@ -26,23 +25,22 @@ export class RegisterPage implements OnInit {
 
   saving = inject(LoadingHandler);
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onSubmit() {
     console.log(this.form.value);
-    this.sub = this.authService.register(this.form.value).pipe(
-      this.saving.tap(),
-    ).subscribe({
-      next: res => {
-        console.log(res)
-        this.router.navigateByUrl('/login');
-      }
-    });
+    this.sub = this.authService
+      .register(this.form.value)
+      .pipe(this.saving.tap())
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.router.navigateByUrl('/login');
+        },
+      });
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe()
+    this.sub.unsubscribe();
   }
-
 }

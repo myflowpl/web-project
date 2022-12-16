@@ -10,18 +10,13 @@ import { EffectsModule } from '@ngrx/effects';
 import { ArtistsEffects } from './+artists/artists.effects';
 import { SongsPage } from './pages/songs/songs.page';
 
-
 @NgModule({
-  declarations: [
-    ArtistListPage,
-    ImageUrlPipe,
-    SongsPage
-  ],
+  declarations: [ArtistListPage, ImageUrlPipe, SongsPage],
   imports: [
     CommonModule,
     ArtistsRoutingModule,
     StoreModule.forFeature(fromArtists.artistsFeatureKey, fromArtists.reducer),
-    EffectsModule.forFeature([ArtistsEffects])
-  ]
+    EffectsModule.forFeature([ArtistsEffects]),
+  ],
 })
-export class ArtistsModule { }
+export class ArtistsModule {}

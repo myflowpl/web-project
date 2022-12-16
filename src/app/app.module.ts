@@ -1,6 +1,6 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClient, HttpClientModule } from '@angular/common/http'
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppService } from './app.service';
@@ -22,9 +22,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 export class AppMockService {}
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -39,7 +37,7 @@ export class AppMockService {}
     EffectsModule.forRoot(),
     StoreModule.forRoot(reducers, { metaReducers }),
     // isDevMode() ? StoreDevtoolsModule.instrument() : [],
-    (!environment.production) ? StoreDevtoolsModule.instrument() : [],
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot(),
   ],
   providers: [
@@ -50,7 +48,10 @@ export class AppMockService {}
     },
     {
       provide: BASE_URL,
-      useValue: window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://project.com/api',
+      useValue:
+        window.location.hostname === 'localhost'
+          ? 'http://localhost:3000'
+          : 'https://project.com/api',
     },
     // {
     //   provide: BASE_URL,
@@ -64,13 +65,10 @@ export class AppMockService {}
     //   deps: [HttpClient]
     // }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
-  constructor(
-    private appService: AppService
-  ) {
-
+  constructor(private appService: AppService) {
     // console.log('app module id', this.appService.id)
   }
- }
+}

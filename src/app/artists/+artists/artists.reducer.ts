@@ -23,6 +23,6 @@ export const reducer = createReducer(
   on(loadArtistsSuccess, (state, action) => ({
     ...state,
     loading: false,
-    artists: action.data
-  })),
+    artists: action.data,
+  }))
 );

@@ -5,11 +5,9 @@ import { AuthService } from '../../../auth/services/auth.service';
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.page.html',
-  styleUrls: ['./contact.page.scss']
+  styleUrls: ['./contact.page.scss'],
 })
 export class ContactPage implements OnInit {
-
-
   authService = inject(AuthService);
 
   loginDialog = inject(LoginDialog);
@@ -18,17 +16,17 @@ export class ContactPage implements OnInit {
 
   color = 'purple';
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   login() {
-
-
-    this.loginDialog.open({
-      message: 'This action requires you to be logged in'
-    }).subscribe({
-      next: (loginResponse) => console.log('LOGIN DIALOG RESPONSE', loginResponse),
-      error: (err) => console.log('LOGIN DIALOG ERROR', err),
-    });
+    this.loginDialog
+      .open({
+        message: 'This action requires you to be logged in',
+      })
+      .subscribe({
+        next: (loginResponse) =>
+          console.log('LOGIN DIALOG RESPONSE', loginResponse),
+        error: (err) => console.log('LOGIN DIALOG ERROR', err),
+      });
   }
 }

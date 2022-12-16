@@ -1,15 +1,19 @@
-
-
 <p appMarker="red" (click)="color = 'blue'">contact works!</p>
 
-<p appMarker="yellow" fontWeight="800" (click)="color = 'red'">contact works!</p>
+<p appMarker="yellow" fontWeight="800" (click)="color = 'red'">
+  contact works!
+</p>
 
-<p [appMarker]="'green'" fontWeight="300" (click)="emptyMarker.style.color = 'red'">contact works!</p>
+<p
+  [appMarker]="'green'"
+  fontWeight="300"
+  (click)="emptyMarker.style.color = 'red'"
+>
+  contact works!
+</p>
 
 <p [appMarker]="color" fontWeight="bold" #emptyMarker>contact works!</p>
 
 <button (click)="login()">Login Dialog</button>
 
-<p *ngIf="profile$ | async as profile">
-  Hello {{profile.name}}
-</p>
+<p *ngIf="profile$ | async as profile">Hello {{profile.name}}</p>

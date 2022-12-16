@@ -7,29 +7,23 @@ import { AuthService } from '../../auth/services/auth.service';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  providers: [
-    AppService
-  ],
+  providers: [AppService],
 })
 export class HeaderComponent implements OnInit {
-
   requiredRole: Role | string = '';
 
   user$ = this.authService.user$;
 
   toggleRole() {
-
-    this.requiredRole = (this.requiredRole) ? "" : Role.ADMIN;
+    this.requiredRole = this.requiredRole ? '' : Role.ADMIN;
   }
 
   constructor(
     private appService: AppService,
-    protected authService: AuthService,
+    protected authService: AuthService
   ) {
     // console.log('header id', this.appService.id)
-   }
-
-  ngOnInit(): void {
   }
 
+  ngOnInit(): void {}
 }

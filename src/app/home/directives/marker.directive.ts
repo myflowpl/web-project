@@ -1,10 +1,21 @@
-import { Directive, ElementRef, HostBinding, HostListener, inject, Input, OnChanges, OnDestroy, OnInit, Renderer2, SimpleChanges } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  HostBinding,
+  HostListener,
+  inject,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+  SimpleChanges,
+} from '@angular/core';
 
 @Directive({
-  selector: '[appMarker]'
+  selector: '[appMarker]',
 })
 export class MarkerDirective implements OnInit, OnDestroy, OnChanges {
-
   el = inject(ElementRef);
   renderer = inject(Renderer2);
 
@@ -12,12 +23,8 @@ export class MarkerDirective implements OnInit, OnDestroy, OnChanges {
     // console.log('DIR CONSTRUCTOR', this.el)
     // this.el.nativeElement.addEventListener('click', () => console.log('CLICk'))
   }
-  ngOnInit(): void {
-
-  }
-  ngOnDestroy(): void {
-
-  }
+  ngOnInit(): void {}
+  ngOnDestroy(): void {}
   ngOnChanges(changes: SimpleChanges): void {
     // console.log('changes', changes)
   }
@@ -38,7 +45,11 @@ export class MarkerDirective implements OnInit, OnDestroy, OnChanges {
   mouseOver(e: HTMLElement) {
     this.backgroundColor = this.bgColor;
 
-    this.renderer.setStyle(this.el.nativeElement, 'font-weight', this.fontWeight);
+    this.renderer.setStyle(
+      this.el.nativeElement,
+      'font-weight',
+      this.fontWeight
+    );
   }
 
   @HostListener('mouseout')
@@ -50,7 +61,6 @@ export class MarkerDirective implements OnInit, OnDestroy, OnChanges {
 
   @HostListener('click', ['$event.target'])
   onClick(e: HTMLElement) {
-    console.log('host click', e)
+    console.log('host click', e);
   }
-
 }

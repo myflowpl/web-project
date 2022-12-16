@@ -11,7 +11,6 @@ import { AuthService } from '../../services/auth.service';
   providers: [LoadingHandler],
 })
 export class LoginFormComponent implements OnInit {
-
   fb = inject(UntypedFormBuilder);
   authService = inject(AuthService);
 
@@ -28,20 +27,20 @@ export class LoginFormComponent implements OnInit {
   @Output()
   loginCancel = new EventEmitter<void>();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onSubmit() {
     console.log(this.form.value);
-    this.authService.login(this.form.value).pipe(
-      this.saving.tap(),
-    ).subscribe({
-      next: user => {
-        console.log(user)
-        this.loginSuccess.next(user)
-      }
-    });
+    this.authService
+      .login(this.form.value)
+      .pipe(this.saving.tap())
+      .subscribe({
+        next: (user) => {
+          console.log(user);
+          this.loginSuccess.next(user);
+        },
+      });
   }
 }

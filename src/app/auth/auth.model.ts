@@ -1,4 +1,4 @@
-import { User } from "../api/api.model";
+import { User } from '../api/api.model';
 
 export interface Profile {
   accessToken: string;

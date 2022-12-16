@@ -7,10 +7,7 @@ export interface HomeState {
 }
 
 export const initialState: HomeState = {
-  message: 'welcome to home store'
+  message: 'welcome to home store',
 };
 
-export const reducer = createReducer(
-  initialState,
-
-);
+export const reducer = createReducer(initialState);

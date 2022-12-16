@@ -1,5 +1,8 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 w-96 mx-auto">
-
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  class="flex flex-col gap-4 w-96 mx-auto"
+>
   <label>Name</label>
   <input formControlName="name" type="text" />
 
@@ -8,14 +11,18 @@
 
   <label>Password</label>
   <input formControlName="password" type="password" />
-  <div class="text-red-500">
-    {{saving.error?.error}}
-  </div>
+  <div class="text-red-500">{{saving.error?.error}}</div>
 
   <div class="flex gap-4">
     <button class="btn-outline" type="button">cancel</button>
     <div class="flex-auto">{{ saving.active ? 'Saving...' : ''}}</div>
-    <button class="btn-primary" type="submit" [disabled]="form.invalid || saving.active">Register</button>
+    <button
+      class="btn-primary"
+      type="submit"
+      [disabled]="form.invalid || saving.active"
+    >
+      Register
+    </button>
   </div>
   <!-- <pre>{{ form.valid | json }}</pre> -->
 </form>

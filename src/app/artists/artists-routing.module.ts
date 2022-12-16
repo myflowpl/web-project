@@ -5,7 +5,7 @@ import { SongsPage } from './pages/songs/songs.page';
 
 const routes: Routes = [
   {
-    path:'',
+    path: '',
     pathMatch: 'full',
     redirectTo: 'list',
   },
@@ -23,6 +23,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ArtistsRoutingModule { }
+export class ArtistsRoutingModule {}

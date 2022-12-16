@@ -8,14 +8,11 @@ import { AppService } from '../../app.service';
   // providers: [AppService]
 })
 export class FooterComponent implements OnInit {
-
-  appService = inject(AppService)
+  appService = inject(AppService);
 
   constructor() {
     // console.log('footer id', this.appService.id)
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

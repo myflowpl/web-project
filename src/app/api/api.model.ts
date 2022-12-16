@@ -1,4 +1,3 @@
-
 export interface Quote {
   id: number;
   text: string;
@@ -17,7 +16,7 @@ export interface User {
   name: string;
   email: string;
   password?: string;
-  role?: Role
+  role?: Role;
 }
 
 export interface LoginDto {
@@ -26,9 +25,9 @@ export interface LoginDto {
 }
 
 export enum Role {
-    USER = 'user',
-    ADMIN = 'admin',
-    ROOT = 'root',
+  USER = 'user',
+  ADMIN = 'admin',
+  ROOT = 'root',
 }
 
 export interface UserCreateResponse {

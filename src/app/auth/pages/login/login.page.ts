@@ -5,18 +5,15 @@ import { User } from '../../../api/api.model';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss']
+  styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
   router = inject(Router);
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   handleSuccess(user: User) {
-    console.log('login cucsses in page', user)
-    this.router.navigateByUrl('/')
+    console.log('login cucsses in page', user);
+    this.router.navigateByUrl('/');
   }
-
 }
