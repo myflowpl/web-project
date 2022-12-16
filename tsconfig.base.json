@@ -14,5 +14,6 @@
       "api-client": ["api-client/src/index.ts"],
       "common-ui": ["common-ui/src/index.ts"]
     }
-  }
+  },
+  "exclude": ["tools/generators/**/files/**"]
 }
