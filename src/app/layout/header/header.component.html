@@ -3,16 +3,16 @@
     <div (click)="toggleRole()">MyApp</div>
     <div class="flex-auto flex gap-4">
       <a routerLink="/">Home</a>
-      <a routerLink="/contact" *appHasRole>Contact</a>
-      <a routerLink="/artists" *appHasRole="requiredRole">Artists</a>
+      <a routerLink="/contact" *appHasRole data-cy="contact-btn">Contact</a>
+      <a routerLink="/artists" *appHasRole="requiredRole" data-cy="artists-btn">Artists</a>
     </div>
     <div class="flex gap-4">
       <ng-container *ngIf="user$ | async as user; else elseTemplate">
-        <a>Hello {{ user.name }}</a>
-        <a (click)="authService.logout()">Logout</a>
+        <a data-cy="user-hello">Hello {{ user.name }}</a>
+        <a (click)="authService.logout()" data-cy="logout-btn">Logout</a>
       </ng-container>
       <ng-template #elseTemplate>
-        <a routerLink="/login">Login</a>
+        <a data-cy="login-btn" routerLink="/login">Login</a>
         <a routerLink="/register">Register</a>
       </ng-template>
     </div>

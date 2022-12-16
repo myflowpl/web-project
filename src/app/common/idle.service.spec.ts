@@ -2,7 +2,7 @@ import { TestBed, tick, fakeAsync, flush, discardPeriodicTasks } from '@angular/
 
 import { IdleService } from './idle.service';
 
-fdescribe('IdleService', () => {
+describe('IdleService', () => {
   let service: IdleService;
 
   beforeEach(() => {
