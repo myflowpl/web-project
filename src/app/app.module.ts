@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { InjectionToken, isDevMode, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -6,7 +6,9 @@ import { AppComponent } from './app.component';
 import { TodosPageModule } from './todos-page/todos-page.module';
 import { HomePageModule } from './home-page/home-page.module';
 import { NavbarComponent } from './navbar/navbar.component';
-import { PetApi } from '../api-client';
+import { Configuration, PetApi } from '../api-client';
+
+const DOMAIN = new InjectionToken<string>('Domain')
 
 @NgModule({
   declarations: [
@@ -24,6 +26,23 @@ import { PetApi } from '../api-client';
     // {
     //   provide: PetApi,
     //   useClass: PetApi,
+    // },
+    // {
+    //   provide: DOMAIN,
+    //   useValue: isDevMode() ? 'http://localhost:1337' : window.location.host,
+    // },
+    // {
+    //   provide: Configuration,
+    //   deps: [DOMAIN, AuthService],
+    //   useFactory: (domain: string, authService: AuthService) => {
+    //     const config = new Configuration({
+    //       basePath: domain+'/api-clout',
+    //       credentials: {
+    //         bearer: () => authService.token
+    //       }
+    //     });
+    //     return config;
+    //   }
     // }
   ],
   bootstrap: [AppComponent]
