@@ -7,6 +7,8 @@ import { TodosPageModule } from './todos-page/todos-page.module';
 import { HomePageModule } from './home-page/home-page.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { Configuration, PetApi } from '../api-client';
+import { AuthModule } from './auth/auth.module';
+import { ErrorsPage } from './pages/errors/errors.page';
 
 const DOMAIN = new InjectionToken<string>('Domain')
 
@@ -14,9 +16,11 @@ const DOMAIN = new InjectionToken<string>('Domain')
   declarations: [
     AppComponent,
     NavbarComponent,
+    ErrorsPage,
   ],
   imports: [
     BrowserModule,
+    AuthModule,
     AppRoutingModule,
     TodosPageModule,
     HomePageModule,
