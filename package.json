@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "swagger:download": "node src/api-client/swagger-download.js",
+    "swagger:generate": "openapi-generator-cli generate -g typescript-angular -i https://petstore.swagger.io/v2/swagger.json -o ./src/api-client --additional-properties=serviceSuffix=Api,serviceFileSuffix=.api,useSingleRequestParameter=true  --type-mappings=set=Array"
   },
   "private": true,
   "dependencies": {
@@ -18,6 +20,7 @@
     "@angular/platform-browser": "^15.0.0",
     "@angular/platform-browser-dynamic": "^15.0.0",
     "@angular/router": "^15.0.0",
+    "@openapitools/openapi-generator-cli": "^2.5.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
