@@ -1,1 +1,5 @@
-<p>errors works!</p>
+<p>Error page</p>
+
+<button #btn (click)="handleClick($event)">Action</button>
+
+<pre *ngFor="let item of items"> {{ item | json }}</pre>

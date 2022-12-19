@@ -9,6 +9,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { Configuration, PetApi } from '../api-client';
 import { AuthModule } from './auth/auth.module';
 import { ErrorsPage } from './pages/errors/errors.page';
+import { HttpClientModule } from '@angular/common/http';
 
 const DOMAIN = new InjectionToken<string>('Domain')
 
@@ -24,6 +25,7 @@ const DOMAIN = new InjectionToken<string>('Domain')
     AppRoutingModule,
     TodosPageModule,
     HomePageModule,
+    HttpClientModule,
   ],
   providers: [
     // PetApi,
