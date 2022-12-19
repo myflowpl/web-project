@@ -1,0 +1,46 @@
+<div
+  class="todo-card"
+>
+  <div
+    class="todo-card-header"
+  >
+    <span
+      class="todo-card-name"
+    >
+    {{name}}
+    </span>
+    <button
+      (click)="onRemoveCardClick()"
+    >
+      Remove
+    </button>
+  </div>
+  <div
+    class="todo-card-item-group"
+  >
+    <app-add-todo-item-button
+      (addTodoItemEmitter)="onAddTodoItem($event)"
+    ></app-add-todo-item-button>
+
+    <ng-container *ngIf="items.length > 0; else noContent">
+      <ng-container *ngFor="let item of items">
+        <app-todo-item
+          [name]="item.name"
+          [id]="item.id"
+          [isDone]="item.isDone"
+          (changeIsCheckedItemEmitter)="onIsDoneChangeAction($event)"
+          (removeItemEmitter)="onRemoveItemAction($event)"
+        ></app-todo-item>
+      </ng-container>
+    </ng-container>
+
+  </div>
+</div>
+
+<ng-template #noContent>
+  <div
+    class="todo-card-no-items"
+  >
+    no content
+  </div>
+</ng-template>

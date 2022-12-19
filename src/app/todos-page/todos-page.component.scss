@@ -1,0 +1,27 @@
+.todo-group-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.todo-group-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #061826;
+  font-size: 24px;
+  gap: 0.25rem;
+}
+
+.todo-group {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.todo-group-no-items {
+  text-align: center;
+  font-style: italic;
+  color: #E63946;
+}

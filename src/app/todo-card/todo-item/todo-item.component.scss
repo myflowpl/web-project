@@ -1,0 +1,14 @@
+.todo-item-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 3px;
+}
+
+.todo-item-group:hover {
+  background-color: #3685B5;
+}
+
+.todo-item-group label {
+  cursor: pointer;
+}

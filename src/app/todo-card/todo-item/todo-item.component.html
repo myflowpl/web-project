@@ -1,0 +1,15 @@
+<div class="todo-item-group">
+  <label>
+    <input
+      type="checkbox"
+      [checked]="isDone"
+      (change)="onCheckBoxClick($event.target)"
+    />
+    {{name}}
+  </label>
+  <button
+    (click)="onRemoveItemClick()"
+  >
+    Remove
+  </button>
+</div>

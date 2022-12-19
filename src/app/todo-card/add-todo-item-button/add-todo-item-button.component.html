@@ -1,0 +1,14 @@
+<div
+  class="add-todo-item-input"
+>
+  <input
+    #todoItemName
+    type="text"
+  />
+
+  <button
+    (click)="onAddButtonClick(todoItemName.value)"
+  >
+    Add
+  </button>
+</div>

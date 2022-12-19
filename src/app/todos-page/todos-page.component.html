@@ -1,0 +1,43 @@
+<div
+  class="todo-group-container"
+>
+  <div class="todo-group-header">
+    My Todos!
+    <div>
+      <input
+        type="text"
+        #cardName
+        placeholder="Card name"
+      >
+      <button
+        (click)="addTodoCard(cardName.value)"
+      >
+        Add Card
+      </button>
+    </div>
+  </div>
+
+  <div
+    *ngIf="todos.length > 0; else noContent"
+    class="todo-group"
+  >
+    <app-todo-element
+      *ngFor="let item of todos"
+      [id]="item.id"
+      [name]="item.name"
+      [items]="item.items"
+      (removeCardEmitter)="removeCardById($event)"
+      (addTodoItemEmitter)="addTodoItemToCard($event)"
+      (removeTodoItemEmitter)="removeTodoItem($event)"
+      (changeTodoItemEmitter)="changeTodoItem($event)"
+    ></app-todo-element>
+  </div>
+</div>
+
+<ng-template #noContent>
+  <div
+    class="todo-group-no-items"
+  >
+    no content
+  </div>
+</ng-template>
