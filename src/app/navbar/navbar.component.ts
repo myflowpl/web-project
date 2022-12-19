@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AuthService } from '../auth/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
 
+  authService = inject(AuthService);
 }

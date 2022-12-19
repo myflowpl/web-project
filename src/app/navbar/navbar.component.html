@@ -8,7 +8,17 @@
 
   <a routerLink="/pets">Pets</a>
 
-  <a routerLink="/login">Login</a>
-  <a routerLink="/register">Register</a>
+  <ng-container *ngIf="authService.user$ | async as user; else elseTemplate">
+    <span>{{user.username}}</span>
+    <a (click)="authService.logout()">Logout</a>
+  </ng-container>
+  <ng-template #elseTemplate>
+
+    <a (click)="authService.login()">Login</a>
+    <!-- <a routerLink="/login">Login</a> -->
+    <a routerLink="/register">Register</a>
+  </ng-template>
+
+
 
 </div>
