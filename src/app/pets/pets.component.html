@@ -1,1 +1,11 @@
-<p>pets works!</p>
+<select (change)="handleStatusChange($event.target)">
+  <option *ngFor="let option of store.statusOptions" [value]="option.value">{{option.label}}</option>
+</select>
+
+<h2>Search for {{ store.status$ | async}} pets</h2>
+
+<div *ngFor="let pet of store.pets$ | async">
+  {{pet.name}}
+</div>
+
+<pre>{{store.state$ | async | json}}</pre>
