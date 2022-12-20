@@ -4,8 +4,12 @@
 
 <h2>Search for {{ store.status$ | async}} pets</h2>
 
+<div *ngIf="store.activePet$ | async as pet">
+  <p><b>Active Pet:</b> {{pet.name}}</p>
+</div>
+
 <div *ngFor="let pet of store.pets$ | async">
-  {{pet.name}}
+  <p (click)="store.selectPet(pet)">{{pet.name}}</p>
 </div>
 
 <pre>{{store.state$ | async | json}}</pre>
