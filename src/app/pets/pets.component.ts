@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Pet } from '../../api-client';
 import { PetsFacade } from './+state/pets.facade';
 import { initialPetsState, PetsStore } from './pets.store';
+import * as PetsActions from './+state/pets.actions';
 
 @Component({
   selector: 'app-pets',
@@ -24,5 +25,9 @@ export class PetsComponent implements OnInit {
     console.log('change', status)
 
     this.store.patchState({status});
+  }
+
+  select(pet: Pet) {
+    this.facade.dispatch(PetsActions.select({pet}))
   }
 }

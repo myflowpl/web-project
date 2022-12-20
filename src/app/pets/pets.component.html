@@ -19,6 +19,11 @@
         <p>{{pet.name}}</p>
         <button (click)="store.selectPet(pet)">show</button>
         <button (click)="store.addFavorite(pet)">add favorite</button>
+        <button (click)="select(pet)">select</button>
+      </div>
+      <div>
+        <h2>selected</h2>
+        {{facade.selectedPets$ | async | json}}
       </div>
     </div>
   </div>

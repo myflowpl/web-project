@@ -24,4 +24,8 @@ export class PetsFacade {
   init() {
     this.store.dispatch(PetsActions.initPets());
   }
+
+  dispatch(action: Action) {
+    this.store.dispatch(action);
+  }
 }

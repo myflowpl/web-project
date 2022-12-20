@@ -29,11 +29,14 @@ const reducer = createReducer(
   on(PetsActions.initPets,
     state => ({ ...state, loaded: false, error: null })
   ),
-  on(PetsActions.loadPetsSuccess,
+  on(PetsActions.loadPetsSuccess, PetsActions.loadPetsOwnersSuccess,
     (state, { pets }) => petsAdapter.setAll(pets, { ...state, loaded: true })
   ),
   on(PetsActions.loadPetsFailure,
     (state, { error }) => ({ ...state, error })
+  ),
+  on(PetsActions.select,
+    (state, action) => ({...state, selectedId: action.pet.id})
   ),
 );
 
