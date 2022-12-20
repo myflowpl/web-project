@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { ComponentStore, tapResponse } from "@ngrx/component-store";
 import { combineLatestWith, distinctUntilChanged, EMPTY, filter, map, mergeWith, Observable, startWith, Subject, switchMap, takeUntil } from "rxjs";
 import { Pet, PetApi } from "../../api-client";
+import { AuthService } from "../auth/services/auth.service";
 import { LoadingHandler } from "../utils/loading.handler";
 
 export interface Options {
@@ -30,6 +31,7 @@ export const initialPetsState: PetsState = {
 }
 
 export class PetsStore extends ComponentStore<PetsState> {
+  authService = inject(AuthService);
   petApi = inject(PetApi);
   router = inject(Router);
   route = inject(ActivatedRoute);
@@ -38,6 +40,18 @@ export class PetsStore extends ComponentStore<PetsState> {
   pets$ = this.select(state => state.pets);
   activePet$ = this.select(state => state.activePet);
   favorite$ = this.select(state => state.favorite);
+
+  favoriteUser$ = this.select(
+    this.favorite$,
+    this.authService.user$,
+    (favorite, user) => {
+      if(!user) {
+        return [];
+      }
+      // return favorite.filter(f => user.favorites.includes(f.id))
+    }
+  );
+
   selectedFavorite$ = this.select(state => state.selectedFavoriteId);
 
   activePetLoading = new LoadingHandler();
@@ -53,6 +67,9 @@ export class PetsStore extends ComponentStore<PetsState> {
       value,
     })
   )
+  statusLabel$ = this.select(
+    state => this.statusOptions.find(option => option.value === state.status)?.label
+  );
 
   readonly loadActivePet = this.effect((trigger$: Observable<void>) => {
 
@@ -82,6 +99,33 @@ export class PetsStore extends ComponentStore<PetsState> {
       ))
     )
   });
+
+  readonly addFavorite = this.updater((state, pet: Pet) => ({
+      ...state,
+      favorite: [pet, ...state.favorite],
+  }));
+
+  readonly removeFavorite = this.updater((state, pet: Pet) => {
+    const favorite = state.favorite.filter(p => p.id !== pet.id);
+
+    return {
+      ...state,
+      favorite,
+    };
+  });
+
+  removeFavorite2(pet: Pet) {
+    // const state = this.get();
+
+    this.setState(state => ({
+      ...state,
+      favorite: state.favorite.filter(p => p.id !== pet.id)
+    }))
+    // this.setState({
+    //   ...state,
+    //   favorite
+    // })
+  }
 
   constructor() {
     super(initialPetsState);

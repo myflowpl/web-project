@@ -1,19 +1,38 @@
-<select (change)="handleStatusChange($event.target)">
-  <option *ngFor="let option of store.statusOptions" [value]="option.value">{{option.label}}</option>
-</select>
+<div class="flex">
+  <div class="w-40">
+    <b>Favorite</b>
+    <div *ngFor="let pet of store.favorite$ | async">
+      <p>{{pet.name}}</p>
+      <button (click)="store.removeFavorite(pet)">remove </button>
+    </div>
+  </div>
+  <div class="flex-auto">
 
-<h2>Search for {{ store.status$ | async}} pets</h2>
+    <h2>Search for {{ store.statusLabel$ | async}} pets</h2>
+    <select (change)="handleStatusChange($event.target)">
+      <option *ngFor="let option of store.statusOptions" [value]="option.value">{{option.label}}</option>
+    </select>
 
-<div *ngIf="store.activePet$ | async as pet">
-  <p><b>Active Pet:</b> {{pet.name}}</p>
-  <button (click)="store.selectPet()">close</button>
-  <button (click)="store.loadActivePet()">reload</button>
+    <div class=" h-40 overflow-auto">
+
+      <div *ngFor="let pet of store.pets$ | async">
+        <p>{{pet.name}}</p>
+        <button (click)="store.selectPet(pet)">show</button>
+        <button (click)="store.addFavorite(pet)">add favorite</button>
+      </div>
+    </div>
+  </div>
+  <div class="w-40">
+    <b>Active pet</b>
+    <div *ngIf="store.activePet$ | async as pet">
+      <p><b>Active Pet:</b> {{pet.name}}</p>
+      <button (click)="store.selectPet()">close</button>
+      <button (click)="store.loadActivePet()">reload</button>
+    </div>
+    <div *ngIf="store.activePetLoading.active">Loading active pet...</div>
+    <div *ngIf="store.activePetLoading.error as error">{{error?.error?.message | json}}</div>
+  </div>
 </div>
-<div *ngIf="store.activePetLoading.active">Loading active pet...</div>
-<div *ngIf="store.activePetLoading.error as error">{{error | json}}</div>
 
-<div *ngFor="let pet of store.pets$ | async">
-  <p (click)="store.selectPet(pet)">{{pet.name}}</p>
-</div>
 
 <pre>{{store.state$ | async | json}}</pre>
