@@ -10,6 +10,10 @@ import { Configuration, PetApi } from '../api-client';
 import { AuthModule } from './auth/auth.module';
 import { ErrorsPage } from './pages/errors/errors.page';
 import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
 
 const DOMAIN = new InjectionToken<string>('Domain')
 
@@ -26,6 +30,10 @@ const DOMAIN = new InjectionToken<string>('Domain')
     TodosPageModule,
     HomePageModule,
     HttpClientModule,
+    EffectsModule.forRoot(),
+    StoreModule.forRoot(reducers, { metaReducers }),
+    true ? StoreDevtoolsModule.instrument() : [],
+    // isDevMode() ? StoreDevtoolsModule.instrument() : [],
   ],
   providers: [
     // PetApi,

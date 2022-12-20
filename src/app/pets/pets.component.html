@@ -15,7 +15,7 @@
 
     <div class=" h-40 overflow-auto">
 
-      <div *ngFor="let pet of store.pets$ | async">
+      <div *ngFor="let pet of facade.allPets$ | async">
         <p>{{pet.name}}</p>
         <button (click)="store.selectPet(pet)">show</button>
         <button (click)="store.addFavorite(pet)">add favorite</button>

@@ -48,6 +48,7 @@ export class PetsStore extends ComponentStore<PetsState> {
       if(!user) {
         return [];
       }
+      return [];
       // return favorite.filter(f => user.favorites.includes(f.id))
     }
   );
