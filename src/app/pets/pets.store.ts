@@ -1,8 +1,10 @@
+import { trigger } from "@angular/animations";
 import { inject } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ComponentStore, tapResponse } from "@ngrx/component-store";
-import { combineLatestWith, distinctUntilChanged, EMPTY, map, Observable, Subject, switchMap, takeUntil } from "rxjs";
+import { combineLatestWith, distinctUntilChanged, EMPTY, filter, map, mergeWith, Observable, startWith, Subject, switchMap, takeUntil } from "rxjs";
 import { Pet, PetApi } from "../../api-client";
+import { LoadingHandler } from "../utils/loading.handler";
 
 export interface Options {
   label: string;
@@ -13,6 +15,8 @@ export interface PetsState {
   status: Pet.StatusEnum,
   pets: Pet[];
   activePet: Pet | null;
+  // activePetLoading: boolean;
+  // activePetError: any;
   favorite: Pet[];
   selectedFavoriteId: number | null;
 }
@@ -35,8 +39,11 @@ export class PetsStore extends ComponentStore<PetsState> {
   activePet$ = this.select(state => state.activePet);
   favorite$ = this.select(state => state.favorite);
   selectedFavorite$ = this.select(state => state.selectedFavoriteId);
+
+  activePetLoading = new LoadingHandler();
+
   petId$ = this.route.queryParams.pipe(
-    map(params => parseInt(params['petId']) || null),
+    map(params => parseInt(params['petId'])),
     distinctUntilChanged(),
   )
 
@@ -47,22 +54,20 @@ export class PetsStore extends ComponentStore<PetsState> {
     })
   )
 
-  readonly loadActivePet = this.effect(() => {
+  readonly loadActivePet = this.effect((trigger$: Observable<void>) => {
 
-    return this.petId$.pipe(
-      switchMap(id => {
-        if(id) {
-          return this.petApi.getPetById({petId: id}).pipe(
-            tapResponse(
-              pet => this.patchState({activePet: pet}),
-              error => console.log('ER', error)
-            )
-          )
-        } else {
-          this.patchState({activePet: null})
-          return EMPTY;
-        }
+    return trigger$.pipe(
+      startWith(undefined),
+      switchMap(() => this.petId$),
+      filter((id)=> {
+        this.patchState({activePet: null});
+        return !!id;
       }),
+      switchMap((id) => this.petApi.getPetById({petId: id}).pipe(
+        this.activePetLoading.tap(
+          pet => this.patchState({activePet: pet})
+        ),
+      )),
     );
   });
 
@@ -82,7 +87,7 @@ export class PetsStore extends ComponentStore<PetsState> {
     super(initialPetsState);
   }
 
-  selectPet(pet: Pet | undefined) {
+  selectPet(pet?: Pet) {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: {petId: pet?.id || null},

@@ -6,7 +6,11 @@
 
 <div *ngIf="store.activePet$ | async as pet">
   <p><b>Active Pet:</b> {{pet.name}}</p>
+  <button (click)="store.selectPet()">close</button>
+  <button (click)="store.loadActivePet()">reload</button>
 </div>
+<div *ngIf="store.activePetLoading.active">Loading active pet...</div>
+<div *ngIf="store.activePetLoading.error as error">{{error | json}}</div>
 
 <div *ngFor="let pet of store.pets$ | async">
   <p (click)="store.selectPet(pet)">{{pet.name}}</p>
