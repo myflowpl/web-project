@@ -8,6 +8,7 @@ import { MainDirective } from './directives/main.directive';
 import { IfDirective } from './directives/if.directive';
 import { HomePage } from './pages/home/home.page';
 import { MarkDirective } from './directives/mark.directive';
+import { LayoutModule } from './layout/layout.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MarkDirective } from './directives/mark.directive';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    LayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
