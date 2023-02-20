@@ -13,6 +13,9 @@
 
 @layer components {
   .btn {
-    @apply border border-blue-500 text-primary ;
+    @apply
+    text-black
+
+    hover:text-red-400 ;
   }
 }

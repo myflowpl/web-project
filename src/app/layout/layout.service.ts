@@ -1,5 +1,5 @@
 import { Injectable, TemplateRef } from '@angular/core';
-import { BehaviorSubject, distinctUntilChanged, map, Observable } from 'rxjs';
+import { BehaviorSubject, delay, distinctUntilChanged, map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,7 @@ export class LayoutService {
   public top$: Observable<TemplateRef<any> | null> = this.top$$.asObservable().pipe(
     map(templates => templates[templates.length-1]),
     distinctUntilChanged(),
+    delay(0)
   );
 
   private bottom$$ = new BehaviorSubject<TemplateRef<any>[]>([]);
@@ -18,6 +19,7 @@ export class LayoutService {
   public bottom$: Observable<TemplateRef<any> | null> = this.bottom$$.asObservable().pipe(
     map(templates => templates[templates.length-1]),
     distinctUntilChanged(),
+    delay(0)
   );
 
   addTop(tpl: TemplateRef<any>) {
