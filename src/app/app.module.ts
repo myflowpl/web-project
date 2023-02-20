@@ -9,6 +9,7 @@ import { IfDirective } from './directives/if.directive';
 import { HomePage } from './pages/home/home.page';
 import { MarkDirective } from './directives/mark.directive';
 import { LayoutModule } from './layout/layout.module';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { LayoutModule } from './layout/layout.module';
     MainDirective,
     IfDirective,
     HomePage,
-    MarkDirective
+    MarkDirective,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
