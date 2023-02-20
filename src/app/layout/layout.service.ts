@@ -1,6 +1,12 @@
 import { Injectable, TemplateRef } from '@angular/core';
 import { BehaviorSubject, delay, distinctUntilChanged, map, Observable } from 'rxjs';
 
+export interface LayoutItem {
+  slot: 'top' | 'bottom';
+  template?: TemplateRef<any>
+  component?: any;
+}
+
 @Injectable({
   providedIn: 'root'
 })
