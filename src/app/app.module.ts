@@ -7,6 +7,7 @@ import { FooterComponent } from './footer/footer.component';
 import { MainDirective } from './directives/main.directive';
 import { IfDirective } from './directives/if.directive';
 import { HomePage } from './pages/home/home.page';
+import { MarkDirective } from './directives/mark.directive';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { HomePage } from './pages/home/home.page';
     FooterComponent,
     MainDirective,
     IfDirective,
-    HomePage
+    HomePage,
+    MarkDirective
   ],
   imports: [
     BrowserModule,

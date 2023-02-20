@@ -1,9 +1,20 @@
-<p>Proman</p>
+<p appMark>Proman</p>
+<p appMark>Proman</p>
+<p appMark>Proman</p>
 
 <button (click)="isVisible = !isVisible">show hidden content</button>
 
-<div *appIf="isVisible">
-  hidden content
-</div>
+<ng-template *appIf="isVisible" [else]="elseTpl" >
+  <span>
+    SECRET hidden content
+  </span>
+</ng-template>
+
+<ng-template #elseTpl>
+
+  <p>
+    this content is hidden, auth to see
+  </p>
+</ng-template>
 
 <p>content visible</p>

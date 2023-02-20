@@ -6,6 +6,9 @@ const routes: Routes = [
   {
     path: '',
     component: HomePage,
+  }, {
+    path: 'map',
+    loadChildren: () => import('./map/map.module').then(m => m.MapModule)
   }
 ];
 
