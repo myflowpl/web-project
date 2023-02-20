@@ -13,6 +13,13 @@ export class LayoutService {
     distinctUntilChanged(),
   );
 
+  private bottom$$ = new BehaviorSubject<TemplateRef<any>[]>([]);
+
+  public bottom$: Observable<TemplateRef<any> | null> = this.bottom$$.asObservable().pipe(
+    map(templates => templates[templates.length-1]),
+    distinctUntilChanged(),
+  );
+
   addTop(tpl: TemplateRef<any>) {
     this.top$$.next([
       ...this.top$$.getValue(),
@@ -23,6 +30,19 @@ export class LayoutService {
   removeTop(tpl: TemplateRef<any>) {
     this.top$$.next(
       this.top$$.getValue().filter(t => t !== tpl)
+    )
+  }
+
+  addBottom(tpl: TemplateRef<any>) {
+    this.bottom$$.next([
+      ...this.bottom$$.getValue(),
+      tpl
+    ])
+  }
+
+  removeBottom(tpl: TemplateRef<any>) {
+    this.bottom$$.next(
+      this.bottom$$.getValue().filter(t => t !== tpl)
     )
   }
 }
