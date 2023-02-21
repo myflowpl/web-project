@@ -37,5 +37,10 @@ describe('template spec', () => {
 
     cy.get('app-map').should('exist').should('contain', 'Pomidddor')
 
+    // cy.request({
+
+    // }).as('save')
+
+    // cy.wait('@save').should('have')
   })
 })
