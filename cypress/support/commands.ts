@@ -26,12 +26,18 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 //
 // declare global {
-//   namespace Cypress {
-//     interface Chainable {
-//       login(email: string, password: string): Chainable<void>
-//       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
-//     }
-//   }
+
+Cypress.Commands.add('dataCy', (selector: string) => {
+  return cy.get(`[data-cy=${selector}]`);
+})
+
+declare namespace Cypress {
+  interface Chainable {
+    dataCy(selector: string): Chainable<JQuery<HTMLElement>>;
+    // login(email: string, password: string): Chainable<void>
+    // drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
+    // dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
+    // visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
+  }
+}
 // }

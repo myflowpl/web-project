@@ -1,20 +1,20 @@
 
-<form class="p-4" [formGroup]="form" (ngSubmit)="onSubmit()">
+<form class="p-4" [formGroup]="form" (ngSubmit)="onSubmit()" data-cy="item-form">
 
   <label class="block my-2">Type</label>
-  <select formControlName="type">
+  <select data-cy="type-select" formControlName="type">
     <option *ngFor="let option of types" [value]="option.value">{{option.label}}</option>
   </select>
 
   <label class="block my-2">Name</label>
-  <input type="text" formControlName="name" />
+  <input data-cy="name-input" type="text" formControlName="name" />
 
   <label class="block my-2">
-    <input type="checkbox" class="mr-2" formControlName="active" />
+    <input data-cy="active-input" type="checkbox" class="mr-2" formControlName="active" />
     Is Active ?
   </label>
 
-  <button class="my-2 border px-4 py-2 " type="submit">save</button>
+  <button data-cy="submit-btn" class="my-2 border px-4 py-2 " type="submit">save</button>
 </form>
 
 <div class="p-4">
@@ -22,5 +22,5 @@
 </div>
 
 <ng-template #errorMessage>
-  <p class="text-red-400">Form is invalid</p>
+  <p class="text-red-400" data-cy="invalid-error">Form is invalid</p>
 </ng-template>
