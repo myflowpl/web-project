@@ -5,7 +5,7 @@ describe('template spec', () => {
       cy.dataCy('submit-btn').click();
     }
 
-    cy.visit('http://localhost:4200')
+    cy.visit('/')
 
     cy.get('header span').first().contains('My App');
 

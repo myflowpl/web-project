@@ -7,6 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "cy": "cypress open",
+    "cy:ci": "cypress run --headless",
     "api": "node api/db.js && json-server-auth api/db.json -r api/db-routes.json --delay 1000"
   },
   "private": true,
