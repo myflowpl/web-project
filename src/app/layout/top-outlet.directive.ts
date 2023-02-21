@@ -1,4 +1,5 @@
 import { Directive, inject, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
+import { HeaderComponent } from '../header/header.component';
 import { LayoutService } from './layout.service';
 
 @Directive({
@@ -17,6 +18,8 @@ export class TopOutletDirective implements OnDestroy {
 
       if(tpl) {
         this.viewContainerRef.createEmbeddedView(tpl)
+      } else {
+        this.viewContainerRef.createComponent(HeaderComponent);
       }
     }
   )

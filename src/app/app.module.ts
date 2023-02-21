@@ -10,6 +10,8 @@ import { HomePage } from './pages/home/home.page';
 import { MarkDirective } from './directives/mark.directive';
 import { LayoutModule } from './layout/layout.module';
 import { HeaderComponent } from './header/header.component';
+import { ItemsPage } from './pages/items/items.page';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,12 +21,14 @@ import { HeaderComponent } from './header/header.component';
     IfDirective,
     HomePage,
     MarkDirective,
-    HeaderComponent
+    HeaderComponent,
+    ItemsPage
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     LayoutModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,22 @@
+
+<form class="p-4" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <label class="block my-2">Type</label>
+  <select formControlName="type">
+    <option *ngFor="let option of types" [value]="option.value">{{option.label}}</option>
+  </select>
+
+  <label class="block my-2">Name</label>
+  <input type="text" formControlName="name" />
+
+  <label class="block my-2">
+    <input type="checkbox" class="mr-2" formControlName="active" />
+    Is Active ?
+  </label>
+
+  <button class="my-2 border px-4 py-2 " type="submit">save</button>
+</form>
+
+<div class="p-4">
+  item
+</div>
