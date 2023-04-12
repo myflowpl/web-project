@@ -10,12 +10,10 @@ import { HomePage } from './home/home.page';
   imports: [
     CommonModule,
     RouterModule.forChild(authRoutes),
-    RouterModule.forChild(authRoutes),
   ],
   declarations: [
     LoginPage,
     RegisterPage,
-    HomePage
   ],
 })
 export class AuthModule {}

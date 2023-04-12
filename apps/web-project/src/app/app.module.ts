@@ -3,10 +3,15 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LayoutModule } from '@asseco/layout';
 
 @NgModule({
+  imports: [
+    BrowserModule, 
+    AppRoutingModule,
+    LayoutModule,
+  ],
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
 })
