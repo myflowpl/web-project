@@ -5,7 +5,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 @layer components {
-    .btn {
-
+    .active {
+        @apply text-blue-500 font-semibold;
     }
 }

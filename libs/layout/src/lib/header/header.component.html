@@ -1,11 +1,17 @@
-<p class="drop-shadow-md border">
-    header works!
-  | 
-  <a routerLink="/user/{{user.id}}">home</a>
-  |
-  <a [routerLink]="[ '/auth', user.id, 'edit',  ]">login</a>
-  | 
-  <a [routerLink]="[ '/auth', 'register' ]" [queryParams]="{q: 'sdf'}">register</a>
+<div class="drop-shadow-md bg-gray-300 ">
+  <div class="container mx-auto py-4 flex gap-4">
 
-</p>
+  <span class="font-bold">Asseco App</span>
+  
+  <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+
+  <span class="flex-auto"></span>
+  
+  <a [routerLink]="[ '/auth' ]" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Login</a>
+  
+  <a [routerLink]="[ '/auth', 'register' ]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Register</a>
+
+  </div>
+
+</div>
 

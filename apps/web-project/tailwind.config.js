@@ -14,4 +14,3 @@ module.exports = {
   },
   plugins: [],
 };
-console.log('CONFIG', module.exports.content)
