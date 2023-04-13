@@ -23,6 +23,10 @@ export class ProfileStore extends ComponentStore<ProfileState> {
     get accessToken() {
         return this.get().accessToken;
     }
+
+    get isLogged(): boolean {
+        return !!this.get().user;
+    }
     
     constructor() {
         const storage = inject(ProfileStorage);

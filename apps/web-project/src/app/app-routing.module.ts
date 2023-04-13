@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { NgModule, inject } from '@angular/core';
+import { Router, RouterModule, Routes } from '@angular/router';
+import { ProfileStore } from '@asseco/auth';
 
 const routes: Routes = [
   {
@@ -9,7 +10,22 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('@asseco/auth').then(m => m.AuthModule)
-  }
+  },
+  {
+    path: 'music',
+    loadChildren: () => import('@asseco/music').then(m => m.MusicModule),
+    canMatch: [
+      () => {
+        const isLogged = inject(ProfileStore).isLogged;
+        if(isLogged) {
+          return true;
+        } else {
+          inject(Router).navigateByUrl('/auth')
+          return false;
+        }
+      }
+    ],
+  },
 ];
 
 @NgModule({
