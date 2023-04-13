@@ -8,4 +8,8 @@
     .active {
         @apply text-blue-500 font-semibold;
     }
+
+    .btn {
+        @apply px-8 py-4 border hover:bg-gray-200 disabled:text-gray-300;
+    }
 }
