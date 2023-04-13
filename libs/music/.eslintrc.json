@@ -20,6 +20,12 @@
             "prefix": "asseco",
             "style": "kebab-case"
           }
+        ],
+        "@angular-eslint/component-class-suffix": [
+          "warn",
+          {
+            "suffixes": ["Component", "Page", "Dialog"]
+          }
         ]
       },
       "extends": [
