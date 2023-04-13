@@ -6,10 +6,17 @@
   <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
 
   <span class="flex-auto"></span>
+
+  <ng-container *ngIf="profileStore.user$ | async as user; else elseTpl">
+    <span>{{user.name}}</span>
+    <a>Logout</a>
+  </ng-container>
   
-  <a [routerLink]="[ '/auth' ]" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Login</a>
+  <ng-template #elseTpl>
+    <a [routerLink]="[ '/auth' ]" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Login</a>
+    <a [routerLink]="[ '/auth', 'register' ]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Register</a>
+  </ng-template>
   
-  <a [routerLink]="[ '/auth', 'register' ]"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Register</a>
 
   </div>
 

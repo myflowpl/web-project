@@ -1,1 +1,22 @@
-<p>login works!</p>
+<h1 class="font-bold py-4">Login</h1>
+
+<div class="max-w-xl mx-auto rounded-md drop-shadow-md border p-4">
+    <form [formGroup]="form" 
+        (ngSubmit)="submit()"  
+        class="flex flex-col gap-4 ">
+
+        <label>Email</label>
+        <input type="email" formControlName="email" />
+
+        <label>Password</label>
+        <input type="password" formControlName="password" />
+
+        <ng-container *ngIf="store.error$ | async as error">
+            <div class="text-red-400 py-4">{{error.error}}</div>
+        </ng-container>
+
+        <button type="submit" class="btn" [disabled]="form.invalid || (store.loading$ | async)  ">Login</button>
+
+    </form>
+</div>
+
