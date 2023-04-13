@@ -23,7 +23,10 @@
           "apps/web-project/src/favicon.ico",
           "apps/web-project/src/assets"
         ],
-        "styles": ["apps/web-project/src/styles.scss"],
+        "styles": [
+          "@angular/material/prebuilt-themes/indigo-pink.css",
+          "apps/web-project/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -89,7 +92,10 @@
           "apps/web-project/src/favicon.ico",
           "apps/web-project/src/assets"
         ],
-        "styles": ["apps/web-project/src/styles.scss"],
+        "styles": [
+          "@angular/material/prebuilt-themes/indigo-pink.css",
+          "apps/web-project/src/styles.scss"
+        ],
         "scripts": []
       }
     }
