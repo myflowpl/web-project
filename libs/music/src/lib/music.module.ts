@@ -4,9 +4,19 @@ import { RouterModule } from '@angular/router';
 import { musicRoutes } from './music.routes';
 import { ArtistsPage } from './artists/artists.page';
 import { SongsPage } from './songs/songs.page';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { StoreDirective } from './store.directive';
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(musicRoutes)],
-  declarations: [ArtistsPage, SongsPage],
+  imports: [
+    CommonModule, 
+    RouterModule.forChild(musicRoutes),
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+  ],
+  declarations: [ArtistsPage, SongsPage, StoreDirective],
 })
 export class MusicModule {}

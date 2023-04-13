@@ -1,3 +1,33 @@
-<p>songs works!</p>
-<pre>{{store.songs$ | async | json}}
-</pre>
+<h1 class="py-4 font-semibold text-lg">Songs</h1>
+
+<ng-container *ngIf="store.songs$ | async as songs">
+    
+    <table mat-table #table [dataSource]="songs" matSort [assecoStore]="store">
+
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+            <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+            <td mat-cell *matCellDef="let row"> {{row.title}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="year">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Year </th>
+            <td mat-cell *matCellDef="let row"> {{row.year}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="store.columns"></tr>
+
+        <tr mat-row *matRowDef="let row; columns: store.columns;"></tr>
+
+    </table>
+
+    <mat-paginator ></mat-paginator>
+
+</ng-container>
+
+
+<pre>{{store.songs$ | async | json}}</pre>
