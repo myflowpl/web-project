@@ -1,6 +1,7 @@
 import { ComponentStore } from "@ngrx/component-store";
 import { User } from "@asseco/api-client";
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
+import { ProfileStorage } from "./profile.storage";
 
 export interface ProfileState {
     accessToken: string;
@@ -22,9 +23,17 @@ export class ProfileStore extends ComponentStore<ProfileState> {
     get accessToken() {
         return this.get().accessToken;
     }
-
+    
     constructor() {
-        super(initialProfileState);
+        const storage = inject(ProfileStorage);
+        const profile = storage.getProfile();
+        
+        super(profile || initialProfileState);
+
+        this.state$.subscribe(state => storage.setProfile(state));
     }
 
+    logout() {
+        this.setState(initialProfileState);
+    }
 }

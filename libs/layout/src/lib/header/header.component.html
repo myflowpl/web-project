@@ -9,7 +9,7 @@
 
   <ng-container *ngIf="profileStore.user$ | async as user; else elseTpl">
     <span>{{user.name}}</span>
-    <a>Logout</a>
+    <a (click)="profileStore.logout()">Logout</a>
   </ng-container>
   
   <ng-template #elseTpl>
@@ -21,4 +21,3 @@
   </div>
 
 </div>
-
