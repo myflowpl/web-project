@@ -20,6 +20,7 @@
     "lib": ["es2020", "dom"],
     "useDefineForClassFields": false,
     "paths": {
+      "@asseco/api-client": ["libs/api-client/src/index.ts"],
       "@asseco/auth": ["libs/auth/src/index.ts"],
       "@asseco/layout": ["libs/layout/src/index.ts"]
     },
