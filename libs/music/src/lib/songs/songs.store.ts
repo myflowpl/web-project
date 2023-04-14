@@ -36,6 +36,7 @@ export class SongsStore extends ComponentStore<SongsState> {
 
     songs$ = this.select(s => s.songs);
     page$ = this.select(s => s.page);
+    sort$ = this.select(s => s.sort);
 
     columns = ['id', 
     'title', 
@@ -80,10 +81,15 @@ export class SongsStore extends ComponentStore<SongsState> {
                     _page: this.page.pageIndex+1,
                     _limit: this.page.pageSize,
                 }
-                return this.http.get<Song[]>(this.baseUrl+'/songs', { params }).pipe(
-                    delay(0),
+                return this.http.get<Song[]>(this.baseUrl+'/songs', { params, observe: 'response' }).pipe(
                     tapResponse(
-                        (songs) => this.patchState({songs}),
+                        (res) => this.patchState({
+                            songs: res.body || [],
+                            page: {
+                                ...this.page,
+                                length: parseInt(res.headers.get('x-total-count') || '0')
+                            }
+                        }),
                         (error: HttpErrorResponse) => this.patchState({error})
                     ),
                 )

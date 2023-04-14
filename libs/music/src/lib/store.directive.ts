@@ -17,10 +17,16 @@ export class StoreDirective {
 
     // setup SORT
     this.sort?.sortChange.subscribe(sort => store.sort = sort);
+    store.sort$.subscribe(sort => {
+      if(this.sort) {
+        this.sort.active = sort.active;
+        this.sort.direction = sort.direction;
+      }
+    })
 
     // setup PAGINATROR
     this.paginator?.page.subscribe(page => store.page = page);
-    
+
     store.page$.subscribe(page => {
 
       if(this.paginator) {
