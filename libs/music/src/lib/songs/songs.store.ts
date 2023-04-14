@@ -5,15 +5,18 @@ import { Observable, delay, switchMap } from "rxjs";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Sort } from "@angular/material/sort";
 import { PageEvent } from "@angular/material/paginator";
+import { tapStore } from "../data.store";
 
 export interface SongsState {
     songs: Song[];
     sort: Sort;
     page: PageEvent;
     error?: HttpErrorResponse;
+    loading: boolean;
 }
 
 const initState: SongsState = {
+    loading: false,
     songs: [],
     sort: {
         active: 'title',
@@ -34,6 +37,7 @@ export class SongsStore extends ComponentStore<SongsState> {
     private baseUrl = 'http://localhost:3000';
     private http = inject(HttpClient);
 
+    loading$ = this.select(s => s.loading);
     songs$ = this.select(s => s.songs);
     page$ = this.select(s => s.page);
     sort$ = this.select(s => s.sort);
@@ -82,7 +86,8 @@ export class SongsStore extends ComponentStore<SongsState> {
                     _limit: this.page.pageSize,
                 }
                 return this.http.get<Song[]>(this.baseUrl+'/songs', { params, observe: 'response' }).pipe(
-                    tapResponse(
+                    tapStore(
+                        this,
                         (res) => this.patchState({
                             songs: res.body || [],
                             page: {
@@ -90,7 +95,6 @@ export class SongsStore extends ComponentStore<SongsState> {
                                 length: parseInt(res.headers.get('x-total-count') || '0')
                             }
                         }),
-                        (error: HttpErrorResponse) => this.patchState({error})
                     ),
                 )
             }),

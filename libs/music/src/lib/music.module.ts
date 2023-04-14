@@ -7,6 +7,7 @@ import { SongsPage } from './songs/songs.page';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { StoreDirective } from './store.directive';
 
 @NgModule({
@@ -16,6 +17,7 @@ import { StoreDirective } from './store.directive';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
+    MatProgressBarModule,
   ],
   declarations: [ArtistsPage, SongsPage, StoreDirective],
 })
