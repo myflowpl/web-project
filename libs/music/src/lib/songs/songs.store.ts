@@ -7,10 +7,16 @@ import { Sort } from "@angular/material/sort";
 import { PageEvent } from "@angular/material/paginator";
 import { tapStore } from "../data.store";
 
+export interface SongsFilters {
+    q?: string, 
+    year?: string
+}
+
 export interface SongsState {
     songs: Song[];
     sort: Sort;
     page: PageEvent;
+    filters: SongsFilters;
     error?: HttpErrorResponse;
     loading: boolean;
 }
@@ -18,6 +24,7 @@ export interface SongsState {
 const initState: SongsState = {
     loading: false,
     songs: [],
+    filters: {},
     sort: {
         active: 'title',
         direction: 'asc',
@@ -76,10 +83,20 @@ export class SongsStore extends ComponentStore<SongsState> {
         return this.get().page;
     }
 
+    set filters(filters: SongsFilters) {
+        this.patchState({ filters });
+        this.init();
+    }
+
+    get filters(): SongsFilters {
+        return this.get().filters;
+    }
+
     readonly init = this.effect((data$: Observable<void>) => {
         return data$.pipe(
             switchMap(() => {
                 const params = {
+                    ...this.filters,
                     _sort: this.sort.active,
                     _order: this.sort.direction,
                     _page: this.page.pageIndex+1,

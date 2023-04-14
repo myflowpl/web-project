@@ -14,6 +14,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     }
 
     .btn {
-        @apply px-8 py-4 border hover:bg-gray-200 disabled:text-gray-300;
+        @apply px-8 py-2 border hover:bg-gray-200 disabled:text-gray-300;
     }
 }

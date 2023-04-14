@@ -4,6 +4,13 @@
     <div class="h-3">
         <mat-progress-bar mode="indeterminate" *ngIf="store.loading$ | async"></mat-progress-bar>
     </div>
+
+    <form class="flex gap-4" [formGroup]="filtersForm" (ngSubmit)="submitFilters()">
+        <input formControlName="q" type="text" placeholder="Szukaj nazwy..." />
+        <input formControlName="year" type="number" placeholder="Wpisz rok" />
+        <button type="submit" class="btn">Szukaj</button>
+    </form>
+
     <table mat-table #table [dataSource]="songs" matSort [assecoStore]="store">
 
         <ng-container matColumnDef="id">

@@ -9,6 +9,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { StoreDirective } from './store.directive';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { StoreDirective } from './store.directive';
     MatSortModule,
     MatPaginatorModule,
     MatProgressBarModule,
+    ReactiveFormsModule,
   ],
   declarations: [ArtistsPage, SongsPage, StoreDirective],
 })
