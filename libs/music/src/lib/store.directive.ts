@@ -2,6 +2,7 @@ import { Directive, Input, inject } from '@angular/core';
 import { SongsStore } from './songs/songs.store';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { DataStore } from './data.store';
 
 @Directive({
   selector: '[assecoStore]'
@@ -13,7 +14,7 @@ export class StoreDirective {
   private paginator = inject(MatPaginator, { optional: true });
 
   @Input()
-  set assecoStore(store: SongsStore) {
+  set assecoStore(store: DataStore<any, any>) {
 
     // setup SORT
     this.sort?.sortChange.subscribe(sort => store.sort = sort);
