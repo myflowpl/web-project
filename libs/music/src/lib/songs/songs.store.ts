@@ -1,13 +1,15 @@
 import { ComponentStore, tapResponse } from "@ngrx/component-store";
 import { Injectable, inject } from "@angular/core";
 import { Artist, Song } from "@asseco/api-client";
-import { Observable, switchMap } from "rxjs";
+import { Observable, delay, switchMap } from "rxjs";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Sort } from "@angular/material/sort";
+import { PageEvent } from "@angular/material/paginator";
 
 export interface SongsState {
     songs: Song[];
     sort: Sort;
+    page: PageEvent;
     error?: HttpErrorResponse;
 }
 
@@ -16,6 +18,11 @@ const initState: SongsState = {
     sort: {
         active: 'title',
         direction: 'asc',
+    },
+    page: {
+        length: 40,
+        pageIndex: 0,
+        pageSize: 5,
     }
 }
 
@@ -28,6 +35,7 @@ export class SongsStore extends ComponentStore<SongsState> {
     private http = inject(HttpClient);
 
     songs$ = this.select(s => s.songs);
+    page$ = this.select(s => s.page);
 
     columns = ['id', 
     'title', 
@@ -40,12 +48,27 @@ export class SongsStore extends ComponentStore<SongsState> {
     }
 
     set sort(sort: Sort) {
-        this.patchState({sort});
+        this.patchState({
+            sort,
+            page: {
+                ...this.page,
+                pageIndex: 0,
+            }
+        });
         this.init();
     }
 
     get sort(): Sort {
         return this.get().sort;
+    }
+
+    set page(page: PageEvent) {
+        this.patchState({page});
+        this.init();
+    }
+
+    get page(): PageEvent {
+        return this.get().page;
     }
 
     readonly init = this.effect((data$: Observable<void>) => {
@@ -54,10 +77,11 @@ export class SongsStore extends ComponentStore<SongsState> {
                 const params = {
                     _sort: this.sort.active,
                     _order: this.sort.direction,
-                    _page: 7,
-                    _limit: 5,
+                    _page: this.page.pageIndex+1,
+                    _limit: this.page.pageSize,
                 }
                 return this.http.get<Song[]>(this.baseUrl+'/songs', { params }).pipe(
+                    delay(0),
                     tapResponse(
                         (songs) => this.patchState({songs}),
                         (error: HttpErrorResponse) => this.patchState({error})
