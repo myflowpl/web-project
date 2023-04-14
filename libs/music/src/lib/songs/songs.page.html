@@ -1,6 +1,6 @@
 <h1 class="py-4 font-semibold text-lg">Songs</h1>
 
-<ng-container *ngIf="store.songs$ | async as songs">
+<ng-container *ngIf="store.data$ | async as songs">
     <div class="h-3">
         <mat-progress-bar mode="indeterminate" *ngIf="store.loading$ | async"></mat-progress-bar>
     </div>
