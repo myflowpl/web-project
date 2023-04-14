@@ -23,15 +23,4 @@ export class SongsPage {
   ngOnInit(): void {
     this.store.init();
   }
-
-  submitFilters() {
-
-    let filters = Object.entries(this.filtersForm.value);
-
-    filters = filters.filter(([_, v]) => !!v);
-
-    this.store.filters = Object.fromEntries(filters);
-
-  }
-  
 }

@@ -5,7 +5,7 @@
         <mat-progress-bar mode="indeterminate" *ngIf="store.loading$ | async"></mat-progress-bar>
     </div>
 
-    <form class="flex gap-4" [formGroup]="filtersForm" (ngSubmit)="submitFilters()">
+    <form class="flex gap-4" [formGroup]="filtersForm" (ngSubmit)="store.filters = filtersForm.value">
         <input formControlName="q" type="text" placeholder="Szukaj nazwy..." />
         <input formControlName="year" type="number" placeholder="Wpisz rok" />
         <button type="submit" class="btn">Szukaj</button>

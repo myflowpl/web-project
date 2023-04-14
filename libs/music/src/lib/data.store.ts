@@ -97,6 +97,13 @@ export class DataStore<E, F> extends ComponentStore<State<E, F>> {
     }
 
     set filters(filters: F) {
+
+        let entires = Object.entries(filters as object);
+
+        entires = entires.filter(([_, v]) => !!v);
+
+        filters = Object.fromEntries(entires) as F;
+        
         this.patchState({ filters });
         this.init();
     }
