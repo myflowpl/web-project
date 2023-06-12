@@ -8,6 +8,8 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { HomePage } from './home/home.page';
 import { QuotesPage } from './quotes/quotes.page';
 import { ImageBaseUrlPipe } from './pipes/image-base-url.pipe';
+import { HighlightDirective } from './directives/highlight.directive';
+import { ItemComponent } from './home/item/item.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { ImageBaseUrlPipe } from './pipes/image-base-url.pipe';
     FooterComponent,
     HomePage,
     QuotesPage,
-    ImageBaseUrlPipe
+    ImageBaseUrlPipe,
+    HighlightDirective,
+    ItemComponent,
   ],
   imports: [
     BrowserModule,
