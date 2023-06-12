@@ -7,6 +7,7 @@ import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { HomePage } from './home/home.page';
 import { QuotesPage } from './quotes/quotes.page';
+import { ImageBaseUrlPipe } from './pipes/image-base-url.pipe';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { QuotesPage } from './quotes/quotes.page';
     HeaderComponent,
     FooterComponent,
     HomePage,
-    QuotesPage
+    QuotesPage,
+    ImageBaseUrlPipe
   ],
   imports: [
     BrowserModule,

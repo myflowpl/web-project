@@ -1,1 +1,15 @@
-<p>home works!</p>
+<h2>{{ title | uppercase }}</h2>
+<h3>{{ today | date:'mm:ss' }} </h3>
+
+<button (click)="onToggleClick($event)">Toggle</button>
+
+<p *ngIf="counter < 10" [class.warn]="counter > 5">
+    Hej hej: {{counter}}
+</p>
+
+<h3>Items</h3>
+
+<div *ngFor="let item of items" class="p-4 m-4 border inline-block">
+    <h4>{{item.name}}</h4>
+    <img [src]="item.id | imageBaseUrl:'thumb'" />
+</div>
