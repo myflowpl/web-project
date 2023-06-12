@@ -9,9 +9,9 @@
 
 <h3>Items</h3>
 
-<div *ngFor="let item of items" class="p-4 m-4 border inline-block">
 
-    <h4 appHighlight class="mb-2">{{item.name}}</h4>
+<ng-container *ngFor="let item of items">
 
-    <img [src]="item.id | imageBaseUrl:'thumb'" />
-</div>
+    <app-item [item]="item"></app-item>
+
+</ng-container>

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Item } from '../home.page';
 
 @Component({
   selector: 'app-item',
@@ -7,4 +8,6 @@ import { Component } from '@angular/core';
 })
 export class ItemComponent {
 
+  @Input()
+  item?: Item;
 }
