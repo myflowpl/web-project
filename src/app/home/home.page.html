@@ -7,7 +7,7 @@
     Hej hej: {{counter}}
 </p>
 
-<h3>Items</h3>
+<h3 class="my-4 font-bold">Items</h3>
 
 
 <ng-container *ngFor="let item of items">
@@ -16,7 +16,19 @@
 
         <button (click)="onItemDelete(item)" class="border p-2">Delete</button>
 
-        <span tools (click)="onItemDelete(item)" class="">❤️</span>
+        <span tools (click)="onItemSelect(item)">❤️</span>
+
+    </app-item>
+
+</ng-container>
+
+<ng-container *ngIf="selected$ | async as selected">
+
+    <h3 class="my-4 font-bold">Selected Item</h3>
+    
+    <app-item [item]="selected">
+
+        <button (click)="closeSelected()" class="border p-2">close</button>
 
     </app-item>
 
