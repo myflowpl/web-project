@@ -1,7 +1,17 @@
-<div class="p-4 m-4 border inline-block">
+<div class="p-4 m-4 border inline-block text-center">
 
-    <h4 appHighlight class="mb-2">{{item?.name}}</h4>
+    <h4 appHighlight class="mb-2">
+        {{item?.name}}
+
+        <ng-content select="[tools]"></ng-content>
+        
+    </h4>
     
-    <img [src]="item?.id | imageBaseUrl:'thumb'" />
+    <img [src]="item?.id | imageBaseUrl:'thumb'" (click)="onSaveClick()" />
+    
+    <span *ngIf="saving">Saving...</span>
 
+    <div class="py-2">
+        <ng-content></ng-content>
+    </div>
 </div>

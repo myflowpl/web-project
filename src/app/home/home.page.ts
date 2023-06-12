@@ -31,4 +31,12 @@ export class HomePage {
     this.counter = this.counter+2;
   }
 
+  onItemClick(e: Item) {
+    console.log('save', e);
+  }
+
+  onItemDelete(e: Item) {
+    console.log('delete', e);
+  }
+
 }

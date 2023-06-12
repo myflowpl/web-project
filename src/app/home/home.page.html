@@ -12,6 +12,12 @@
 
 <ng-container *ngFor="let item of items">
 
-    <app-item [item]="item"></app-item>
+    <app-item [item]="item" (saveSuccess)="onItemClick($event)">
+
+        <button (click)="onItemDelete(item)" class="border p-2">Delete</button>
+
+        <span tools (click)="onItemDelete(item)" class="">❤️</span>
+
+    </app-item>
 
 </ng-container>
