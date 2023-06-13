@@ -11,6 +11,8 @@ import { ImageBaseUrlPipe } from './pipes/image-base-url.pipe';
 import { HighlightDirective } from './directives/highlight.directive';
 import { ItemComponent } from './home/item/item.component';
 import { HttpClientModule } from '@angular/common/http';
+import { BASE_URL } from './api/api.config';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,15 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: BASE_URL,
+      useFactory: () => {
+        return environment.production ? '/api' : 'http://localhost:3000';
+      },
+      deps: [],
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

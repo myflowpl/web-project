@@ -3,3 +3,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+button {
+    @apply px-8 py-2 border hover:bg-gray-200 disabled:text-gray-300;
+}
+
+input.ng-invalid.ng-touched {
+    @apply border-red-400;
+}

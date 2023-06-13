@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SongsRoutingModule } from './songs-routing.module';
 import { SongListPage } from './song-list/song-list.page';
 import { SongEditPage } from './song-list/song-edit/song-edit.page';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { SongEditPage } from './song-list/song-edit/song-edit.page';
   ],
   imports: [
     CommonModule,
-    SongsRoutingModule
+    SongsRoutingModule,
+    ReactiveFormsModule,
   ]
 })
 export class SongsModule { }

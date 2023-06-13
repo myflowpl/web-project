@@ -3,8 +3,9 @@
 
 <div class="flex gap-8">
     <div class="flex-1">
-        <a routerLink="./1">song 1</a>
-        <a routerLink="./2">song 2</a>
+        <div *ngFor="let song of songs$ | async">
+            <a [routerLink]="['.', song.id]">{{song.title}}</a>
+        </div>
     </div>
     <div class="flex-1">
         <router-outlet></router-outlet>
