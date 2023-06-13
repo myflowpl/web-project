@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'quotes',
     component: QuotesPage,
+  },
+  {
+    path: 'songs',
+    loadChildren: () => import('./songs/songs.module').then(module => module.SongsModule),
   }
 ];
 
