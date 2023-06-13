@@ -1,1 +1,11 @@
-<p>quotes works!</p>
+<h2>Quotes</h2>
+
+<input #inputElement class="border p-2" (keyup)="onKeyUp($event)"  /> 
+
+<button class="border p-4" (click)="onCancel()">cancel</button>
+
+<br><br>
+
+<button class="border p-4" (click)="show = !show">Toggle</button>
+
+<pre *ngIf="show">{{ data$ | async | json }}</pre>

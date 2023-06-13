@@ -10,6 +10,7 @@ import { QuotesPage } from './quotes/quotes.page';
 import { ImageBaseUrlPipe } from './pipes/image-base-url.pipe';
 import { HighlightDirective } from './directives/highlight.directive';
 import { ItemComponent } from './home/item/item.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ItemComponent } from './home/item/item.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

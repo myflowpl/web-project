@@ -18,14 +18,16 @@ export class SongEditPage implements OnInit {
   );
 
   ngOnInit(): void {
-    
+
     const param$ = this.route.paramMap;
 
     param$.pipe(
       map(params => parseInt(params.get('id') || '') )
     )
-    .subscribe(id => {
-      this.id = id;
+    .subscribe({
+      next: id => this.id = id,
+      error: err => console.log(err),
+      complete: () => console.log('complete'),
     });
   }
 }
