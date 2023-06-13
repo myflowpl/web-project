@@ -4,6 +4,7 @@ import { Subject, map, switchMap, takeUntil } from 'rxjs';
 import { SongsService } from '../songs.service';
 import { Song } from 'src/app/api/api.model';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { SongsStore } from '../songs.store';
 
 @Component({
   selector: 'app-song-edit',
@@ -17,6 +18,7 @@ export class SongEditPage implements OnInit, OnDestroy {
   router = inject(Router);
   route = inject(ActivatedRoute);
   songsService = inject(SongsService);
+  songsStore = inject(SongsStore);
 
   fb = inject(UntypedFormBuilder);
 
@@ -48,15 +50,19 @@ export class SongEditPage implements OnInit, OnDestroy {
 
   onSubmit() {
     console.log(this.form.valid, this.form.value);
-    this.songsService.update(this.form.value).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.close();
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    })
+    
+    this.songsStore.update(this.form.value);
+    
+    // .subscribe({
+    //   next: (res) => {
+    //     console.log(res);
+    //     this.songsStore.init();
+    //     this.close();
+    //   },
+    //   error: (err) => {
+    //     console.log(err);
+    //   }
+    // })
   }
 
   close() {

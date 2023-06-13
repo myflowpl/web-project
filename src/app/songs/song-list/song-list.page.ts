@@ -1,15 +1,20 @@
-import { Component, inject } from '@angular/core';
-import { SongsService } from './songs.service';
+import { Component, OnInit, inject } from '@angular/core';
+import { SongsStore } from './songs.store';
 
 @Component({
   selector: 'app-song-list',
   templateUrl: './song-list.page.html',
-  styleUrls: ['./song-list.page.scss']
+  styleUrls: ['./song-list.page.scss'],
+  providers: [ SongsStore ],
 })
-export class SongListPage {
+export class SongListPage implements OnInit {
 
-  songsService = inject(SongsService);
+  songsSore = inject(SongsStore);
 
-  songs$ = this.songsService.getSongs();
+  songs$ = this.songsSore.songs$;
+
+  ngOnInit(): void {
+      this.songsSore.init();
+  }
 
 }

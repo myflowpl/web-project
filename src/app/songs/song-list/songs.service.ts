@@ -16,10 +16,11 @@ export class SongsService {
   private baseUrl = inject(BASE_URL);
 
   getSongs() {
+    return this.http.get<Song[]>(this.baseUrl+'/songs');
 
-    return this.reload$.pipe(
-      switchMap(() => this.http.get<Song[]>(this.baseUrl+'/songs'))
-    );
+    // return this.reload$.pipe(
+    //   switchMap(() => this.http.get<Song[]>(this.baseUrl+'/songs'))
+    // );
   }
 
   getSongById(id: number) {
@@ -27,8 +28,8 @@ export class SongsService {
   }
 
   update(song: Partial<Song>) {
-    return this.http.patch(this.baseUrl+'/songs/'+song.id, song).pipe(
-      tap(() => this.reload$.next(true))
+    return this.http.patch<Song>(this.baseUrl+'/songs/'+song.id, song).pipe(
+      // tap(() => this.reload$.next(true))
     );
   }
 

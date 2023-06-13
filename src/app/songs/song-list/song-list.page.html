@@ -3,6 +3,9 @@
 
 <div class="flex gap-8">
     <div class="flex-1">
+        <div class="h-3">
+            <span *ngIf="songsSore.loading">Loading...</span>
+        </div>
         <div *ngFor="let song of songs$ | async">
             <a [routerLink]="['.', song.id]">{{song.title}}</a>
         </div>

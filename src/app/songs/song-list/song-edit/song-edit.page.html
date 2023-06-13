@@ -14,6 +14,8 @@
 
     <input type="number" formControlName="year" />
 
-    <button type="submit" [disabled]="form.invalid" >Zapisz</button>
+    <button type="submit" [disabled]="form.invalid || songsStore.loading" >Zapisz</button>
+
+    <span *ngIf="songsStore.loading">Zapisuję...</span>
 
 </form>
