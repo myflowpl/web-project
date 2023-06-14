@@ -5,6 +5,8 @@ import { SongsService } from '../songs.service';
 import { Song } from 'src/app/api/api.model';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { SongsStore } from '../songs.store';
+import { MatDialog } from '@angular/material/dialog';
+import { SongDeactivateData, SongEditDeactivateDialog } from './song-edit-deactivate/song-edit-deactivate.dialog';
 
 @Component({
   selector: 'app-song-edit',
@@ -22,6 +24,8 @@ export class SongEditPage implements OnInit, OnDestroy {
 
   fb = inject(UntypedFormBuilder);
 
+  dialog = inject(MatDialog);
+
   song?: Song;
 
   form = this.fb.group({
@@ -32,7 +36,16 @@ export class SongEditPage implements OnInit, OnDestroy {
 
   canDeactivate() {
     if(this.form.dirty) {
-      return confirm('You have unsaved changes, do you want to quit?')
+
+      const dialogRef = this.dialog.open(SongEditDeactivateDialog, {
+        width: '500px',
+        disableClose: true,
+        data: {
+          title: this.form.value.title,
+        } as SongDeactivateData
+      });
+
+      return dialogRef.afterClosed();
     }
     return true;
   }

@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Confirm form exit</h1>
+
+<div mat-dialog-content>
+  You have unsaved changes in:<br><br>
+
+  <b>{{data?.title}}</b><br><br>
+  
+  Do you want to quit?
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="handleNo()">No</button>
+  <button mat-button (click)="handleYes()">YES</button>
+</div>

@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BASE_URL } from './api/api.config';
 import { environment } from '../environments/environment';
 import { AuthModule } from './auth/auth.module';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { AuthModule } from './auth/auth.module';
     AppRoutingModule,
     HttpClientModule,
     AuthModule,
+    MatDialogModule,
   ],
   providers: [
     {
