@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
+import { NgModule, inject } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePage } from './home/home.page';
 import { QuotesPage } from './quotes/quotes.page';
+import { LoginDialog } from './auth/login-dialog/login-dialog.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,9 @@ const routes: Routes = [
   {
     path: 'quotes',
     component: QuotesPage,
+    canActivate: [
+      () => inject(LoginDialog).canActivate$,
+    ],
   },
   {
     path: 'songs',
