@@ -13,7 +13,7 @@ const routes: Routes = [
     path: 'quotes',
     component: QuotesPage,
     canActivate: [
-      () => inject(LoginDialog).canActivate$,
+      // () => inject(LoginDialog).canActivate$,
     ],
   },
   {
