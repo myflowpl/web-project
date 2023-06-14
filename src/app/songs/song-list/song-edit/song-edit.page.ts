@@ -24,7 +24,7 @@ export class SongEditPage implements OnInit, OnDestroy {
 
   fb = inject(UntypedFormBuilder);
 
-  dialog = inject(MatDialog);
+  deactivateDialog = inject(SongEditDeactivateDialog);
 
   song?: Song;
 
@@ -37,15 +37,9 @@ export class SongEditPage implements OnInit, OnDestroy {
   canDeactivate() {
     if(this.form.dirty) {
 
-      const dialogRef = this.dialog.open(SongEditDeactivateDialog, {
-        width: '500px',
-        disableClose: true,
-        data: {
-          title: this.form.value.title,
-        } as SongDeactivateData
+      return this.deactivateDialog.open({
+        title: this.form.value.title,
       });
-
-      return dialogRef.afterClosed();
     }
     return true;
   }

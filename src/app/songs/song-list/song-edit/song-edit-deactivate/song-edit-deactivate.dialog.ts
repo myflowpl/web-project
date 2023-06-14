@@ -1,10 +1,28 @@
-import { Component, inject } from '@angular/core';
+import { Component, Injectable, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { Observable } from 'rxjs';
 
 export interface SongDeactivateData {
   title: string;
+}
+
+@Injectable({providedIn: 'root'})
+export class SongEditDeactivateDialog {
+
+  dialog = inject(MatDialog);
+
+  open(data: SongDeactivateData): Observable<boolean> {
+
+      const dialogRef = this.dialog.open(SongEditDeactivateDialogComponent, {
+        width: '500px',
+        disableClose: true,
+        data
+      });
+
+      return dialogRef.afterClosed();
+  }
 }
 
 @Component({
@@ -14,7 +32,7 @@ export interface SongDeactivateData {
   templateUrl: './song-edit-deactivate.dialog.html',
   styleUrls: ['./song-edit-deactivate.dialog.scss']
 })
-export class SongEditDeactivateDialog {
+export class SongEditDeactivateDialogComponent {
 
   dialogRef = inject(MatDialogRef);
 
