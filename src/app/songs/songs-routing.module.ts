@@ -20,6 +20,9 @@ const routes: Routes = [
       {
         path: ':id',
         component: SongEditPage,
+        canDeactivate: [
+          (page: SongEditPage) => page.canDeactivate()
+        ]
       }
     ],
   }

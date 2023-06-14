@@ -30,6 +30,13 @@ export class SongEditPage implements OnInit, OnDestroy {
     year: ['', [Validators.required]]
   });
 
+  canDeactivate() {
+    if(this.form.dirty) {
+      return confirm('You have unsaved changes, do you want to quit?')
+    }
+    return true;
+  }
+
   ngOnInit(): void {
 
     const param$ = this.route.paramMap;

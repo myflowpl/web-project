@@ -16,7 +16,7 @@ export class LoginPage {
   fb = inject(UntypedFormBuilder);
 
   form = this.fb.group({
-    email: ['piotr2@myflow.pl', [Validators.required, Validators.email], []],
+    email: ['piotr3@myflow.pl', [Validators.required, Validators.email], []],
     password: ['!@#$', [Validators.required, Validators.minLength(4)]],
   });
 
