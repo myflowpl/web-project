@@ -13,6 +13,7 @@ import { ItemComponent } from './home/item/item.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BASE_URL } from './api/api.config';
 import { environment } from '../environments/environment';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { environment } from '../environments/environment';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    AuthModule,
   ],
   providers: [
     {

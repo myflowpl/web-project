@@ -43,6 +43,10 @@ export class AuthStore extends ComponentStore<AuthState> {
         return this.get().accessToken;
     }
 
+    get isAuthorized(): boolean {
+        return !!this.get().user;
+    }
+
     user$ = this.select(state => state.user);
     accessToken$ = this.select(state => state.accessToken);
 
