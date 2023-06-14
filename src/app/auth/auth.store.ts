@@ -4,6 +4,7 @@ import { ComponentStore, tapResponse } from "@ngrx/component-store";
 import { Observable, finalize, mergeWith, skip, switchMap, tap } from "rxjs";
 import { BASE_URL } from "../api/api.config";
 import { AuthResponse, LoginDto, RegisterDto, User } from "../api/api.model";
+import { AuthStorage } from "./auth.storage";
 
 export interface AuthState {
     loading: number;
@@ -23,6 +24,7 @@ export class AuthStore extends ComponentStore<AuthState> {
 
   private http = inject(HttpClient);
   private baseUrl = inject(BASE_URL);
+  private authStorage = inject(AuthStorage);
 
 
     get loading(): boolean {
@@ -42,10 +44,26 @@ export class AuthStore extends ComponentStore<AuthState> {
     }
 
     user$ = this.select(state => state.user);
+    accessToken$ = this.select(state => state.accessToken);
+
+    storageState$ = this.select(
+        this.accessToken$,
+        this.user$,
+        (accessToken, user ) => ({ accessToken, user })
+    );
 
 
     constructor() {
         super(initialState);
+
+        // load state from storage
+        const state = this.authStorage.get();
+        if(state) {
+            this.patchState(state);
+        }
+
+        // udpate storage on state changes
+        this.storageState$.subscribe(state => this.authStorage.set(state))
     }
 
     tapLoader<T>() {
