@@ -1,17 +1,24 @@
 import { Injectable, inject } from "@angular/core";
 import { ComponentStore, tapResponse } from "@ngrx/component-store";
-import { Observable, finalize, switchMap, tap } from "rxjs";
+import { Observable, finalize, mergeWith, skip, switchMap, tap } from "rxjs";
 import { Song } from "src/app/api/api.model";
 import { SongsService } from "./songs.service";
+import { PageEvent } from "@angular/material/paginator";
 
 export interface SongsState {
     loading: number;
     songs?: Song[];
-    error?: any,
+    error?: any;
+    page: PageEvent;
 }
 
 const initialState: SongsState = {
     loading: 0,
+    page: {
+        length: 0,
+        pageIndex: 0,
+        pageSize: 10,
+    }
 }
 
 @Injectable()
@@ -23,16 +30,32 @@ export class SongsStore extends ComponentStore<SongsState> {
         return this.get().loading > 0;
     }
 
+    set page(page: Partial<PageEvent>) {
+        this.patchState({ 
+            page: {
+                ...this.get().page,
+                ...page,
+            }
+         });
+         this.init();
+    }
+
     // select songs
     readonly songs$ = this.select(state => state.songs);
+    readonly page$ = this.select(state => state.page);
 
     // load songs efect
     readonly init = this.effect((in$) => {
         return in$.pipe(
-            switchMap(() => this.songsService.getSongs().pipe(
+            // mergeWith(this.page$.pipe(skip(1))),
+            switchMap(() => this.songsService.getSongs(this.get().page).pipe(
                 this.tapLoader(),
                 tapResponse(
-                    songs => this.patchState({ songs }),
+                    (res) => this.patchState({ 
+                        songs: res.songs, 
+                        page: {...this.get().page, length: res.length} 
+                    }),
+                    // ({ songs }) => this.patchState({ songs }),
                     error => this.patchState({error}),
                 ),
             )),
@@ -63,3 +86,16 @@ export class SongsStore extends ComponentStore<SongsState> {
         })
     }
 }
+
+const a = { name: 'adam', title: 'student' }
+const b = { title: 'doctor' }
+
+const c = {
+    ...a,
+    ...b,
+};
+
+const { name, title } = a;
+
+// console.log(name);
+// console.log(a.name);

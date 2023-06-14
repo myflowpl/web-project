@@ -3,12 +3,25 @@
 
 <div class="flex gap-8">
     <div class="flex-1">
-        <div class="h-3">
+        <div class="h-5">
             <span *ngIf="songsSore.loading">Loading...</span>
         </div>
         <div *ngFor="let song of songs$ | async">
             <a [routerLink]="['.', song.id]">{{song.title}}</a>
         </div>
+
+        <ng-container *ngIf="songsSore.page$ | async as page">
+            <mat-paginator 
+                [length]="page.length" 
+                [pageSize]="page.pageSize" 
+                [pageIndex]="page.pageIndex"
+
+                (page)="songsSore.page = $event"
+
+            ></mat-paginator>
+        </ng-container>
+        
+
     </div>
     <div class="flex-1">
         <router-outlet></router-outlet>
