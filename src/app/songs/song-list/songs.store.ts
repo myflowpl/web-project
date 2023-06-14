@@ -97,5 +97,12 @@ const c = {
 
 const { name, title } = a;
 
+const arr = ['user', 'admin'];
+
+// const user = arr[0];
+// const role = arr[1];
+
+const [user, role] = arr;
+
 // console.log(name);
 // console.log(a.name);
