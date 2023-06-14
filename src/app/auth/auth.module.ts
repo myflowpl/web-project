@@ -13,7 +13,7 @@ import { HasRoleDirective } from './has-role.directive';
   declarations: [
     LoginPage,
     RegisterPage,
-    HasRoleDirective
+    HasRoleDirective,
   ],
   imports: [
     CommonModule,
@@ -26,6 +26,9 @@ import { HasRoleDirective } from './has-role.directive';
       useClass: AuthInterceptor,
       multi: true,
     }
-  ]
+  ],
+  exports: [
+    HasRoleDirective,
+  ],
 })
 export class AuthModule { }

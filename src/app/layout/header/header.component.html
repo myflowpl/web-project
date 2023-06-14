@@ -3,7 +3,7 @@
         <span>Web Project</span>
         <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
         <a routerLink="/quotes" routerLinkActive="active">Quotes</a>
-        <a routerLink="/songs" routerLinkActive="active">Songs</a>
+        <a routerLink="/songs" routerLinkActive="active" *appHasRole>Songs</a>
 
         <span class="flex-auto"></span>
 
