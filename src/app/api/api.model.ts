@@ -24,13 +24,19 @@ export interface LoginDto {
   password: string;
 }
 
+export interface RegisterDto {
+  name: string;
+  email: string;
+  password: string;
+}
+
 export enum Role {
   USER = 'user',
   ADMIN = 'admin',
   ROOT = 'root',
 }
 
-export interface UserCreateResponse {
+export interface AuthResponse {
   accessToken: string;
   user: User;
 }
