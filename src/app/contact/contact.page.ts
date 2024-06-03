@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DoCheck, OnChanges, SimpleChanges } from '@angular/core';
 import { Contact } from '../api/api.model';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.page.html',
-  styleUrl: './contact.page.scss'
+  styleUrl: './contact.page.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ContactPage {
+export class ContactPage implements DoCheck {
 
   title = 'Contact <i>Page</i>';
 
@@ -32,5 +33,9 @@ export class ContactPage {
     this.selectedContact = contact;
 
     console.log(e);
+  }
+
+  ngDoCheck(): void {
+      console.log('CHECK');
   }
 }
