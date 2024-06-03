@@ -1,9 +1,14 @@
 import { Routes } from '@angular/router';
-import { HomePage } from './home/home/home.page';
+// import { HomePage } from './home/home/home.page';
 
 export const routes: Routes = [
     {
         path: '',
-        component: HomePage,
+        // component: HomePage,
+        loadComponent: () => import('./home/home/home.page').then(m => m.HomePage),
+    },
+    {
+        path: 'contact',
+        loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule)
     }
 ];
