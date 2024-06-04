@@ -6,38 +6,23 @@
     <div class="w-52">
         <h3>all contacts</h3>
 
-
-
         @for (contact of contacts(); track contact) {
             <div>
                 <a [routerLink]="['.']" [queryParams]="{ id: contact.id }" >{{contact.name}}</a>
             </div>
             <hr>
         }
-
-        <!-- <ng-container *ngFor="let contact of contacts" > </ng-container> -->
     </div>
 
     <div class="flex-auto">
-        <h3>selected contact</h3>
+        <h3 (click)="isGray = false">selected contact</h3>
 
         @if (selectedContact()) {
-            <pre>{{ selectedContact() | json }}</pre>
-        } 
+            <app-contact-info [contact]="selectedContact()"></app-contact-info>
+        }
         @else {
             <p>Zaznacz rekord by zobaczyć szczegóły</p>
         }
 
-<!--         
-        <ng-container *ngIf="selectedContact; else noSelectionTpl">
-    
-            <pre>{{ selectedContact | json }}</pre>
-
-        </ng-container>
-
-
-        <ng-template #noSelectionTpl>
-            <p>Zaznacz rekord by zobaczyć szczegóły</p>
-        </ng-template> -->
     </div>
 </div>

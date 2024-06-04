@@ -11,7 +11,6 @@ import { injectQueryParamNumber } from '../injection.utils';
   selector: 'app-contact',
   templateUrl: './contact.page.html',
   styleUrl: './contact.page.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactPage implements DoCheck {
 
