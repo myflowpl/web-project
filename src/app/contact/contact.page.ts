@@ -38,7 +38,6 @@ export class ContactPage implements DoCheck {
     return contacts.find(c => c.id === id) || null;
   });
 
-
   constructor() {
 
     effect(() => {
