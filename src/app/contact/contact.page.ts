@@ -23,6 +23,8 @@ export class ContactPage implements DoCheck {
   contactService = inject(ContactService);
 
   selectedId = injectQueryParamNumber('id');
+
+  limit = signal(6);
   
   contacts = toSignal(
     this.contactService.getAllContacts(), 
@@ -56,4 +58,5 @@ export class ContactPage implements DoCheck {
   ngDoCheck(): void {
       
   }
+  onContact(e: any) {}
 }

@@ -5,6 +5,7 @@ import { ContactRoutingModule } from './contact-routing.module';
 import { ContactPage } from './contact.page';
 import { RouterModule } from '@angular/router';
 import { ContactInfoComponent } from './contact-info/contact-info.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { ContactInfoComponent } from './contact-info/contact-info.component';
     CommonModule,
     ContactRoutingModule,
     RouterModule,
+    FormsModule,
   ]
 })
 export class ContactModule { }

@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, computed, input } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, computed, input, model, output } from '@angular/core';
 import { Contact } from '../../api/api.model';
 
 @Component({
@@ -9,8 +9,9 @@ import { Contact } from '../../api/api.model';
 export class ContactInfoComponent {
 
   contact = input<Contact | null>(null);
+  contactChange = output<Contact>();
 
-  limit = input(5);
+  limit = model(5);
 
   email = computed(
     () => this.contact()?.email.substring(0, this.limit())+'...'

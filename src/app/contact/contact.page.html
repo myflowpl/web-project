@@ -18,7 +18,15 @@
         <h3 (click)="isGray = false">selected contact</h3>
 
         @if (selectedContact()) {
-            <app-contact-info [contact]="selectedContact()"></app-contact-info>
+        
+            Limit: <input type="number" [(ngModel)]="limit"  > {{limit()}}
+            <app-contact-info 
+                [contact]="selectedContact()" 
+                (contactChange)="onContact($event)" 
+                
+                [(limit)]="limit"
+                (limitChange)="onContact($event)"
+            ></app-contact-info>
         }
         @else {
             <p>Zaznacz rekord by zobaczyć szczegóły</p>
