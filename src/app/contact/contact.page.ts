@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, DoCheck, OnChanges, OnDestroy, SimpleChanges, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DoCheck, OnChanges, OnDestroy, SimpleChanges, computed, effect, inject, signal } from '@angular/core';
 import { Contact } from '../api/api.model';
 import { Meta, Title } from '@angular/platform-browser';
 import { ContactService } from './contact.service';
-import { Subscription } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Subscription, map } from 'rxjs';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -23,12 +23,16 @@ export class ContactPage implements DoCheck {
   contactService = inject(ContactService);
   route = inject(ActivatedRoute);
 
+  id$ = this.route.queryParamMap.pipe(
+    map(queryParams => queryParams.get('id') || ''),
+    map(id => parseInt(id, 10) || 0)
+  );
   
   contacts$ = this.contactService.getAllContacts();
 
   contacts = signal<Contact[]>([]);
 
-  selectedId = signal<number | null>(null)
+  selectedId = toSignal(this.id$, {initialValue: 0});
 
   selectedContact = computed(() => {
     const contacts = this.contacts();
@@ -47,17 +51,19 @@ export class ContactPage implements DoCheck {
       error: (error) => console.log(error),
       complete: () => console.log('COMPLETE')
     });
-  }
 
-
-  handleContactClick(contact: Contact, e: Event) {
-    this.selectedId.set(contact.id);
-
-    this.titleService.setTitle(contact.name);
-    this.metaService.removeTag('name=description')
-    this.metaService.addTag({name: 'description', content: contact.name});
-
-    console.log(e);
+    effect(() => {
+      const contact = this.selectedContact();
+      
+      this.metaService.removeTag('name=description')
+      this.titleService.setTitle('Web Project');
+      
+      if(contact) {
+        this.titleService.setTitle(contact.name);
+        this.metaService.addTag({name: 'description', content: contact.name});
+      }
+  
+    });
   }
 
   ngDoCheck(): void {

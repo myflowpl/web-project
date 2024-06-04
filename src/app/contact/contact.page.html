@@ -9,10 +9,8 @@
 
 
         @for (contact of contacts(); track contact) {
-            <div (mouseenter)="decoration = 'underline'; isGray = true"
-                (mouseleave)="decoration = ''; isGray = false"
-            >
-                <a (click)="handleContactClick(contact, $event)" >{{contact.name}}</a>
+            <div>
+                <a [routerLink]="['.']" [queryParams]="{ id: contact.id }" >{{contact.name}}</a>
             </div>
             <hr>
         }
