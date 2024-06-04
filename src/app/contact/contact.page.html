@@ -8,7 +8,7 @@
 
 
 
-        @for (contact of contacts; track contact) {
+        @for (contact of contacts(); track contact) {
             <div (mouseenter)="decoration = 'underline'; isGray = true"
                 (mouseleave)="decoration = ''; isGray = false"
             >
@@ -23,8 +23,8 @@
     <div class="flex-auto">
         <h3>selected contact</h3>
 
-        @if (selectedContact) {
-            <pre>{{ selectedContact | json }}</pre>
+        @if (selectedContact()) {
+            <pre>{{ selectedContact() | json }}</pre>
         } 
         @else {
             <p>Zaznacz rekord by zobaczyć szczegóły</p>

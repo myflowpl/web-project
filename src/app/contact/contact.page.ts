@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, DoCheck, OnChanges, OnDestroy, SimpleChanges, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DoCheck, OnChanges, OnDestroy, SimpleChanges, computed, inject, signal } from '@angular/core';
 import { Contact } from '../api/api.model';
 import { Meta, Title } from '@angular/platform-browser';
 import { ContactService } from './contact.service';
 import { Subscription } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-contact',
@@ -20,12 +21,21 @@ export class ContactPage implements DoCheck {
   metaService = inject(Meta);
   titleService = inject(Title);
   contactService = inject(ContactService);
+  route = inject(ActivatedRoute);
 
-  contacts: Contact[] = [];
-
+  
   contacts$ = this.contactService.getAllContacts();
 
-  selectedContact?: Contact;
+  contacts = signal<Contact[]>([]);
+
+  selectedId = signal<number | null>(null)
+
+  selectedContact = computed(() => {
+    const contacts = this.contacts();
+    const id = this.selectedId();
+
+    return contacts.find(c => c.id === id) || null;
+  });
 
 
   constructor() {
@@ -33,7 +43,7 @@ export class ContactPage implements DoCheck {
     this.contacts$.pipe(
       takeUntilDestroyed(),
     ).subscribe({
-      next: contacts => this.contacts = contacts,
+      next: contacts => this.contacts.set(contacts),
       error: (error) => console.log(error),
       complete: () => console.log('COMPLETE')
     });
@@ -41,7 +51,7 @@ export class ContactPage implements DoCheck {
 
 
   handleContactClick(contact: Contact, e: Event) {
-    this.selectedContact = contact;
+    this.selectedId.set(contact.id);
 
     this.titleService.setTitle(contact.name);
     this.metaService.removeTag('name=description')
