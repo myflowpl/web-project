@@ -5,6 +5,7 @@ import { ContactService } from './contact.service';
 import { Subscription, map } from 'rxjs';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
+import { injectQueryParamNumber } from '../injection.utils';
 
 @Component({
   selector: 'app-contact',
@@ -21,18 +22,13 @@ export class ContactPage implements DoCheck {
   metaService = inject(Meta);
   titleService = inject(Title);
   contactService = inject(ContactService);
-  route = inject(ActivatedRoute);
 
-  id$ = this.route.queryParamMap.pipe(
-    map(queryParams => queryParams.get('id') || ''),
-    map(id => parseInt(id, 10) || 0)
-  );
+  selectedId = injectQueryParamNumber('id');
   
-  contacts$ = this.contactService.getAllContacts();
-
-  contacts = signal<Contact[]>([]);
-
-  selectedId = toSignal(this.id$, {initialValue: 0});
+  contacts = toSignal(
+    this.contactService.getAllContacts(), 
+    {initialValue: []}
+  );
 
   selectedContact = computed(() => {
     const contacts = this.contacts();
@@ -44,17 +40,9 @@ export class ContactPage implements DoCheck {
 
   constructor() {
 
-    this.contacts$.pipe(
-      takeUntilDestroyed(),
-    ).subscribe({
-      next: contacts => this.contacts.set(contacts),
-      error: (error) => console.log(error),
-      complete: () => console.log('COMPLETE')
-    });
-
     effect(() => {
       const contact = this.selectedContact();
-      
+
       this.metaService.removeTag('name=description')
       this.titleService.setTitle('Web Project');
       
