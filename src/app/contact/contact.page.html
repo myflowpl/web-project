@@ -4,23 +4,42 @@
 <div class="flex py-4">
 
     <div class="w-52">
-        <h3  [style.textDecoration]="decoration" [ngClass]="{'text-gray-400': isGray}">all contacts</h3>
+        <h3>all contacts</h3>
 
-        <div *ngFor="let contact of contacts" 
-            (mouseenter)="decoration = 'underline'; isGray = true"
-            (mouseleave)="decoration = ''; isGray = false"
-        >
 
-            <a (click)="handleContactClick(contact, $event)" >{{contact.name}}</a>
-        </div>
-        
+
+        @for (contact of contacts; track contact) {
+            <div (mouseenter)="decoration = 'underline'; isGray = true"
+                (mouseleave)="decoration = ''; isGray = false"
+            >
+                <a (click)="handleContactClick(contact, $event)" >{{contact.name}}</a>
+            </div>
+            <hr>
+        }
+
+        <!-- <ng-container *ngFor="let contact of contacts" > </ng-container> -->
     </div>
 
     <div class="flex-auto">
-        <h3 (click)="contacts[0].name = 'zmiana'">selected contact</h3>
-        
-        <pre>decoration {{ decoration | json }}</pre>
+        <h3>selected contact</h3>
 
-        <pre>{{ selectedContact | json }}</pre>
+        @if (selectedContact) {
+            <pre>{{ selectedContact | json }}</pre>
+        } 
+        @else {
+            <p>Zaznacz rekord by zobaczyć szczegóły</p>
+        }
+
+<!--         
+        <ng-container *ngIf="selectedContact; else noSelectionTpl">
+    
+            <pre>{{ selectedContact | json }}</pre>
+
+        </ng-container>
+
+
+        <ng-template #noSelectionTpl>
+            <p>Zaznacz rekord by zobaczyć szczegóły</p>
+        </ng-template> -->
     </div>
 </div>
