@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { BASE_URL } from '../api/api.config';
-import { Contact } from '../api/api.model';
+import { Contact, ContactFilters } from '../api/api.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,9 @@ export class ContactService {
 
   constructor() { }
 
-  getAllContacts() {
-    return this.http.get<Contact[]>(this.baseUrl+'/contacts');
+  getAllContacts(params?: ContactFilters) {
+    return this.http.get<Contact[]>(this.baseUrl+'/contacts', {
+      params: { ... params },
+    });
   }
 }

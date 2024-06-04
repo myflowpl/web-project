@@ -41,6 +41,13 @@ export interface Contact {
   email: string;
 }
 
+export interface ContactFilters {
+  q?: string;
+  _page?: number;
+  _limit?: number;
+}
+
+
 export interface Coords {
   lat: number;
   lng: number;

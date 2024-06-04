@@ -5,7 +5,7 @@ import { ContactRoutingModule } from './contact-routing.module';
 import { ContactPage } from './contact.page';
 import { RouterModule } from '@angular/router';
 import { ContactInfoComponent } from './contact-info/contact-info.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ContactAdminPage } from './contact-admin/contact-admin.page';
 
 
@@ -20,6 +20,7 @@ import { ContactAdminPage } from './contact-admin/contact-admin.page';
     ContactRoutingModule,
     RouterModule,
     FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class ContactModule { }

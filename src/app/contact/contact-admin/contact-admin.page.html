@@ -1,5 +1,19 @@
 <h1 class="font-bold text-xl">Contact Admin</h1>
 
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-2">
+
+    <label>Szukaj</label>
+    <input type="text" formControlName="q" />
+
+    <label>Page</label>
+    <input type="number" formControlName="_page" />
+
+    <label>Size</label>
+    <input type="number" formControlName="_limit" />
+
+    <button type="submit">Szukaj</button>
+</form>
+
 <div class="flex py-4 gap-4 flex-col">
 
     <pre>{{ store.contacts() | json}}</pre>

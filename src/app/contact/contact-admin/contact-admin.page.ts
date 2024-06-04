@@ -1,5 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ContactStore } from '../contact.store';
+import { FormBuilder } from '@angular/forms';
+import { ContactFilters } from '../../api/api.model';
 
 @Component({
   selector: 'app-contact-admin',
@@ -7,8 +9,26 @@ import { ContactStore } from '../contact.store';
   styleUrl: './contact-admin.page.scss',
   providers: [ ContactStore ],
 })
-export class ContactAdminPage {
+export class ContactAdminPage implements OnInit {
 
   store = inject(ContactStore);
+
+  fb = inject(FormBuilder);
+
+  form = this.fb.group({
+    q: ['', [], []],
+    _page: [1, [], []],
+    _limit: [2, [], []],
+  });
+
+  ngOnInit() {
+
+    this.store.loadContacts(this.form.value as ContactFilters);
+  }
+
+  onSubmit() {
+
+    this.store.loadContacts(this.form.value as ContactFilters);
+  }
 
 }
