@@ -4,6 +4,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { Configuration } from '../api-client';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,5 +18,14 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(
       withFetch(),
     ),
+    // {
+    //   provide: Configuration,
+    //   useFactory: () => {
+
+    //     return new Configuration({
+    //       basePath: '',
+    //     })
+    //   }
+    // }
   ]
 };
