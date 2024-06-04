@@ -28,6 +28,10 @@ export class ContactAdminPage implements OnInit {
 
   onSubmit() {
 
+    this.store.setFilters(this.form.value as ContactFilters);
+    this.store.setFilters(this.form.value as ContactFilters);
+    this.store.setFilters(this.form.value as ContactFilters);
+
     this.store.loadContacts(this.form.value as ContactFilters);
   }
 

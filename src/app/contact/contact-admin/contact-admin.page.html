@@ -11,8 +11,12 @@
     <label>Size</label>
     <input type="number" formControlName="_limit" />
 
-    <button type="submit">Szukaj</button>
+    <button type="submit" [disabled]="store.loading()" class="disabled:text-gray-300">{{ store.loading() ? 'Szukam...' : 'Szukaj' }}</button>
 </form>
+
+@if (store.error()) {
+    <p class="py-3 text-red-400">{{store.error().message}}</p>
+}
 
 <div class="flex py-4 gap-4 flex-col">
 

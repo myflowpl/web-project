@@ -4,16 +4,21 @@ import { rxMethod } from "@ngrx/signals/rxjs-interop";
 import { pipe, switchMap, tap } from "rxjs";
 import { inject } from "@angular/core";
 import { ContactService } from "./contact.service";
+import { tapLoader } from "../injection.utils";
 
 
 type ContactState = {
     contacts: Contact[];
-    filters: ContactFilters
+    filters: ContactFilters;
+    loading: boolean;
+    error: any;
 }
 
 const initialState: ContactState = {
     contacts: [],
     filters: {},
+    loading: false,
+    error: null,
 }
 
 export const ContactStore = signalStore(
@@ -30,7 +35,7 @@ export const ContactStore = signalStore(
             switchMap(params => {
                 
                 return contactService.getAllContacts(params).pipe(
-                    tap(contacts => patchState(store, { contacts })),
+                    tapLoader(store, contacts => patchState(store, { contacts })),
                 );
             }),
         )),
