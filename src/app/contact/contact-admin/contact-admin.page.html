@@ -11,7 +11,7 @@
     <label>Size</label>
     <input type="number" formControlName="_limit" />
 
-    <button type="submit" [disabled]="store.loading()" class="disabled:text-gray-300">{{ store.loading() ? 'Szukam...' : 'Szukaj' }}</button>
+    <button type="submit" [disabled]="store.loading()" class="disabled:text-gray-300">{{ store.loadLabel() }}</button>
 </form>
 
 @if (store.error()) {
