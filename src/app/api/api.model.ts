@@ -29,6 +29,10 @@ export enum Role {
   ADMIN = 'admin',
   ROOT = 'root',
 }
+export interface RegisterDto {
+  email: string;
+  password: string;
+}
 
 export interface UserCreateResponse {
   accessToken: string;
