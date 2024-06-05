@@ -2,11 +2,13 @@ import { HttpHeaders, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, map, throwError } from 'rxjs';
 import { AuthStore } from './auth.store';
+import { LoginService } from './login.service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   
   // INTERCEPT request
   const auth = inject(AuthStore);
+  const loginService = inject(LoginService);
 
   if(auth.accessToken()) {
     req = req.clone({
@@ -25,7 +27,10 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     catchError(error => {
 
       console.log('INTERCEPT ERROR', error);
-      return next(req);
+
+      // return loginService.loginDialog$.pipe(
+
+      // );
       return throwError(() => error);
     }),
   );
