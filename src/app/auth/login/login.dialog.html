@@ -1,1 +1,7 @@
-<p>login works!</p>
+<h1 matDialogTitle>
+    Login
+</h1>
+
+<mat-dialog-content>
+    <app-login-form (loginSuccess)="onClose($event)"></app-login-form>
+</mat-dialog-content>
