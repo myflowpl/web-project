@@ -1,9 +1,19 @@
-import { isPlatformBrowser } from "@angular/common";
+import { isPlatformBrowser, isPlatformServer } from "@angular/common";
 import { InjectionToken, PLATFORM_ID, inject } from "@angular/core";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { ActivatedRoute } from "@angular/router";
 import { StateSignal, patchState } from "@ngrx/signals";
 import { EMPTY, catchError, map, pipe, tap } from "rxjs";
+
+export const IS_SERVER = new InjectionToken<boolean>("Is Server", {
+  providedIn: 'root',
+  factory: () => isPlatformServer(inject(PLATFORM_ID))
+});
+
+export const IS_BROWSER = new InjectionToken<boolean>("Is Browser", {
+  providedIn: 'root',
+  factory: () => isPlatformBrowser(inject(PLATFORM_ID))
+});
 
 export const LOCAL_STORAGE = new InjectionToken<Storage>("localStorage", {
   providedIn: 'root',
@@ -19,7 +29,7 @@ export const LOCAL_STORAGE = new InjectionToken<Storage>("localStorage", {
         // serwer
         return new LocalStorageMock();
       }
-      
+
   },
 });
 

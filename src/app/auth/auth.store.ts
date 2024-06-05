@@ -67,6 +67,7 @@ export const AuthStore = signalStore(
         onInit(store, localStorage = inject(LOCAL_STORAGE)) {
 
             const KEY = 'auth_data'
+            if(!localStorage) return;
 
             // check storage for existing session
             const data = localStorage.getItem(KEY);

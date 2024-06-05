@@ -1,6 +1,6 @@
 import { HttpHeaders, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { catchError, map, throwError } from 'rxjs';
+import { catchError, map, switchMap, throwError } from 'rxjs';
 import { AuthStore } from './auth.store';
 import { LoginService } from './login.service';
 
@@ -18,19 +18,36 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     });
   }
   
-  console.log(req);
+  
   return next(req).pipe(
     map(res => {
-      console.log('INTERCEPT RESPONSE', res);
+      // 'INTERCEPT RESPONSE'
       return res;
     }),
     catchError(error => {
 
-      console.log('INTERCEPT ERROR', error);
+      // INTERCEPT ERROR
+      // przechwytujemy unauthorized errors
+      if(error.status === 401 || error.status === 403) {
 
-      // return loginService.loginDialog$.pipe(
-
-      // );
+        // wyswietl onko logowania
+        return loginService.loginDialog$.pipe(
+          switchMap(user => {
+            // jesli nie zalogowany zwracamy błąd
+            if(!user) {
+              return throwError(() => error);
+            }
+            // jeśli zalogoany, to tworzymy ponownie request z nowym tokenem
+            req = req.clone({
+              headers: new HttpHeaders({
+                Authorization: 'Bearer ' + auth.accessToken()
+              })
+            });
+            // i ponawiamy request na serwer
+            return next(req);
+          }),
+        );
+      }
       return throwError(() => error);
     }),
   );

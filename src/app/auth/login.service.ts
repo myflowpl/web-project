@@ -4,6 +4,7 @@ import { toObservable } from '@angular/core/rxjs-interop';
 import { map, of, share, switchMap, take } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog'
 import { LoginDialog } from './login/login.dialog';
+import { IS_SERVER } from '../injection.utils';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +12,15 @@ import { LoginDialog } from './login/login.dialog';
 export class LoginService {
 
   authStore = inject(AuthStore);
+  isServer = inject(IS_SERVER);
 
   dialog = inject(MatDialog);
 
   loginDialog$ = of(1).pipe(
     map(() => this.authStore.user()),
     switchMap(user => {
-      console.log(user);
-      if(user) {
+      
+      if(user || this.isServer) {
         return of(user);
       }
 
