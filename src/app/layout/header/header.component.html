@@ -3,12 +3,15 @@
     <div class="page-container flex gap-4">
         <span>Web Project</span>
 
-        <a [routerLink]="['/']">Home</a>
-        <a routerLink="/contact">Contact</a>
-        <a routerLink="/contact/admin">Admin</a>
+        <a [routerLink]="['/']" routerLinkActive="font-bold" [routerLinkActiveOptions]="{exact: true}">Home</a>
+        <a routerLink="/contact" routerLinkActive="font-bold" [routerLinkActiveOptions]="{exact: true}">Contact</a>
+        <a routerLink="/contact/admin" routerLinkActive="font-bold">Admin</a>
 
         <span class="flex-auto"></span>
 
         <a>Login</a>
+        <a routerLink="/register" routerLinkActive="font-bold">Register</a>
     </div>
 </div>
+
+

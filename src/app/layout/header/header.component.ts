@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AuthStore } from '../../auth/auth.store';
 
 @Component({
   selector: 'app-header',
@@ -9,5 +10,7 @@ import { RouterModule } from '@angular/router';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+
+  auth = inject(AuthStore);
 
 }

@@ -21,6 +21,10 @@ import { ContactAdminPage } from './contact-admin/contact-admin.page';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-  ]
+  ],
+  exports: [
+    ContactPage,
+    ContactAdminPage,
+  ],
 })
 export class ContactModule { }

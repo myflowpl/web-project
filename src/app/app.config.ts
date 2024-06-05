@@ -28,6 +28,6 @@ export const appConfig: ApplicationConfig = {
     //     })
     //   }
     // }
-    AuthStore,
+    // AuthStore,
   ]
 };
