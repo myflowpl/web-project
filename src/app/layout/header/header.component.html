@@ -11,7 +11,7 @@
         <span class="flex-auto"></span>
         
         @if (auth.user(); as user) {
-            <img [src]="auth.userPhoto()" class="rounded-full h-6">
+            <img [src]="auth.user() | userPhoto:'jpg':'large'" class="rounded-full h-6">
             <span>{{ user?.email }}</span>
             <span (click)="auth.logout()">Logout</span>
         }
