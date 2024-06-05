@@ -1,8 +1,27 @@
-import { inject } from "@angular/core";
+import { isPlatformBrowser } from "@angular/common";
+import { InjectionToken, PLATFORM_ID, inject } from "@angular/core";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { ActivatedRoute } from "@angular/router";
 import { StateSignal, patchState } from "@ngrx/signals";
 import { EMPTY, catchError, map, pipe, tap } from "rxjs";
+
+export const LOCAL_STORAGE = new InjectionToken<Storage>("localStorage", {
+  providedIn: 'root',
+  factory() {
+
+      const platformId = inject(PLATFORM_ID);
+
+      if(isPlatformBrowser(platformId)) {
+        // przegladarka
+        return localStorage;
+
+      } else {
+        // serwer
+        return new LocalStorageMock();
+      }
+      
+  },
+});
 
 export function injectQueryParamNumber(name: string) {
     
@@ -37,4 +56,31 @@ export function tapLoader<T>(store: StateSignal<LoadingState>, nextFn?: (v: T)=>
       return EMPTY;
     }),
   );
+}
+
+export class LocalStorageMock implements Storage {
+  
+  [name: string]: any;
+
+  private items: {[name: string]: any}  = {};
+
+  length: number = 0;
+
+  clear(): void {
+    this.items = {};
+  }
+  getItem(key: string): string {
+    return this.items[key];
+  }
+  key(index: number): string {
+    const keys = Object.keys(this.items);
+    return keys[index];
+  }
+  removeItem(key: string): void {
+    delete this.items[key];
+  }
+  setItem(key: string, value: string): void {
+    this.items[key] = value;
+  }
+
 }
