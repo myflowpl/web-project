@@ -16,8 +16,7 @@ export class LoginService {
 
   dialog = inject(MatDialog);
 
-  loginDialog$ = of(1).pipe(
-    map(() => this.authStore.user()),
+  loginDialog$ = toObservable(this.authStore.user).pipe(
     switchMap(user => {
       
       if(user || this.isServer) {
