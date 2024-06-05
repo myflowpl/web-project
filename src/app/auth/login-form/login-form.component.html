@@ -1,0 +1,17 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-2">
+
+    <label>Email</label>
+    <input type="email" formControlName="email"/>
+    <p class="form-error" *ngIf="form.controls.email.hasError('required') && form.controls.email.touched">Pole wymagane</p>
+    <p class="form-error" *ngIf="form.controls.email.hasError('email') && form.controls.email.touched">Nie poprawny email</p>
+    
+    <label>Password</label>
+    <input type="password"  formControlName="password"/>
+    <p class="form-error" *ngIf="form.controls.password.hasError('required') && form.controls.password.touched">Pole wymagane</p>
+    <p class="form-error" *ngIf="form.controls.password.hasError('minlength') && form.controls.password.touched">Minimalna długość to 3 znaki</p>
+
+    <p class="form-error" *ngIf="store.error()">
+        {{store.error().error}}
+    </p>
+    <button type="submit" [disabled]="form.invalid || store.loading()">Login</button>
+</form>

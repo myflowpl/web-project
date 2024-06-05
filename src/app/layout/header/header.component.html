@@ -9,8 +9,14 @@
         
         <span class="flex-auto"></span>
         
-        <a  routerLink="/login" routerLinkActive="font-bold">Login</a>
-        <a routerLink="/register" routerLinkActive="font-bold">Register</a>
+        @if (auth.user(); as user) {
+            <img [src]="auth.userPhoto()" class="rounded-full h-6">
+            <span>{{ user?.email }}</span>
+        }
+        @else {
+            <a routerLink="/login" routerLinkActive="font-bold">Login</a>
+            <a routerLink="/register" routerLinkActive="font-bold">Register</a>
+        }
     </div>
 </div>
 
