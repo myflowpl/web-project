@@ -50,22 +50,6 @@ export const PetsStore = signalStore(
                 ),
             ),
         ),
-        loadPetsBASIC: rxMethod<Status>(
-            pipe(
-                debounceTime(10),
-                distinctUntilChanged(),
-                tap(status => patchState(store, { status, isLoading: true, error: null, pets: [] })),
-                switchMap(
-                    (status) => petApi.findPetsByStatus({status: [status]}).pipe(
-                        tap(pets => patchState(store, { pets, isLoading: false })),
-                        catchError((error) => {
-                            patchState(store, {error, isLoading: false});
-                            return EMPTY;
-                        }),
-                    )
-                ),
-            ),
-        ),
     })),
     withHooks({
         onInit(store) {

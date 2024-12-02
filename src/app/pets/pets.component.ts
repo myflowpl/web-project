@@ -1,6 +1,6 @@
 import { Component, computed, effect, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { injectQueryParam } from '../utils';
+import { injectQueryParam, injectUpdateTitle } from '../utils';
 import { PetsStore, Status } from './pets.store';
 
 @Component({
@@ -16,15 +16,13 @@ export class PetsComponent {
 
   status = injectQueryParam<Status>('status', 'available');
 
+  updateTitle = injectUpdateTitle();
+
   constructor() {
 
     this.store.loadPets(this.status);
 
-    // effect(() => {
-
-    //   this.store.setStatus(this.status());
-      
-    // });
+    this.updateTitle(this.store.title);
 
   }
 }
