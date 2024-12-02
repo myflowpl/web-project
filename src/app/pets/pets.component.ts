@@ -1,23 +1,25 @@
-import { Component, effect, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, effect, inject, OnInit, signal } from '@angular/core';
 import { Pet, PetApi } from '../api-client';
 import { AsyncPipe } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink, RouterModule } from '@angular/router';
 import { Observable, Subscription, switchMap } from 'rxjs';
 import { injectQueryParam } from '../utils';
+import { PetsStore } from './pets.store';
 
 export type Status = 'sold' | 'available' | 'pending'
 
 @Component({
   selector: 'app-pets',
-  imports: [AsyncPipe, RouterLink],
+  imports: [RouterLink],
   templateUrl: './pets.component.html',
-  styleUrl: './pets.component.scss'
+  styleUrl: './pets.component.scss',
+  providers: [PetsStore],
 })
-export class PetsComponent implements OnInit {
+export class PetsComponent {
+
+  store = inject(PetsStore);
 
   status = injectQueryParam<Status>('status', 'available');
-
-  // route = inject(ActivatedRoute);
 
   petApi = inject(PetApi);
 
@@ -28,6 +30,8 @@ export class PetsComponent implements OnInit {
   sub: Subscription | null = null;
 
   constructor() {
+
+    this.store.filters.dir();
 
     effect(() => {
       const status: any = this.status();

@@ -24,6 +24,7 @@
     "@angular/platform-server": "^19.0.0",
     "@angular/router": "^19.0.0",
     "@angular/ssr": "^19.0.2",
+    "@ngrx/signals": "^18.1.1",
     "@openapitools/openapi-generator-cli": "^2.15.3",
     "express": "^4.18.2",
     "json-server": "^0.17.4",
