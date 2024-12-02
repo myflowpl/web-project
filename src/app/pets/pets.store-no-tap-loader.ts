@@ -3,7 +3,6 @@ import { Pet, PetApi } from '../api-client';
 import { computed, inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, debounceTime, distinctUntilChanged, EMPTY, pipe, switchMap, tap } from 'rxjs';
-import { tapLoader } from '../utils';
 
 export type Status = 'sold' | 'available' | 'pending'
 
@@ -39,18 +38,6 @@ export const PetsStore = signalStore(
             patchState(store, { status });
         },
         loadPets: rxMethod<Status>(
-            pipe(
-                debounceTime(10),
-                distinctUntilChanged(),
-                tap(status => patchState(store, { status, pets: [] })),
-                switchMap(
-                    (status) => petApi.findPetsByStatus({status: [status]}).pipe(
-                        tapLoader(store, pets => patchState(store, { pets })),
-                    )
-                ),
-            ),
-        ),
-        loadPetsBASIC: rxMethod<Status>(
             pipe(
                 debounceTime(10),
                 distinctUntilChanged(),

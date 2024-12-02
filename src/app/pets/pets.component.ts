@@ -18,11 +18,13 @@ export class PetsComponent {
 
   constructor() {
 
-    effect(() => {
+    this.store.loadPets(this.status);
 
-      this.store.loadPets(this.status());
+    // effect(() => {
 
-    });
+    //   this.store.setStatus(this.status());
+      
+    // });
 
   }
 }
