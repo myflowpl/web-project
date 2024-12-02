@@ -1,6 +1,8 @@
-import { signalStore, withComputed, withHooks, withState } from '@ngrx/signals';
-import { Pet } from '../api-client';
-import { computed } from '@angular/core';
+import { patchState, signalStore, withComputed, withHooks, withMethods, withState } from '@ngrx/signals';
+import { Pet, PetApi } from '../api-client';
+import { computed, inject } from '@angular/core';
+import { rxMethod } from '@ngrx/signals/rxjs-interop';
+import { catchError, debounceTime, distinctUntilChanged, EMPTY, pipe, switchMap, tap } from 'rxjs';
 
 export type Status = 'sold' | 'available' | 'pending'
 
@@ -31,6 +33,27 @@ export const PetsStore = signalStore(
             return `Znaleziono ${count} ${status} zwierzakow`;
           }),
     })),
+    withMethods((store, petApi = inject(PetApi)) => ({
+        setStatus: (status: Status) => {
+            patchState(store, { status });
+        },
+        loadPets: rxMethod<Status>(
+            pipe(
+                debounceTime(10),
+                distinctUntilChanged(),
+                tap(status => patchState(store, { status, isLoading: true, error: null, pets: [] })),
+                switchMap(
+                    (status) => petApi.findPetsByStatus({status: [status]}).pipe(
+                        tap(pets => patchState(store, { pets, isLoading: false })),
+                        catchError((error) => {
+                            patchState(store, {error, isLoading: false});
+                            return EMPTY;
+                        }),
+                    )
+                ),
+            ),
+        ),
+    })),
     withHooks({
         onInit(store) {
             console.log('INIT PET STORE');
@@ -43,13 +66,3 @@ export const PetsStore = signalStore(
 
 
 type PetsStore = InstanceType<typeof PetsStore>;
-
-// function createTitle(store: PetsStore) {
-
-//     return computed(() => {
-//         const status = store.status();
-//         const count = store.pets().length;
-    
-//         return `Znaleziono ${count} ${status} zwierzakow`
-//       });
-// }
