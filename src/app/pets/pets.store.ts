@@ -64,4 +64,4 @@ export const PetsStore = signalStore(
 );
 
 
-type PetsStore = InstanceType<typeof PetsStore>;
+export type PetsStore = InstanceType<typeof PetsStore>;
