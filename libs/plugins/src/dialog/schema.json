@@ -12,6 +12,16 @@
         "index": 0
       },
       "x-prompt": "What name would you like to use?"
+    },
+
+    "path": {
+      "type": "string",
+      "description": "nestet path to create dialog",
+      "format": "path",
+      "visible": true,
+      "$default": {
+        "$source": "workingDirectory"
+      }
     }
   },
   "required": ["name"]
