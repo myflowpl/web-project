@@ -4,6 +4,11 @@
       "factory": "./src/dialog/generator",
       "schema": "./src/dialog/schema.json",
       "description": "Generacja dialogu z angular material i injectable pattern"
+    },
+    "store": {
+      "factory": "./src/store/generator",
+      "schema": "./src/store/schema.json",
+      "description": "store generator"
     }
   }
 }
