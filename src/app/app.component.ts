@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, computed, viewChild } from '@angular/core';
 import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
@@ -8,5 +8,6 @@ import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
+
   title = 'web';
 }
