@@ -1,0 +1,33 @@
+<h2>Pets: {{ store.title() }}</h2>
+
+<div class="flex gap-4 my-2">
+  <span>STATUS:</span>
+  <a
+    [routerLink]="['.']"
+    [queryParams]="{ status: 'available' }"
+    routerLinkActive="router-link-active"
+    >Available</a
+  >
+  <a
+    [routerLink]="['.']"
+    [queryParams]="{ status: 'pending' }"
+    routerLinkActive="router-link-active"
+    >Pending</a
+  >
+  <a
+    [routerLink]="['.']"
+    [queryParams]="{ status: 'sold' }"
+    routerLinkActive="router-link-active"
+    >Sold</a
+  >
+  <b>{{ store.status() }}</b>
+</div>
+
+@if (store.isLoading()) {
+<div>Loading...</div>
+} @if (store.error()) {
+<b>ERROR: </b>
+<div>{{ store.error().message }}</div>
+} @for (pet of store.pets(); track $index) {
+<div class="my-1">{{ pet.name }} ({{ pet.status }})</div>
+}
