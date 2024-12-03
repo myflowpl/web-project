@@ -1,3 +1,11 @@
-<app-login-form #loginForm></app-login-form>
+<h1 mat-dialog-title>
+{{ data?.message || 'Login'}}
+</h1>
 
-{{loginForm.form.invalid ? 'invalid' : 'valid'}}
+<mat-dialog-content>
+
+    <app-login-form #loginForm (loginSuccess)="handleLogin($event)"></app-login-form>
+    
+    <!-- {{loginForm.form.invalid ? 'invalid' : 'valid'}} -->
+
+</mat-dialog-content>

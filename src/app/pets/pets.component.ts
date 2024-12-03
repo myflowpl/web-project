@@ -28,7 +28,7 @@ export class PetsComponent {
 
     this.updateTitle(this.store.title);
 
-    this.loginDialog.open();
+    // this.loginDialog.open();
 
   }
 }

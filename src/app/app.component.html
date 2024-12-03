@@ -5,7 +5,13 @@
     <a routerLink="pets">Pets</a>
     <a routerLink="contacts">Contacts</a>
     <span class="flex-auto"></span>
-    <a routerLink="login">Login</a>
+    @if (profileStore.user()) {
+      <span>Witaj {{profileStore.user()?.name}}</span>
+      <a (click)="profileStore.logout()">Logout</a>
+    }
+    @else {
+      <a routerLink="login">Login</a>
+    }
   </div>
   <router-outlet />
 </div>

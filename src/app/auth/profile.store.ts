@@ -1,4 +1,4 @@
-import { signalStore, withState } from "@ngrx/signals";
+import { patchState, signalStore, withMethods, withState } from "@ngrx/signals";
 import { User } from "../api/api.model";
 
 type ProfileState = {
@@ -12,6 +12,14 @@ const InitialState: ProfileState = {
 export const ProfileStore = signalStore(
     { providedIn: 'root' },
     withState(InitialState),
+    withMethods((store) => ({
+        login(user: User) {
+            patchState(store, { user })
+        },
+        logout() {
+            patchState(store, { user: null })
+        }
+    }))
 );
 
 export type ProfileStore = InstanceType<typeof ProfileStore>;

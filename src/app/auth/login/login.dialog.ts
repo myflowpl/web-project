@@ -1,7 +1,7 @@
 import { Component, effect, inject, Injector, viewChild } from '@angular/core';
-import { catchError, map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of, switchMap, throwError } from 'rxjs';
 import { ProfileStore } from '../profile.store';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { PetsStore } from '../../pets/pets.store';
 import { LoginFormComponent } from '../login-form/login-form.component';
 
@@ -21,9 +21,12 @@ export function injectLoginDialog() {
       const dialogRef = matDialog.open(LoginDialog, {
         injector,
         data,
+
       });
 
-      return dialogRef.afterClosed();
+      return dialogRef.afterClosed().pipe(
+        switchMap(profile => profile ? of(profile) : throwError(() => new Error('Login anulowany'))),
+      );
     },
 
     guard(data: LoginDialogData = {}): Observable<boolean> {
@@ -37,7 +40,11 @@ export function injectLoginDialog() {
 
 @Component({
   selector: 'app-login',
-  imports: [LoginFormComponent],
+  imports: [
+    LoginFormComponent,
+    MatDialogTitle,
+    MatDialogContent,
+  ],
   templateUrl: './login.dialog.html',
   styleUrl: './login.dialog.scss'
 })
@@ -46,13 +53,17 @@ export class LoginDialog {
   profileStore = inject(ProfileStore);
 
   data = inject<LoginDialogData>(MAT_DIALOG_DATA);
+  dialogRef = inject(MatDialogRef);
 
   loginForm = viewChild.required('loginForm');
 
   constructor() {
-    effect(() => {
-      console.log(this.loginForm());
-    }) 
+    // effect(() => {
+    //   console.log(this.loginForm());
+    // }) 
   }
 
+  handleLogin(profileStore: ProfileStore) {
+    this.dialogRef.close(profileStore);
+  }
 }
