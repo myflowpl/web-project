@@ -43,6 +43,7 @@
     "@angular/compiler-cli": "^19.0.0",
     "@nx/angular": "20.1.4",
     "@nx/js": "20.1.4",
+    "@nx/plugin": "^20.1.4",
     "@nx/workspace": "20.1.4",
     "@schematics/angular": "^19.0.2",
     "@swc-node/register": "~1.9.1",
