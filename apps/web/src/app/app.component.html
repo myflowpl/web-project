@@ -3,8 +3,11 @@
     <span>app</span>
     <a routerLink="/">Home</a>
     <a routerLink="pets">Pets</a>
+
     <a routerLink="contacts">Contacts</a>
-    <a routerLink="store">Store</a>
+
+    <a routerLink="store" *libHasRole="'test@myflow.pl'" roleName="admin">Store</a>
+
     <span class="flex-auto"></span>
     @if (profileStore.user()) {
     <span>Witaj {{ profileStore.user()?.name }}</span>

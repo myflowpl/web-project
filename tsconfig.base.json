@@ -16,7 +16,8 @@
     "target": "ES2022",
     "module": "ES2022",
     "paths": {
-      "plugins": ["libs/plugins/src/index.ts"]
+      "@web/auth": ["libs/auth/src/index.ts"],
+      "@web/plugins": ["libs/plugins/src/index.ts"]
     },
     "baseUrl": ".",
     "rootDir": "."

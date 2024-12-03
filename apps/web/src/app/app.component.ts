@@ -1,10 +1,10 @@
 import { Component, computed, inject, viewChild } from '@angular/core';
 import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
-import { ProfileStore } from './auth/profile.store';
+import { ProfileStore, HasRoleDirective } from '@web/auth';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink],
+  imports: [RouterOutlet, RouterLink, HasRoleDirective],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

@@ -1,7 +1,6 @@
 import { Component, effect, inject, input, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ProfileStore } from '../profile.store';
-import { Subject } from 'rxjs';
+import { ProfileStore } from '@web/auth';
 
 @Component({
   selector: 'app-login-form',

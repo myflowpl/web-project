@@ -1,6 +1,6 @@
 import { Component, effect, inject, Injector, viewChild } from '@angular/core';
 import { catchError, map, Observable, of, switchMap, throwError } from 'rxjs';
-import { ProfileStore } from '../profile.store';
+import { ProfileStore } from '@web/auth';
 import {
   MAT_DIALOG_DATA,
   MatDialog,

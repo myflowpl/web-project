@@ -1,5 +1,18 @@
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
-import { User } from '../api/api.model';
+
+export enum Role {
+  USER = 'user',
+  ADMIN = 'admin',
+  ROOT = 'root',
+}
+
+export interface User {
+  id: number;
+  name: string;
+  email: string;
+  password?: string;
+  role?: Role;
+}
 
 type ProfileState = {
   user: User | null;

@@ -10,7 +10,7 @@ import { RouterLink } from '@angular/router';
 import { injectQueryParam, injectUpdateTitle } from '../utils';
 import { PetsStore, Status } from './pets.store';
 import { injectLoginDialog } from '../auth/login/login.dialog';
-import { ProfileStore } from '../auth/profile.store';
+import { ProfileStore } from '@web/auth';
 
 @Component({
   selector: 'app-pets',
