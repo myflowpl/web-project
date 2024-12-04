@@ -1,5 +1,7 @@
 import {
   ApplicationConfig,
+  inject,
+  PLATFORM_ID,
   provideExperimentalZonelessChangeDetection,
   provideZoneChangeDetection,
 } from '@angular/core';
@@ -25,5 +27,12 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch(), withInterceptorsFromDi()),
     provideAnimationsAsync(),
+    // {
+    //   provide: IS_SERVER,
+    //   useFactory: () => {
+    //     const id = inject(PLATFORM_ID)
+    //     return isPlatformServer(id);
+    //   }
+    // }
   ],
 };

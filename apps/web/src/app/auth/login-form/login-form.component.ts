@@ -21,9 +21,9 @@ export class LoginFormComponent {
   });
 
   constructor() {
-    effect(() => {
-      console.log(this.message());
-    });
+    // effect(() => {
+    //   console.log(this.message());
+    // });
   }
 
   handleLogin() {

@@ -17,16 +17,16 @@ export class HasRoleDirective {
 
   constructor() {
     
-    effect(() => {
+    // effect(() => {
 
-      console.log('PROPS', this.roleName(), this.libHasRole());
+    // //   console.log('PROPS', this.libHasRole());
       
-      if(this.profileStore.user()) {
-        this.containerRef.createEmbeddedView(this.templateRef);
-      } else {
-        this.containerRef.clear();
-      }
-    });
+    //   if(this.profileStore.user()) {
+    //     this.containerRef.createEmbeddedView(this.templateRef);
+    //   } else {
+    //     this.containerRef.clear();
+    //   }
+    // });
 
   }
 }
