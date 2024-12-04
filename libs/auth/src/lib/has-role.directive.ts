@@ -1,4 +1,4 @@
-import { Directive, effect, inject, input, TemplateRef, ViewContainerRef } from '@angular/core';
+import { computed, Directive, effect, inject, input, signal, TemplateRef, ViewContainerRef } from '@angular/core';
 import { ProfileStore } from './profile.store';
 
 @Directive({
@@ -7,7 +7,6 @@ import { ProfileStore } from './profile.store';
 })
 export class HasRoleDirective {
 
-  roleName = input();
   libHasRole = input();
 
   templateRef = inject(TemplateRef);
@@ -15,18 +14,17 @@ export class HasRoleDirective {
 
   profileStore = inject(ProfileStore);
 
+  isVisible = computed(() => !!this.profileStore.user());
+
   constructor() {
-    
-    // effect(() => {
 
-    // //   console.log('PROPS', this.libHasRole());
-      
-    //   if(this.profileStore.user()) {
-    //     this.containerRef.createEmbeddedView(this.templateRef);
-    //   } else {
-    //     this.containerRef.clear();
-    //   }
-    // });
+    effect(() => {
 
+      if(this.isVisible()) {
+        this.containerRef.createEmbeddedView(this.templateRef);
+      } else {
+        this.containerRef.clear();
+      }
+    });
   }
 }
