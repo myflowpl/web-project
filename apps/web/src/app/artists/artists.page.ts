@@ -1,9 +1,9 @@
-import { Component, computed, inject, Injectable, resource, signal } from '@angular/core';
+import { Component, computed, DestroyRef, Directive, effect, inject, Injectable, input, resource, Signal, signal, untracked, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { rxResource } from '@angular/core/rxjs-interop';
+import { rxResource, takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { map, Observable } from 'rxjs';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 export interface Artist {
   id: number;
@@ -18,6 +18,67 @@ export interface ArtistsDto {
 export interface ArtistsResponse {
   artists: Artist[];
   total: number;
+}
+
+export interface DataStore {
+  params: WritableSignal<ArtistsDto>;
+  value: WritableSignal<ArtistsResponse | undefined>;
+}
+
+@Directive({ selector: '[storePaginator]' })
+export class StorePaginatorDirective {
+
+  destroyRef = inject(DestroyRef);
+  paginator = inject(MatPaginator);
+  storePaginator = input.required<DataStore>();
+
+  page = computed(() => this.storePaginator()?.params()?._page | 1);
+  limit = computed(() => this.storePaginator()?.params()?._limit | 50);
+
+  constructor() {
+    
+    effect(() => {
+      const length = this.storePaginator()?.value()?.total || 0;
+      this.paginator.length = length;
+
+      const size = this.storePaginator()?.params()?._limit || 50;
+      this.paginator.pageSize = size;
+    });
+
+
+    this.paginator.page.pipe(
+      map(p => p.pageIndex),
+      takeUntilDestroyed(this.destroyRef),
+    ).subscribe(index => {
+      const params: ArtistsDto = {
+        _limit: 5,
+        _page: index+1,
+      } 
+      this.storePaginator().params.set(params);
+    })
+
+
+    // const pageIndex = toSignal(
+    //   this.paginator.page.pipe(map(p => p.pageIndex)), 
+    //   {initialValue: this.paginator.pageIndex}
+    // );
+
+    // effect(() => {
+    //   const index = pageIndex();
+
+    //   untracked(() => {
+        
+    //     const params: ArtistsDto = {
+    //       _limit: this.limit(),
+    //       _page: index+1,
+    //     } 
+    //     this.storePaginator().params.set(params);
+
+    //   });
+    // })
+
+
+  }
 }
 
 @Injectable({providedIn: 'root'})
@@ -40,7 +101,7 @@ export class ArtistService {
 @Component({
   selector: 'app-artists',
   standalone: true,
-  imports: [CommonModule, MatPaginatorModule],
+  imports: [CommonModule, MatPaginatorModule, StorePaginatorDirective],
   templateUrl: './artists.page.html',
   styleUrl: './artists.page.css',
 })
@@ -57,6 +118,11 @@ export class ArtistsPage {
     request: () => (this.params()),
     loader: ({ request }) => this.service.search(request),
   });
+
+  store = {
+    params: this.params,
+    value: this.artists.value,
+  }
 
   error = computed(() => this.artists.error() as HttpErrorResponse | undefined);
 }

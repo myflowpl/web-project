@@ -10,4 +10,4 @@
     <div class="my-1">{{artist.id}} - {{artist.name}}</div>
 }
     
-<mat-paginator [length]="artists.value()?.total" [pageSize]="params()._limit"></mat-paginator>
+<mat-paginator [storePaginator]="store"></mat-paginator>
