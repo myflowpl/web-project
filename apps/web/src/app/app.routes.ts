@@ -28,4 +28,8 @@ export const routes: Routes = [
     path: 'store',
     loadComponent: () => import('./store/store.page').then((c) => c.StorePage),
   },
+  {
+    path: 'artists',
+    loadComponent: () => import('./artists/artists.page').then((c) => c.ArtistsPage),
+  },
 ];

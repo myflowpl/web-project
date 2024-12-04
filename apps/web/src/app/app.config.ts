@@ -11,6 +11,7 @@ import { routes } from './app.routes';
 import {
   provideClientHydration,
   withEventReplay,
+  withHttpTransferCacheOptions,
 } from '@angular/platform-browser';
 import {
   provideHttpClient,
@@ -24,8 +25,13 @@ export const appConfig: ApplicationConfig = {
     // provideExperimentalZonelessChangeDetection(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideClientHydration(withEventReplay()),
-    provideHttpClient(withFetch(), withInterceptorsFromDi()),
+    provideClientHydration(
+      withEventReplay(),
+      withHttpTransferCacheOptions({
+        filter: (req) => false, // TURN OFF transfer cache server -> client
+      })
+    ),
+    provideHttpClient(withFetch(), withInterceptorsFromDi(), ),
     provideAnimationsAsync(),
     // {
     //   provide: IS_SERVER,
