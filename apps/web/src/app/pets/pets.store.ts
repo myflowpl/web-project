@@ -8,6 +8,7 @@ import {
 } from '@ngrx/signals';
 import { Pet, PetApi } from '../api-client';
 import { computed, inject } from '@angular/core';
+import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import {
   catchError,
@@ -79,3 +80,12 @@ export const PetsStore = signalStore(
 );
 
 export type PetsStore = InstanceType<typeof PetsStore>;
+
+const response = toSignal(
+  pipe(
+    startWith(1),
+    switchMap(),
+    switchMap(),
+    switchMap(),
+  ),
+);

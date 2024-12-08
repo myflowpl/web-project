@@ -1,1 +1,48 @@
 <p>home works!</p>
+
+<button (click)="loadMap()">Load map</button>
+
+<div class="h-[1000px]">
+    <ng-container #mapContainer></ng-container>
+    
+</div>
+
+<!-- @defer (on viewport) {
+    <app-calendar />
+} @placeholder {
+    <div>Loading calendar component....</div>
+} -->
+
+<!-- @defer (on interaction) {
+    <app-calendar />
+} @placeholder {
+    <div>Loading 2 calendar component....</div>
+} -->
+
+<!-- @defer (on timer(5000ms)) {
+    <app-calendar />
+} @placeholder {
+    <div>Loading 2 calendar component....</div>
+} -->
+
+
+<button (click)="isVisible = true">Show Calendar</button>
+
+@defer (when isVisible) {
+    <app-calendar />
+} @placeholder {
+    <div>Loading 2 calendar component....</div>
+}
+
+@defer (on hover(showTrigger); prefetch on idle) {
+    <app-calendar />
+} @placeholder {
+    <div>Loading on tringger calendar component....</div>
+} @loading {
+    <div>Loading calendar</div>
+} @error {
+    <div>Ups calendar loading error</div>
+}
+
+
+<button class="mt-40" #showTrigger>trigger </button>
