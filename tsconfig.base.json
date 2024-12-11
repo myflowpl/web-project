@@ -18,7 +18,8 @@
     "paths": {
       "@web/auth": ["libs/auth/src/index.ts"],
       "@web/home": ["libs/home/src/index.ts"],
-      "@web/pet": ["libs/pet/src/index.ts"]
+      "@web/pet": ["libs/pet/src/index.ts"],
+      "@web/api-client": ["libs/api-client/src/index.ts"]
     },
     "baseUrl": ".",
     "rootDir": "."
