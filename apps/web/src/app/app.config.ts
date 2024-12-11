@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import {
   provideClientHydration,
   withEventReplay,
+  withHttpTransferCacheOptions,
 } from '@angular/platform-browser';
 import { provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/common/http';
 
@@ -12,7 +13,12 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideClientHydration(withEventReplay()),
+    provideClientHydration(
+      withEventReplay(),
+      withHttpTransferCacheOptions({
+        filter: (req) => false,
+      }),
+    ),
     provideHttpClient(
       withFetch(),
       withInterceptorsFromDi(),

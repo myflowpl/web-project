@@ -1,3 +1,23 @@
-<p>pet works!</p>
+<p class="font-bold text-xl">Search Pets ({{status$ | async }})</p>
 
-<pre>{{ pets$ | async | json}}</pre>
+<div class="flex gap-4 my-2">
+
+    <a [routerLink]="['.']" [queryParams]="{ status: 'available'}">Available</a>
+    <a [routerLink]="['.']" [queryParams]="{ status: 'pending'}">Pending</a>
+    <a [routerLink]="['.']" [queryParams]="{ status: 'sold'}">Sold</a>
+</div>
+
+<h2 class="font-bold text-xl">Pets results: <span *ngIf="loader.isLoading">Loading...</span></h2>
+
+@if (loader.error) {
+    <p>ERROR </p>
+}
+
+@for (pet of pets; track $index) {
+    <div>
+        {{pet.id}} - {{pet.name}}
+    </div>
+}
+
+
+<!-- {{pets | json}} -->
