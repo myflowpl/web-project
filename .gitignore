@@ -6,6 +6,7 @@
 /out-tsc
 /api/db.json
 /bazel-out
+.nx 
 
 # Node
 /node_modules
