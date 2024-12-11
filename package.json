@@ -10,7 +10,7 @@
     "serve:ssr:web": "node dist/web/server/server.mjs",
     "api": "node api/db.js && json-server-auth api/db.json -r api/db-routes.json --delay 1000",
     "swagger:donwload": "node download.js https://petstore.swagger.io/v2/swagger.json ./libs/api-licent/src/swagger.json",
-    "swagger:generate": "openapi-generator-cli generate -g typescript-angular -i ./libs/api-licent/src/swagger.json -o ./libs/api-client/src/lib --additional-properties=serviceFileSuffix=.api,serviceSuffix=Api,useSingleRequestParameter=true --type-mapping=set=Array"
+    "swagger:generate": "openapi-generator-cli generate -g typescript-angular -i ./libs/api-licent/src/swagger.json -o ./libs/api-client/src/lib --additional-properties=serviceFileSuffix=.api,serviceSuffix=Api,useSingleRequestParameter=true --type-mappings=set=Array"
   },
   "private": true,
   "dependencies": {

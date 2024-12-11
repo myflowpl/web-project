@@ -1,1 +1,1 @@
-export * from './lib/pet/pet.component';
+export * from './lib/pet.page';
