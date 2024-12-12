@@ -1,7 +1,7 @@
 import { Component, computed, effect, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { PetStatus } from './pet.model';
-import { injectQueryParam, injectUpdateTitle } from './utils';
+import { injectQueryParam, injectUpdateTitle } from '@web/utils';
 import { PetStore } from './pet.store';
 
 @Component({

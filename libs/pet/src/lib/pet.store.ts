@@ -4,7 +4,7 @@ import { patchState, signalStore, withComputed, withHooks, withMethods, withStat
 import { computed, inject } from "@angular/core";
 import { debounceTime, pipe, switchMap, tap } from "rxjs";
 import { rxMethod } from "@ngrx/signals/rxjs-interop";
-import { tapLoader } from "./utils";
+import { tapLoader } from "@web/utils";
 
 export interface PetState {
     pets: Pet[];
