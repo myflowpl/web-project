@@ -1,7 +1,8 @@
-import { Pet } from "@web/api-client";
+import { Pet, PetApi } from "@web/api-client";
 import { ComponentStore } from "@ngrx/component-store";
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { PetStatus } from "./pet.model";
+import { debounceTime, Observable, switchMap, tap } from "rxjs";
 
 export interface PetState {
     pets: Pet[];
@@ -26,6 +27,8 @@ const initialState: PetState = {
 @Injectable()
 export class PetStore extends ComponentStore<PetState> {
 
+    petApi = inject(PetApi);
+
     // selektory
     pets$ = this.select(state => state.pets);
     isLoading$ = this.select(state => state.isLoading);
@@ -48,10 +51,9 @@ export class PetStore extends ComponentStore<PetState> {
 
     // methods
     setSelectedId(selectedId?: number) {
-        const state = this.get();
         this.patchState({
             selectedId
-        })
+        });
     }
 
     setStatus = this.updater((state, status: PetStatus) => ({
@@ -60,5 +62,32 @@ export class PetStore extends ComponentStore<PetState> {
     }));
 
     // effects
+    loadPets = this.effect(() => {
+        return this.status$.pipe(
+            debounceTime(10),
+            switchMap(
+                (status) => this.petApi.findPetsByStatus({status: [status]}).pipe(
+                    tap({
+                        next: (pets) => this.patchState({pets}),
+                        error: (error) => this.patchState({error})
+                    }),
+                )
+            ),
+        );
+    });
 
+    loadStatus = this.effect((status$: Observable<PetStatus>) => {
+        return status$.pipe(
+            debounceTime(10),
+            tap(status => this.setStatus(status)),
+            switchMap(
+                (status) => this.petApi.findPetsByStatus({status: [status]}).pipe(
+                    tap({
+                        next: (pets) => this.patchState({pets}),
+                        error: (error) => this.patchState({error})
+                    }),
+                )
+            ),
+        );
+    });
 }

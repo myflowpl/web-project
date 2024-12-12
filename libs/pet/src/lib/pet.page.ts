@@ -21,7 +21,12 @@ export class PetPage {
   store = inject(PetStore);
   
   constructor() {
-    this.store.setStatus(this.status$);
+    // this.store.setStatus(this.status$);
+
+    // this.store.loadStatus('pending');
+    // this.store.loadStatus('sold');
+
+    this.store.loadStatus(this.status$);
   }
 
 }
