@@ -20,6 +20,7 @@
       "@web/auth": ["libs/auth/src/index.ts"],
       "@web/home": ["libs/home/src/index.ts"],
       "@web/pet": ["libs/pet/src/index.ts"],
+      "@web/plugins": ["libs/plugins/src/index.ts"],
       "@web/utils": ["libs/utils/src/index.ts"]
     },
     "baseUrl": ".",
