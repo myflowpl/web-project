@@ -2,7 +2,7 @@ import { Pet, PetApi } from "@web/api-client";
 import { ComponentStore } from "@ngrx/component-store";
 import { inject, Injectable, PLATFORM_ID } from "@angular/core";
 import { PetStatus } from "./pet.model";
-import { BehaviorSubject, catchError, combineLatest, debounceTime, EMPTY, interval, map, Observable, of, switchMap, tap } from "rxjs";
+import { BehaviorSubject, catchError, combineLatest, debounceTime, EMPTY, interval, map, merge, Observable, of, Subject, switchMap, tap } from "rxjs";
 import { injectIsServer, tapStoreLoader } from "./utils";
 import { isPlatformServer } from "@angular/common";
 
@@ -27,7 +27,12 @@ export class PetStore extends ComponentStore<PetState> {
 
     petApi = inject(PetApi);
 
-    private reload$ = injectIsServer() ? of(1) : interval(5000);
+    private reload$$ = new Subject();
+
+    private reload$ = merge(
+        injectIsServer() ? of(1) : interval(5000),
+        this.reload$$
+    );
 
     // selektory
     pets$ = this.select(state => state.pets);
@@ -51,7 +56,7 @@ export class PetStore extends ComponentStore<PetState> {
 
     // methods
     reload() {
-        // this.reload$.next(undefined);
+        this.reload$$.next(undefined);
     }
     setSelectedId(selectedId?: number) {
         this.patchState({

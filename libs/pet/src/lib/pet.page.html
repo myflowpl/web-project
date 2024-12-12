@@ -7,7 +7,16 @@
     <a [routerLink]="['.']" [queryParams]="{ status: 'sold'}">Sold</a>
 </div>
 
-<h2 class="font-bold text-xl">Pets results: <span *ngIf="store.isLoading$ | async">Loading...</span></h2>
+<h2 class="font-bold text-xl">
+    Pets results: 
+    @if(store.isLoading$ | async) {
+        <span>Loading...</span>
+    }
+    @else {
+        <span (click)="store.reload()">RELOAD</span>
+    }
+
+</h2>
 
 @if (store.error$ | async; as error) {
     <p>ERROR: {{error.message}} </p>
