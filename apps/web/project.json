@@ -16,7 +16,9 @@
         "outputPath": "dist/apps/web",
         "index": "apps/web/src/index.html",
         "browser": "apps/web/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js"
+        ],
         "tsConfig": "apps/web/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
@@ -25,7 +27,10 @@
             "input": "apps/web/public"
           }
         ],
-        "styles": ["apps/web/src/styles.scss"],
+        "styles": [
+          "@angular/material/prebuilt-themes/azure-blue.css",
+          "apps/web/src/styles.scss"
+        ],
         "scripts": [],
         "server": "apps/web/src/main.server.ts",
         "outputMode": "server",
@@ -75,7 +80,10 @@
     "test": {
       "executor": "@angular-devkit/build-angular:karma",
       "options": {
-        "polyfills": ["zone.js", "zone.js/testing"],
+        "polyfills": [
+          "zone.js",
+          "zone.js/testing"
+        ],
         "tsConfig": "apps/web/tsconfig.spec.json",
         "inlineStyleLanguage": "scss",
         "assets": [
@@ -84,7 +92,10 @@
             "input": "apps/web/public"
           }
         ],
-        "styles": ["apps/web/src/styles.scss"],
+        "styles": [
+          "@angular/material/prebuilt-themes/azure-blue.css",
+          "apps/web/src/styles.scss"
+        ],
         "scripts": []
       }
     }
