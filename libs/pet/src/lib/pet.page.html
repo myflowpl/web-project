@@ -1,4 +1,4 @@
-<p class="font-bold text-xl">Search Pets ({{store.status$ | async }})</p>
+<p class="font-bold text-xl">Search Pets ({{store.status() }})</p>
 
 <div class="flex gap-4 my-2">
 
@@ -9,7 +9,7 @@
 
 <h2 class="font-bold text-xl">
     Pets results: 
-    @if(store.isLoading$ | async) {
+    @if(store.isLoading()) {
         <span>Loading...</span>
     }
     @else {
@@ -18,11 +18,11 @@
 
 </h2>
 
-@if (store.error$ | async; as error) {
+@if (store.error(); as error) {
     <p>ERROR: {{error.message}} </p>
 }
 
-@for (pet of store.pets$ | async; track $index) {
+@for (pet of store.pets(); track $index) {
     <div (click)="store.setSelectedId(pet.id)">
         {{pet.id}} - {{pet.name}}
     </div>
@@ -30,11 +30,11 @@
 
 <h2>Selected Pet</h2>
 
-@if (store.selectedPet$ | async; as pet) {
+@if (store.selectedPet(); as pet) {
     <p>{{pet.name}}</p>
 }
 
-@if (store.details$ | async; as details) {
+@if (store.details(); as details) {
     <h2>DETAILS</h2>
     <p>{{details.name}}</p>
 }

@@ -1,8 +1,9 @@
 import { isPlatformServer } from "@angular/common";
 import { DestroyRef, inject, PLATFORM_ID } from "@angular/core";
-import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
+import { takeUntilDestroyed, toSignal } from "@angular/core/rxjs-interop";
 import { ActivatedRoute } from "@angular/router";
 import { ComponentStore } from "@ngrx/component-store";
+import { patchState } from "@ngrx/signals";
 import { catchError, EMPTY, map, pipe, tap } from "rxjs"
 
 export function injectLoader() {
@@ -40,6 +41,20 @@ export function injectQueryParam$<T = String>(name: string, defaultValue?: T) {
     );
 }
 
+export function injectQueryParam<T = String>(name: string, defaultValue?: T) {
+    
+    const route = inject(ActivatedRoute);
+
+    const value$ = route.queryParamMap.pipe(
+        map(params => (params.get(name) || defaultValue || '') as T),
+    );
+
+    const initialValue = (route.snapshot.queryParamMap.get(name) || defaultValue || '') as T;
+
+    return toSignal(value$, { initialValue });
+}
+
+
 export interface LoadingState {
     isLoading: boolean;
     error: any;
@@ -53,6 +68,19 @@ export function tapStoreLoader<T>(store: ComponentStore<any>, next: (v: T) => vo
             next,
             error: (error) => store.patchState( { error }),
             finalize: () => store.patchState( { isLoading: false }),
+        }),
+        catchError(() => EMPTY),
+    );
+}
+
+export function tapLoader<T>(store: any, next: (v: T) => void ) {
+
+    return pipe(
+        tap({
+            subscribe: () => patchState(store, { isLoading: true, error: null }),
+            next,
+            error: (error) => patchState(store, { error }),
+            finalize: () => patchState(store, { isLoading: false }),
         }),
         catchError(() => EMPTY),
     );

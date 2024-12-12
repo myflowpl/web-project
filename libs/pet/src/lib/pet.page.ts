@@ -1,13 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { AsyncPipe, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { PetStatus } from './pet.model';
-import { injectQueryParam$ } from './utils';
-import { PetStore } from './pet.cstore';
+import { injectQueryParam } from './utils';
+import { PetStore } from './pet.store';
 
 @Component({
   selector: 'lib-pet',
-  imports: [AsyncPipe, RouterLink],
+  imports: [RouterLink],
   templateUrl: './pet.page.html',
   styleUrl: './pet.page.scss',
   providers: [
@@ -16,17 +15,13 @@ import { PetStore } from './pet.cstore';
 })
 export class PetPage {
 
-  status$ = injectQueryParam$<PetStatus>('status', 'available');
+  status = injectQueryParam<PetStatus>('status', 'available');
 
   store = inject(PetStore);
   
   constructor() {
-    // this.store.setStatus(this.status$);
 
-    // this.store.loadStatus('pending');
-    // this.store.loadStatus('sold');
-
-    this.store.loadStatus(this.status$);
+    this.store.loadStatus(this.status);
   }
 
 }
