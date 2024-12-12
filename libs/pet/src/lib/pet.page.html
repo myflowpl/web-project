@@ -10,7 +10,7 @@
 <h2 class="font-bold text-xl">Pets results: <span *ngIf="loader.isLoading">Loading...</span></h2>
 
 @if (loader.error) {
-    <p>ERROR </p>
+    <p>ERROR: {{loader.error.message}} </p>
 }
 
 @for (pet of pets; track $index) {
