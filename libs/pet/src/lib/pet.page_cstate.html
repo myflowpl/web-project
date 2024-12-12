@@ -1,0 +1,41 @@
+<p class="font-bold text-xl">Search Pets ({{store.status$ | async }})</p>
+
+<div class="flex gap-4 my-2">
+
+    <a [routerLink]="['.']" [queryParams]="{ status: 'available'}">Available</a>
+    <a [routerLink]="['.']" [queryParams]="{ status: 'pending'}">Pending</a>
+    <a [routerLink]="['.']" [queryParams]="{ status: 'sold'}">Sold</a>
+</div>
+
+<h2 class="font-bold text-xl">
+    Pets results: 
+    @if(store.isLoading$ | async) {
+        <span>Loading...</span>
+    }
+    @else {
+        <span (click)="store.reload()">RELOAD</span>
+    }
+
+</h2>
+
+@if (store.error$ | async; as error) {
+    <p>ERROR: {{error.message}} </p>
+}
+
+@for (pet of store.pets$ | async; track $index) {
+    <div (click)="store.setSelectedId(pet.id)">
+        {{pet.id}} - {{pet.name}}
+    </div>
+}
+
+<h2>Selected Pet</h2>
+
+@if (store.selectedPet$ | async; as pet) {
+    <p>{{pet.name}}</p>
+}
+
+@if (store.details$ | async; as details) {
+    <h2>DETAILS</h2>
+    <p>{{details.name}}</p>
+}
+<!-- {{pets | json}} -->

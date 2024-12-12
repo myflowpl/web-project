@@ -8,8 +8,7 @@ import { PetStore } from './pet.cstore';
 @Component({
   selector: 'lib-pet',
   imports: [AsyncPipe, RouterLink],
-  templateUrl: './pet.page.html',
-  styleUrl: './pet.page.scss',
+  templateUrl: './pet.page_cstate.html',
   providers: [
     PetStore,
   ],
