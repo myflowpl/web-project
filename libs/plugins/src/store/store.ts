@@ -12,11 +12,13 @@ export async function storeGenerator(
   tree: Tree,
   options: StoreGeneratorSchema
 ) {
-  const projectRoot = `${options.name}`;
   const nameParts = options.name.split('/');
   const name = strings.dasherize(nameParts[nameParts.length-1])
+  nameParts.pop();
+  const projectRoot = nameParts.join('/');
   
   const vars = {
+    projectRoot,
     name: name,
     nameClass: `${strings.classify(name)}`,
     className: `${strings.classify(name)}Store`,
