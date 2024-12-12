@@ -3,9 +3,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AsyncPipe, JsonPipe, NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Pet, PetApi } from '@web/api-client';
-import { map, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, startWith, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { PetStatus } from './pet.model';
-import { injectLoader } from './utils';
+import { injectLoader, injectQueryParam$ } from './utils';
 
 @Injectable()
 class TestApi {}
@@ -24,19 +24,23 @@ export class PetPage {
 
   destroyRef = inject(DestroyRef);
 
-  route = inject(ActivatedRoute);
-
+  
   petApi = inject(PetApi);
-
+  
   loader = injectLoader();
+  
+  reload$ = new BehaviorSubject<any>(true);
+  
+  status$ = injectQueryParam$<PetStatus>('status', 'available');
+  
+  // route = inject(ActivatedRoute);
+  // status$ = this.route.queryParams.pipe(
+  //   map(params => (params['status'] || 'available') as PetStatus),
+  // );
 
-  status$ = this.route.queryParams.pipe(
-    map(params => (params['status'] || 'available') as PetStatus),
-  );
-
-  pets$ = this.status$.pipe(
+  pets$ = combineLatest([this.status$, this.reload$]).pipe(
     switchMap(
-      (status) => this.petApi.findPetsByStatus({
+      ([status]) => this.petApi.findPetsByStatus({
         status: [status],
       }).pipe(
         this.loader.tap()
