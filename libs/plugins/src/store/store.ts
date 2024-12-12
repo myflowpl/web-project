@@ -6,19 +6,27 @@ import {
 } from '@nx/devkit';
 import * as path from 'path';
 import { StoreGeneratorSchema } from './schema';
+import { strings } from '@angular-devkit/core';
 
 export async function storeGenerator(
   tree: Tree,
   options: StoreGeneratorSchema
 ) {
-  const projectRoot = `libs/${options.name}`;
-  addProjectConfiguration(tree, options.name, {
-    root: projectRoot,
-    projectType: 'library',
-    sourceRoot: `${projectRoot}/src`,
-    targets: {},
-  });
-  generateFiles(tree, path.join(__dirname, 'files'), projectRoot, options);
+  const projectRoot = `${options.name}`;
+  const nameParts = options.name.split('/');
+  const name = strings.dasherize(nameParts[nameParts.length-1])
+  
+  const vars = {
+    name: name,
+    nameClass: `${strings.classify(name)}`,
+    className: `${strings.classify(name)}Store`,
+    stateName: `${strings.classify(name)}State`,
+    fileName: `${name}.store`,
+  }
+  // console.log('VARS', vars);
+
+  generateFiles(tree, path.join(__dirname, 'files'), projectRoot, vars);
+
   await formatFiles(tree);
 }
 
