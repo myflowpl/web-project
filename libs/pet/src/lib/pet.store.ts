@@ -2,7 +2,7 @@ import { Pet, PetApi } from "@web/api-client";
 import { PetStatus } from "./pet.model";
 import { patchState, signalStore, withComputed, withHooks, withMethods, withState } from "@ngrx/signals";
 import { computed, inject } from "@angular/core";
-import { pipe, switchMap } from "rxjs";
+import { debounceTime, pipe, switchMap, tap } from "rxjs";
 import { rxMethod } from "@ngrx/signals/rxjs-interop";
 import { tapLoader } from "./utils";
 
@@ -37,6 +37,12 @@ export const PetStore = signalStore(
             const id = store.selectedId();
             return store.pets().find(pet => pet.id === id);
         }),
+        title: computed(() => {
+            const status = store.status();
+            const count = store.pets().length;
+
+            return `Znaleziono ${count} ${status} zwierzaków`;
+        }),
     })),
 
     // metody
@@ -46,6 +52,8 @@ export const PetStore = signalStore(
             patchState(store, { selectedId })
         },
         loadStatus: rxMethod<PetStatus>(pipe(
+            debounceTime(10),
+            tap(status => patchState(store, { status })),
             switchMap(
                 status => petApi.findPetsByStatus({status: [status]}).pipe(
                     tapLoader(store, (pets) => patchState(store, { pets }))

@@ -1,9 +1,10 @@
 import { isPlatformServer } from "@angular/common";
 import { DestroyRef, inject, PLATFORM_ID } from "@angular/core";
 import { takeUntilDestroyed, toSignal } from "@angular/core/rxjs-interop";
+import { Title } from "@angular/platform-browser";
 import { ActivatedRoute } from "@angular/router";
 import { ComponentStore } from "@ngrx/component-store";
-import { patchState } from "@ngrx/signals";
+import { patchState, signalMethod } from "@ngrx/signals";
 import { catchError, EMPTY, map, pipe, tap } from "rxjs"
 
 export function injectLoader() {
@@ -88,4 +89,21 @@ export function tapLoader<T>(store: any, next: (v: T) => void ) {
 
 export function injectIsServer() {
     return isPlatformServer(inject(PLATFORM_ID));
+}
+
+export function injectUpdateTitle() {
+
+    const titleService = inject(Title);
+
+    const backup = titleService.getTitle();
+
+    const destroyRef = inject(DestroyRef);
+
+    destroyRef.onDestroy(() => {
+        titleService.setTitle(backup);
+    });
+
+    return signalMethod((title: string) => {
+        titleService.setTitle(title);
+    });
 }

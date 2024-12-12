@@ -7,6 +7,10 @@
     <a [routerLink]="['.']" [queryParams]="{ status: 'sold'}">Sold</a>
 </div>
 
+<button (click)="update()">
+    UPDATE COUNT ({{count()}})
+</button>
+
 <h2 class="font-bold text-xl">
     Pets results: 
     @if(store.isLoading()) {
