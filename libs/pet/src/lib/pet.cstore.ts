@@ -56,30 +56,30 @@ export class PetStore extends ComponentStore<PetState> {
         });
     }
 
-    setStatus = this.updater((state, status: PetStatus) => ({
-        ...state,
-        status,
-    }));
+    // setStatus = this.updater((state, status: PetStatus) => ({
+    //     ...state,
+    //     status,
+    // }));
 
-    // effects
-    loadPets = this.effect(() => {
-        return this.status$.pipe(
-            debounceTime(10),
-            switchMap(
-                (status) => this.petApi.findPetsByStatus({status: [status]}).pipe(
-                    tap({
-                        next: (pets) => this.patchState({pets}),
-                        error: (error) => this.patchState({error})
-                    }),
-                )
-            ),
-        );
-    });
+    // // effects
+    // loadPets = this.effect(() => {
+    //     return this.status$.pipe(
+    //         debounceTime(10),
+    //         switchMap(
+    //             (status) => this.petApi.findPetsByStatus({status: [status]}).pipe(
+    //                 tap({
+    //                     next: (pets) => this.patchState({pets}),
+    //                     error: (error) => this.patchState({error})
+    //                 }),
+    //             )
+    //         ),
+    //     );
+    // });
 
     loadStatus = this.effect((status$: Observable<PetStatus>) => {
         return status$.pipe(
             debounceTime(10),
-            tap(status => this.setStatus(status)),
+            tap(status => this.patchState({ status })),
             switchMap(
                 (status) => this.petApi.findPetsByStatus({status: [status]}).pipe(
                     tap({
