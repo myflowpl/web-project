@@ -7,7 +7,7 @@
 /api/db.json
 /bazel-out
 .nx 
-!storage/.gitkeep
+!storage/.storage
 storage
 *.env
 
