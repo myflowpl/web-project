@@ -11,12 +11,12 @@
     }
   ],
   "compilerOptions": {
-    "esModuleInterop": true,
+    "esModuleInterop": false,
     "moduleResolution": "node",
     "strict": false,
     "noImplicitOverride": false,
     "noPropertyAccessFromIndexSignature": false,
     "noImplicitReturns": false,
-    "noFallthroughCasesInSwitch": false,
+    "noFallthroughCasesInSwitch": false
   }
 }
