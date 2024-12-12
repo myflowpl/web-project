@@ -7,21 +7,17 @@
     <a [routerLink]="['.']" [queryParams]="{ status: 'sold'}">Sold</a>
 </div>
 
-<h2 class="font-bold text-xl">Pets results: <span *ngIf="store.isLoading$ | async">Loading...</span></h2>
+<h2 class="font-bold text-xl">Pets results: <span *ngIf="loader.isLoading">Loading...</span></h2>
 
-@if (store.error$ | async; as error) {
-    <p>ERROR: {{error.message}} </p>
+@if (loader.error) {
+    <p>ERROR: {{loader.error.message}} </p>
 }
 
-@for (pet of store.pets$ | async; track $index) {
-    <div (click)="store.setSelectedId(pet.id)">
+@for (pet of pets; track $index) {
+    <div>
         {{pet.id}} - {{pet.name}}
     </div>
 }
 
-<h2>Selected Pet</h2>
 
-@if (store.selectedPet$ | async; as pet) {
-    <p>{{pet.name}}</p>
-}
 <!-- {{pets | json}} -->

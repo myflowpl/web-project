@@ -6,90 +6,25 @@ import { Pet, PetApi } from '@web/api-client';
 import { BehaviorSubject, combineLatest, map, startWith, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { PetStatus } from './pet.model';
 import { injectLoader, injectQueryParam$ } from './utils';
-
-@Injectable()
-class TestApi {}
+import { PetStore } from './pet.cstore';
 
 @Component({
   selector: 'lib-pet',
-  imports: [AsyncPipe, RouterLink, JsonPipe, NgFor, NgIf],
+  imports: [AsyncPipe, RouterLink, NgIf],
   templateUrl: './pet.page.html',
   styleUrl: './pet.page.scss',
   providers: [
-    TestApi,
+    PetStore,
   ],
 })
 export class PetPage {
-  testApi = inject(TestApi);
 
-  destroyRef = inject(DestroyRef);
-
-  
-  petApi = inject(PetApi);
-  
-  loader = injectLoader();
-  
-  reload$ = new BehaviorSubject<any>(true);
-  
   status$ = injectQueryParam$<PetStatus>('status', 'available');
+
+  store = inject(PetStore);
   
-  // route = inject(ActivatedRoute);
-  // status$ = this.route.queryParams.pipe(
-  //   map(params => (params['status'] || 'available') as PetStatus),
-  // );
-
-  pets$ = combineLatest([this.status$, this.reload$]).pipe(
-    switchMap(
-      ([status]) => this.petApi.findPetsByStatus({
-        status: [status],
-      }).pipe(
-        this.loader.tap()
-      )
-    ),
-    map(response => response),
-    takeUntilDestroyed(this.destroyRef),
-  );
-
-  pets: Pet[] = [];
-
   constructor() {
-    this.pets$.subscribe(pets => this.pets = pets)
-  }
-
-
-  // ngOnDestroy(): void {
-  //     // this.sub.unsubscribe();
-  //     this.destroy$.next(true);
-  // }
-
-}
-
-class User {
-  name: string = 'Piotr';
-
-  getName() {
-    return this.name;
-  }
-
-  constructor(name: string) {
-    // async operation
-    this.name = 'Piotr po zmianie: '+name
-  }
-}
-
-
-const user = new User('costam');
-const user2 = new User('costam');
-
-class Admin extends User {
-
-  adminName = '';
-
-  constructor() {
-    super('jakostam')
+    
   }
 
 }
-
-const admin = new Admin();
-const admin2 = new Admin();
