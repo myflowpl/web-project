@@ -33,4 +33,9 @@
 @if (store.selectedPet$ | async; as pet) {
     <p>{{pet.name}}</p>
 }
+
+@if (store.details$ | async; as details) {
+    <h2>DETAILS</h2>
+    <p>{{details.name}}</p>
+}
 <!-- {{pets | json}} -->

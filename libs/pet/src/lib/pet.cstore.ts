@@ -1,8 +1,8 @@
-import { Pet, PetApi } from "@web/api-client";
+import { Pet, PetApi, User } from "@web/api-client";
 import { ComponentStore } from "@ngrx/component-store";
 import { inject, Injectable, PLATFORM_ID } from "@angular/core";
 import { PetStatus } from "./pet.model";
-import { BehaviorSubject, catchError, combineLatest, debounceTime, EMPTY, interval, map, merge, Observable, of, Subject, switchMap, tap } from "rxjs";
+import { BehaviorSubject, catchError, combineLatest, debounceTime, EMPTY, filter, interval, map, merge, Observable, of, Subject, switchMap, tap } from "rxjs";
 import { injectIsServer, tapStoreLoader } from "./utils";
 import { isPlatformServer } from "@angular/common";
 
@@ -13,6 +13,8 @@ export interface PetState {
     status: PetStatus;
 
     selectedId?: number;
+
+    details?: Pet
 }
 
 const initialState: PetState = {
@@ -39,6 +41,7 @@ export class PetStore extends ComponentStore<PetState> {
     isLoading$ = this.select(state => state.isLoading);
     error$ = this.select(state => state.error);
     status$ = this.select(state => state.status);
+    details$ = this.select(state => state.details);
 
     selectedId$ = this.select(state => state.selectedId);
 
@@ -99,5 +102,23 @@ export class PetStore extends ComponentStore<PetState> {
     //         ),
     //     );
     // });
+
+    loadPetDetails = this.effect(() => {
+        return this.selectedId$.pipe(
+            debounceTime(10),
+            tap(() => this.patchState({details: undefined})),
+            filter(petId => !!petId),
+            map(id => id as number),
+            switchMap(
+                (petId) => this.petApi.getPetById({ petId }).pipe(
+                    tap({
+                        next: (details) => this.patchState({details}),
+                        error: (error) => this.patchState({error})
+                    }),
+                    catchError(error => EMPTY),
+                )
+            ),
+        );
+    });
 
 }
