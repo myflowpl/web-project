@@ -1,0 +1,13 @@
+export * from './app.api';
+import { AppApi } from './app.api';
+export * from './auth.api';
+import { AuthApi } from './auth.api';
+export * from './contacts.api';
+import { ContactsApi } from './contacts.api';
+export * from './default.api';
+import { DefaultApi } from './default.api';
+export * from './photos.api';
+import { PhotosApi } from './photos.api';
+export * from './usersAdmin.api';
+import { UsersAdminApi } from './usersAdmin.api';
+export const APIS = [AppApi, AuthApi, ContactsApi, DefaultApi, PhotosApi, UsersAdminApi];
