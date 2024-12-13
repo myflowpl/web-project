@@ -1,10 +1,22 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { ArtistsStore } from './artists.store';
+import { StorePaginatorDirective } from '@web/utils';
 
 @Component({
   selector: 'lib-artists',
-  imports: [CommonModule],
+  imports: [
+    MatPaginatorModule,
+    StorePaginatorDirective,
+  ],
   templateUrl: './artists.page.html',
   styleUrl: './artists.page.scss',
+  providers: [
+    ArtistsStore,
+  ],
 })
-export class ArtistsPage {}
+export class ArtistsPage {
+
+  store = inject(ArtistsStore);
+  c = this.store.length()
+}

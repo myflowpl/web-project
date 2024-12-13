@@ -1,1 +1,18 @@
-<p>artists works!</p>
+
+<h2>
+    ARTISTS
+
+    @if (store.isLoading()) {
+        <span>Loading...</span>
+    }
+</h2>
+
+@for (artist of store.artists(); track $index) {
+    <div>{{artist.name}}</div>
+}
+
+@if (store.error()) {
+    <div>ERROR</div>
+}
+
+<mat-paginator [storePaginator]="store"></mat-paginator>

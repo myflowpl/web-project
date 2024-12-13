@@ -28,7 +28,7 @@ export class ArtistsService {
         return this.http.get<Artist[]>(this.baseUrl+'/artists', {observe: 'response', params: params as any}).pipe(
             map(res => ({
                 artists: res.body || [],
-                length: parseInt(res.headers.get('content-leght') || '0', 10),
+                length: parseInt(res.headers.get('content-length') || '0', 10),
             })),
         );
     }

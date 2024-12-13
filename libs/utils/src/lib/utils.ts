@@ -1,6 +1,7 @@
 import { isPlatformServer } from "@angular/common";
-import { DestroyRef, inject, PLATFORM_ID } from "@angular/core";
+import { DestroyRef, Directive, effect, inject, input, PLATFORM_ID } from "@angular/core";
 import { takeUntilDestroyed, toSignal } from "@angular/core/rxjs-interop";
+import { MatPaginator } from "@angular/material/paginator";
 import { Title } from "@angular/platform-browser";
 import { ActivatedRoute } from "@angular/router";
 import { ComponentStore } from "@ngrx/component-store";
@@ -106,4 +107,42 @@ export function injectUpdateTitle() {
     return signalMethod((title: string) => {
         titleService.setTitle(title);
     });
+}
+
+export interface DataStoreParams {
+    _page: number;
+    _limit: number;
+}
+export interface DataStore {
+    patchParams: (params: Partial<DataStoreParams>) => void;
+    length: () => number,
+    limit: () => number,
+}
+
+@Directive({
+    selector: '[storePaginator]'
+})
+export class StorePaginatorDirective {
+    storePaginator = input.required();
+    paginator = inject(MatPaginator);
+
+    constructor() {
+        
+        effect(() => {
+            const store = this.storePaginator() as DataStore;
+            this.paginator.length = store.length();
+        });
+        
+        effect(() => {
+            const store = this.storePaginator() as DataStore;
+            this.paginator.pageSize = store.limit();
+        });
+
+        this.paginator.page.subscribe(event => {
+            const store = this.storePaginator() as DataStore;
+            store.patchParams({
+                _page: event.pageIndex+1
+            })
+        })
+    }
 }
