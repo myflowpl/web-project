@@ -1,1 +1,43 @@
-<p>home works!</p>
+<p (click)="renderMap()">HOME</p>
+
+<ng-container #mapContainer />
+
+<button (click)="isVisible = true">Show callendar</button>
+
+@defer (when isVisible) {
+    <lib-calendar></lib-calendar>
+} @placeholder {
+    <div>calendar will be redered here</div>
+} @loading {
+    <p>Loading...</p>
+} @error {
+    <p>Calendar loading ERROR</p>
+}
+
+
+@defer (on hover; prefetch on idle) {
+    <lib-calendar></lib-calendar>
+} @placeholder {
+    <p>Calendar on hover</p>
+}
+
+
+@defer (on interaction; prefetch on idle) {
+    <lib-calendar></lib-calendar>
+} @placeholder {
+    <p>Calendar on interaction</p>
+}
+
+@defer (on timer(5000ms)) {
+    <lib-calendar></lib-calendar>
+} @placeholder {
+    <p>Calendar on 5s</p>
+}
+
+<div class="h-[1300px]"></div>
+
+@defer (on viewport) {
+    <lib-calendar></lib-calendar>
+} @placeholder {
+    <p>Calendar on vieport</p>
+}
