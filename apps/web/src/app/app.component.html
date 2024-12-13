@@ -8,10 +8,12 @@
     
     <a [routerLink]="['/pet']">Pet</a>
 
+    <a [routerLink]="['/contact']" *hasRole="'admin'">Contact</a>
+
     <span class="flex-auto"></span>
 
     @if(profileStore.user(); as user) {
-      <span>{{user.email}}</span>
+      <span (click)="loginDialog.open()">{{user.email}}</span>
       <button (click)="profileStore.logout()">logout</button>
     }
     @else {

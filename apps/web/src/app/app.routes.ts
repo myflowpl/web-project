@@ -27,5 +27,9 @@ export const routes: Routes = [
     {
         path: 'login',
         loadComponent: () => import('@web/auth').then(m => m.LoginPage)
+    },
+    {
+        path: 'contact',
+        loadComponent: () => import('@web/auth').then(m => m.LoginPage)
     }
 ];
