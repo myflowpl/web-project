@@ -29,7 +29,7 @@ export const routes: Routes = [
         loadComponent: () => import('@web/auth').then(m => m.LoginPage)
     },
     {
-        path: 'contact',
-        loadComponent: () => import('@web/auth').then(m => m.LoginPage)
+        path: 'artists',
+        loadComponent: () => import('@web/home').then(m => m.ArtistsPage)
     }
 ];

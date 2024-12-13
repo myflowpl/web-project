@@ -1,7 +1,9 @@
-import { Component, NgModule, ViewChild, viewChild, ViewContainerRef } from '@angular/core';
+import { Component, inject, NgModule, signal, ViewChild, viewChild, ViewContainerRef } from '@angular/core';
 import { MapComponent } from '../map.component';
 import { CalendarComponent } from '../calendar.component';
 import { VideoGameComponent } from '../video-game.component';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { ArtistsService } from '../artists.service';
 // import { CommonModule } from '@angular/common';
 
 @Component({
@@ -17,6 +19,24 @@ import { VideoGameComponent } from '../video-game.component';
   }
 })
 export class HomeComponent {
+
+  limit = signal(3);
+  page = signal(1);
+
+  artistsService = inject(ArtistsService);
+
+  artists = rxResource({
+    request: () => ({
+      _limit: this.limit(),
+      _page: this.page(),
+    }),
+    loader: ({request}) => this.artistsService.search(request)
+  });
+
+  nextPage() {
+    this.page.update(page => page+1);
+  }
+
 
   isVisible = false;
 

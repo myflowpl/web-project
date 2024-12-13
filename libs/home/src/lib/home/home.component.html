@@ -1,5 +1,22 @@
 <p (click)="renderMap()">HOME</p>
 
+<h2>ARTISTS page {{page()}} <span (click)="nextPage()">next</span></h2>
+
+@for (artist of artists.value()?.artists; track $index) {
+    <div>{{artist.name}}</div>
+}
+
+@if (artists.isLoading()) {
+    <div>Loading...</div>
+}
+
+@if (artists.error()) {
+    <div>ERROR</div>
+}
+
+
+<div class="h-[1300px]"></div>
+<h2> DEFFER VIEWS</h2>
 <ng-container #mapContainer />
 
 <button (click)="isVisible = true">Show callendar</button>
