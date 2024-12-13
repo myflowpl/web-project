@@ -1,0 +1,66 @@
+import { Component, effect, inject, Injector, viewChild } from '@angular/core';
+import { catchError, map, Observable, of, switchMap, throwError } from 'rxjs';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
+
+export interface <%= dataClassName %> {
+  message?: string;
+}
+
+export interface <%= resultClassName %> {
+  message?: string;
+}
+
+export function <%= injectFnName %>() {
+  const matDialog = inject(MatDialog);
+  const injector = inject(Injector);
+
+  return {
+    open(data: <%= dataClassName %> = {}): Observable<<%= resultClassName %>> {
+      const dialogRef = matDialog.open(<%= componentClassName %>, {
+        injector,
+        data,
+      });
+
+      return dialogRef
+        .afterClosed()
+        .pipe(
+          switchMap((profile) =>
+            profile
+              ? of(profile)
+              : throwError(() => new Error('Login anulowany'))
+          )
+        );
+    },
+
+    guard(data: <%= dataClassName %> = {}): Observable<boolean> {
+      return this.open(data).pipe(
+        map((profileStore) => true),
+        catchError(() => of(false))
+      );
+    },
+  };
+}
+
+@Component({
+  selector: 'app-login',
+  imports: [MatDialogTitle, MatDialogContent],
+  templateUrl: './login.dialog.html',
+  styleUrl: './login.dialog.scss',
+})
+export class <%= componentClassName %> {
+
+  data = inject<<%= dataClassName %>>(MAT_DIALOG_DATA);
+  dialogRef = inject(MatDialogRef);
+
+  constructor() {}
+
+  handleClose() {
+    this.dialogRef.close();
+  }
+}
