@@ -20,7 +20,7 @@ export class PetPage {
 
   store = inject(PetStore);
 
-  updateTitle = injectUpdateTitle();
+  connectUpdateTitle = injectUpdateTitle();
 
   petFormDialog = injectPetFormDialog();
   
@@ -37,9 +37,11 @@ export class PetPage {
 
   constructor() {
 
-    this.store.loadStatus(this.status);
+    this.store.connectLoadStatus(this.status);
 
-    this.updateTitle(this.store.title);
+    this.connectUpdateTitle(this.store.title);
+
+    effect(() => this.connectUpdateTitle(this.store.title()))
 
     const count = this.count;
 
@@ -50,6 +52,10 @@ export class PetPage {
     const title = computed(() => {
       // console.log('COMPUTED');
       const c = count();
+      if(c > 3) {
+        const status = this.status()
+        console.log(status);
+      }
       const label = labels()[c] || 'to big'
       return `Liczba rekordow to: ${label}`
     })

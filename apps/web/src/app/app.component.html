@@ -10,7 +10,13 @@
 
     <span class="flex-auto"></span>
 
-    <a  [routerLink]="['/login']">Login</a>
+    @if(profileStore.user(); as user) {
+      <span>{{user.email}}</span>
+      <button (click)="profileStore.logout()">logout</button>
+    }
+    @else {
+      <a  [routerLink]="['/login']">Login</a>
+    }
   </div>
 
   <div class="py-4 px-4 sm:px-0">

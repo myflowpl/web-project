@@ -52,7 +52,7 @@ export const PetStore = signalStore(
         setSelectedId(selectedId?: number) {
             patchState(store, { selectedId })
         },
-        loadStatus: rxMethod<PetStatus>(pipe(
+        connectLoadStatus: rxMethod<PetStatus>(pipe(
             debounceTime(10),
             tap(status => patchState(store, { status })),
             switchMap(

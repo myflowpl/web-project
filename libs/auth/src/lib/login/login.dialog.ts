@@ -7,6 +7,8 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
+import { LoginFormComponent } from '../login-form.component';
+import { ProfileState, ProfileStore } from '../profile.store';
 
 export interface LoginDialogData {
   message?: string;
@@ -17,9 +19,10 @@ export interface LoginDialogResponse {
 }
 
 export function injectLoginDialog() {
-  
+
   const matDialog = inject(MatDialog);
   const injector = inject(Injector);
+  const profileStore = inject(ProfileStore);
 
   return {
     open(data: LoginDialogData = {}): Observable<LoginDialogResponse> {
@@ -40,6 +43,9 @@ export function injectLoginDialog() {
     },
 
     guard(data: LoginDialogData = {}): Observable<boolean> {
+      if(profileStore.user()) {
+        return of(true);
+      }
       return this.open(data).pipe(
         map((profileStore) => true),
         catchError(() => of(false))
@@ -50,7 +56,11 @@ export function injectLoginDialog() {
 
 @Component({
   selector: 'app-login',
-  imports: [MatDialogTitle, MatDialogContent],
+  imports: [
+    MatDialogTitle, 
+    MatDialogContent, 
+    LoginFormComponent,
+  ],
   templateUrl: './login.dialog.html',
   styleUrl: './login.dialog.scss',
 })
@@ -60,7 +70,7 @@ export class LoginDialog {
 
   constructor() {}
 
-  handleClose() {
-    this.dialogRef.close();
+  handleClose(profile: ProfileStore) {
+    this.dialogRef.close(profile);
   }
 }

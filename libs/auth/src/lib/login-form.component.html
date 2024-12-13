@@ -1,1 +1,13 @@
-<p>login-form works!</p>
+<form [formGroup]="form" (ngSubmit)="handleLogin()" class="flex flex-col gap-2">
+
+    @if (message()) {
+        <p class="text-red-400 py-2">{{message()}}</p>
+    }
+    <label>Email</label>
+    <input formControlName="email" class="p-2 border" />
+
+    <label>Password</label>
+    <input formControlName="password" class="p-2 border" type="password" />
+
+    <button type="submit" class="p-2 border">Login</button>
+</form>

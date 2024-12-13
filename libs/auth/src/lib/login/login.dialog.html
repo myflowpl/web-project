@@ -1,3 +1,8 @@
-<h1 mat-dialog-title>login</h1>
+<h1 mat-dialog-title>Login</h1>
 
-<mat-dialog-content> Content here </mat-dialog-content>
+<mat-dialog-content> 
+    <lib-login-form 
+        message="Login required for this" 
+        (loginSuccess)="handleClose($event)" 
+    />
+</mat-dialog-content>

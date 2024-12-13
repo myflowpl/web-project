@@ -7,7 +7,7 @@ import {
   withMethods,
   withState,
 } from '@ngrx/signals';
-import { debounceTime, pipe, switchMap, tap, of } from 'rxjs';
+import { debounceTime, pipe, switchMap, tap, of, Observable } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { tapLoader } from '@web/utils';
 import { AuthApi, User } from '@web/api';
@@ -38,8 +38,9 @@ export const ProfileStore = signalStore(
 
   // metody
   withMethods((store, authApi = inject(AuthApi)) => ({
-    login(user: any) {
+    login(user: any): Observable<ProfileStore> {
       patchState(store, { user });
+      return of(store as any);
     },
     logout() {
       patchState(store, { user: null });
