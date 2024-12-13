@@ -70,3 +70,5 @@ export const <%= className %> = signalStore(
         },
     }),
 );
+
+export type <%= className %> = InstanceType<typeof <%= className %>>;

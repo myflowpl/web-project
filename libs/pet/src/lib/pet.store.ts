@@ -73,3 +73,5 @@ export const PetStore = signalStore(
         },
     }),
 );
+
+export type PetStore = InstanceType<typeof PetStore>;

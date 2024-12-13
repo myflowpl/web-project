@@ -16,8 +16,8 @@
     "target": "ES2022",
     "module": "ES2022",
     "paths": {
-      "@web/api-client": ["libs/api-client/src/index.ts"],
       "@web/api": ["libs/api-client/src/api/index.ts"],
+      "@web/api-client": ["libs/api-client/src/index.ts"],
       "@web/auth": ["libs/auth/src/index.ts"],
       "@web/home": ["libs/home/src/index.ts"],
       "@web/pet": ["libs/pet/src/index.ts"],

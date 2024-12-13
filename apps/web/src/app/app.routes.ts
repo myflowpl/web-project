@@ -8,8 +8,11 @@ export const routes: Routes = [
     {
         path: 'pet',
         loadComponent: () => import('@web/pet').then(m => m.PetPage),
-        children: [],
-        providers: [],
+        canActivate: [
+
+        ],
+        canMatch: [],
+        canDeactivate: [],
     },
     {
         path: 'login',
