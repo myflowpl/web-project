@@ -1,5 +1,10 @@
 {
   "generators": {
+    "dialog": {
+      "factory": "./src/dialog/generator",
+      "schema": "./src/dialog/schema.json",
+      "description": "Generacja dialogu z angular material i injectable pattern"
+    },
     "store": {
       "factory": "./src/store/store",
       "schema": "./src/store/schema.json",
