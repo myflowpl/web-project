@@ -1,1 +1,12 @@
-<p>home works!</p>
+<h1>
+    {{ title | uppercase }}
+</h1>
+<p>
+    Today is: {{ today | date: 'YYYY-MM-dd' }}
+</p>
+
+<p>
+    User Photo
+</p>
+<img [src]="user | userPhoto:'women'">
+<img [src]="user | userPhoto:'men'">
