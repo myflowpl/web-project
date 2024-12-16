@@ -7,6 +7,8 @@ export const routes: Routes = [
     },
     {
         path: 'contact',
-        loadComponent: () => import('./contact/contact.page').then(m => m.ContactPage)
+        loadComponent: () => import('./contact/contact.page').then(m => m.ContactPage),
+        children: [],
+        providers: [],
     }
 ];

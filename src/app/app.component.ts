@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, effect, viewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from "./layout/footer/footer.component";
 import { HeaderComponent } from "./layout/header/header.component";
@@ -16,4 +16,13 @@ import { HeaderComponent } from "./layout/header/header.component";
 })
 export class AppComponent {
   data = { message: 'hello angular' };
+
+  header = viewChild(HeaderComponent);
+
+  constructor() {
+    effect(() => {
+
+      console.log('header in app compo', this.header());
+    })
+  }
 }

@@ -1,3 +1,31 @@
-{
-    "message": "Hello from static files"
-}
+[
+    {
+        "id": 1,
+        "name": "Piotr",
+        "description": "Hello from piotr",
+        "roles": ["admin", "root", "user"],
+        "gender": "male"
+    },
+    {
+        "id": 2,
+        "name": "Joanna",
+        "description": "Hello from joanna",
+        "roles": ["admin"],
+        "gender": "female"
+    },
+    {
+        "id": 3,
+        "name": "Adam",
+        "description": "Hello from adam",
+        "roles": ["admin"],
+        "gender": "male"
+    },
+    {
+        "id": 4,
+        "name": "Adam 2",
+        "description": "Hello from adam",
+        "roles": [],
+        "gender": "male"
+    }
+
+]

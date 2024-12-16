@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-header',
@@ -12,4 +13,9 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class HeaderComponent {
 
+  protected readonly app = inject(AppComponent);
+  
+  constructor() {
+    console.log(this.app.data);
+  }
 }

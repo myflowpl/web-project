@@ -10,3 +10,27 @@
 </p>
 <img [src]="user | userPhoto:'women'">
 <img [src]="user | userPhoto:'men'">
+
+<h2>Profiles</h2>
+
+<!-- {{ profiles | json}} -->
+
+
+<ng-container *ngIf="profiles.length; else elseTemplate">
+
+    <ng-container *ngFor="let profile of profiles">
+        <p>
+            {{profile.name}} 
+    
+            <span *ngIf="profile.roles.length">
+                ({{profile.roles.join(', ')}})
+            </span>
+        </p>
+    </ng-container>
+    
+</ng-container>
+
+<ng-template #elseTemplate>
+    <p>Brak profili do wyswietlenia</p>
+</ng-template>
+
