@@ -1,8 +1,10 @@
-import { DatePipe, JsonPipe, NgFor, NgIf, UpperCasePipe } from '@angular/common';
+import { AsyncPipe, DatePipe, JsonPipe, NgFor, NgIf, UpperCasePipe } from '@angular/common';
 import { Component, inject, Injectable } from '@angular/core';
 import { UserPhotoPipe } from './user-photo.pipe';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { Observable, shareReplay } from 'rxjs';
+import { API_1_BASE_URL, injectConfig } from '../app.tokens';
 
 // @Injectable({providedIn: 'root'})
 // export class HttpClient {
@@ -26,14 +28,18 @@ interface Profile {
     JsonPipe,
     NgFor,
     NgIf,
+    AsyncPipe,
   ],
   templateUrl: './home.page.html',
   styleUrl: './home.page.scss',
   providers: [
-    HttpClient
+
   ],
 })
 export class HomePage {
+
+  api1BaseUrl = injectConfig().api1BaseUrl;
+  baseUrl = injectConfig().baseUrl;
 
   http = inject(HttpClient);
 
@@ -43,13 +49,35 @@ export class HomePage {
 
   user = { id: 3 };
 
-  profiles: Profile[] = []
+  profiles$: Observable<Profile[]>
+
+  // profiles: Profile[] = []
 
   constructor() {
 
-    this.http.get<Profile[]>('http://localhost:4200/data/test.json').subscribe(
-      profiles => this.profiles = profiles
-    )
+    const request$ = this.http.get<Profile[]>(this.api1BaseUrl+'/data/test.json').pipe(
+      // operators
+      shareReplay(),
+    );
+
+    this.profiles$ = request$;
+    
+    // const sub = request$.subscribe({
+    //   next: profiles => this.profiles = profiles,
+    //   error: (error) => console.log(error),
+    //   complete: () => console.log('complete'),
+    // })
+
+    // sub.unsubscribe();
+  }
+
+  getName() {
+    console.log('GET NAME');
+    return 'NAME: '
+  }
+
+  handleProfileClick(profile: Profile) {
+    console.log(profile);
   }
 
 }

@@ -15,8 +15,8 @@
 
 <!-- {{ profiles | json}} -->
 
-
-<ng-container *ngIf="profiles.length; else elseTemplate">
+<!-- DIRECTIV -->
+<!-- <ng-container *ngIf="profiles.length; else elseTemplate">
 
     <ng-container *ngFor="let profile of profiles">
         <p>
@@ -32,5 +32,25 @@
 
 <ng-template #elseTemplate>
     <p>Brak profili do wyswietlenia</p>
-</ng-template>
+</ng-template> -->
 
+<!-- TEMPLATE -->
+
+@if ((profiles$ | async)?.length) {
+    @for (profile of profiles$ | async; track $index) {
+
+        <p (click)="handleProfileClick(profile)" class="font-bold cursor-pointer">
+
+           {{ getName() }}  {{ profile.id + ': ' + profile.name }}
+            @if (profile.roles.length) {
+                <span>({{profile.roles.join(', ')}})</span>
+            }
+        </p>
+        <p>
+            Gender: {{ profile.gender === 'male' ? 'Mężczyzna' : 'Kobieta' }}
+        </p>
+    }
+}
+@else {
+    <p>Brak profili do wyswietlenia</p>
+}
