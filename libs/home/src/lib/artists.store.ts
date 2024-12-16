@@ -11,6 +11,7 @@ import { debounceTime, pipe, switchMap, tap, of } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { tapLoader } from '@web/utils';
 import { Artist, ArtistDto, ArtistsService } from './artists.service';
+import { withDevtools } from '@angular-architects/ngrx-toolkit';
 
 export interface ArtistsState {
   artists: Artist[];
@@ -35,6 +36,7 @@ const initialState: ArtistsState = {
 
 export const ArtistsStore = signalStore(
   withState(initialState),
+  withDevtools('ArtistsStore'),
   withComputed((store) => ({
     limit: computed(() => store.params._limit())
   })),

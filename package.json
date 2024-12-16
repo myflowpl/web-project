@@ -9,10 +9,8 @@
     "watch": "nx build --watch --configuration development",
     "test": "nx test",
     "serve:ssr:web": "node dist/web/server/server.mjs",
-
     "typeorm": "typeorm-ts-node-commonjs -d ./apps/api/src/db/ormconfig.ts",
     "migration:run": "npm run typeorm migration:run",
-
     "api": "node api/db.js && json-server-auth api/db.json -r api/db-routes.json --delay 1000",
     "swagger:donwload": "node download.js https://petstore.swagger.io/v2/swagger.json ./libs/api-licent/src/swagger.json",
     "swagger:generate": "openapi-generator-cli generate -g typescript-angular -i ./libs/api-licent/src/swagger.json -o ./libs/api-client/src/lib --additional-properties=serviceFileSuffix=.api,serviceSuffix=Api,useSingleRequestParameter=true --type-mappings=set=Array",
@@ -20,6 +18,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-architects/ngrx-toolkit": "^18.1.1",
     "@angular/animations": "^19.0.0",
     "@angular/cdk": "~19.0.3",
     "@angular/common": "^19.0.0",
