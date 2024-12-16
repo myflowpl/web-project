@@ -1,7 +1,12 @@
+<div class="bg-gray-300 drop-shadow-md">
+    <div class="flex gap-4 page-container">
+        <span class="font-bold">Web Project</span>
+    
+        <a [routerLink]="['/']" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact: true}">Home</a>
+        <a [routerLink]="['contact']" [routerLinkActive]="'active'">Contact</a>
 
-<div>
-    <span>Web Project</span>
+        <span class="flex-auto"></span>
 
-    <a [routerLink]="['/']">Home</a>
-    <a [routerLink]="['contact']">Contact</a>
+        <a>Login</a>
+    </div>
 </div>

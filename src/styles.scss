@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    button {
+
+    }
+    input {
+
+    }
+}
+
+@layer components {
+    .page-container {
+        @apply  p-4 container mx-auto;
+    }
+}
+
+
+// EXTRA GLOBAL styles
