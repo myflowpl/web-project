@@ -1,16 +1,20 @@
 import { isPlatformServer } from "@angular/common";
 import { inject, InjectionToken, PLATFORM_ID } from "@angular/core";
 
-export const API_1_BASE_URL = new InjectionToken<string>("API 1 BASE URL");
-
+export const DOMAIN = new InjectionToken<string>("DOMAIN");
 
 export interface Config {
-    api1BaseUrl: string;
+    domain: string;
     baseUrl: string;
+    createPhotoUrl(id: string): string;
 }
 
 export const CONFIG = new InjectionToken<Config>("CONFIG", {
-    factory: () => ({} as Config)
+    factory: () => ({
+        createPhotoUrl(id: string) {
+            return this.domain+'/'+id
+        }
+    } as Config)
 });
 
 export function injectConfig(): Config {

@@ -4,7 +4,7 @@ import { UserPhotoPipe } from './user-photo.pipe';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable, shareReplay } from 'rxjs';
-import { API_1_BASE_URL, injectConfig } from '../app.tokens';
+import { DOMAIN, injectConfig } from '../app.tokens';
 
 // @Injectable({providedIn: 'root'})
 // export class HttpClient {
@@ -38,7 +38,7 @@ interface Profile {
 })
 export class HomePage {
 
-  api1BaseUrl = injectConfig().api1BaseUrl;
+  api1BaseUrl = injectConfig().domain;
   baseUrl = injectConfig().baseUrl;
 
   http = inject(HttpClient);

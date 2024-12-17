@@ -4,7 +4,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay, withHttpTransferCacheOptions } from '@angular/platform-browser';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
-import { API_1_BASE_URL, CONFIG, injectIsPlatformServer } from './app.tokens';
+import { DOMAIN, CONFIG, injectIsPlatformServer } from './app.tokens';
 import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
@@ -26,21 +26,21 @@ export const appConfig: ApplicationConfig = {
 
       const configService = inject(CONFIG);
 
-      const baseUrl = environment.baseUrl;
+      Object.assign(configService, environment)
 
-      // Object.assign(configService, environment)
+      // TODO  opcjonalnie gdy potrfzebujemy zaciagnac config z zewnetrzengo serwisu
 
-      return fetch(baseUrl+'/config.json').then(res => res.json()).then(
-        config => {
-          Object.assign(configService, config)
-        }
-      )
+      // return fetch(environment.domain+'/config.json').then(res => res.json()).then(
+      //   config => {
+      //     Object.assign(configService, config)
+      //   }
+      // )
     }),
     {
-      provide: API_1_BASE_URL,
+      provide: DOMAIN,
       useFactory: () => {
         const config = inject(CONFIG);
-        return config.api1BaseUrl;
+        return config.domain;
       },
     },
   ]
