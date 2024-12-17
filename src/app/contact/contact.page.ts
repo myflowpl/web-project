@@ -5,6 +5,7 @@ import { ContactService } from './contact.service';
 import { BehaviorSubject, catchError, combineLatest, EMPTY, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { Title } from '@angular/platform-browser';
 import { loaderSignal } from '../utils/signal.utils';
+import { injectUpdateTitle } from '../utils/title.utils';
 
 @Component({
   selector: 'app-contact',
@@ -14,7 +15,7 @@ import { loaderSignal } from '../utils/signal.utils';
 })
 export class ContactPage {
 
-  titleService = inject(Title);
+  updateTitle = injectUpdateTitle();
   contactService = inject(ContactService);
 
   reload$ = new BehaviorSubject(true)
@@ -46,7 +47,7 @@ export class ContactPage {
 
   constructor() {
     effect(() => {
-      this.titleService.setTitle(this.title());
+      this.updateTitle(this.title());
     })
   }
 

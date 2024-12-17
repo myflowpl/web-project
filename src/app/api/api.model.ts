@@ -55,12 +55,24 @@ export interface Coords {
   lat: number;
   lng: number;
 }
+// artists
 export interface Artist {
   id: number;
   name: string;
   img: string;
   location?: Coords;
 }
+export interface ArtistDto {
+  _page?: number;
+  _limit?: number;
+  q?: string;
+}
+export interface ArtistResponse {
+  artists: Artist[];
+  length: number;
+}
+
+// playlists
 export interface Playlist {
   id: number;
   name: string;

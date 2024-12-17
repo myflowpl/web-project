@@ -1,0 +1,27 @@
+<h1>
+    Artists
+</h1>
+<div class="flex gap-4">
+    <nav class="flex flex-col gap-2 w-48 border-r-2 pr-4">
+
+        <form (submit)="handleSubmit($event, searchInput.value)">
+            <input #searchInput type="search" />
+        </form>
+
+        @if (artists.isLoading()) {
+            <span>Loading...</span>
+        }
+        @if (artists.error()) {
+            <span>ERROR...</span>
+        }
+        @for (artist of artists.value()?.artists; track $index) {
+            <a>{{artist.name}}</a>
+        }
+        @empty {
+            <span>Artists not found</span>
+        }
+    </nav>
+    <main>
+
+    </main>
+</div>

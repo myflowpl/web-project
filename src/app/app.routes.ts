@@ -8,7 +8,9 @@ export const routes: Routes = [
     {
         path: 'contact',
         loadComponent: () => import('./contact/contact.page').then(m => m.ContactPage),
-        children: [],
-        providers: [],
+    },
+    {
+        path: 'artists',
+        loadComponent: () => import('./artists/artists.page').then(m => m.ArtistsPage),
     }
 ];
