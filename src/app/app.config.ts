@@ -1,10 +1,11 @@
-import { ApplicationConfig, inject, provideAppInitializer, provideExperimentalZonelessChangeDetection, provideZoneChangeDetection, REQUEST } from '@angular/core';
+import { ApplicationConfig, inject, provideAppInitializer, provideExperimentalZonelessChangeDetection, provideZoneChangeDetection, REQUEST, REQUEST_CONTEXT } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay, withHttpTransferCacheOptions } from '@angular/platform-browser';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { API_1_BASE_URL, CONFIG, injectIsPlatformServer } from './app.tokens';
+import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,18 +24,13 @@ export const appConfig: ApplicationConfig = {
     ),
     provideAppInitializer(() => {
 
-      const isServer = injectIsPlatformServer();
-      
       const configService = inject(CONFIG);
-      const request = inject(REQUEST);
-      console.log('REQUEST', request);
 
-      let baseurl = '';
-      if(request) {
-        baseurl = request.headers.get('proto') + '://' + request.headers.get('host');
-      }
+      const baseUrl = environment.baseUrl;
 
-      return fetch(baseurl+'/config.json').then(res => res.json()).then(
+      // Object.assign(configService, environment)
+
+      return fetch(baseUrl+'/config.json').then(res => res.json()).then(
         config => {
           Object.assign(configService, config)
         }
