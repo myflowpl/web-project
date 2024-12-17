@@ -26,7 +26,7 @@ export class ContactPage {
 
   response = toSignal(toObservable(this.params).pipe(
     switchMap((params) => this.contactService.getContacts(params)),
-  ));
+  ), {initialValue: {contacts: [], length: 0}});
 
   contacts = computed(() => this.response()?.contacts );
   length = computed(() => this.response()?.length);
