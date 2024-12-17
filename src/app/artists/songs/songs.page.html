@@ -1,7 +1,24 @@
-<h1>Songs</h1>
+<h1>Songs ({{ store.artistId() }})</h1>
 
-{{ store.artistId() }}
-
-@for (song of store.songs(); track $index) {
-    <div>{{ song.title }}</div>
+@if (store.loader()) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 }
+@else {
+    @if (store.loader.error(); as error) {
+        <div>ERROR: {{ error.message }}</div>
+    }
+    @for (song of store.songs(); track $index) {
+        <div>{{ song.title }}</div>
+    }
+    @empty {
+        <div>No songs found</div>
+    }
+}
+
+<mat-paginator 
+    [length]="store.length()"
+    [pageSize]="store.pageSize()"
+    [pageIndex]="store.pageIndex()"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    aria-label="Select page">
+</mat-paginator>
