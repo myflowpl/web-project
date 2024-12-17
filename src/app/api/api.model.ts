@@ -35,10 +35,20 @@ export interface UserCreateResponse {
   user: User;
 }
 
+export interface ContactDto {
+  _limit: number;
+  _page: number;
+}
+
 export interface Contact {
   id: number;
   name: string;
   email: string;
+}
+
+export interface ContactResponse {
+  contacts: Contact[];
+  length: number;
 }
 
 export interface Coords {

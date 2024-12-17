@@ -1,1 +1,21 @@
-<p>contact works!</p>
+<p class="font-bold">
+    Contacts ({{ length() }})
+</p>
+
+<div class="flex gap-4 py-4">
+    <button>Prev</button>
+    <span>{{params()._page}}</span>
+    <button>Next</button>
+</div>
+
+<!-- RxJS Subjects -->
+<!-- {{ contacts$$ | async | json }} -->
+
+<!-- Signals -->
+<!-- {{ contacts() }} -->
+
+@for (contact of contacts(); track $index) {
+    <div>
+        {{contact.name}}
+    </div>
+}
