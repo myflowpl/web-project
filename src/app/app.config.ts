@@ -6,6 +6,7 @@ import { provideClientHydration, withEventReplay, withHttpTransferCacheOptions }
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { DOMAIN, CONFIG, injectIsPlatformServer } from './app.tokens';
 import { environment } from '../environments/environment';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -42,6 +43,7 @@ export const appConfig: ApplicationConfig = {
         const config = inject(CONFIG);
         return config.domain;
       },
-    },
+    }, 
+    provideAnimationsAsync(),
   ]
 };
