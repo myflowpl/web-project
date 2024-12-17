@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { injectParamAsNumber } from '../../utils/signal.utils';
 import { SongsStore } from './songs.store';
 
@@ -6,7 +6,10 @@ import { SongsStore } from './songs.store';
   selector: 'app-songs',
   imports: [],
   templateUrl: './songs.page.html',
-  styleUrl: './songs.page.scss'
+  styleUrl: './songs.page.scss',
+  providers: [ 
+    SongsStore,
+  ],
 })
 export class SongsPage {
 
@@ -15,7 +18,11 @@ export class SongsPage {
   store = inject(SongsStore);
 
   constructor() {
-    // this.store.songs()
-    // this.store.artistId()
+    
+    this.store.loadSongsByArtistId(this.artistId);
+
+    // effect(() => {
+    //   this.store.loadSongsByArtistId(this.artistId());
+    // })
   }
 }

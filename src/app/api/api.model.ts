@@ -98,3 +98,13 @@ export interface Song {
   genders?: string[];
   favorite?: boolean;
 }
+
+export interface SongDto {
+  artistId?: number;
+  _page?: number;
+  _limit?: number;
+}
+export interface SongResponse {
+  songs: Song[];
+  length: number;
+}

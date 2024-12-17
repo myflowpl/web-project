@@ -1,3 +1,7 @@
 <h1>Songs</h1>
 
-{{ artistId() }}
+{{ store.artistId() }}
+
+@for (song of store.songs(); track $index) {
+    <div>{{ song.title }}</div>
+}
