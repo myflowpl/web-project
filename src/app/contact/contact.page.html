@@ -3,6 +3,9 @@
     @if (loader()) {
         <span>Loading...</span>
     }
+    @else {
+        <button (click)="reload$.next(true)">reload</button>
+    }
 </p>
 
 <div class="flex gap-4 py-4">
