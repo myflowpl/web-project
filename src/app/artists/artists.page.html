@@ -11,17 +11,19 @@
         @if (artists.isLoading()) {
             <span>Loading...</span>
         }
-        @if (artists.error()) {
-            <span>ERROR...</span>
-        }
-        @for (artist of artists.value()?.artists; track $index) {
-            <a>{{artist.name}}</a>
-        }
-        @empty {
-            <span>Artists not found</span>
+        @else {
+            @if (artists.error()) {
+                <span>ERROR...</span>
+            }
+            @for (artist of artists.value()?.artists; track $index) {
+                <a [routerLink]="[artist.id]">{{artist.name}}</a>
+            }
+            @empty {
+                <span>Artists not found</span>
+            }
         }
     </nav>
     <main>
-
+        <router-outlet />
     </main>
 </div>

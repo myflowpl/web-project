@@ -1,5 +1,7 @@
-import { signal, Signal } from "@angular/core";
-import { catchError, EMPTY, MonoTypeOperatorFunction, OperatorFunction, pipe, tap, UnaryFunction } from "rxjs";
+import { inject, signal, Signal } from "@angular/core";
+import { toSignal } from "@angular/core/rxjs-interop";
+import { ActivatedRoute } from "@angular/router";
+import { catchError, EMPTY, map, MonoTypeOperatorFunction, OperatorFunction, pipe, tap, UnaryFunction } from "rxjs";
 
 export interface LoaderSignal extends Signal<boolean> {
     error: Signal<any>;
@@ -38,3 +40,13 @@ export function loaderSignal(): LoaderSignal {
     return output;
 }
 
+export function injectParamAsNumber(name: string, initialValue = 0) {
+    const route = inject(ActivatedRoute);
+
+    const value$ = route.params.pipe(
+        map(params => params[name]),
+        map(param => parseInt(param, 10)),
+    );
+
+    return toSignal(value$, { initialValue });
+}

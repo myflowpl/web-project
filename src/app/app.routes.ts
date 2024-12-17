@@ -12,5 +12,11 @@ export const routes: Routes = [
     {
         path: 'artists',
         loadComponent: () => import('./artists/artists.page').then(m => m.ArtistsPage),
+        children: [
+            {
+                path: ':id',
+                loadComponent: () => import('./artists/songs/songs.page').then(m => m.SongsPage)
+            }
+        ]
     }
 ];
