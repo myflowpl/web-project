@@ -2,8 +2,9 @@ import { Component, computed, DestroyRef, effect, inject, OnDestroy, Signal, sig
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { Contact, ContactDto, ContactResponse } from '../api/api.model';
 import { ContactService } from './contact.service';
-import { BehaviorSubject, Subject, switchMap, takeUntil } from 'rxjs';
+import { BehaviorSubject, catchError, EMPTY, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { Title } from '@angular/platform-browser';
+import { loaderSignal } from '../utils/signal.utils';
 
 @Component({
   selector: 'app-contact',
@@ -24,8 +25,14 @@ export class ContactPage {
     _limit: this.limit(),
   }));
 
+  loader = loaderSignal();
+
   response = toSignal(toObservable(this.params).pipe(
-    switchMap((params) => this.contactService.getContacts(params)),
+    switchMap(
+      (params) => this.contactService.getContacts(params).pipe(
+        this.loader.tap(),
+      )
+    ),
   ), {initialValue: {contacts: [], length: 0}});
 
   contacts = computed(() => this.response()?.contacts );

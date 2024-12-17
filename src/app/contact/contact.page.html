@@ -1,5 +1,8 @@
 <p class="font-bold">
     Contacts ({{ length() }})
+    @if (loader()) {
+        <span>Loading...</span>
+    }
 </p>
 
 <div class="flex gap-4 py-4">
@@ -7,6 +10,10 @@
     <span>{{params()._page}}</span>
     <button (click)="handleNextPage()">Next</button>
 </div>
+
+@if (loader.error(); as error) {
+    <div class="text-red-400">ERROR: {{ error.message }}</div>
+}
 
 @for (contact of contacts(); track $index) {
     <div>
