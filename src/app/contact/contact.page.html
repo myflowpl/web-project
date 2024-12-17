@@ -3,16 +3,10 @@
 </p>
 
 <div class="flex gap-4 py-4">
-    <button>Prev</button>
+    <button (click)="handlePrevPage()">Prev</button>
     <span>{{params()._page}}</span>
-    <button>Next</button>
+    <button (click)="handleNextPage()">Next</button>
 </div>
-
-<!-- RxJS Subjects -->
-<!-- {{ contacts$$ | async | json }} -->
-
-<!-- Signals -->
-<!-- {{ contacts() }} -->
 
 @for (contact of contacts(); track $index) {
     <div>
