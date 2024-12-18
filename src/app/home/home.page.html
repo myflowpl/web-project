@@ -5,13 +5,55 @@
     Today is: {{ today | date: 'YYYY-MM-dd' }}
 </p>
 
-<p>
+<button (click)="loadMap()">load map</button>
+<ng-container #mapContainer></ng-container>
+
+<h1 (click)="isVisible = true">defered views</h1>
+
+@defer (when isVisible) {
+    <app-map></app-map>
+}
+
+<h1>on hover</h1>
+
+@defer (on hover(hoverTrigger)) {
+    <app-map></app-map>
+}
+<span #hoverTrigger >hover trigger</span>
+
+<h1>hover placeholder</h1>
+<!-- @defer (on hover; prefetch on idle) { -->
+@defer (on hover) {
+    <app-map></app-map>
+}
+@placeholder {
+    <span #hoverTrigger >hover trigger as placeholder</span>
+}
+@loading {
+    <span>Loading...</span>
+}
+@error {
+    <p>Loading ERRROR</p>
+}
+<div class="h-[1000px]"></div>
+
+@defer (on viewport; prefetch on idle) {
+    <app-map></app-map>
+}
+@placeholder {
+    <span>on viewport placeholder</span>
+}
+@loading {
+    <span>Loading...</span>
+}
+
+<!-- <p>
     User Photo
 </p>
 <img [src]="user | userPhoto:'women'">
 <img [src]="user | userPhoto:'men'">
 
-<h2>Profiles</h2>
+<h2>Profiles</h2> -->
 
 <!-- {{ profiles | json}} -->
 
@@ -36,7 +78,7 @@
 
 <!-- TEMPLATE -->
 
-@if ((profiles$ | async)?.length) {
+<!-- @if ((profiles$ | async)?.length) {
     @for (profile of profiles$ | async; track $index) {
 
         <p (click)="handleProfileClick(profile)" class="font-bold cursor-pointer">
@@ -53,4 +95,4 @@
 }
 @else {
     <p>Brak profili do wyswietlenia</p>
-}
+} -->

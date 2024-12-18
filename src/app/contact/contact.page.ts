@@ -17,7 +17,7 @@ import { logoutWatchDog } from '../auth/logout.watchdog';
 export class ContactPage {
   logoutWatchDog = logoutWatchDog();
 
-  canDeactivate = false;
+  canDeactivate = true;
 
   updateTitle = injectUpdateTitle();
   contactService = inject(ContactService);

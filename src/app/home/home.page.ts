@@ -1,10 +1,11 @@
 import { AsyncPipe, DatePipe, JsonPipe, NgFor, NgIf, UpperCasePipe } from '@angular/common';
-import { Component, inject, Injectable } from '@angular/core';
+import { Component, inject, Injectable, viewChild, ViewContainerRef } from '@angular/core';
 import { UserPhotoPipe } from './user-photo.pipe';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable, shareReplay } from 'rxjs';
 import { DOMAIN, injectConfig } from '../app.tokens';
+import { MapComponent } from './map/map.component';
 
 // @Injectable({providedIn: 'root'})
 // export class HttpClient {
@@ -29,14 +30,30 @@ interface Profile {
     // NgFor,
     // NgIf,
     AsyncPipe,
+    MapComponent,
   ],
   templateUrl: './home.page.html',
   styleUrl: './home.page.scss',
   providers: [
 
   ],
+  host: {ngSkipHydration: 'true'}
 })
 export class HomePage {
+
+  mapContainer = viewChild('mapContainer', {read: ViewContainerRef})
+
+  isVisible = false;
+
+  async loadMap() {
+    const { MapComponent } = await import('./map/map.component');
+
+    this.mapContainer()?.createComponent(MapComponent);
+  }
+
+
+
+
 
   api1BaseUrl = injectConfig().domain;
   baseUrl = injectConfig().baseUrl;
