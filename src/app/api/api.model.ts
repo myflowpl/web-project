@@ -19,6 +19,11 @@ export interface User {
   role?: Role;
 }
 
+export interface RegisterDto {
+  name: string;
+  email: string;
+  password: string;
+}
 export interface LoginDto {
   email: string;
   password: string;
@@ -30,6 +35,10 @@ export enum Role {
   ROOT = 'root',
 }
 
+export interface LoginResponse {
+  accessToken: string;
+  user: User;
+}
 export interface UserCreateResponse {
   accessToken: string;
   user: User;
