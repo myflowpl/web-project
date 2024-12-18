@@ -1,1 +1,15 @@
-<p>login-form works!</p>
+<form [formGroup]="form" (ngSubmit)="handleSubmit()" class="flex flex-col gap-2">
+    <label>Email</label>
+    <input formControlName="email" />
+
+    <label>Password</label>
+    <input formControlName="password" type="password" />
+
+    @if (store.isLoading.error(); as error) {
+        <div class="text-red-400">
+            {{error.message}}
+        </div>
+    }
+
+    <button type="submit" [disabled]="form.invalid && store.isLoading()">Login</button>
+</form>
