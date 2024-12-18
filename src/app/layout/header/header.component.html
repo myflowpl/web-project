@@ -10,7 +10,7 @@
 
         @if (profileStore.user(); as user) {
             <span>{{ user.email }}</span>
-            <span (click)="profileStore.logout()">logout</span>
+            <span (click)="profileStore.logout()" class="cursor-pointer">logout</span>
         }
         @else {
             <a [routerLink]="['login']" [routerLinkActive]="'active'">Login</a>

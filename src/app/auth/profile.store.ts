@@ -1,7 +1,7 @@
 import { inject } from "@angular/core"
 import { patchState, signalStore, withComputed, withHooks, withMethods, withProps, withState } from "@ngrx/signals"
 import { tap } from "rxjs"
-import { LoginDto, User } from "../api/api.model"
+import { LoginDto, RegisterDto, User } from "../api/api.model"
 import { UserService } from "./user.service"
 import { loaderSignal } from "../utils/signal.utils"
 
@@ -28,6 +28,17 @@ export const ProfileStore = signalStore(
         },
         login(data: LoginDto) {
             return api.login(data).pipe(
+                store.isLoading.tap(),
+                tap(res => {
+                    patchState(store, {
+                        user: res.user,
+                        accessToken: res.accessToken,
+                    })
+                }),
+            );
+        },
+        register(data: RegisterDto) {
+            return api.register(data).pipe(
                 store.isLoading.tap(),
                 tap(res => {
                     patchState(store, {

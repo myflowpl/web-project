@@ -1,4 +1,11 @@
 <form [formGroup]="form" (ngSubmit)="handleSubmit()" class="flex flex-col gap-2">
+    
+    @if (message(); as msg) {
+        <span class="text-orange-500">{{msg}}</span>
+    }
+
+    <ng-content select="[top]"></ng-content>
+    
     <label>Email</label>
     <input formControlName="email" />
 
@@ -11,5 +18,8 @@
         </div>
     }
 
+    <ng-content></ng-content>
+
     <button type="submit" [disabled]="form.invalid && store.isLoading()">Login</button>
+    
 </form>

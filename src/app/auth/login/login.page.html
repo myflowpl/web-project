@@ -1,3 +1,18 @@
 <h1>Login</h1>
 
-<app-login-form></app-login-form>
+<app-login-form  [message]="message()"  (loginSuccess)="handleSuccess($event)">
+
+    <div class="flex gap-4">
+        <a>Forgot password</a>
+        <a>Regulations</a>
+    </div>
+
+    <div class="flex gap-4" top>
+        <a>Are you a Business ? Ask question!</a>
+    </div>
+
+    <div class="flex gap-4" top>
+        <a>Help ??</a>
+    </div>
+
+</app-login-form>

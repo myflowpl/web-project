@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { LoginFormComponent } from '../login-form/login-form.component';
+import { User } from '../../api/api.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,4 +11,11 @@ import { LoginFormComponent } from '../login-form/login-form.component';
 })
 export class LoginPage {
 
+  message = signal('Login is required');
+
+  router = inject(Router);
+
+  handleSuccess(user: User) {
+    this.router.navigateByUrl('/');
+  }
 }
