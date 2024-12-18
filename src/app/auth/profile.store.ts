@@ -1,9 +1,10 @@
-import { inject } from "@angular/core"
+import { computed, effect, inject } from "@angular/core"
 import { patchState, signalStore, withComputed, withHooks, withMethods, withProps, withState } from "@ngrx/signals"
 import { tap } from "rxjs"
 import { LoginDto, RegisterDto, User } from "../api/api.model"
 import { UserService } from "./user.service"
 import { loaderSignal } from "../utils/signal.utils"
+import { injectLocalStorage, injectWindow } from "../utils/ssr.utils"
 
 type ProfileState = {
     user: User | null,
@@ -18,7 +19,12 @@ const initialState: ProfileState = {
 export const ProfileStore = signalStore(
     {providedIn: 'root'},
     withState(initialState),
-    withComputed((store) => ({})),
+    withComputed((store) => ({
+        sessionData: computed(() => ({
+            user: store.user(),
+            accessToken: store.accessToken()
+        })),
+    })),
     withProps((store) => ({
         isLoading: loaderSignal(),
     })),
@@ -50,8 +56,22 @@ export const ProfileStore = signalStore(
         },
      })),
      withHooks({
-        onInit(store) {
+        onInit(store, localStorage = injectLocalStorage(), window = injectWindow()) {
             
+            const KEY = 'auth_data';
+
+            // check storage for existing session
+            const data = localStorage.getItem(KEY);
+            if(data) {
+                const session = JSON.parse(data);
+                patchState(store, session);
+            }
+
+            // update localStorage on session changes
+            effect(() => {
+                const data = store.sessionData();
+                localStorage.setItem(KEY, JSON.stringify(data));
+            })
         },
      }),
 );

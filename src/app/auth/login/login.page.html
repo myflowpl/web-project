@@ -16,3 +16,21 @@
     </div>
 
 </app-login-form>
+
+<ng-template #forMenu>
+    <a>Menu elmement</a>
+</ng-template>
+
+<h1 (click)="flag = !flag">template outlet</h1>
+
+<ng-container *ngTemplateOutlet="flag ? tpl : tpl2"></ng-container>
+<ng-container *ngTemplateOutlet="tpl2"></ng-container>
+<ng-container *ngTemplateOutlet="tpl"></ng-container>
+
+<ng-template #tpl>
+    <p>testks --- tekst</p>
+</ng-template>
+
+<ng-template #tpl2>
+    <p>2222 ----- -22222</p>
+</ng-template>

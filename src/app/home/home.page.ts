@@ -25,9 +25,9 @@ interface Profile {
     UpperCasePipe,
     DatePipe,
     UserPhotoPipe,
-    JsonPipe,
-    NgFor,
-    NgIf,
+    // JsonPipe,
+    // NgFor,
+    // NgIf,
     AsyncPipe,
   ],
   templateUrl: './home.page.html',
@@ -72,7 +72,7 @@ export class HomePage {
   }
 
   getName() {
-    console.log('GET NAME');
+    // console.log('GET NAME');
     return 'NAME: '
   }
 

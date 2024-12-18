@@ -22,7 +22,7 @@ export class AppComponent {
   constructor() {
     effect(() => {
 
-      console.log('header in app compo', this.header());
+      // console.log('header in app compo', this.header());
     })
   }
 }

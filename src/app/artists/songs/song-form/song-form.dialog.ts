@@ -52,7 +52,7 @@ export function injectSongFormDialog() {
     MatDialogActions,
     MatDialogClose,
     ReactiveFormsModule,
-    JsonPipe,
+    // JsonPipe,
   ],
   templateUrl: './song-form.dialog.html',
   styleUrl: './song-form.dialog.scss'
