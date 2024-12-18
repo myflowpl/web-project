@@ -26,7 +26,7 @@ export class LoginFormComponent {
   // @Output()
   // success = new EventEmitter();
 
-  message = input.required();
+  message = input();
 
   loginSuccess = output<User>();
 
