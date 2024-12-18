@@ -24,13 +24,12 @@ export class SongsPage {
   store = inject(SongsStore);
 
   constructor() {
-    
     // this.store.loadSongsByArtistId(this.artistId);
 
-    this.store.load(this.store.loadParams);
+    this.store.connectArtistId(this.artistId);
 
-    effect(() => {
-      this.store.setArtistId(this.artistId());
-    })
+    // effect(() => {
+    //   this.store.setArtistId(this.artistId());
+    // })
   }
 }
