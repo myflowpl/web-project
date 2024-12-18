@@ -1,5 +1,6 @@
 <h1>Songs (found {{ store.length() }})</h1>
 <p>artistId: {{ store.artistId() }}</p>
+<button (click)="handleCreate()">Add new song</button>
 
 @if (store.loader()) {
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>

@@ -3,6 +3,8 @@ import { injectParamAsNumber } from '../../utils/signal.utils';
 import { SongsStore } from './songs.store';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { injectSongFormDialog } from './song-form/song-form.dialog';
+import { Song } from '../../api/api.model';
 
 @Component({
   selector: 'app-songs',
@@ -23,6 +25,8 @@ export class SongsPage {
 
   store = inject(SongsStore);
 
+  songFormDialog = injectSongFormDialog();
+
   constructor() {
     // this.store.loadSongsByArtistId(this.artistId);
 
@@ -31,5 +35,19 @@ export class SongsPage {
     // effect(() => {
     //   this.store.setArtistId(this.artistId());
     // })
+
+    this.handleCreate();
+  }
+
+  handleCreate() {
+    this.songFormDialog.create(this.artistId()).subscribe(
+      (song) => console.log('CREATE END', song)
+    )
+  }
+
+  handleEdit(song: Song) {
+    this.songFormDialog.edit(song).subscribe(
+      (song) => console.log('EDIT END', song)
+    )
   }
 }
