@@ -1,10 +1,19 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './auth/auth.guard';
+import { authGuard, canMatchGuard } from './auth/auth.guard';
+import { ContactPage } from './contact/contact.page';
+import { inject } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export const routes: Routes = [
     {
         path: '',
-        loadComponent: () => import('./home/home.page').then(m => m.HomePage)
+        loadComponent: () => import('./artists/artists.page').then(m => m.ArtistsPage),
+        canMatch: [canMatchGuard()]
+    },
+    {
+        path: '',
+        loadComponent: () => import('./home/home.page').then(m => m.HomePage),
+        canMatch: []
     },
     {
         path: 'contact',
@@ -12,6 +21,14 @@ export const routes: Routes = [
         canActivate: [
             authGuard('admin')
         ],
+        canDeactivate: [
+            (com: ContactPage, b:any, c:any) => {
+                if(!com.canDeactivate) {
+                    inject(MatSnackBar).open('Save data before exit','', {verticalPosition: 'top', duration: 500})
+                }
+                return com.canDeactivate
+            }
+        ]
     },
     {
         path: 'artists',
@@ -19,6 +36,7 @@ export const routes: Routes = [
         canActivate: [
             authGuard('root')
         ],
+        canActivateChild: [],
         children: [
             {
                 path: ':id',

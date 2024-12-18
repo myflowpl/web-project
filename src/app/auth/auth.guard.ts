@@ -6,7 +6,12 @@ export function authGuard(...roles: string[]) {
 
     return () => {
         return injectLoginDialog().guard('Requred roles: '+roles.join(', '));
+    }
+}
 
-        // return !! inject(ProfileStore).user()
+export function canMatchGuard(...roles: string[]) {
+
+    return () => {
+        return !! inject(ProfileStore).user()
     }
 }

@@ -6,6 +6,7 @@ import { BehaviorSubject, catchError, combineLatest, EMPTY, Subject, switchMap, 
 import { Title } from '@angular/platform-browser';
 import { loaderSignal } from '../utils/signal.utils';
 import { injectUpdateTitle } from '../utils/title.utils';
+import { logoutWatchDog } from '../auth/logout.watchdog';
 
 @Component({
   selector: 'app-contact',
@@ -14,6 +15,9 @@ import { injectUpdateTitle } from '../utils/title.utils';
   styleUrl: './contact.page.scss'
 })
 export class ContactPage {
+  logoutWatchDog = logoutWatchDog();
+
+  canDeactivate = false;
 
   updateTitle = injectUpdateTitle();
   contactService = inject(ContactService);
