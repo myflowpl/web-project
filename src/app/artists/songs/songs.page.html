@@ -3,18 +3,25 @@
 <button (click)="handleCreate()">Add new song</button>
 
 @if (store.loader()) {
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    <div class="h-2">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
 }
 @else {
-    @if (store.loader.error(); as error) {
-        <div>ERROR: {{ error.message }}</div>
-    }
-    @for (song of store.songs(); track $index) {
-        <div>{{ song.title }}</div>
-    }
-    @empty {
-        <div>No songs found</div>
-    }
+        @if (store.loader.error(); as error) {
+            <div>ERROR: {{ error.message }}</div>
+        }
+    <div class="flex gap-4 flex-col">
+        @for (song of store.songs(); track $index) {
+            <div class="flex gap-4">
+                <span class="flex-1">{{ song.title }}</span>
+                <button (click)="handleEdit(song)">Edit</button>
+            </div>
+        }
+        @empty {
+            <div>No songs found</div>
+        }
+    </div>
 }
 
 <mat-paginator 

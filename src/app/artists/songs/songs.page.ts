@@ -36,7 +36,7 @@ export class SongsPage {
     //   this.store.setArtistId(this.artistId());
     // })
 
-    this.handleCreate();
+    // this.handleCreate();
   }
 
   handleCreate() {

@@ -1,10 +1,11 @@
 import { Component, computed, inject, Injector } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Song } from '../../../api/api.model';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
 import { SongsStore } from '../songs.store';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { JsonPipe } from '@angular/common';
 
 interface Data {
   artistId?: number;
@@ -29,7 +30,15 @@ export function injectSongFormDialog() {
       return dialogRef.afterClosed();
     },
     edit(song: Song): Observable<Song> {
-      return of();
+      
+      const dialogRef = dialog.open(SongFormDialog, {
+        width: '400px',
+        disableClose: true,
+        injector,
+        data: { song }
+      })
+
+      return dialogRef.afterClosed();
     },
   }
 }
@@ -43,6 +52,7 @@ export function injectSongFormDialog() {
     MatDialogActions,
     MatDialogClose,
     ReactiveFormsModule,
+    JsonPipe,
   ],
   templateUrl: './song-form.dialog.html',
   styleUrl: './song-form.dialog.scss'
@@ -51,6 +61,8 @@ export class SongFormDialog {
   artistId = inject<Data>(MAT_DIALOG_DATA).artistId;
   song = inject<Data>(MAT_DIALOG_DATA).song;
   store = inject(SongsStore);
+  dialogRef = inject(MatDialogRef);
+
   isVisible = false;
   title = computed(
     () => this.artistId ? `Add new song for artist ${this.artistId}` : `Edit song: ${this.song?.title}`
@@ -69,6 +81,9 @@ export class SongFormDialog {
     if(this.artistId) {
       this.form.patchValue({ artistId: this.artistId });
     }
+    if(this.song) {
+      this.form.patchValue(this.song);
+    }
   }
 
   handlSubmit() {
@@ -78,7 +93,15 @@ export class SongFormDialog {
     }
     console.log(this.form.value);
 
-    this.store.create(this.form.value).subscribe();
+    if(this.artistId) {
+      this.store.create(this.form.value).subscribe(
+        (song) => this.dialogRef.close(song)
+      );
+    } else {
+      this.store.update(this.form.value).subscribe(
+        (song) => this.dialogRef.close(song)
+      );
+    }
   }
 
   handleTest(e: any) {

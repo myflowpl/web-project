@@ -33,4 +33,8 @@ export class SongsService {
   create(song: Partial<Song>) {
     return this.http.post<Song>(this.baseUrl+'/songs', song, {})
   }
+
+  update(song: Partial<Song>) {
+    return this.http.patch<Song>(this.baseUrl+'/songs/'+song.id, song, {})
+  }
 }

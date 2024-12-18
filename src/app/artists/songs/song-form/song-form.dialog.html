@@ -14,24 +14,60 @@
             <label>Title</label>
             <input formControlName="title" />
 
+            <div class="text-red-300 h-4">
+                @if (form.controls.title.errors; as errors) {
+                    @if (errors['required']) {
+                        This input is requred
+                    }
+                    @if (errors['minlength']) {
+                        This input is to short
+                    }
+                }
+            </div>
+
             <label>Year</label>
             <input formControlName="year" />
+            
+            <div class="text-red-300 h-4">
+                @if (form.controls.year.errors; as errors) {
+                    @if (errors['required']) {
+                        This input is requred
+                    }
+                }
+            </div>
 
             <label>Url</label>
             <input formControlName="webUrl" />
+            <div class="text-red-300 h-4">
+                @if (form.controls.webUrl.errors; as errors) {
+                    @if (errors['required']) {
+                        This input is requred
+                    }
+                    @if (errors['minlength']) {
+                        This input is to short
+                    }
+                }
+            </div>
 
+
+        @if (store.isCreating.error(); as error) {
+            <span class="text-red-500">Error: {{ error.message }}</span>
+        }
         </div>
-        <pre [style.color]="isVisible ? 'red' : 'green'">
+        <!-- <pre [style.color]="isVisible ? 'red' : 'green'">
             is valid: {{form.valid}}
             is dirty: {{form.dirty}}
             is pristine: {{form.pristine}}
             is touched: {{form.touched}}
             is pending: {{form.pending}}
             is title touched: {{form.get('title')?.touched}}
-        </pre>
+        </pre> -->
     </mat-dialog-content>
     
     <mat-dialog-actions>
-        <button type="submit" [disabled]="form.invalid && formRef.submitted">Save</button>
+        @if (store.isCreating()) {
+            <span class="text-green-500 px-4">Saving...</span>
+        }
+        <button type="submit" [disabled]="(form.invalid && formRef.submitted) || store.isCreating()">Save</button>
     </mat-dialog-actions>
 </form>

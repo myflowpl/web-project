@@ -84,6 +84,19 @@ export const SongsStore = signalStore(
                     })
                 }),
             );
+        },
+
+        update(song: Partial<Song>) {
+            return songsService.update(song).pipe(
+                store.isCreating.tap(),
+                tap(song => {
+                    patchState(store, {
+                        songs: store.songs().map(
+                            old => old.id === song.id ? song : old
+                        ),
+                    })
+                }),
+            );
         }
      })),
      withHooks({
