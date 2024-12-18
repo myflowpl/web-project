@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { LoginFormComponent } from '../login-form/login-form.component';
-import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { map, Observable } from 'rxjs';
 import { User } from '../../api/api.model';
 import { injectIsPlatformServer } from '../../app.tokens';
@@ -13,19 +13,21 @@ export function injectLoginDialog() {
   const profile = inject(ProfileStore);
 
   return {
-    open(): Observable<User | undefined> {
-      const dialogRef = dialog.open(LoginDialog);
+    open(message?: string): Observable<User | undefined> {
+      const dialogRef = dialog.open(LoginDialog, {
+        data: { message }
+      });
 
       return dialogRef.afterClosed()
     },
-    guard() {
+    guard(message?: string) {
       if(isServer) {
         return false;
       }
       if(profile.user()) {
         return true;
       }
-      return this.open().pipe(
+      return this.open(message).pipe(
         map(user => !!user),
       )
     }
@@ -44,5 +46,7 @@ export function injectLoginDialog() {
 export class LoginDialog {
 
   dialogRef = inject(MatDialogRef);
+
+  message = inject(MAT_DIALOG_DATA)?.message;
 
 }

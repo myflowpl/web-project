@@ -1,6 +1,6 @@
 <p matDialogTitle>Login</p>
 
 <mat-dialog-content>
-    <app-login-form (loginSuccess)="dialogRef.close($event)" />
+    <app-login-form [message]="message" (loginSuccess)="dialogRef.close($event)" />
 
 </mat-dialog-content>
