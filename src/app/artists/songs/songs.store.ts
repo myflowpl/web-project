@@ -35,6 +35,7 @@ export const SongsStore = signalStore(
     })),
     withProps((store) => ({
         loader: loaderSignal(),
+        isCreating: loaderSignal(),
     })),
     withMethods((store, songsService = inject(SongsService)) => ({ 
         setArtistId(artistId: number) {
@@ -69,7 +70,21 @@ export const SongsStore = signalStore(
                     tap((res) => patchState(store, res)),
                 )
             ),
-        ))
+        )),
+
+        create(song: Partial<Song>) {
+            return songsService.create(song).pipe(
+                store.isCreating.tap(),
+                tap(song => {
+                    patchState(store, {
+                        songs: [
+                            song,
+                            ...store.songs(),
+                        ],
+                    })
+                }),
+            );
+        }
      })),
      withHooks({
         onInit(store) {

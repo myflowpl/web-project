@@ -12,9 +12,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @layer base {
     button {
         @apply border px-4 py-2 bg-slate-200 hover:bg-slate-100;
+        @apply disabled:bg-slate-100 disabled:text-gray-400;
     }
     input {
-        @apply py-2 px-2 border;
+        @apply py-2 px-2 border focus:border focus-visible:border;
     }
     h1 {
         @apply font-bold py-4 text-lg;
@@ -28,4 +29,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     .page-container {
         @apply  p-4 container mx-auto;
     }
+}
+
+.ng-invalid.ng-touched {
+    @apply border-red-400 focus:border-e-red-400;
 }

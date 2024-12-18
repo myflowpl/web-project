@@ -15,9 +15,9 @@ export class SongsService {
   getSongsByArtistId(params: Partial<SongDto> = {}): Observable<SongResponse> {
     const { _page } = params;
 
-    if(_page && _page > 2) {
-      return throwError(() => new Error('Page number is to large'));
-    }
+    // if(_page && _page > 2) {
+    //   return throwError(() => new Error('Page number is to large'));
+    // }
 
     return this.http.get<Song[]>(this.baseUrl+'/songs', {
       params: {...params},
@@ -28,5 +28,9 @@ export class SongsService {
         length: parseInt(res.headers.get('x-total-count') || '0'),
       }))
     )
+  }
+
+  create(song: Partial<Song>) {
+    return this.http.post<Song>(this.baseUrl+'/songs', song, {})
   }
 }

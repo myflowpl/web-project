@@ -7,12 +7,31 @@
     </span>
 </div>
 
-<form>
-    <mat-dialog-content>
-        form here <br><br>
+<form [formGroup]="form" (ngSubmit)="handlSubmit()" #formRef="ngForm" >
+    <mat-dialog-content (click)="isVisible = !isVisible">
+        <div class="flex gap-2 flex-col" (click)="handleTest(formRef)">
+
+            <label>Title</label>
+            <input formControlName="title" />
+
+            <label>Year</label>
+            <input formControlName="year" />
+
+            <label>Url</label>
+            <input formControlName="webUrl" />
+
+        </div>
+        <pre [style.color]="isVisible ? 'red' : 'green'">
+            is valid: {{form.valid}}
+            is dirty: {{form.dirty}}
+            is pristine: {{form.pristine}}
+            is touched: {{form.touched}}
+            is pending: {{form.pending}}
+            is title touched: {{form.get('title')?.touched}}
+        </pre>
     </mat-dialog-content>
     
     <mat-dialog-actions>
-        <button>Save</button>
+        <button type="submit" [disabled]="form.invalid && formRef.submitted">Save</button>
     </mat-dialog-actions>
 </form>
