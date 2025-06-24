@@ -7,9 +7,12 @@
 /api/db.json
 /bazel-out
 .nx 
+.env
+/db
+
 
 # Node
-/node_modules
+node_modules
 npm-debug.log
 yarn-error.log
 
