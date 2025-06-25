@@ -10,7 +10,7 @@
     "serve:ssr:web": "node dist/web/server/server.mjs",
     "api": "node api/bin/api.js",
     "swagger:download": "node src/app/api-client/download-spec.js",
-    "swagger:generate": "openapi-generator-cli generate -i http://localhost:3000/docs-json -g typescript-angular -o ./src/app/api-client/lib"
+    "swagger:generate": "openapi-generator-cli generate -i http://localhost:3000/docs-json -g typescript-angular -o ./src/app/api-client/lib --additional-properties=serviceFileSuffix=.api,serviceSuffix=Api,useSingleRequestParameter=true"
   },
   "private": true,
   "dependencies": {

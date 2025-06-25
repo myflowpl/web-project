@@ -19,7 +19,7 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { ApiResponseError } from '../model/apiResponseError';
 // @ts-ignore
-import { QuotesResponseDto } from '../model/quotesResponseDto';
+import { PhotoCreateResponseDto } from '../model/photoCreateResponseDto';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -27,38 +27,40 @@ import { Configuration }                                     from '../configurat
 import { BaseService } from '../api.base.service';
 
 
+export interface PhotosPostRequestParams {
+    /** The image file to upload (JPEG, PNG, GIF). Max 5MB. */
+    photo: Blob;
+}
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class QuotesService extends BaseService {
+export class PhotosApi extends BaseService {
 
     constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string|string[], @Optional() configuration?: Configuration) {
         super(basePath, configuration);
     }
 
     /**
-     * Get a list of quotes with pagination and search
-     * @param pageIndex Page number (0-indexed)
-     * @param pageSize Number of items per page
-     * @param q Search query for text or author
+     * Upload a photo
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public quotesGet(pageIndex?: number, pageSize?: number, q?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<QuotesResponseDto>;
-    public quotesGet(pageIndex?: number, pageSize?: number, q?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<QuotesResponseDto>>;
-    public quotesGet(pageIndex?: number, pageSize?: number, q?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<QuotesResponseDto>>;
-    public quotesGet(pageIndex?: number, pageSize?: number, q?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-
-        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
-        localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-          <any>pageIndex, 'pageIndex');
-        localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-          <any>pageSize, 'pageSize');
-        localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-          <any>q, 'q');
+    public photosPost(requestParameters: PhotosPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<PhotoCreateResponseDto>;
+    public photosPost(requestParameters: PhotosPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<PhotoCreateResponseDto>>;
+    public photosPost(requestParameters: PhotosPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<PhotoCreateResponseDto>>;
+    public photosPost(requestParameters: PhotosPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+        const photo = requestParameters?.photo;
+        if (photo === null || photo === undefined) {
+            throw new Error('Required parameter photo was null or undefined when calling photosPost.');
+        }
 
         let localVarHeaders = this.defaultHeaders;
+
+        // authentication (bearerAuth) required
+        localVarHeaders = this.configuration.addCredentialToHeaders('bearerAuth', 'Authorization', localVarHeaders, 'Bearer ');
 
         const localVarHttpHeaderAcceptSelected: string | undefined = options?.httpHeaderAccept ?? this.configuration.selectHeaderAccept([
             'application/json'
@@ -71,6 +73,28 @@ export class QuotesService extends BaseService {
 
         const localVarTransferCache: boolean = options?.transferCache ?? true;
 
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'multipart/form-data'
+        ];
+
+        const canConsumeForm = this.canConsumeForm(consumes);
+
+        let localVarFormParams: { append(param: string, value: any): any; };
+        let localVarUseForm = false;
+        let localVarConvertFormParamsToString = false;
+        // use FormData to transmit files using content-type "multipart/form-data"
+        // see https://stackoverflow.com/questions/4007969/application-x-www-form-urlencoded-or-multipart-form-data
+        localVarUseForm = canConsumeForm;
+        if (localVarUseForm) {
+            localVarFormParams = new FormData();
+        } else {
+            localVarFormParams = new HttpParams({encoder: this.encoder});
+        }
+
+        if (photo !== undefined) {
+            localVarFormParams = localVarFormParams.append('photo', <any>photo) as any || localVarFormParams;
+        }
 
         let responseType_: 'text' | 'json' | 'blob' = 'json';
         if (localVarHttpHeaderAcceptSelected) {
@@ -83,12 +107,12 @@ export class QuotesService extends BaseService {
             }
         }
 
-        let localVarPath = `/quotes`;
+        let localVarPath = `/photos`;
         const { basePath, withCredentials } = this.configuration;
-        return this.httpClient.request<QuotesResponseDto>('get', `${basePath}${localVarPath}`,
+        return this.httpClient.request<PhotoCreateResponseDto>('post', `${basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                params: localVarQueryParameters,
+                body: localVarConvertFormParamsToString ? localVarFormParams.toString() : localVarFormParams,
                 responseType: <any>responseType_,
                 ...(withCredentials ? { withCredentials } : {}),
                 headers: localVarHeaders,

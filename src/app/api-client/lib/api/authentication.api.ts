@@ -39,11 +39,23 @@ import { Configuration }                                     from '../configurat
 import { BaseService } from '../api.base.service';
 
 
+export interface LoginPostRequestParams {
+    loginRequestDto: LoginRequestDto;
+}
+
+export interface ProfilePatchRequestParams {
+    profileUpdateRequestDto: ProfileUpdateRequestDto;
+}
+
+export interface RegisterPostRequestParams {
+    registerRequestDto: RegisterRequestDto;
+}
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationService extends BaseService {
+export class AuthenticationApi extends BaseService {
 
     constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string|string[], @Optional() configuration?: Configuration) {
         super(basePath, configuration);
@@ -51,14 +63,15 @@ export class AuthenticationService extends BaseService {
 
     /**
      * Login user
-     * @param loginRequestDto 
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public loginPost(loginRequestDto: LoginRequestDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<LoginResponseDto>;
-    public loginPost(loginRequestDto: LoginRequestDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<LoginResponseDto>>;
-    public loginPost(loginRequestDto: LoginRequestDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<LoginResponseDto>>;
-    public loginPost(loginRequestDto: LoginRequestDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public loginPost(requestParameters: LoginPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<LoginResponseDto>;
+    public loginPost(requestParameters: LoginPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<LoginResponseDto>>;
+    public loginPost(requestParameters: LoginPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<LoginResponseDto>>;
+    public loginPost(requestParameters: LoginPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+        const loginRequestDto = requestParameters?.loginRequestDto;
         if (loginRequestDto === null || loginRequestDto === undefined) {
             throw new Error('Required parameter loginRequestDto was null or undefined when calling loginPost.');
         }
@@ -168,14 +181,15 @@ export class AuthenticationService extends BaseService {
 
     /**
      * Update current user profile
-     * @param profileUpdateRequestDto 
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public profilePatch(profileUpdateRequestDto: ProfileUpdateRequestDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<ProfileUpdateResponseDto>;
-    public profilePatch(profileUpdateRequestDto: ProfileUpdateRequestDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<ProfileUpdateResponseDto>>;
-    public profilePatch(profileUpdateRequestDto: ProfileUpdateRequestDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<ProfileUpdateResponseDto>>;
-    public profilePatch(profileUpdateRequestDto: ProfileUpdateRequestDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public profilePatch(requestParameters: ProfilePatchRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<ProfileUpdateResponseDto>;
+    public profilePatch(requestParameters: ProfilePatchRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<ProfileUpdateResponseDto>>;
+    public profilePatch(requestParameters: ProfilePatchRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<ProfileUpdateResponseDto>>;
+    public profilePatch(requestParameters: ProfilePatchRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+        const profileUpdateRequestDto = requestParameters?.profileUpdateRequestDto;
         if (profileUpdateRequestDto === null || profileUpdateRequestDto === undefined) {
             throw new Error('Required parameter profileUpdateRequestDto was null or undefined when calling profilePatch.');
         }
@@ -235,14 +249,15 @@ export class AuthenticationService extends BaseService {
 
     /**
      * Register a new user
-     * @param registerRequestDto 
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public registerPost(registerRequestDto: RegisterRequestDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<RegisterResponseDto>;
-    public registerPost(registerRequestDto: RegisterRequestDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<RegisterResponseDto>>;
-    public registerPost(registerRequestDto: RegisterRequestDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<RegisterResponseDto>>;
-    public registerPost(registerRequestDto: RegisterRequestDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public registerPost(requestParameters: RegisterPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<RegisterResponseDto>;
+    public registerPost(requestParameters: RegisterPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<RegisterResponseDto>>;
+    public registerPost(requestParameters: RegisterPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<RegisterResponseDto>>;
+    public registerPost(requestParameters: RegisterPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+        const registerRequestDto = requestParameters?.registerRequestDto;
         if (registerRequestDto === null || registerRequestDto === undefined) {
             throw new Error('Required parameter registerRequestDto was null or undefined when calling registerPost.');
         }

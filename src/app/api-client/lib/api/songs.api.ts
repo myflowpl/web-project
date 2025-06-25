@@ -19,15 +19,15 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { ApiResponseError } from '../model/apiResponseError';
 // @ts-ignore
-import { ArtistsCreateRequestDto } from '../model/artistsCreateRequestDto';
+import { SongUpdateRequestDto } from '../model/songUpdateRequestDto';
 // @ts-ignore
-import { ArtistsCreateResponseDto } from '../model/artistsCreateResponseDto';
+import { SongUpdateResponseDto } from '../model/songUpdateResponseDto';
 // @ts-ignore
-import { ArtistsResponseDto } from '../model/artistsResponseDto';
+import { SongsCreateRequestDto } from '../model/songsCreateRequestDto';
 // @ts-ignore
-import { ArtistsUpdateRequestDto } from '../model/artistsUpdateRequestDto';
+import { SongsCreateResponseDto } from '../model/songsCreateResponseDto';
 // @ts-ignore
-import { ArtistsUpdateResponseDto } from '../model/artistsUpdateResponseDto';
+import { SongsResponseDto } from '../model/songsResponseDto';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -35,28 +35,51 @@ import { Configuration }                                     from '../configurat
 import { BaseService } from '../api.base.service';
 
 
+export interface SongsGetRequestParams {
+    /** Page number (0-indexed) */
+    pageIndex?: number;
+    /** Number of items per page */
+    pageSize?: number;
+    /** Search query for song title */
+    q?: string;
+    /** Filter songs by artist ID */
+    artistId?: number;
+}
+
+export interface SongsIdPatchRequestParams {
+    /** ID of the song to update */
+    id: number;
+    songUpdateRequestDto: SongUpdateRequestDto;
+}
+
+export interface SongsPostRequestParams {
+    songsCreateRequestDto: SongsCreateRequestDto;
+}
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class ArtistsService extends BaseService {
+export class SongsApi extends BaseService {
 
     constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string|string[], @Optional() configuration?: Configuration) {
         super(basePath, configuration);
     }
 
     /**
-     * Get a list of artists with pagination and search
-     * @param pageIndex Page number (0-indexed)
-     * @param pageSize Number of items per page
-     * @param q Search query for artist name
+     * Get a list of songs with pagination, search, and artist filter
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public artistsGet(pageIndex?: number, pageSize?: number, q?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<ArtistsResponseDto>;
-    public artistsGet(pageIndex?: number, pageSize?: number, q?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<ArtistsResponseDto>>;
-    public artistsGet(pageIndex?: number, pageSize?: number, q?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<ArtistsResponseDto>>;
-    public artistsGet(pageIndex?: number, pageSize?: number, q?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public songsGet(requestParameters?: SongsGetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<SongsResponseDto>;
+    public songsGet(requestParameters?: SongsGetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<SongsResponseDto>>;
+    public songsGet(requestParameters?: SongsGetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<SongsResponseDto>>;
+    public songsGet(requestParameters?: SongsGetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+        const pageIndex = requestParameters?.pageIndex;
+        const pageSize = requestParameters?.pageSize;
+        const q = requestParameters?.q;
+        const artistId = requestParameters?.artistId;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
@@ -65,6 +88,8 @@ export class ArtistsService extends BaseService {
           <any>pageSize, 'pageSize');
         localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
           <any>q, 'q');
+        localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+          <any>artistId, 'artistId');
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -91,9 +116,9 @@ export class ArtistsService extends BaseService {
             }
         }
 
-        let localVarPath = `/artists`;
+        let localVarPath = `/songs`;
         const { basePath, withCredentials } = this.configuration;
-        return this.httpClient.request<ArtistsResponseDto>('get', `${basePath}${localVarPath}`,
+        return this.httpClient.request<SongsResponseDto>('get', `${basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
@@ -108,21 +133,22 @@ export class ArtistsService extends BaseService {
     }
 
     /**
-     * Update an existing artist
-     * @param id ID of the artist to update
-     * @param artistsUpdateRequestDto 
+     * Update an existing song
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public artistsIdPatch(id: number, artistsUpdateRequestDto: ArtistsUpdateRequestDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<ArtistsUpdateResponseDto>;
-    public artistsIdPatch(id: number, artistsUpdateRequestDto: ArtistsUpdateRequestDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<ArtistsUpdateResponseDto>>;
-    public artistsIdPatch(id: number, artistsUpdateRequestDto: ArtistsUpdateRequestDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<ArtistsUpdateResponseDto>>;
-    public artistsIdPatch(id: number, artistsUpdateRequestDto: ArtistsUpdateRequestDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public songsIdPatch(requestParameters: SongsIdPatchRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<SongUpdateResponseDto>;
+    public songsIdPatch(requestParameters: SongsIdPatchRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<SongUpdateResponseDto>>;
+    public songsIdPatch(requestParameters: SongsIdPatchRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<SongUpdateResponseDto>>;
+    public songsIdPatch(requestParameters: SongsIdPatchRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+        const id = requestParameters?.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling artistsIdPatch.');
+            throw new Error('Required parameter id was null or undefined when calling songsIdPatch.');
         }
-        if (artistsUpdateRequestDto === null || artistsUpdateRequestDto === undefined) {
-            throw new Error('Required parameter artistsUpdateRequestDto was null or undefined when calling artistsIdPatch.');
+        const songUpdateRequestDto = requestParameters?.songUpdateRequestDto;
+        if (songUpdateRequestDto === null || songUpdateRequestDto === undefined) {
+            throw new Error('Required parameter songUpdateRequestDto was null or undefined when calling songsIdPatch.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -162,12 +188,12 @@ export class ArtistsService extends BaseService {
             }
         }
 
-        let localVarPath = `/artists/${this.configuration.encodeParam({name: "id", value: id, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int64"})}`;
+        let localVarPath = `/songs/${this.configuration.encodeParam({name: "id", value: id, in: "path", style: "simple", explode: false, dataType: "number", dataFormat: "int64"})}`;
         const { basePath, withCredentials } = this.configuration;
-        return this.httpClient.request<ArtistsUpdateResponseDto>('patch', `${basePath}${localVarPath}`,
+        return this.httpClient.request<SongUpdateResponseDto>('patch', `${basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: artistsUpdateRequestDto,
+                body: songUpdateRequestDto,
                 responseType: <any>responseType_,
                 ...(withCredentials ? { withCredentials } : {}),
                 headers: localVarHeaders,
@@ -179,17 +205,18 @@ export class ArtistsService extends BaseService {
     }
 
     /**
-     * Create a new artist
-     * @param artistsCreateRequestDto 
+     * Create a new song
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public artistsPost(artistsCreateRequestDto: ArtistsCreateRequestDto, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<ArtistsCreateResponseDto>;
-    public artistsPost(artistsCreateRequestDto: ArtistsCreateRequestDto, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<ArtistsCreateResponseDto>>;
-    public artistsPost(artistsCreateRequestDto: ArtistsCreateRequestDto, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<ArtistsCreateResponseDto>>;
-    public artistsPost(artistsCreateRequestDto: ArtistsCreateRequestDto, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
-        if (artistsCreateRequestDto === null || artistsCreateRequestDto === undefined) {
-            throw new Error('Required parameter artistsCreateRequestDto was null or undefined when calling artistsPost.');
+    public songsPost(requestParameters: SongsPostRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<SongsCreateResponseDto>;
+    public songsPost(requestParameters: SongsPostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<SongsCreateResponseDto>>;
+    public songsPost(requestParameters: SongsPostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<SongsCreateResponseDto>>;
+    public songsPost(requestParameters: SongsPostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+        const songsCreateRequestDto = requestParameters?.songsCreateRequestDto;
+        if (songsCreateRequestDto === null || songsCreateRequestDto === undefined) {
+            throw new Error('Required parameter songsCreateRequestDto was null or undefined when calling songsPost.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -229,12 +256,12 @@ export class ArtistsService extends BaseService {
             }
         }
 
-        let localVarPath = `/artists`;
+        let localVarPath = `/songs`;
         const { basePath, withCredentials } = this.configuration;
-        return this.httpClient.request<ArtistsCreateResponseDto>('post', `${basePath}${localVarPath}`,
+        return this.httpClient.request<SongsCreateResponseDto>('post', `${basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: artistsCreateRequestDto,
+                body: songsCreateRequestDto,
                 responseType: <any>responseType_,
                 ...(withCredentials ? { withCredentials } : {}),
                 headers: localVarHeaders,
