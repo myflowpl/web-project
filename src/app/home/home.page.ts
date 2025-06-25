@@ -1,7 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, effect, inject, signal, untracked } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { QuoteComponent } from "./quote/quote.component";
 import { AsyncPipe, JsonPipe } from '@angular/common';
-import { Quote, QuotesApi } from '@web/api-client';
+import { Quote, QuotesApi, QuotesResponseDto } from '@web/api-client';
 
 @Component({
   selector: 'app-home',
@@ -13,15 +14,41 @@ export class HomePage {
 
   quotesApi = inject(QuotesApi);
 
-  selected: Quote[] = [];
 
-  quotes$ = this.quotesApi.quotesGet({
+  quotes = toSignal(this.quotesApi.quotesGet({
     pageSize: 3,
     pageIndex: 0,
 
-  });
+  }), {initialValue: {data: []} as any as QuotesResponseDto });
+
+  selectedIds = signal<number[]>([]);
+
+  selected = computed(
+    () => this.selectedIds().map(id => this.quotes().data.find(q => q.id===id))
+  );
+
+  constructor() {
+
+    effect(() => {
+      const ids = this.selected();
+      console.log('EFFECT', ids)
+      if(ids.length > 5) {
+        console.log('quotes', this.quotes(), ids)
+
+      }
+      // untracked(() => {
+      //   console.log('quotes', this.quotes(), ids)
+      // });
+    });
+  }
 
   handleSelected(quote: Quote) {
-    this.selected.push(quote)
+    const newIds = [...this.selectedIds(), quote.id];
+    this.selectedIds.set(newIds)
+
+
+    // this.selectedIds.update((ids) => [...ids, quote.id]);
+
   }
+
 }

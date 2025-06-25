@@ -1,12 +1,17 @@
 <p>Welcome to Quotes & Artists</p>
 
-@if (quotes$ | async; as quotes) {
+@if (quotes(); as quotes) {
 
     @for (quote of quotes.data; track $index) {
         <app-quote [quote]="quote" (selected)="handleSelected($event)"></app-quote>
     }
 }
 
-<pre>{{selected | json}}</pre>
+<h1 class="p-4 text-bold text-underline">
+Selected
+</h1>
 
 
+    @for (quote of selected(); track $index) {
+        <app-quote [quote]="quote" (selected)="handleSelected($event)"></app-quote>
+    }
