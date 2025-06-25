@@ -1,1 +1,8 @@
-<p>quote works!</p>
+@if (quote) {
+
+    <div>
+        <h2 class="text-bold">{{quote.author}}</h2>
+        <p>{{quote.text}}</p>
+        <button (click)="handleSelect(quote)">slelect</button>
+    </div>
+}
