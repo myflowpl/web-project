@@ -5,5 +5,13 @@ export const routes: Routes = [
     {
         path: '',
         component: HomePage,
+    },
+    {
+        path: 'test',
+        component: HomePage,
+    },
+    {
+        path: 'test/:id',
+        component: HomePage,
     }
 ];
