@@ -1,0 +1,11 @@
+export * from './artists.service';
+import { ArtistsService } from './artists.service';
+export * from './authentication.service';
+import { AuthenticationService } from './authentication.service';
+export * from './photos.service';
+import { PhotosService } from './photos.service';
+export * from './quotes.service';
+import { QuotesService } from './quotes.service';
+export * from './songs.service';
+import { SongsService } from './songs.service';
+export const APIS = [ArtistsService, AuthenticationService, PhotosService, QuotesService, SongsService];
