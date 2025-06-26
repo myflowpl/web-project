@@ -1,1 +1,17 @@
-<p>songs works!</p>
+<h1 class="text-3xl font-bold">Songsy by: {{ artist()?.name}}</h1>
+
+ @if (songsStore.loader()) {
+    Loading songs...
+}
+@else if (songsStore.loader.error()) {
+    ERROR
+}
+@else {
+
+    @for (song of songsStore.songs(); track $index) {
+        <div>
+            <h2>{{song.title}}</h2>
+        </div>
+    }
+}
+
