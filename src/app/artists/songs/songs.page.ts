@@ -23,14 +23,14 @@ export class SongsPage {
 
   constructor() {
 
-
-    effect(() => {
-
-      const artistId = this.artistsId();
-
-      this.songsStore.loadSongsByArtistId(artistId);
-
-    });
+    this.songsStore.setArtistId(this.artistsId);
+    
+    
+    // this.songsStore.loadSongsByArtistId(this.artistsId)
+    // effect(() => {
+      // this.songsStore.setArtistId(this.artistsId());
+      // this.songsStore.loadSongsByArtistId(this.artistsId());
+    // });
 
     effect(() => {
       const name = this.artist()?.name || 'Artists';

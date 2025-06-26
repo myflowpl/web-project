@@ -1,8 +1,8 @@
 import { SongsApi, SongsResponseDto } from "@web/api-client";
-import { patchState, signalStore, withComputed, withMethods, withState, signalMethod, withProps } from "@ngrx/signals";
+import { patchState, signalStore, withComputed, withMethods, withState, signalMethod, withProps, withHooks } from "@ngrx/signals";
 import { computed, inject } from "@angular/core";
 import { rxMethod } from "@ngrx/signals/rxjs-interop";
-import { distinctUntilChanged, filter, pipe, switchMap, tap } from "rxjs";
+import { distinctUntilChanged, filter, map, pipe, switchMap, tap } from "rxjs";
 import { loaderSignal } from "@web/utils";
 
 
@@ -28,14 +28,15 @@ export const SongsStore = signalStore(
     })),
     // sync methods
     withMethods((store, songsApi = inject(SongsApi)) => ({
-        setArtistId(artistId: number) {
+        setArtistId_old(artistId: number) {
             patchState(store, { artistId });
         },
+        setArtistId: signalMethod<number>((artistId) => patchState(store, { artistId })),
     })),
     // reactive methods
     withMethods((store, songsApi = inject(SongsApi)) => ({
-        loadSongsByArtistId: rxMethod<number>(pipe(
-            filter(id => !!id),
+        loadSongsByArtistId: rxMethod<number | null>(pipe(
+            filter(Boolean),
             distinctUntilChanged(),
             switchMap(
                 (artistId) => songsApi.songsGet({ artistId }).pipe(
@@ -45,7 +46,11 @@ export const SongsStore = signalStore(
             ),
         )),
     })),
-
+    withHooks({
+        onInit(store) {
+            store.loadSongsByArtistId(store.artistId)
+        },
+    })
 );
 
 export type SongsStore = InstanceType<typeof SongsStore>;
