@@ -3,7 +3,7 @@
 
     <span>Web Project</span>
 
-    <a [routerLink]="['/']" [routerLinkActive]="'active'">Home</a>
+    <a [routerLink]="['/']" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact: true}">Home</a>
     <a [routerLink]="['artists']" [routerLinkActive]="'active'">Artists</a>
     
     <span class="flex-auto"></span>
@@ -14,7 +14,9 @@
     <router-outlet />
   </div>
   
-  <footer class="text-center "> 
-    footer 
-  </footer>
+  <div class="border-t">
+      <p class="page-container">
+          Web Project - Szkolenie z Angular
+      </p>
+  </div>
 </div>

@@ -1,2 +1,4 @@
+
 {
+    "tailwindCSS.experimental.configFile": "src/styles.scss"
 }
