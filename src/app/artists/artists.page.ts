@@ -1,12 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ArtistsStore } from './artists.store';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-artists',
-  imports: [],
+  imports: [JsonPipe],
   templateUrl: './artists.page.html',
   styleUrl: './artists.page.scss',
-  providers: [],
+  providers: [ArtistsStore],
 })
 export class ArtistsPage {
+  store = inject(ArtistsStore);
 
+
+    ngOnInit(): void {
+        this.store.load();
+    }
 }

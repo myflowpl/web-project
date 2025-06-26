@@ -1,1 +1,23 @@
-<p>artists works!</p>
+<h1 class="text-3xl font-bold">Artists</h1>
+
+<div class="flex">
+    <div class="w-[400px]">
+        <b>Artists</b>
+        <div>
+            @if (store.isLoading()) {
+                Loading...
+            }
+            @else if (store.isLoading.error()) {
+                ERROR
+            }
+            @else {
+
+                @for (artist of store.artists(); track $index) {
+                    <a class="block p-2">{{artist.name}}</a>
+                }
+            }
+
+        </div>
+    </div>
+    <div class="flex-auto"></div>
+</div>
