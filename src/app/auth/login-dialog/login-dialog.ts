@@ -1,9 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { LoginFormComponent } from '../login-form/login-form';
 import { User } from '@web/api-client';
-import { DialogRef } from '@angular/cdk/dialog';
-import { tap } from 'rxjs';
 
 interface LoginData {
   message?: string;
@@ -17,15 +15,11 @@ export function injectLoginDialog() {
   return {
     open(message?: string) {
       const dialogRef = dialog.open<LoginDialog, LoginData, User>(
-        LoginDialog,
-        {
-          data: { message }
-        }
-      );
+        LoginDialog, {
+          data: { message },
+      });
 
-      return dialogRef.afterClosed().pipe(
-        tap(v => console.log('v', v))
-      )
+      return dialogRef.afterClosed()
     },
   }
 }
@@ -39,10 +33,9 @@ export function injectLoginDialog() {
 export class LoginDialog {
 
   data = inject<LoginData>(MAT_DIALOG_DATA);
-  dialogRef = inject<DialogRef<User>>(DialogRef);
+  dialogRef = inject<MatDialogRef<User>>(MatDialogRef);
 
   handleLogin(user: User) {
-    console.log('ccc', user)
     this.dialogRef.close(user);
   }
 }
