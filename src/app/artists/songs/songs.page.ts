@@ -1,11 +1,12 @@
 import { Component, computed, effect, inject } from '@angular/core';
-import { injectParamAsNumber, injectTitleService } from '@web/utils';
+import { injectParamAsNumber, injectTitleService, StorePaginator } from '@web/utils';
 import { ArtistsStore } from '../artists.store';
 import { SongsStore } from './songs.store';
+import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-songs',
-  imports: [],
+  imports: [MatPaginatorModule, StorePaginator],
   templateUrl: './songs.page.html',
   styleUrl: './songs.page.scss',
   providers: [SongsStore],
@@ -39,5 +40,10 @@ export class SongsPage {
     });
     
   }
+
+  // handlePage(page: PageEvent) {
+  //   console.log('page', page)
+  //   this.songsStore.setPage(page);
+  // }
 
 }

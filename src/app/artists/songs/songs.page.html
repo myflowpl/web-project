@@ -1,5 +1,7 @@
 <h1 class="text-3xl font-bold">Songsy by: {{ artist()?.name}}</h1>
 
+<mat-paginator  class="my-2" [storePaginator]="songsStore"></mat-paginator>
+    
  @if (songsStore.loader()) {
     Loading songs...
 }
@@ -15,3 +17,9 @@
     }
 }
 
+
+
+    <!-- [pageSize]="songsStore.pageSize()" 
+    [pageIndex]="songsStore.pageIndex()" 
+    [length]="songsStore.length()"
+    (page)="handlePage($event)" -->
