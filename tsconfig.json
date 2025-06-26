@@ -15,7 +15,8 @@
     "target": "ES2022",
     "module": "preserve",
     "paths": {
-      "@web/api-client": ["./src/app/api-client/lib/index.ts"]
+      "@web/api-client": ["./src/app/api-client/lib/index.ts"],
+      "@web/utils": ["./src/app/utils/index.ts"]
     }
   },
   "angularCompilerOptions": {

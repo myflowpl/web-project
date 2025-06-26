@@ -4,7 +4,8 @@ import { Component } from '@angular/core';
   selector: 'app-artists',
   imports: [],
   templateUrl: './artists.page.html',
-  styleUrl: './artists.page.scss'
+  styleUrl: './artists.page.scss',
+  providers: [],
 })
 export class ArtistsPage {
 
