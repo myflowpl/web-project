@@ -1,0 +1,5 @@
+<h1 matDialogTitle>Login</h1>
+
+<mat-dialog-content>
+    <app-login-form [message]="data?.message" (loginSuccess)="handleLogin($event)"></app-login-form>
+</mat-dialog-content>

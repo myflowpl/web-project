@@ -1,0 +1,26 @@
+<form [formGroup]="form" (ngSubmit)="handleSubmit()" class="flex flex-col gap-2">
+    
+    @if (message(); as msg) {
+        <span class="text-orange-500">{{msg}}</span>
+    }
+
+    <ng-content select="[top]"></ng-content>
+    
+    <label>Email</label>
+    <input formControlName="email" />
+
+    <label>Password</label>
+    <input formControlName="password" type="password" />
+
+    <!-- @if (store.isLoading.error(); as error) {
+        <div class="text-red-400">
+            {{error.message}}
+        </div>
+    } -->
+
+    <ng-content></ng-content>
+
+    <button type="submit" [disabled]="form.invalid">Login</button>
+    <!-- <button type="submit" [disabled]="form.invalid && store.isLoading()">Login</button> -->
+    
+</form>
