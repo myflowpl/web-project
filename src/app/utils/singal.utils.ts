@@ -1,5 +1,8 @@
-import { signal, Signal } from "@angular/core";
-import { catchError, EMPTY, MonoTypeOperatorFunction, pipe, tap } from "rxjs";
+import { DestroyRef, inject, signal, Signal } from "@angular/core";
+import { toSignal } from "@angular/core/rxjs-interop";
+import { Meta, Title } from "@angular/platform-browser";
+import { ActivatedRoute } from "@angular/router";
+import { catchError, EMPTY, map, MonoTypeOperatorFunction, pipe, tap } from "rxjs";
 
 export interface LoaderSignal extends Signal<boolean> {
     tap: <T>() => MonoTypeOperatorFunction<T>;
@@ -35,4 +38,33 @@ export function loaderSignal(): LoaderSignal {
     output.error = error;
 
     return output;
+}
+
+export function injectParamAsNumber(name: string, initialValue = 0) {
+
+    const   route = inject(ActivatedRoute);
+
+    const value$ = route.params.pipe(
+        map(params => params[name]),
+        map(param => parseInt(param, 10))
+    );
+
+    return toSignal(value$, { initialValue })
+}
+
+export function injectTitleService() {
+
+    const titleService = inject(Title);
+    const metaService = inject(Meta);
+    
+    const backup = titleService.getTitle();
+    const destroyRef = inject(DestroyRef);
+
+    destroyRef.onDestroy(() => titleService.setTitle(backup))
+
+    return {
+        setTitle(title: string) {
+            titleService.setTitle(title);
+        }
+    }
 }
