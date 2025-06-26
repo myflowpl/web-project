@@ -1,6 +1,7 @@
 import { Component, inject, Input, input, output } from '@angular/core';
 import { ReactiveFormsModule, UntypedFormBuilder } from '@angular/forms';
 import { User } from '@web/api-client';
+import { ProfileStore } from '../profile.store';
 
 @Component({
   selector: 'app-login-form',
@@ -14,7 +15,7 @@ export class LoginFormComponent {
 
   loginSuccess = output<User>();
 
-  // store = inject(ProfileStore);
+  store = inject(ProfileStore);
 
   form = inject(UntypedFormBuilder).group({
     email: ['user@example.com'],
@@ -31,12 +32,10 @@ export class LoginFormComponent {
       this.form.markAllAsTouched();
       return;
     }
-    
-    this.loginSuccess.emit(this.form.value)
 
-    // this.store.login(this.form.value).subscribe(
-    //   (res) => this.loginSuccess.emit(res.user)
-    // );
+    this.store.login(this.form.value).subscribe(
+      (res) => this.loginSuccess.emit(res.user)
+    );
 
   }
 }
