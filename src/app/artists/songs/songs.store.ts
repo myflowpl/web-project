@@ -5,7 +5,7 @@ import { rxMethod } from "@ngrx/signals/rxjs-interop";
 import { distinctUntilChanged, filter, map, pipe, switchMap, tap } from "rxjs";
 import { loaderSignal } from "@web/utils";
 import { PageEvent } from "@angular/material/paginator";
-
+import { withDevtools } from '@angular-architects/ngrx-toolkit';
 
 type SongsState = {
     artistId: number | null;
@@ -22,6 +22,7 @@ const initialState: SongsState = {
 }
 
 export const SongsStore = signalStore(
+    withDevtools('Songs'),
     withState(initialState),
     // props
     withProps((store) => ({
@@ -47,7 +48,7 @@ export const SongsStore = signalStore(
         }),
     })),
     // sync methods
-    withMethods((store, songsApi = inject(SongsApi)) => ({
+    withMethods((store) => ({
         setPage(page: PageEvent) {
             patchState(store, { 
                 pageIndex: page.pageIndex, 
@@ -60,7 +61,6 @@ export const SongsStore = signalStore(
     withMethods((store, songsApi = inject(SongsApi)) => ({
         loadSongs: rxMethod<SongsGetRequestParams | null>(pipe(
             filter(Boolean),
-            distinctUntilChanged(),
             switchMap(
                 (params) => songsApi.songsGet(params).pipe(
                     store.loader.tap(),
@@ -69,9 +69,18 @@ export const SongsStore = signalStore(
             ),
         )),
     })),
+
+    // sync methods
+    withMethods((store) => ({
+        reload() {
+            store.loadSongs(store.requestParams());
+        },
+    })),
+
+    // hooks
     withHooks({
         onInit(store) {
-            store.loadSongs(store.requestParams)
+            store.loadSongs(store.requestParams);
         },
     })
 );
