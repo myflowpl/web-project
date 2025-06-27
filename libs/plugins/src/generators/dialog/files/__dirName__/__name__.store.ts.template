@@ -1,0 +1,39 @@
+import { Component, inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+
+interface <%= dataClassName %> {
+  message?: string;
+}
+interface <%= resultClassName %> {
+  
+}
+
+
+export function <%= injectFnName %>() {
+
+  const dialog = inject(MatDialog);
+
+  return {
+    open(message?: string) {
+      const dialogRef = dialog.open<<%= componentClassName %>, <%= dataClassName %>, <%= resultClassName %>>(
+        <%= componentClassName %>, {
+          data: { message },
+      });
+
+      return dialogRef.afterClosed()
+    },
+  }
+}
+
+@Component({
+  selector: 'app-<%= name %>',
+  imports: [MatDialogContent, MatDialogTitle],
+  templateUrl: './<%= name %>.html',
+  styleUrl: './<%= name %>.scss'
+})
+export class <%= componentClassName %> {
+
+  data = inject<<%= dataClassName %>>(MAT_DIALOG_DATA);
+  dialogRef = inject<MatDialogRef<<%= resultClassName %>>>(MatDialogRef);
+
+}

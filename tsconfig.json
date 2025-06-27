@@ -12,6 +12,7 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "preserve",
+    "baseUrl": ".",
     "paths": {
       "@web/api-client": ["./src/app/api-client/lib/index.ts"],
       "@web/utils": ["./src/app/utils/index.ts"],

@@ -4,6 +4,15 @@
   "title": "",
   "type": "object",
   "properties": {
+
+    "path": {
+      "type": "string",
+      "description": "",
+      "$default": {
+        "$source": "workingDirectory"
+      }
+    },
+
     "name": {
       "type": "string",
       "description": "",

@@ -1,0 +1,5 @@
+<h1 matDialogTitle><%= name %></h1>
+
+<mat-dialog-content>
+    dialog <%= name %> content here...
+</mat-dialog-content>
