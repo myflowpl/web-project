@@ -1,4 +1,4 @@
-
 {
-    "tailwindCSS.experimental.configFile": "src/styles.scss"
+  "tailwindCSS.experimental.configFile": "src/styles.scss",
+  "eslint.validate": ["json"]
 }

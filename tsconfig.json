@@ -1,5 +1,3 @@
-/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
-/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
 {
   "compileOnSave": false,
   "compilerOptions": {
@@ -16,7 +14,9 @@
     "module": "preserve",
     "paths": {
       "@web/api-client": ["./src/app/api-client/lib/index.ts"],
-      "@web/utils": ["./src/app/utils/index.ts"]
+      "@web/utils": ["./src/app/utils/index.ts"],
+      "plugins": ["libs/plugins/src/index.ts"],
+      "pluglins": ["libs/pluglins/src/index.ts"]
     }
   },
   "angularCompilerOptions": {

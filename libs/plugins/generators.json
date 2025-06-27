@@ -1,0 +1,14 @@
+{
+  "generators": {
+    "dialog": {
+      "factory": "./src/generators/dialog/dialog",
+      "schema": "./src/generators/dialog/schema.json",
+      "description": "dialog generator"
+    },
+    "store": {
+      "factory": "./src/generators/store/store",
+      "schema": "./src/generators/store/schema.json",
+      "description": "store generator"
+    }
+  }
+}

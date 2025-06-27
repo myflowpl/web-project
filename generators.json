@@ -1,0 +1,9 @@
+{
+  "generators": {
+    "dialog": {
+      "factory": "./libs/plugins/src/generators/dialog/dialog",
+      "schema": "./libs/plugins/src/generators/dialog/schema.json",
+      "description": "dialog generator"
+    }
+  }
+}
