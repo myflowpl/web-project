@@ -1,7 +1,9 @@
 import { withDevtools } from "@angular-architects/ngrx-toolkit";
-import { computed, effect, inject } from "@angular/core";
+import { isPlatformServer } from "@angular/common";
+import { computed, effect, inject, PLATFORM_ID } from "@angular/core";
 import { patchState, signalStore, withComputed, withHooks, withMethods, withState } from "@ngrx/signals";
 import { AuthenticationApi, LoginRequestDto, User } from "@web/api-client";
+import { injectIsServer, injectLocalStorage, injectWindow } from "@web/utils";
 import { tap } from "rxjs";
 
 type ProfileState = {
@@ -36,12 +38,9 @@ export const ProfileStore = signalStore(
     })),
 
     withHooks({
-        onInit(store) {
+        onInit(store, isServer = injectIsServer(), localStorage = injectLocalStorage(), window = injectWindow()) {
+            
             const KEY = 'auth_data';
-            // TODO
-            if(typeof localStorage === 'undefined') {
-                return;
-            }
 
             // read localStorage
             const data = localStorage.getItem(KEY);
