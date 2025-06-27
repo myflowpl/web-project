@@ -2,7 +2,7 @@ import { SongsApi, SongsGetRequestParams, SongsResponseDto } from "@web/api-clie
 import { patchState, signalStore, withComputed, withMethods, withState, signalMethod, withProps, withHooks } from "@ngrx/signals";
 import { computed, inject } from "@angular/core";
 import { rxMethod } from "@ngrx/signals/rxjs-interop";
-import { distinctUntilChanged, filter, map, pipe, switchMap, tap } from "rxjs";
+import { filter, map, pipe, switchMap, tap } from "rxjs";
 import { loaderSignal } from "@web/utils";
 import { PageEvent } from "@angular/material/paginator";
 import { withDevtools } from '@angular-architects/ngrx-toolkit';

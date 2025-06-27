@@ -1,0 +1,10 @@
+<h1 class="bold text-2xl mb-1">Artists | Admin</h1>
+
+<mat-paginator ></mat-paginator>
+
+@for (artist of resource.value()?.data; track $index) {
+
+    <div class="my-2 border-b p-2">
+        {{artist.name}}
+    </div>
+}

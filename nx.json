@@ -36,5 +36,10 @@
       "!{projectRoot}/.eslintrc.json",
       "!{projectRoot}/eslint.config.mjs"
     ]
+  },
+  "generators": {
+    "@nx/angular:component": {
+      "style": "css"
+    }
   }
 }
