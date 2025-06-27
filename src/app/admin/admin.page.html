@@ -1,6 +1,16 @@
 <h1 class="bold text-2xl mb-1">Artists | Admin</h1>
 
-<mat-paginator ></mat-paginator>
+<!-- <input [value]="q()" (change)="q.set(inp.value)" type="search" class="border py-1 px-2 rounded-2xl" #inp > -->
+
+<!-- <input (ngModelChange)="q.set($event)" [ngModel]="q()" type="search" class="border py-1 px-2 rounded-2xl" > -->
+
+<input [(ngModel)]="q" type="search" class="border py-1 px-2 rounded-2xl" >
+
+<mat-paginator [pageSize]="pageSize()" [length]="resource.value()?.length || 0" #paginator (page)="handlePage($event)"></mat-paginator>
+
+@if (resource.isLoading()) {
+    Loading...
+}
 
 @for (artist of resource.value()?.data; track $index) {
 
@@ -8,3 +18,5 @@
         {{artist.name}}
     </div>
 }
+
+<button (click)="resource.reload()">reload</button>
